@@ -108,35 +108,9 @@ The layout constraint that defines the hierarchical groups for clustering is exp
 
 <h3 id="classes-to-cluster-together">Classes to cluster together</h3>
 
-It is
+It is possible to define which classes can be clustered and grouped together. By default, in our grouping algorithm, only nodes of the same visual and hierarchical classes are clustered and grouped together.
 
-
-
-
-
-
-
-
-
-
-
-
- possible to define which classes can be clustered and grouped together. By default, in our grouping algorithm, only nodes of the same visual and hierarchical classes are clustered and grouped together.
-
-The layout constraint that defines classes to cluster and group together is expressed as an instance of the *browser:ClassesToClusterTogetherLayoutConstraint
-
-
-
-
-
-
-
-
-
-
-
-
-* class. Classes are assigned using the *browser:clusteringSelector* property.
+The layout constraint that defines classes to cluster and group together is expressed as an instance of the *browser:ClassesToClusterTogetherLayoutConstraint* class. Classes are assigned using the *browser:clusteringSelector* property.
 
 **Warning** Use this layout constraint only if you want to create groups containing nodes of different classes. Put all these classes that you want to cluster and group together in one instance of the *browser:ClassesToCluster Together Layout Constraint* class.
 
@@ -148,8 +122,7 @@ See the implementation for [backend configuration]()
 
 ## Frontend script
 
-Our extension of the original Knowledge Graph Browser is inspired by mapping platforms like [google maps](https://maps.google.com
-), maps.cz, etc. When you zoom in, at each zoom level, you see more and more details about the region you zoom in, and also otherwise, when you zoom out, some details disappear and more regions are shown on the map itself.
+Our extension of the original Knowledge Graph Browser is inspired by mapping platforms like [google maps](https://maps.google.com), maps.cz, etc. When you zoom in, at each zoom level, you see more and more details about the region you zoom in, and also otherwise, when you zoom out, some details disappear and more regions are shown on the map itself.
 
 Our extension uses a similar principle, that is, when you zoom out, you see less detail, and when you zoom in, you see more detail. 
 
@@ -157,20 +130,7 @@ The grouping of nodes is determined based on the class of the hierarchical group
 
 The amount of detail displayed on the maps depends on the zoom level. Our implementation uses the same idea. At the deepest level of the hierarchy, the graph shows all possible details, and as you zoom out, it generalizes the details to the parent nodes and shows less detail in the graph. And at the highest level of the hierarchy, the graph shows only the nodes that represent the hierarchies themselves.
 
-As described in the [Classes to cluster together](#classes-to-cluster-together) section, multiple different visual classes
-
-
-
-
-
-
-
-
-
-
-
-
- can be grouped together, and the default is that only nodes of the same visual class can be grouped together. Therefore, when grouping nodes, their visual classes must also be taken into account.
+As described in the [Classes to cluster together](#classes-to-cluster-together) section, multiple different visual classes can be grouped together, and the default is that only nodes of the same visual class can be grouped together. Therefore, when grouping nodes, their visual classes must also be taken into account.
 
 When switching between zoom levels and therefore hierarchy levels, the graph shows more or less detail in relation to the number of nodes. In other words, child nodes become their parents. They only disappear, but still exist on the graph. Therefore, it is necessary to preserve their incoming and outgoing edges. This is done by moving their edges towards their parents. That is, when all child nodes disappear and it's time to show only the parent node, all their edges go to the parent node.
 
@@ -216,5 +176,5 @@ Two cases can occur during grouping. In the first case, at the end of the filter
 
 In the second case, only one node can remain at the end of the filtering, which means that the parent contains only one child. This child can represent a single node or a group containing all the child nodes of the parent. In this case, the remaining child node should be collapsed into the parent node, but this should only happen when all nodes shown at the lowest level of the hierarchy are single child nodes of their parents. If there is still a pair of nodes that can be grouped, the algorithm simply remembers that it must collapse single child nodes in the future, and groups that pair of nodes. In the case when each node at the deepest hierarchy level shown is the only node of its parent, the algorithm switches the hierarchy level one level higher and collapses the child nodes into their parents.
 
-//TODO write edge moving (to the parent node), already written, but to add also here. Then, ungrouping
+//TODO write edge moving (to the parent node), already written, but to add also here. Then, to write ungrouping
 
