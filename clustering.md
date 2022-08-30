@@ -132,7 +132,7 @@ The amount of detail displayed on the maps depends on the zoom level. Our implem
 
 As described in the [Classes to cluster together](#classes-to-cluster-together) section, multiple different visual classes can be grouped together, and the default is that only nodes of the same visual class can be grouped together. Therefore, when grouping nodes, their visual classes must also be taken into account.
 
-When switching between zoom levels and therefore hierarchy levels, the graph shows more or less detail in relation to the number of nodes. In other words, child nodes become their parents. They only disappear, but still exist on the graph. Therefore, it is necessary to preserve their incoming and outgoing edges. This is done by moving their edges towards their parents. That is, when all child nodes disappear and it's time to show only the parent node, all their edges go to the parent node.
+When switching between zoom levels and therefore hierarchy levels, the graph shows more or less detail in relation to the number of nodes. In other words, child nodes become their parents. They only disappear, but still exist on the graph (in other words, they are not mounted in the hierarchy, but still mounted in the graph). Therefore, it is necessary to preserve their incoming and outgoing edges. This is done by moving their edges towards their parents. That is, when all child nodes disappear and it's time to show only the parent node, all their edges move to the parent node.
 
 The next few sections will describe extensions to main code components.
 
@@ -170,11 +170,31 @@ Edge is extended with a new attribute showing that the edge is coming from the c
 
 The original component is extended with a new private *clustering* method that performs clustering and grouping of nodes. It is also extended with the *globalHierarchyDepth* attribute, whose value indicates the current depth of the hierarchy.
 
-When grouping, the *clustering* method filters all nodes that have a hierarchical group class that is allowed to be grouped in the visual configuration (more in [Hierarchical groups to cluster](#hierarchical-groups-to-cluster) section). The algorithm then filters out of all previously filtered nodes only those that are at the deepest level of the hierarchy shown in the graph (based on the value of the *globalHierarchyDepth* attribute). From now on, the algorithm groups all filtered nodes, but based on the parent and visual classes. First, it filters all nodes that have the same parent, then from the filtered nodes, it filters out nodes that have the same visual class, unless multiple classes are explicitly set in the visual configuration (more in [Classes to cluster together](#classes-to-cluster-together) section).
+When grouping, the *clustering* method filters all nodes that have a hierarchical group class that is allowed to be grouped in the visual configuration (more in [Hierarchical groups to cluster](#hierarchical-groups-to-cluster) section). The algorithm then filters out of all previously filtered nodes only those that are at the deepest level of the hierarchy shown in the graph (based on the value of the *globalHierarchyDepth* attribute). 
+
+**Warning** Value of the *globalHierarchyDepth* attribute does not show the deepest hierarchical level that has been achieved in the graph, but the deepest level of nodes that are still visible in the graph.
+
+From now on, the algorithm groups all filtered nodes, but based on the parent and visual classes. First, it filters all nodes that have the same parent, then from the filtered nodes, it filters out nodes that have the same visual class, unless multiple classes are explicitly set in the visual configuration (more in [Classes to cluster together](#classes-to-cluster-together) section).
 
 Two cases can occur during grouping. In the first case, at the end of the filtering, there are several nodes that can be grouped. The algorithm then calls the *kClustering* function, which performs the grouping of the filtered nodes. This function is described in more detail in the //TODO section.
 
-In the second case, only one node can remain at the end of the filtering, which means that the parent contains only one child. This child can represent a single node or a group containing all the child nodes of the parent. In this case, the remaining child node should be collapsed into the parent node, but this should only happen when all nodes shown at the lowest level of the hierarchy are single child nodes of their parents. If there is still a pair of nodes that can be grouped, the algorithm simply remembers that it must collapse single child nodes in the future, and groups that pair of nodes. In the case when each node at the deepest hierarchy level shown is the only node of its parent, the algorithm switches the hierarchy level one level higher and collapses the child nodes into their parents.
+In the second case, only one node can remain at the end of the filtering, which means that the parent contains only one child. This child node can represent a single node or a group containing all of the parent's child nodes. In this case, the remaining child node should be collapsed into the parent node, but this should only happen when all the nodes (or groups) having hierarchical level equal to *globalHierarchyDepth* value are single child nodes of their parents. If there are still pair of nodes that can be grouped, the algorithm simply remembers that in the future it must collapse single child nodes, and groups this pair of nodes. In the case where each node that has a depth equal to *globalHierarchyDepth* is the only node of its parent, the algorithm switches the hierarchy level one level higher (value of the *globalHierarchyDepth* attribute plus one) and collapses the child nodes into their parents. During this operation, all edges from child nodes are moved to the parent node.
 
-//TODO write edge moving (to the parent node), already written, but to add also here. Then, to write ungrouping
+When ungrouping, only nodes of the same hierarchical level can be ungrouped (nodes shown in the graph and having a hierarchical level equal to the value of the *globalHierarchyDepth* attribute). Here again there are two cases. The first case, when there is at least one group at a level equal to *globalHierarchyDepth*, then this group can be ungrouped and the algorithm stops its execution. In the second case, there can only be single nodes representing the parents of the nodes that disappeared during the grouping operation. This can be verified using the *isMountedInHierarchy* attribute of a node (more detail in the [Extension of the NodeCommon.ts](#extension-of-the-node-common)). Thus, nodes that are not mounted in the hierarchy but are mounted in the graph (i.e. they were expanded and then collapsed to a parent node during a grouping operation in the past) appear in the graph as child nodes and their *isMountedInHierarchy* attribute value takes the value *true*.
+
+<h3 id="extension-of-the-graph-manipulator">Extension of the GraphManipulator.ts</h3>
+
+In this component, only methods for managing groups are extended, namely, setting the parent, the level of the hierarchy to which the group or node belongs, and the hierarchical group. But make sure that when you ungroup a group, you need to remove that group from its parent's list of children, and otherwise, when you group a nodes, you need to remove them form its parent's list of children, but add newly created group as a child node.
+
+<h3 id="extension-of-the-node">Extension of the Node.ts</h3>
+
+When deleting a node, you must also delete all its descendant nodes in the hierarchy, as this may violate the principle of the hierarchy.
+
+An extension of this component is the *remove* method, which is extended to handle the recursive removal of child nodes (including nodes and groups).
+
+<h3 id="extension-of-the-node-common">Extension of the NodeCommon.ts</h3>
+
+The NodeCommon.ts component is extended with attributes that allow you to set the hierarchy of nodes, namely *parent*, *children*, *hierarchyGroup*, *hierarchyLevel* and their getters.
+
+To check if a node has been expanded and not disappeared during the grouping operation, a new *isMountedInHierarchy* attribute has also been added to indicate if the node is collapsed inside its parent.
 
