@@ -91,7 +91,7 @@ Nodes that belong to the same visual group are placed under the same "pseudo-par
 
 **Warning** Each hierarchical group class must be assigned to a separate instance of *browser:VisualGroupLayoutConstraint* class.
 
-### Child-parent or parent-child relations
+<h3 id="child-parent-or-parent-child-relations">Child-parent or parent-child relations</h3>
 
 These relations have a special place in our grouping of clusters extension of the Knowledge Graph Browser because they establish how hierarchical groups of nodes can be visualized. Expansion query can be triggered from a parent node (expand child nodes) as well as form a child node (expand parent node). In both cases it may use same property in SPARQL CONSTRUCT, for example *skos:broader*.
 
@@ -124,7 +124,7 @@ See the implementation for [backend configuration]()
 
 Our extension of the original Knowledge Graph Browser is inspired by mapping platforms like [google maps](https://maps.google.com), maps.cz, etc. When you zoom in, at each zoom level, you see more and more details about the region you zoom in, and also otherwise, when you zoom out, some details disappear and more regions are shown on the map itself.
 
-Our extension uses a similar principle, that is, when you zoom out, you see less detail, and when you zoom in, you see more detail. 
+Our extension uses a similar principle, that is, when you zoom in, you see more detail, and when you zoom out, you see less detail. 
 
 The grouping of nodes is determined based on the class of the hierarchical group, the parent node, the level of the hierarchy in which it is placed, and the visual class. First of all, the nodes must be grouped by the hierarchical group class to which they belong, because as the map scales down and details disappear, new correlated details appear in their place that generalize the disappeared details. In our case, the parent node is such a generalization. Therefore, the second condition of the grouping algorithm must be the grouping of nodes that have the same parent node.
 
@@ -198,3 +198,34 @@ The NodeCommon.ts component is extended with attributes that allow you to set th
 
 To check if a node has been expanded and not disappeared during the grouping operation, a new *isMountedInHierarchy* attribute has also been added to indicate if the node is collapsed inside its parent.
 
+<h3 id="extension-of-the-node-group">Extension of the NodeGroup.ts</h3>
+
+*remove* method is changed to handle node hierarchy.
+
+<h3 id="extension-of-the-node-view">Extension of the NodeGroup.ts</h3>
+
+*expand* method is changed to handle *child-parent/parent-child relation* layout constraint (described in more detail in [Child-parent or parent-child relations](#child-parent-or-parent-child-relations) and [Node hierarchy and hierarchical relations](#node-hierarchy-and-hierarchical-relations)) section. At the moment, our implementation only supports child-parent relationships, but it's easy to add support for parent-child relationships as well.
+
+<h3 id="extension-of-the-view-options">Extension of the NodeGroup.ts</h3>
+
+The NodeCommon.ts component is extended with the *isHierarchyView* attribute to indicate if the visual style of the parent node needs to be changed. When at least one child node is collapsed within a parent node, its visual style changes so that its label appears at the top and center.
+
+<h3 id="extension-of-the-cola-layout">Extension of the ColaLayout.ts</h3>
+
+*onExpansion* method is changed to handle node hierarchy.
+
+<h3 id="extension-of-the-layouts">Extension of the Layouts.ts</h3>
+
+Layouts.ts and all its descendant components are extended with *supportsHierarchicalView* and *constraintRulesLoaded* attributes. The first one indicates whether the layout supports a hierarchical view. The *constraintRulesLoaded* attribute indicates whether layout constraints were successfully loaded.
+
+<h3 id="extension-of-the-layout-manager">Extension of the LayoutManager.ts</h3>
+
+*switchToLayout* method is extended to handle the case when current layout is changed to another one.
+
+<h3 id="extension-of-the-remote-server">Extension of the RemoteServer.ts</h3>
+
+The RemoteServer.ts component is extended with the requestor receiving layout constraints from the backend server.
+
+<h3 id="extension-of-the-response-interfaces">Extension of the ResponseInterfaces.ts</h3>
+
+The ResponseInterfaces.ts component is extended with a new interfaces used for layout constraints received from the backend server.
