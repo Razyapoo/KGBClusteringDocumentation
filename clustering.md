@@ -15,7 +15,9 @@ The main purpose of the implemented grouping method is to make a large graph mor
 
 Typically, nodes in a graph are related to each other, for example, a company has employees, university has scientists, scientist has awards, scientist writes scientific papers, university has departments, and many other examples. In what follows, for simplicity, we will consider universities and departments as an example, and relation between them will be - "university has department(s)".
 
-One of the possible ways to visualize such relations is to add a hierarchy between entities, that is, in our example, the university acts as a parent node, and its departments act as child nodes. In such case, "university has department(s)" relation is hierarchical one. In our Knowledge Graph Browser application university can be visualized as a big node containing inside child nodes representing departments as shown at the picture below: //TODO add picture
+One possible way to visualize such relationships is to create an edge between nodes. But there is another way, namely adding a hierarchy between the nodes, that is, in our example, the university acts as a parent node, and its departments act as child nodes. In such case, "university has department(s)" relation is hierarchical one. 
+
+In our Knowledge Graph Browser application university can be visualized as a big node containing inside child nodes representing departments as shown at the picture below: //TODO add picture
 
 In our implementation, each such node hierarchy has its own class. Each node has an additional class indicating which hierarchy class it belongs to.
 
