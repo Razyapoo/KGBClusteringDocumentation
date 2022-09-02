@@ -52,7 +52,7 @@ Each node in a visual group must have a visual class that represents that hierar
 
 <p align="center">
     <img src="img/visual_groups.png" alt="visual-groups" title="Visual groups" width="600"/><br/>
-    <em>Figure 1. Visual groups</em>
+    <em>Figure 2. Visual groups</em>
 </p>
 
 <h3 id="hierarchical-level">Hierarchical level</h3>
@@ -61,7 +61,16 @@ Each node in a visual group must have a visual class that represents that hierar
 
 <h2 id="how-to-use-the-extension">How to use the extension?</h2>
 
-This guide will explain and teach you how the clustering and grouping extension works.
+This guide will explain and teach you how the *"clustering and grouping"* extension works.
+
+The Knowledge Graph Browser currently supports only one configuration that allows this extension to be used.
+
+<h3 id="configuration-selection">Configuration selection</h3>
+
+<p align="center">
+    <img src="img/configuration_selection.png" alt="configuration-selection" title="Configuration selection" width="600"/><br/>
+    <em>Figure 3. Configuration selection</em>
+</p>
 
 
 
