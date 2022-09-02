@@ -1,4 +1,4 @@
-### $${\text{Table of Contents}$$
+### Table of Contents
 
 - [Motivation](#motivation)
 - [Glossary](#glossary)
