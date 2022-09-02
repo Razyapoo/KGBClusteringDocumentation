@@ -67,11 +67,29 @@ The Knowledge Graph Browser currently supports only one configuration that allow
 
 <h3 id="configuration-selection">Configuration selection</h3>
 
+**1)** Choose "Charles Explorer" meta-configuration. See the Figure 3 for more detail.
+
 <p align="center">
-    <img src="img/configuration_selection.png" alt="configuration-selection" title="Configuration selection" width="600"/><br/>
-    <em>Figure 3. Configuration selection</em>
+    <img src="img/meta_configuration_selection.png" alt="meta-configuration-selection" title="Meta-Configuration selection" width="600"/><br/>
+    <em>Figure 3. Meta-Configuration selection</em>
 </p>
 
+**2)** Choose "Browsing topics cultivated at Charles University (with constraints)" configuration
+
+<p align="center">
+    <img src="img/configuration_selection.png" alt="configuration-selection" title="Configuration selection" width="600"/><br/>
+    <em>Figure 4. Meta-Configuration selection</em>
+</p>
+
+**3)** Choose starting node
+
+> **Warning**
+> Wait for the starting node to fully load (the loading sign will disappear and starting node will look like at the picture below). This is a necessary step for the extension to work correctly. 
+
+<p align="center">
+    <img src="img/starting_node.png" alt="starting-node" title="Starting node" width="600"/><br/>
+    <em>Figure 5. Starting node</em>
+</p>
 
 
 
