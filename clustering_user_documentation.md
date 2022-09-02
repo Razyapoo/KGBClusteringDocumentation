@@ -2,20 +2,21 @@
 
 - [Motivation](#motivation)
 - [Glossary](#glossary)
-- [Glossary](#how-to-use-the-extension)
+- [configuration-section](#configuration-section)
+- [Get started with graph exploration](#get-started-with-graph-exploration)
 
 ---
-<h2 id="motivation">Motivation</h2>
+<h1 id="motivation">Motivation</h1>
 
 We all know how zoom in/out works on mapping platforms such as [google maps](https://maps.google.com), maps.cz, etc. Zoom is used to increase or decrease the zoom level at a specific point and show more or less detail on a map.
 
 Our extension of the original Knowledge Graph browser is inspired by such mapping platforms.
 
-<h2 id="glossary">Glossary</h2>
+<h1 id="glossary">Glossary</h1>
 
 In this part of the guide, you will learn the necessary terms that will help you understand the basic principle of how our extension works.
 
-<h3 id="hierarchical-relationships">Hierarchical relationships</h3>
+<h2 id="hierarchical-relationships">Hierarchical relationships</h2>
 
 In our approach, we introduce the concept of hierarchical relationships. 
 
@@ -32,7 +33,7 @@ See the picture below for an example:
 
 Here the node *"Fakulty"* is the parent node of the node *"Matematicko-fyzikální fakulta"*, which, in turn, is the parent of the internal nodes that are light-blue and have titles inside the node.
 
-<h3 id="hierarchical-groups">Hierarchical groups</h3>
+<h2 id="hierarchical-groups">Hierarchical groups</h2>
 
 > A hierarchical group is a cluster of nodes that are related to each other by parent-child relationships. 
 
@@ -42,7 +43,7 @@ An example of one such hierarchical group is shown in Figure 1.
 
 The hierarchical group is predefined by the technician in the visual configuration.
 
-<h3 id="visual-groups">Visual groups</h3>
+<h2 id="visual-groups">Visual groups</h2>
 
 > A visual group is a cluster of nodes located in the same area on a graph.
 
@@ -55,17 +56,18 @@ Each node in a visual group must have a visual class that represents that hierar
     <em>Figure 2. Visual groups</em>
 </p>
 
-<h3 id="hierarchical-level">Hierarchical level</h3>
+<h2 id="hierarchical-level">Hierarchical level</h2>
 
 > The hierarchical level indicates the depth of the hierarchy at which the node resides.
 
-<h2 id="how-to-use-the-extension">How to use the extension?</h2>
+<h1 id="how-to-use-the-extension">How to use the extension?</h1>
 
-This guide will explain and teach you how the *"clustering and grouping"* extension works.
+This guide will explain and teach you how the *"clustering and grouping"* extension works and what benefits it provides.
 
-The Knowledge Graph Browser currently supports only one configuration that allows this extension to be used.
+<h2 id="configuration-selection">Configuration selection</h2>
 
-<h3 id="configuration-selection">Configuration selection</h3>
+> **Note**
+> The Knowledge Graph Browser currently supports only one configuration that allows this extension to be used.
 
 **1)** Choose "Charles Explorer" meta-configuration. See the Figure 3 for more detail.
 
@@ -91,7 +93,7 @@ The Knowledge Graph Browser currently supports only one configuration that allow
     <em>Figure 5. Starting node</em>
 </p>
 
-
+<h2 id="get-started-with-graph-exploration">Get started with graph exploration</h2>
 
 ## Useful links
 
