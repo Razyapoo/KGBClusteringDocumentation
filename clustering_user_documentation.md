@@ -119,7 +119,7 @@ Non-hierarchical expansions:
 - "Sdílená témata pracoviště"
 
 <p align="center">
-    <img src="img/hierarchical_non_hierarchical_expansions.png" alt="hierarchical-and-non-hierarchical-expansions" title="Hierarchical and non hierarchical expansions" width="600"/><br/>
+    <img src="img/hierarchical_non_hierarchical_expansions.png" alt="hierarchical-and-non-hierarchical-expansions" title="Hierarchical and non hierarchical expansions" width="400"/><br/>
     <em>Figure 6. Hierarchical and non hierarchical expansions</em>
 </p>
 
