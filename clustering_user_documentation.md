@@ -15,7 +15,7 @@ Our extension of the original Knowledge Graph browser is inspired by such mappin
 
 <h1 id="glossary">Glossary</h1>
 
-In this part of the guide, you will learn the necessary terms that will help you understand the basic principle of how our extension works.
+In this part of the guide, you will learn the necessary terms that will help you understand the basic principle of how the extension works.
 
 <h2 id="hierarchical-relationships-glossary">Hierarchical relationships</h2>
 
@@ -46,22 +46,45 @@ An example of one such hierarchical group is shown in Figure 1.
 
 The hierarchical group is predefined by the technician in the visual configuration.
 
-<h2 id="visual-groups">Visual groups</h2>
+<h2 id="visual-groups-glossary">Visual groups</h2>
 
-> A visual group is a cluster of nodes located in the same area on a graph.
+> A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" representing the visual group itself.
+
+<p align="center">
+    <img src="img/visual_group.png" alt="visual-group" title="Visual group" width="600"/><br/>
+    <em>Figure 2. Visual group</em>
+</p>
 
 The visual group is predefined by the technician in the visual configuration.
 
-Each node in a visual group must have a visual class that represents that hierarchical group. It can be the same class as the hierarchical class.
+Example of visual group is shown above in the Figure 2.
+
+Each node in a visual group must have a visual class representing that visual group. It can be the same class as the hierarchical class.
+
 
 <p align="center">
     <img src="img/visual_groups.png" alt="visual-groups" title="Visual groups" width="600"/><br/>
-    <em>Figure 2. Visual groups</em>
+    <em>Figure 3. Visual groups</em>
 </p>
+
+> The hierarchical groups themselves can be interpreted as visual groups. In such a case, there is no need for a "pseudo-parent".
+
+An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in Figure 3 above.
+
+> **Note**
+> The main advantage of visual groups is that you can easily move all the nodes that belong to the same group across the entire graph area at the same time. This way they won't be scattered all over the graph area. 
 
 <h2 id="hierarchical-class">Hierarchical class</h2>
 
 > A hierarchical class is a visual class that determines which hierarchical group a node belongs to.
+
+Hierarchical class if exists is shown along with the node label. See Figure 4 below for more detail.
+
+<p align="center">
+    <img src="img/hierarchical_class.png" alt="hierarchical-class" title="Hierarchical class" width="600"/><br/>
+    <em>Figure 4. Hierarchical class</em>
+</p>
+
 
 <h2 id="hierarchical-level">Hierarchical level</h2>
 
@@ -76,18 +99,18 @@ This guide will explain and teach you how the *"clustering and grouping"* extens
 > **Note**
 > The Knowledge Graph Browser currently supports only one configuration that allows this extension to be used.
 
-**1)** Choose "Charles Explorer" meta-configuration. See the Figure 3 for more detail.
+**1)** Choose "Charles Explorer" meta-configuration. See the Figure 5 for more detail.
 
 <p align="center">
     <img src="img/meta_configuration_selection.png" alt="meta-configuration-selection" title="Meta-Configuration selection" width="600"/><br/>
-    <em>Figure 3. Meta-Configuration selection</em>
+    <em>Figure 5. Meta-Configuration selection</em>
 </p>
 
 **2)** Choose "Browsing topics cultivated at Charles University (with constraints)" configuration
 
 <p align="center">
     <img src="img/configuration_selection.png" alt="configuration-selection" title="Configuration selection" width="600"/><br/>
-    <em>Figure 4. Meta-Configuration selection</em>
+    <em>Figure 6. Meta-Configuration selection</em>
 </p>
 
 **3)** Choose starting node
@@ -97,7 +120,7 @@ This guide will explain and teach you how the *"clustering and grouping"* extens
 
 <p align="center">
     <img src="img/starting_node.png" alt="starting-node" title="Starting node" width="600"/><br/>
-    <em>Figure 5. Starting node</em>
+    <em>Figure 7. Starting node</em>
 </p>
 
 <h2 id="get-started-with-graph-exploration">Get started with graph exploration</h2>
@@ -112,22 +135,24 @@ As mentioned in the [Glossary](#glossary), namely [Hierarchical relationships](#
 
 An expansion query predefined in the configuration allows you to show the neighborhood of a node in which the node is in either a hierarchical or non-hierarchical relationship with its neighbor.
 
-The hierarchical and non-hierarchical expansions are listed below and shown in the Figure 6.
+The hierarchical and non-hierarchical expansions are listed below and shown in the Figure 8.
 
-> Hierarchical expansions:
-> - "Nadřazená pracoviště"
-> - "Podřazená pracoviště"
+Hierarchical expansions:
+- "Nadřazená pracoviště"
+- "Podřazená pracoviště"
 
-> Non-hierarchical expansions:
-> - "Témata pracoviště"
-> - "Sdílená témata pracoviště"
+Non-hierarchical expansions:
+- "Témata pracoviště"
+- "Sdílená témata pracoviště"
 
 <p align="center">
     <img src="img/hierarchical_non_hierarchical_expansions.png" alt="hierarchical-and-non-hierarchical-expansions" title="Hierarchical and non hierarchical expansions" width="530"/><br/>
-    <em>Figure 6. Hierarchical and non hierarchical expansions</em>
+    <em>Figure 8. Hierarchical and non-hierarchical expansions</em>
 </p>
 
-> A [hierarchical group](#hierarchical-groups) can be continuously build using a hierarchical expansion.
+> **Note** 
+> - A [hierarchical group](#hierarchical-groups) can be continuously build using a hierarchical expansions (example is shown in the Figure 1).
+> - Non-hierarchical expansions expand a node with its neighborhood connected to that node by edges.
 
 
 
@@ -136,3 +161,7 @@ The hierarchical and non-hierarchical expansions are listed below and shown in t
 
 [1] https://www.geeksforgeeks.org/google-maps-zoom/
 
+//TODO
+- clustering and zooming
+- node deletion
+- common principle what can be shown on the graph
