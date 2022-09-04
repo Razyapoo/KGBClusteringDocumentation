@@ -103,7 +103,7 @@ The hierarchical class, if it exists, is shown along with the label of a node. S
 To choose whether to group nodes or to zoom, you can use the checkbox "Scaling options" in the right corner of the graph area.
 
 <p align="center">
-    <img src="img/scaling_options.png" alt="scaling-options" title="Scaling options" width="300"/><br/>
+    <img src="img/scaling_options.png" alt="scaling-options" title="Scaling options" width="200"/><br/>
     <em>Figure 5. Scaling options</em>
 </p>
 
@@ -177,7 +177,25 @@ When we zoom in on a specific point on the mapping platforms, we get more detail
 
 The same principle is used in the *"grouping of clusters"* algorithm. Which nodes to cluster and then group into a single node is determined by an algorithm based on the location of the nodes. This algorithm uses well-known clustering methods such as k-Means clustering [1] and k-Medoids clustering [2] (the method used is set by the technician).
 
-The basic approach of the algorithm is that it creates several centroids, combines them into an empty group (k-Means clustering [1]) or into a group consisting of a single node (k-Medoids clustering [2]), and then adds surrounding nodes to the group closest to them.
+The basic approach of the algorithm is that it creates several centroids, combines them into an empty group (k-Means clustering [1]) or into a group consisting of a single node (k-Medoids clustering [2]), and then adds surrounding nodes to the closest group.
+
+The grouping of nodes is determined based on the [hierarchical class](#hierarchical-class), the parent node, the [level of the hierarchy](#hierarchical-level) in which it is placed, and the visual class. First of all, the nodes must be grouped by the hierarchical group class to which they belong. 
+
+As the map (in the mapping platforms) scales down and details disappear, new correlated details appear in their place that generalize the disappeared details. In our case, the parent node is such a generalization. Therefore, the second condition of the grouping algorithm must be the grouping of nodes that have the same parent node.
+
+The amount of detail displayed on the maps depends on the zoom level. Our implementation uses the same idea. At the deepest level of the hierarchy, the graph shows all possible details, and as you zoom out, it generalizes the details to the parent nodes and shows less detail in the graph. And at the highest level of the hierarchy, the graph shows only the nodes that represent the hierarchies themselves. 
+
+> **Wartning**
+> Algorithm always group nodes that are reside at the deepest hierarchical level shown in the graph area.
+
+As described in the [Classes to cluster together](./clustering.md#classes-to-cluster-together) section, multiple different visual classes can be grouped together, and the default is that only nodes of the same visual class can be grouped together. Therefore, when grouping nodes, their visual classes must also be taken into account.
+
+When switching between zoom levels and therefore hierarchy levels, the graph shows more or less detail in relation to the number of nodes. In other words, child nodes collapse into their parents when you zoom out. They only disappear, but still exist on the graph (in other words, they are not mounted in the hierarchy, but still mounted in the graph). Also otherwise, when you zoom in, the disappeared nodes reappear similar to mapping platforms. 
+
+> **Warning**
+> When you zoom in, the disappeared nodes reappear in a different way than they were collapsed, namely when the parent node expands during the zoom operation, only one node appears inside the parent node (either a group or a single node), and on the next zoom in (in case this node is a group), the group gets broken and releases all child nodes.
+
+When switching between levels, the incoming and outgoing edges of child nodes are preserved. This is done by moving edges to parent nodes. That is, when all child nodes disappear and it's time to show only the parent node, all their edges go to the parent node.
 
 <h3 id="grouping-of-clusters">Grouping of clusters and zoom at the same time</h3>
 
