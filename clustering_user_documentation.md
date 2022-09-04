@@ -81,7 +81,7 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 Hierarchical class if exists is shown along with the node label. See Figure 4 below for more detail.
 
 <p align="center">
-    <img src="img/hierarchical_class.png" alt="hierarchical-class" title="Hierarchical class" width="600"/><br/>
+    <img src="img/hierarchical_class.png" alt="hierarchical-class" title="Hierarchical class" width="500"/><br/>
     <em>Figure 4. Hierarchical class</em>
 </p>
 
