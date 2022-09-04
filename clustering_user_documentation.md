@@ -78,7 +78,7 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 
 > A hierarchical class is a visual class that determines which hierarchical group a node belongs to.
 
-Hierarchical class if exists is shown along with the node label. See Figure 4 below for more detail.
+The hierarchical class, if it exists, is shown along with the label of a node. See Figure 4 below for more details.
 
 <p align="center">
     <img src="img/hierarchical_class.png" alt="hierarchical-class" title="Hierarchical class" width="350"/><br/>
@@ -99,7 +99,7 @@ This guide will explain and teach you how the *"clustering and grouping"* extens
 > **Note**
 > The Knowledge Graph Browser currently supports only one configuration that allows this extension to be used.
 
-**1)** Choose "Charles Explorer" meta-configuration. See the Figure 5 for more detail.
+**1)** Choose "Charles Explorer" meta-configuration. See the Figure 5 for more details.
 
 <p align="center">
     <img src="img/meta_configuration_selection.png" alt="meta-configuration-selection" title="Meta-Configuration selection" width="600"/><br/>
