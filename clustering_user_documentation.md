@@ -102,7 +102,11 @@ This guide will explain and teach you how the *"clustering and grouping"* extens
 
 <h2 id="get-started-with-graph-exploration">Get started with graph exploration</h2>
 
-<h3 id="hierarchical-relationships-guide">Hierarchical relationships</h3>
+<h3 id="starting-node">Starting node</h3>
+
+The starting node is shown in the same way as in other configurations.
+
+<h3 id="hierarchical-extensions">Hierarchical extensions</h3>
 
 As mentioned in the [Glossary](#glossary), namely [Hierarchical relationships](#hierarchical-relationships-glossary), there are hierarchical and non-hierarchical relationships.
 
@@ -110,18 +114,23 @@ An expansion query predefined in the configuration allows you to show the neighb
 
 The hierarchical and non-hierarchical expansions are listed below and shown in the Figure 6.
 
-Hierarchical expansions:
-- "Nadřazená pracoviště"
-- "Podřazená pracoviště"
+> Hierarchical expansions:
+> - "Nadřazená pracoviště"
+> - "Podřazená pracoviště"
 
-Non-hierarchical expansions:
-- "Témata pracoviště"
-- "Sdílená témata pracoviště"
+> Non-hierarchical expansions:
+> - "Témata pracoviště"
+> - "Sdílená témata pracoviště"
 
 <p align="center">
     <img src="img/hierarchical_non_hierarchical_expansions.png" alt="hierarchical-and-non-hierarchical-expansions" title="Hierarchical and non hierarchical expansions" width="530"/><br/>
     <em>Figure 6. Hierarchical and non hierarchical expansions</em>
 </p>
+
+> A [hierarchical group](#hierarchical-groups) can be continuously build using a hierarchical expansion.
+
+
+
 
 <h1 id="references">References</h1>
 
