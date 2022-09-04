@@ -90,27 +90,44 @@ The hierarchical class, if it exists, is shown along with the label of a node. S
 
 > The hierarchical level indicates the depth of the hierarchy at which the node resides.
 
+<h2 id="cluster-glossary">Cluster</h2>
+
+> Cluster is a set of the same or similar elements, assembled or located close to each other. 
+
+<h2 id="grouping-glossary">Grouping</h2>
+
+> Grouping is the task of converting clusters into a single node.
+
+<h2 id="checkbox-glossary">Checkbox</h2>
+
+To choose whether to group nodes or to zoom, you can use the checkbox "Scaling options" in the right corner of the graph area.
+
+<p align="center">
+    <img src="img/scaling_options.png" alt="scaling-options" title="Scaling options" width="300"/><br/>
+    <em>Figure 5. Scaling options</em>
+</p>
+
 <h1 id="how-to-use-the-extension">How to use the extension?</h1>
 
-This guide will explain and teach you how the *"clustering and grouping"* extension works and what benefits it provides.
+This guide will explain and teach you how the *"grouping of clusters"* extension works and what benefits it provides.
 
 <h2 id="configuration-selection">Configuration selection</h2>
 
 > **Note**
 > The Knowledge Graph Browser currently supports only one configuration that allows this extension to be used.
 
-**1)** Choose "Charles Explorer" meta-configuration. See the Figure 5 for more details.
+**1)** Choose "Charles Explorer" meta-configuration. See the Figure 6 for more details.
 
 <p align="center">
     <img src="img/meta_configuration_selection.png" alt="meta-configuration-selection" title="Meta-Configuration selection" width="600"/><br/>
-    <em>Figure 5. Meta-Configuration selection</em>
+    <em>Figure 6. Meta-Configuration selection</em>
 </p>
 
 **2)** Choose "Browsing topics cultivated at Charles University (with constraints)" configuration
 
 <p align="center">
     <img src="img/configuration_selection.png" alt="configuration-selection" title="Configuration selection" width="600"/><br/>
-    <em>Figure 6. Meta-Configuration selection</em>
+    <em>Figure 7. Meta-Configuration selection</em>
 </p>
 
 **3)** Choose starting node
@@ -120,7 +137,7 @@ This guide will explain and teach you how the *"clustering and grouping"* extens
 
 <p align="center">
     <img src="img/starting_node.png" alt="starting-node" title="Starting node" width="600"/><br/>
-    <em>Figure 7. Starting node</em>
+    <em>Figure 8. Starting node</em>
 </p>
 
 <h2 id="get-started-with-graph-exploration">Get started with graph exploration</h2>
@@ -131,11 +148,11 @@ The starting node is shown in the same way as in other configurations.
 
 <h3 id="hierarchical-extensions">Hierarchical extensions</h3>
 
-As mentioned in the [Glossary](#glossary), namely [Hierarchical relationships](#hierarchical-relationships-glossary), there are hierarchical and non-hierarchical relationships.
+As mentioned in the [Hierarchical relationships](#hierarchical-relationships-glossary) section of the [Glossary](#glossary), there are hierarchical and non-hierarchical relationships.
 
-An expansion query predefined in the configuration allows you to show the neighborhood of a node in which the node is in either a hierarchical or non-hierarchical relationship with its neighbor.
+An expansion query predefined in the configuration allows you to show the neighborhood of a node in which the node is in either a hierarchical or non-hierarchical relationship with its neighbors.
 
-The hierarchical and non-hierarchical expansions are listed below and shown in the Figure 8.
+The hierarchical and non-hierarchical expansions are listed below and shown in the Figure 9.
 
 Hierarchical expansions:
 - "Nadřazená pracoviště"
@@ -147,21 +164,33 @@ Non-hierarchical expansions:
 
 <p align="center">
     <img src="img/hierarchical_non_hierarchical_expansions.png" alt="hierarchical-and-non-hierarchical-expansions" title="Hierarchical and non hierarchical expansions" width="530"/><br/>
-    <em>Figure 8. Hierarchical and non-hierarchical expansions</em>
+    <em>Figure 9. Hierarchical and non-hierarchical expansions</em>
 </p>
 
 > **Note** 
 > - A [hierarchical group](#hierarchical-groups) can be continuously build using a hierarchical expansions (example is shown in the Figure 1).
-> - Non-hierarchical expansions expand a node with its neighborhood connected to that node by edges.
+> - Non-hierarchical expansions expand a node with its neighborhood, where each neighbor is connected to that node by an edge.
 
+<h3 id="grouping-of-clusters">Grouping of clusters</h3>
 
+When we zoom in on a specific point on the mapping platforms, we get more detail close to that point and to each other. And otherwise when we zoom out. 
+
+The same principle is used in the *"grouping of clusters"* algorithm. Which nodes to cluster and then group into a single node is determined by an algorithm based on the location of the nodes. This algorithm uses well-known clustering methods such as k-Means clustering [1] and k-Medoids clustering [2] (the method used is set by the technician).
+
+The basic approach of the algorithm is that it creates several centroids, combines them into an empty group (k-Means clustering [1]) or into a group consisting of a single node (k-Medoids clustering [2]), and then adds surrounding nodes to the group closest to them.
+
+<h3 id="grouping-of-clusters">Grouping of clusters and zoom at the same time</h3>
+
+At the right corner of the graph area you can see the checkbox having 
 
 
 <h1 id="references">References</h1>
 
-[1] https://www.geeksforgeeks.org/google-maps-zoom/
+[1] https://en.wikipedia.org/wiki/K-means_clustering
+[2] https://en.wikipedia.org/wiki/K-medoids
 
-//TODO
-- clustering and zooming
+<!-- //TODO
+- zooming
 - node deletion
 - common principle what can be shown on the graph
+- change clustering in the checkbox to grouping -->

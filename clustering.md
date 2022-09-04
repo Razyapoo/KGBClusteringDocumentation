@@ -231,3 +231,8 @@ The RemoteServer.ts component is extended with the requestor receiving layout co
 <h3 id="extension-of-the-response-interfaces">Extension of the ResponseInterfaces.ts</h3>
 
 The ResponseInterfaces.ts component is extended with a new interfaces used for layout constraints received from the backend server.
+
+
+
+
+//TODO kClustering
