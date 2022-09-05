@@ -2,8 +2,9 @@
 
 - [Motivation](#motivation)
 - [Glossary](#glossary)
-- [Configuration selection](#configuration-selection)
 - [Get started with graph exploration](#get-started-with-graph-exploration)
+  - [Configuration selection](#configuration-selection)
+  - [Get started with graph exploration](#get-started-with-graph-exploration)
 
 ---
 
@@ -17,7 +18,7 @@ Our extension of the original Knowledge Graph browser is inspired by such mappin
 
 In this part of the guide, you will learn the necessary terms that will help you understand the basic principle of how the extension works. They may differ from the usual terms you may be familiar with.
 
-<h2 id="hierarchical-relationships-glossary">Hierarchical relationship</h2>
+<h3 id="hierarchical-relationships-glossary">Hierarchical relationship</h3>
 
 In our approach, we introduce the concept of hierarchical relationships. 
 
@@ -36,7 +37,7 @@ Here the node *"Fakulty"* is the parent node of the node *"Matematicko-fyzikáln
 
 Non-hierarchical relationships are represented by edge between nodes.
 
-<h2 id="hierarchical-groups">Hierarchical group</h2>
+<h3 id="hierarchical-groups">Hierarchical group</h3>
 
 > A hierarchical group is a cluster of nodes that are related to each other by parent-child relationships. 
 
@@ -46,7 +47,7 @@ An example of one such hierarchical group is shown in Figure 1.
 
 The hierarchical group is predefined by the technician in the visual configuration.
 
-<h2 id="visual-groups-glossary">Visual group</h2>
+<h3 id="visual-groups-glossary">Visual group</h3>
 
 > A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" representing the visual group itself.
 
@@ -74,7 +75,7 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 > **Note**
 > The main advantage of visual groups is that you can easily move all the nodes that belong to the same group across the entire graph area at the same time. This way they won't be scattered all over the graph area. 
 
-<h2 id="hierarchical-class">Hierarchical class</h2>
+<h3 id="hierarchical-class">Hierarchical class</h3>
 
 > A hierarchical class is a visual class that determines which hierarchical group a node belongs to. A node can only be assigned to one hierarchical class.
 
@@ -86,21 +87,21 @@ The hierarchical class, if it exists, is shown along with the label of a node. S
 </p>
 
 
-<h2 id="hierarchical-level">Hierarchical level</h2>
+<h3 id="hierarchical-level">Hierarchical level</h3>
 
 > The hierarchical level indicates the depth of the hierarchy at which the node resides.
 
 The amount of detail displayed on the maps (in mapping platforms) depends on the zoom level. Our implementation uses the same idea. At the deepest [level of the hierarchy](#hierarchical-level), the graph shows all possible details, and as you zoom out, it generalizes the details to the parent nodes and shows less detail (the depth of the [hierarchical level](#hierarchical-level) decreases). And at the highest [level of the hierarchy](#hierarchical-level), the graph shows only those single nodes that are representatives of the hierarchies themselves. 
 
-<h2 id="cluster-glossary">Cluster</h2>
+<h3 id="cluster-glossary">Cluster</h3>
 
 > Cluster is a set of the same or similar elements, assembled or located close to each other. 
 
-<h2 id="grouping-glossary">Grouping</h2>
+<h3 id="grouping-glossary">Grouping</h3>
 
 > Grouping is the task of converting clusters into a single node.
 
-<h2 id="checkbox-glossary">Checkbox</h2>
+<h3 id="checkbox-glossary">Checkbox</h3>
 
 "Scaling options" checkbox is used to choose whether to group nodes or to zoom. It is placed in the right corner of the graph area. See the Figure 5 for more detail.
 
@@ -244,6 +245,3 @@ The main motivation behind the *"grouping of clustering"* extension is to bring 
 [1] https://en.wikipedia.org/wiki/K-means_clustering
 
 [2] https://en.wikipedia.org/wiki/K-medoids
-
-<!-- //TODO
-- add layouting after deletion -->

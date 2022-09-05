@@ -5,7 +5,8 @@ _This page describes how the grouping methods are implemented in the Knowledge G
 ---
 //TODO add table of content 
 
-## Main goal
+ 
+<h1 id="main-goal">Main goal</h1>
 
 So far, in our Knowledge Graph Browser, it was only possible to group nodes in such a way that the user selects a couple of nodes and makes a group out of them manually. But in many cases it is more efficient and easier for the user to escape such work and allow the application to automatically group nodes based on similar attribute values.
 
