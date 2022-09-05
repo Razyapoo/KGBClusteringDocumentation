@@ -235,17 +235,15 @@ After removal:
     <em>Figure 11. After removal</em>
 </p>
 
-
 <h2 id="summary">Summary</h2>
 
+The main motivation behind the *"grouping of clustering"* extension is to bring the concept of zooming from mapping platforms into the Knowledge Graph browser. Feel free to use the newly implemented features that will give you a fresh perspective on the graph.
 
 <h1 id="references">References</h1>
 
 [1] https://en.wikipedia.org/wiki/K-means_clustering
+
 [2] https://en.wikipedia.org/wiki/K-medoids
 
 <!-- //TODO
-- zooming
-- node deletion
-- common principle what can be shown on the graph
-- change clustering in the checkbox to grouping -->
+- add layouting after deletion -->
