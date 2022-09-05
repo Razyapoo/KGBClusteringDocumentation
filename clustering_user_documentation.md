@@ -219,9 +219,9 @@ By selecting a "Grouping of clusters" and "zooming" at the same time, you can ta
 
 [Removing](#node-removal-glossary) a node is described in the [Glossary](#glossary)
 
-Example of the node removal:
+Example of the node removal. Node's label is "Informaticka sekce":
 
-Before removal:
+Before removal of the "Informaticka sekce":
 
 <p align="center">
     <img src="img/before_removal.png" alt="before-removal" title="Before removal" width="750"/><br/>
