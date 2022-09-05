@@ -15,9 +15,9 @@ Our extension of the original Knowledge Graph browser is inspired by such mappin
 
 <h1 id="glossary">Glossary</h1>
 
-In this part of the guide, you will learn the necessary terms that will help you understand the basic principle of how the extension works.
+In this part of the guide, you will learn the necessary terms that will help you understand the basic principle of how the extension works. They may differ from the usual terms you may be familiar with.
 
-<h2 id="hierarchical-relationships-glossary">Hierarchical relationships</h2>
+<h2 id="hierarchical-relationships-glossary">Hierarchical relationship</h2>
 
 In our approach, we introduce the concept of hierarchical relationships. 
 
@@ -36,17 +36,17 @@ Here the node *"Fakulty"* is the parent node of the node *"Matematicko-fyzikáln
 
 Non-hierarchical relationships are represented by edge between nodes.
 
-<h2 id="hierarchical-groups">Hierarchical groups</h2>
+<h2 id="hierarchical-groups">Hierarchical group</h2>
 
 > A hierarchical group is a cluster of nodes that are related to each other by parent-child relationships. 
 
-Each node in a hierarchical group must have a [hierarchical class](#hierarchical-class) that represents that hierarchical group.
+Each node in a hierarchical group must have the [hierarchical class](#hierarchical-class) that represents that hierarchical group.
 
 An example of one such hierarchical group is shown in Figure 1.
 
 The hierarchical group is predefined by the technician in the visual configuration.
 
-<h2 id="visual-groups-glossary">Visual groups</h2>
+<h2 id="visual-groups-glossary">Visual group</h2>
 
 > A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" representing the visual group itself.
 
@@ -76,7 +76,7 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 
 <h2 id="hierarchical-class">Hierarchical class</h2>
 
-> A hierarchical class is a visual class that determines which hierarchical group a node belongs to.
+> A hierarchical class is a visual class that determines which hierarchical group a node belongs to. A node can only be assigned to one hierarchical class.
 
 The hierarchical class, if it exists, is shown along with the label of a node. See Figure 4 below for more details.
 
@@ -90,6 +90,8 @@ The hierarchical class, if it exists, is shown along with the label of a node. S
 
 > The hierarchical level indicates the depth of the hierarchy at which the node resides.
 
+The amount of detail displayed on the maps (in mapping platforms) depends on the zoom level. Our implementation uses the same idea. At the deepest [level of the hierarchy](#hierarchical-level), the graph shows all possible details, and as you zoom out, it generalizes the details to the parent nodes and shows less detail (the depth of the [hierarchical level](#hierarchical-level) decreases). And at the highest [level of the hierarchy](#hierarchical-level), the graph shows only those single nodes that are representatives of the hierarchies themselves. 
+
 <h2 id="cluster-glossary">Cluster</h2>
 
 > Cluster is a set of the same or similar elements, assembled or located close to each other. 
@@ -100,12 +102,40 @@ The hierarchical class, if it exists, is shown along with the label of a node. S
 
 <h2 id="checkbox-glossary">Checkbox</h2>
 
-To choose whether to group nodes or to zoom, you can use the checkbox "Scaling options" in the right corner of the graph area.
+"Scaling options" checkbox is used to choose whether to group nodes or to zoom. It is placed in the right corner of the graph area. See the Figure 5 for more detail.
 
 <p align="center">
     <img src="img/scaling_options.png" alt="scaling-options" title="Scaling options" width="200"/><br/>
     <em>Figure 5. Scaling options</em>
 </p>
+
+<h3 id="grouping-of-clusters-glossary">Grouping of clusters</h3>
+
+When you zoom in on a specific point on the mapping platforms, at each zoom level, you see more and more details about the region you zoom in, and also otherwise, when you zoom out, some details disappear. The same principle is used in the *"grouping of clusters"* algorithm, namely, when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes.
+
+The *"grouping of clusters"* algorithm must first cluster the nodes into a [cluster](#cluster-glossary), and then collapse this cluster into a single group node. Which nodes to cluster and then group into a single node is determined by an algorithm based on the location of the nodes. This algorithm uses well-known clustering methods such as k-Means clustering [1] and k-Medoids clustering [2] (the method used is set by the technician).
+
+The basic approach of the algorithm is that it creates several centroids, combines them into an empty group (k-Means clustering [1]) or into a group consisting of a single node (k-Medoids clustering [2]), and then adds surrounding nodes to the closest group.
+
+The grouping of nodes is determined based on the [hierarchical class](#hierarchical-class), the parent node, the [level of the hierarchy](#hierarchical-level), and the visual class. First of all, the nodes must be grouped by the hierarchical group class to which they belong. 
+
+As the map (in the mapping platforms) scales down and details disappear, new correlated details appear in their place that generalize the disappeared details. In our case, the parent node is such a generalization. Therefore, the second condition of the grouping algorithm must be the grouping of nodes that have the same parent node.
+
+> **Wartning**
+> The algorithm always groups the nodes that are at the deepest [hierarchical level](#hierarchical-level) shown in the graph area. Only when all nodes in a level will be the only nodes of their parents, the algorithm will collapse those nodes into their parents and increase the hierarchical level by 1.
+
+When zooming out, child nodes are collapsed into their parents, and all incoming and outgoing edges of child nodes remain preserved. This is done by moving edges to parent nodes.
+
+When switching between zoom levels and therefore hierarchy levels, the graph shows more or less details in terms of the number of nodes. They only disappear, but still exist on the graph (in other words, they are not mounted in the hierarchy, but still mounted in the graph). Also otherwise, when you zoom in, the disappeared nodes reappear (similar to mapping platforms). 
+
+> **Warning**
+> When you zoom in, the disappeared nodes reappear in a different way than they were grouped and collapsed, namely when the parent node expands during the zoom operation, only one node appears inside the parent node (either a group or a single node), and on the next zoom in (in case this node is a group), the group gets broken and releases all child nodes of the expanded parent node. In such case the hierarchical level may increase by 1.
+
+By default, only nodes of the same visual class (other than [hierarchical class](#hierarchical-class)) can be grouped together, but it is also possible to group multiple nodes of different visual classes into one group node (this is predefined in the visual configuration by the technician). Therefore, when grouping nodes, their visual classes must also be taken into account.
+
+<h3 id="node-removal-glossary">Node removal</h3>
+
+> The deletion of a node propagates recursively to the deletion of the node's descendants.
 
 <h1 id="how-to-use-the-extension">How to use the extension?</h1>
 
@@ -150,9 +180,9 @@ The starting node is shown in the same way as in other configurations.
 
 As mentioned in the [Hierarchical relationships](#hierarchical-relationships-glossary) section of the [Glossary](#glossary), there are hierarchical and non-hierarchical relationships.
 
-An expansion query predefined in the configuration allows you to show the neighborhood of a node in which the node is in either a hierarchical or non-hierarchical relationship with its neighbors.
+An expansion query predefined in the visual configuration allows you to show the neighborhood of a node in which the node is in either a hierarchical or non-hierarchical relationship with its neighbors.
 
-The hierarchical and non-hierarchical expansions are listed below and shown in the Figure 9.
+The hierarchical and non-hierarchical expansions are listed below:
 
 Hierarchical expansions:
 - "Nadřazená pracoviště"
@@ -161,6 +191,8 @@ Hierarchical expansions:
 Non-hierarchical expansions:
 - "Témata pracoviště"
 - "Sdílená témata pracoviště"
+
+See the Figure 9 for an example.
 
 <p align="center">
     <img src="img/hierarchical_non_hierarchical_expansions.png" alt="hierarchical-and-non-hierarchical-expansions" title="Hierarchical and non hierarchical expansions" width="530"/><br/>
@@ -171,35 +203,40 @@ Non-hierarchical expansions:
 > - A [hierarchical group](#hierarchical-groups) can be continuously build using a hierarchical expansions (example is shown in the Figure 1).
 > - Non-hierarchical expansions expand a node with its neighborhood, where each neighbor is connected to that node by an edge.
 
-<h3 id="grouping-of-clusters">Grouping of clusters</h3>
+<h3 id="checkbox-guide">Checkbox</h3>
 
-When we zoom in on a specific point on the mapping platforms, we get more detail close to that point and to each other. And otherwise when we zoom out. 
+The main tool that enable you to utilize the extension is the [checkbox](#checkbox-glossary). 
 
-The same principle is used in the *"grouping of clusters"* algorithm. Which nodes to cluster and then group into a single node is determined by an algorithm based on the location of the nodes. This algorithm uses well-known clustering methods such as k-Means clustering [1] and k-Medoids clustering [2] (the method used is set by the technician).
+Using the checkbox, you can choose whether to:
+- [Grouping of clusters](#grouping-of-clusters-glossary)
+- Zooming
+- Grouping of clusters and zooming at the same time
+- Neither one of them
 
-The basic approach of the algorithm is that it creates several centroids, combines them into an empty group (k-Means clustering [1]) or into a group consisting of a single node (k-Medoids clustering [2]), and then adds surrounding nodes to the closest group.
+By selecting a "Grouping of clusters" and "zooming" at the same time, you can take an advantage of the main features of the mapping platforms.
 
-The grouping of nodes is determined based on the [hierarchical class](#hierarchical-class), the parent node, the [level of the hierarchy](#hierarchical-level) in which it is placed, and the visual class. First of all, the nodes must be grouped by the hierarchical group class to which they belong. 
+<h3 id="node-removal-guide">Node removal</h3>
 
-As the map (in the mapping platforms) scales down and details disappear, new correlated details appear in their place that generalize the disappeared details. In our case, the parent node is such a generalization. Therefore, the second condition of the grouping algorithm must be the grouping of nodes that have the same parent node.
+[Removing](#node-removal-glossary) a node is described in the [Glossary](#glossary)
 
-The amount of detail displayed on the maps depends on the zoom level. Our implementation uses the same idea. At the deepest level of the hierarchy, the graph shows all possible details, and as you zoom out, it generalizes the details to the parent nodes and shows less detail in the graph. And at the highest level of the hierarchy, the graph shows only the nodes that represent the hierarchies themselves. 
+Example of the node removal:
 
-> **Wartning**
-> Algorithm always group nodes that are reside at the deepest hierarchical level shown in the graph area.
+Before removal:
 
-As described in the [Classes to cluster together](./clustering.md#classes-to-cluster-together) section, multiple different visual classes can be grouped together, and the default is that only nodes of the same visual class can be grouped together. Therefore, when grouping nodes, their visual classes must also be taken into account.
+<p align="center">
+    <img src="img/before_removal.png" alt="before-removal" title="Before removal" width="750"/><br/>
+    <em>Figure 10. Before removal</em>
+</p>
 
-When switching between zoom levels and therefore hierarchy levels, the graph shows more or less detail in relation to the number of nodes. In other words, child nodes collapse into their parents when you zoom out. They only disappear, but still exist on the graph (in other words, they are not mounted in the hierarchy, but still mounted in the graph). Also otherwise, when you zoom in, the disappeared nodes reappear similar to mapping platforms. 
+After removal:
 
-> **Warning**
-> When you zoom in, the disappeared nodes reappear in a different way than they were collapsed, namely when the parent node expands during the zoom operation, only one node appears inside the parent node (either a group or a single node), and on the next zoom in (in case this node is a group), the group gets broken and releases all child nodes.
+<p align="center">
+    <img src="img/after_removal.png" alt="after-removal" title="After removal" width="350"/><br/>
+    <em>Figure 11. After removal</em>
+</p>
 
-When switching between levels, the incoming and outgoing edges of child nodes are preserved. This is done by moving edges to parent nodes. That is, when all child nodes disappear and it's time to show only the parent node, all their edges go to the parent node.
 
-<h3 id="grouping-of-clusters">Grouping of clusters and zoom at the same time</h3>
-
-At the right corner of the graph area you can see the checkbox having 
+<h2 id="summary">Summary</h2>
 
 
 <h1 id="references">References</h1>

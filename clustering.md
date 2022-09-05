@@ -124,7 +124,7 @@ See the implementation for [backend configuration]()
 
 ## Frontend script
 
-Our extension of the original Knowledge Graph Browser is inspired by mapping platforms like [google maps](https://maps.google.com), maps.cz, etc. When you zoom in, at each zoom level, you see more and more details about the region you zoom in, and also otherwise, when you zoom out, some details disappear and more regions are shown on the map itself.
+Our extension of the original Knowledge Graph Browser is inspired by mapping platforms like [google maps](https://maps.google.com), maps.cz, etc. When you zoom in, at each zoom level, you see more and more details about the region you zoom in, and also otherwise, when you zoom out, some details disappear.
 
 Our extension uses a similar principle, that is, when you zoom in, you see more detail, and when you zoom out, you see less detail. 
 
