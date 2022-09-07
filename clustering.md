@@ -37,7 +37,7 @@ University can be visualized as a big node (blue) containing inside child nodes 
     <em>Figure 1. Parent-child relationship</em>
 </p>
 
-In our extension, each such node hierarchy represents a [hierarchical group](#hierarchical-groups-glossary).
+In our extension, each such node hierarchy represents a [hierarchical group](#hierarchical-group-glossary).
 
 Hierarchical relationships are predefined by the technician in the visual configuration.
 
@@ -61,7 +61,7 @@ Non-hierarchical relationships are all relationships other than hierarchical.
 
 > A visual layout constraint is a rule applied to a graph to change the way it is visualized 
 
-<h3 id="hierarchical-groups-glossary">Hierarchical group</h3>
+<h3 id="hierarchical-group-glossary">Hierarchical group</h3>
 
 > A hierarchical group is a cluster of nodes that are related to each other by [parent-child relationships](#parent-child-or-child-parent-hierarchical-relationship-glossary). 
 
@@ -73,7 +73,7 @@ The hierarchical group is predefined by the technician in the visual configurati
 
 <h3 id="hierarchical-class-glossary">Hierarchical class<h3>
 
-> A hierarchical class is a visual class that determines which [hierarchical group](#hierarchical-groups-glossary) a node belongs to. A node can only be assigned to one hierarchical class.
+> A hierarchical class is a visual class that determines which [hierarchical group](#hierarchical-group-glossary) a node belongs to. A node can only be assigned to one hierarchical class.
 
 The hierarchical class, if it exists, is shown along with the label of a node. See Figure 4 below for more details.
 
@@ -131,7 +131,7 @@ The *"grouping of clusters"* algorithm must first cluster the nodes into a [clus
 
 The basic approach of the algorithm is that it creates several centroids, combines them into an empty group (k-Means clustering [1]) or into a group consisting of a single node (k-Medoids clustering [2]), and then adds surrounding nodes to the closest group.
 
-The grouping of nodes is determined based on the [hierarchical class](#hierarchical-class-glossary), the parent node, the [level of the hierarchy](#hierarchical-level), and the visual class. First of all, the nodes must be grouped by the hierarchical group class to which they belong. 
+The grouping of nodes is determined based on the [hierarchical class](#hierarchical-class-glossary), the parent node, the [level of the hierarchy](#hierarchical-level-glossary), and the visual class. First of all, the nodes must be grouped by the hierarchical group class to which they belong. 
 
 As the map (in the mapping platforms) scales down and details disappear, new correlated details appear in their place that generalize the disappeared details. In our case, the parent node is such a generalization. Therefore, the second condition of the grouping algorithm must be the grouping of nodes that have the same parent node.
 
@@ -147,7 +147,7 @@ When switching between zoom levels and therefore hierarchy levels, the graph sho
 
 By default, only nodes of the same visual class (other than [hierarchical class](#hierarchical-class-glossary)) can be grouped together, but it is also possible to group multiple nodes of different visual classes into one group node (this is predefined in the visual configuration by the technician). Therefore, when grouping nodes, their visual classes must also be taken into account.
 
-<h3 id="hierarchical-level">Hierarchical level</h3>
+<h3 id="hierarchical-level-glossary">Hierarchical level</h3>
 
 > The hierarchical level indicates the depth of the hierarchy at which the node resides.
 
@@ -155,10 +155,11 @@ The amount of detail displayed on the maps (in mapping platforms) depends on the
 
 <h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3> //TODO add to text
 
-> A current hierarchical level is the deepest [hierarchical level](#hierarchical-level) shown in the graph area.
+> A current hierarchical level is the deepest [hierarchical level](#hierarchical-level-glossary) shown in the graph area.
 
 When you zoom in, at some point the "*grouping of clusters*" algorithm collapses the nodes into their parents and increases the current hierarchical level by 1, and when you zoom out, it generalizes the child nodes to the parent nodes and therefore shows less detail on the graph area (current hierarchical level decreases).
 
+The *globalHierarchyDepth* attribute value indicates the current hierarchical level.
 
 
 
@@ -209,9 +210,9 @@ A [visual layout constraint](#visual-layout-constraint) defining [visual group](
 
 <h3 id="hierarchical-groups-to-cluster">"HierarchicalGroupsToClusterLayoutConstraint" class</h3>
 
-It can be useful not to group nodes that belong to the same [hierarchical group](#hierarchical-groups-glossary) (within that group). 
+It can be useful not to group nodes that belong to the same [hierarchical group](#hierarchical-group-glossary) (within that group). 
 
-A [visual layout constraint](#visual-layout-constraint) that defines the [hierarchical groups](#hierarchical-groups-glossary), in which we can run ["*grouping of clusters*"](#grouping-of-clusters-glossary), is expressed as an instance of the *browser:HierarchyGroupToClusterLayoutConstraint* class. The [hierarchical (group) class](#hierarchical-class-glossary) is assigned using the *browser:clusteringSelector* property. 
+A [visual layout constraint](#visual-layout-constraint) that defines the [hierarchical groups](#hierarchical-group-glossary), in which we can run ["*grouping of clusters*"](#grouping-of-clusters-glossary), is expressed as an instance of the *browser:HierarchyGroupToClusterLayoutConstraint* class. The [hierarchical (group) class](#hierarchical-class-glossary) is assigned using the *browser:clusteringSelector* property. 
 
 > **Warning** 
 > Each hierarchical group class must be assigned to a separate instance of the *browser:HierarchyGroupToClusterLayoutConstraint* class. The whole process of ["*grouping of clusters*"](#grouping-of-clusters-glossary) algorithm is written in [Glossary](#glossary).
@@ -251,7 +252,7 @@ The original GraphArea component is extended with a checkbox that allows the use
 
 <h3 id="extension-of-the-graphareastylesheetmixin">Extension of the GraphAreaStylesheetMixin.ts</h3>
 
-The original component is extended with visual styles for the parent node. When a node becomes a parent, its label is moved to the node's top and center position. Also, the shape of the node becomes octagonal.
+The original component is extended with visual styles for the parent node. When a node becomes a parent, having at least one child node placed inside, its visual style changes so that its label appears at the top and center. Also, the shape of the node becomes octagonal.
 
 // TODO to continue from here
 
@@ -271,7 +272,7 @@ The original component is extended with new attribute *constraints* in which the
 
 <h3 id="extension-of-the-application">Extension of the Application.vue</h3>
 
-It is extended with a new feature to query and retrieve layout constraints from the server.
+It is extended with a new feature to query and retrieve layout constraints from the server. *isHierarchyView* and *constraintRulesLoaded* attributes indicate whether constraints are loaded from the server successfully. 
 
 <h3 id="extension-of-the-edge">Extension of the Edge.ts</h3>
 
@@ -306,14 +307,22 @@ Two cases can occur during grouping:
 
   This child node can represent a single node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 9 above).
 
-> **Note**
-> After collapsing child nodes, the algorithm switches the [current hierarchical level](#current-hierarchical-level-glossary) one level higher (*globalHierarchyDepth* attribute value is increased by one). During this operation, all edges from child nodes are moved to the parent node.
+  > **Note**
+  > After collapsing child nodes, the algorithm switches the [current hierarchical level](#current-hierarchical-level-glossary) one level higher (*globalHierarchyDepth* attribute value is increased by one). During this operation, all edges from child nodes are moved to the parent node.
 
-When ungrouping, only nodes of the same hierarchical level can be ungrouped (nodes shown in the graph and having a hierarchical level equal to the value of the *globalHierarchyDepth* attribute). Here again there are two cases. The first case, when there is at least one group at a level equal to *globalHierarchyDepth*, then this group can be ungrouped and the algorithm stops its execution. In the second case, there can only be single nodes representing the parents of the nodes that disappeared during the grouping operation. This can be verified using the *isMountedInHierarchy* attribute of a node (more detail in the [Extension of the NodeCommon.ts](#extension-of-the-node-common)). Thus, nodes that are not mounted in the hierarchy but are mounted in the graph (i.e. they were expanded and then collapsed to a parent node during a grouping operation in the past) appear in the graph as child nodes and their *isMountedInHierarchy* attribute value takes the value *true*.
+When ungrouping, only nodes at the [current hierarchical level](#current-hierarchical-level-glossary) can be ungrouped. 
+
+There are two cases:
+
+- In the first case, there is at least one group at the [current hierarchical level](#current-hierarchical-level-glossary). In such case, algorithm randomly ungroups one of such group. 
+- In the second case, there are only single nodes representing the parents of the nodes that were collapsed during the previous calls of the [*groupingOfClusters*](#grouping-of-clusters-glossary) operation in the past (see [Extension of the NodeCommon.ts](#extension-of-the-node-common) for more details). In such case, after a call of the *groupingOfClustersManager* operation, collapsed nodes appear on the graph area as child nodes and their *isMountedInHierarchy* attribute value takes the value *true*.
 
 <h3 id="extension-of-the-graph-manipulator">Extension of the GraphManipulator.ts</h3>
 
-In this component, only methods for managing groups are extended, namely, setting the parent, the level of the hierarchy to which the group or node belongs, and the hierarchical group. But make sure that when you ungroup a group, you need to remove that group from its parent's list of children, and otherwise, when you group a nodes, you need to remove them form its parent's list of children, but add newly created group as a child node.
+In this component, only group management methods are extended to set a parent node, a [hierarchical level](#hierarchical-level-glossary), and a [hierarchical group](#hierarchical-group-glossary). 
+
+> **Warning**
+> Make sure that when you ungroup a group you need to remove that group from the parent list of child nodes and also otherwise when you group nodes you need to remove them from the parent list of children but add the newly created group as a child node.
 
 <h3 id="extension-of-the-node">Extension of the Node.ts</h3>
 
@@ -323,44 +332,41 @@ An extension of this component is the *remove* method, which is extended to hand
 
 <h3 id="extension-of-the-node-common">Extension of the NodeCommon.ts</h3>
 
-The NodeCommon.ts component is extended with attributes that allow you to set the hierarchy of nodes, namely *parent*, *children*, *hierarchyGroup*, *hierarchyLevel* and their getters.
+The NodeCommon.ts component is extended with attributes that set the hierarchical attributes of a node, namely a parent node, child nodes, a [hierarchical group](#hierarchical-group-glossary), [hierarchical level](#hierarchical-level-glossary) //TODO ?getters? and their getters.
 
-To check if a node has been expanded and not disappeared during the grouping operation, a new *isMountedInHierarchy* attribute has also been added to indicate if the node is collapsed inside its parent.
+To check if a node has been expanded and disappeared during the [*groupingOfClusters*](#grouping-of-clusters-glossary) operation, a new *isMountedInHierarchy* attribute is also added to indicate if the node is collapsed inside its parent. The *true* value indicates that a node is still visible on the graph area and the *false* value indicates that a node was expanded and then collapsed to a parent node during [*groupingOfClusters*](#grouping-of-clusters-glossary) operation in the past.
 
 <h3 id="extension-of-the-node-group">Extension of the NodeGroup.ts</h3>
 
-*remove* method is changed to handle node hierarchy.
+The *remove* method is changed to handle node hierarchy.
 
-<h3 id="extension-of-the-node-view">Extension of the NodeGroup.ts</h3>
+<h3 id="extension-of-the-node-view">Extension of the NodeView.ts</h3>
 
-*expand* method is changed to handle [child-parent/parent-child relation layout constraint](#child-parent-or-parent-child-layout-constraint). At the moment, our implementation only supports [child-parent relationships](#parent-child-or-child-parent-hierarchical-relationship-glossary), but it's easy to add support for [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary) as well.
+The *expand* method is changed to handle [child-parent/parent-child relation layout constraint](#child-parent-or-parent-child-layout-constraint). At the moment, the implementation only supports [child-parent relationships](#parent-child-or-child-parent-hierarchical-relationship-glossary), but it's easy to add support for [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary) as well.
 
-<h3 id="extension-of-the-view-options">Extension of the NodeGroup.ts</h3>
+<h3 id="extension-of-the-view-options">Extension of the ViewOptions.ts</h3>
 
-The NodeCommon.ts component is extended with the *isHierarchyView* attribute to indicate if the visual style of the parent node needs to be changed. When at least one child node is collapsed within a parent node, its visual style changes so that its label appears at the top and center.
+This component is extended with the *isHierarchyView* attribute to indicate if the visual style of the parent node needs to be changed. See [Extension of the GraphAreaStylesheetMixin.ts](#extension-of-the-graphareastylesheetmixin) for more details.
 
 <h3 id="extension-of-the-cola-layout">Extension of the ColaLayout.ts</h3>
 
-*onExpansion* method is changed to handle node hierarchy.
+The *onExpansion* method is changed to handle node hierarchy.
 
 <h3 id="extension-of-the-layouts">Extension of the Layouts.ts</h3>
 
-Layouts.ts and all its descendant components are extended with *supportsHierarchicalView* and *constraintRulesLoaded* attributes. The first one indicates whether the layout supports a hierarchical view. The *constraintRulesLoaded* attribute indicates whether layout constraints were successfully loaded.
+The Layouts.ts and all its descendant components are extended with boolean *supportsHierarchicalView* and *constraintRulesLoaded* attributes. The first one indicates whether the layout supports a hierarchical view. The *constraintRulesLoaded* attribute indicates whether layout constraints were successfully loaded.
 
 <h3 id="extension-of-the-layout-manager">Extension of the LayoutManager.ts</h3>
 
-*switchToLayout* method is extended to handle the case when current layout is changed to another one.
+The *switchToLayout* method is extended to handle the case when the current layout is changed to a different one, so that all loaded constraint rules are preserved.
 
 <h3 id="extension-of-the-remote-server">Extension of the RemoteServer.ts</h3>
 
-The RemoteServer.ts component is extended with the requestor receiving layout constraints from the backend server.
+This component is extended with the requestor, which receives layout constraints from the backend server.
 
 <h3 id="extension-of-the-response-interfaces">Extension of the ResponseInterfaces.ts</h3>
 
-The ResponseInterfaces.ts component is extended with a new interfaces used for layout constraints received from the backend server.
-
-
-
+This component is extended with a new interfaces used for layout constraints received from the backend server.
 
 <h3 id="KCluster">KCluster</h3>
 //TODO kClustering
