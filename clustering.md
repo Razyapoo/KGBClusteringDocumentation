@@ -290,24 +290,24 @@ From now on, the algorithm groups all filtered nodes, but based on the parent an
 
 Two cases can occur during grouping:
 
-* In the first case (example is shown in the Figure 8 below), at the end of the filtering, there are several nodes that can be clustered and grouped (within same parent). The algorithm then calls the *groupingOfClusters* function, which performs the clustering and grouping of the filtered nodes. This function is described in more detail in the [KCluster](#KCluster) section.
+- In the first case (example is shown in the Figure 8 below), at the end of the filtering, there are several nodes that can be clustered and grouped (within same parent). The algorithm then calls the *groupingOfClusters* function, which performs the clustering and grouping of the filtered nodes. This function is described in more detail in the [KCluster](#KCluster) section.
 
 <p align="center">
     <img src="img/grouping_of_clusters_several_child_nodes.png" alt="grouping-of-clusters-several-child-nodes" title="Grouping of clusters several child nodes" width="600"/><br/>
     <em>Figure 8. Grouping of clusters (use-case of several child nodes)</em>
 </p>
 
-* In the second case, only one child node remain (per parent) at the end of the filtering (example is shown in the Figure 9 below). 
+- In the second case, only one child node remain (per parent) at the end of the filtering (example is shown in the Figure 9 below). 
 
-<p align="center">
-    <img src="img/grouping_of_clusters_one_child_node.png" alt="grouping-of-clusters-one-child-node" title="Grouping of clusters with one child node" width="600"/><br/>
-    <em>Figure 9. Grouping of clusters (use-case of one child node)</em>
-</p>
+  <p align="center">
+      <img src="img/grouping_of_clusters_one_child_node.png" alt="grouping-of-clusters-one-child-node" title="Grouping of clusters with one child node" width="600"/><br/>
+      <em>Figure 9. Grouping of clusters (use-case of one child node)</em>
+  </p>
 
-    This child node can represent a single node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 9 above).
+  This child node can represent a single node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 9 above).
 
-    > **Note**
-    > After collapsing child nodes, the algorithm switches the [current hierarchical level](#current-hierarchical-level-glossary) one level higher (*globalHierarchyDepth* attribute value is increased by one). During this operation, all edges from child nodes are moved to the parent node.
+> **Note**
+> After collapsing child nodes, the algorithm switches the [current hierarchical level](#current-hierarchical-level-glossary) one level higher (*globalHierarchyDepth* attribute value is increased by one). During this operation, all edges from child nodes are moved to the parent node.
 
 When ungrouping, only nodes of the same hierarchical level can be ungrouped (nodes shown in the graph and having a hierarchical level equal to the value of the *globalHierarchyDepth* attribute). Here again there are two cases. The first case, when there is at least one group at a level equal to *globalHierarchyDepth*, then this group can be ungrouped and the algorithm stops its execution. In the second case, there can only be single nodes representing the parents of the nodes that disappeared during the grouping operation. This can be verified using the *isMountedInHierarchy* attribute of a node (more detail in the [Extension of the NodeCommon.ts](#extension-of-the-node-common)). Thus, nodes that are not mounted in the hierarchy but are mounted in the graph (i.e. they were expanded and then collapsed to a parent node during a grouping operation in the past) appear in the graph as child nodes and their *isMountedInHierarchy* attribute value takes the value *true*.
 
