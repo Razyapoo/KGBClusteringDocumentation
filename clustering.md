@@ -4,35 +4,160 @@ _This page describes how the grouping methods are implemented in the Knowledge G
 
 ---
 //TODO add table of content 
+### Table of Contents
 
+- [Main goal](#main-goal)
+- [Glossary]($glossary)
+
+
+---
  
 <h1 id="main-goal">Main goal</h1>
 
-So far, in our Knowledge Graph Browser, it was only possible to group nodes in such a way that the user selects a couple of nodes and makes a group out of them manually. But in many cases it is more efficient and easier for the user to escape such work and allow the application to automatically group nodes based on similar attribute values.
+//TODO to write that "*grouping of clusters*" alg is used here
 
-The main purpose of the implemented grouping method is to make a large graph more user-friendly, i.e. more readable and understandable. Node grouping is the process of creating clusters of nodes with the same or similar attribute values ​​and then combining them into a single group.
+So far, in the Knowledge Graph browser, it was only possible to group nodes in such a way that the user selects a couple of nodes and makes a group out of them manually. But in many cases it is more efficient and easier for the user to escape such work and allow the application to automatically group nodes based on similar attribute values.
 
-<h3 id="node-hierarchy-and-hierarchical-relations">Node hierarchy and hierarchical relations</h3>
+The main purpose of the implemented grouping method is to make a large graph more user-friendly, i.e. more readable and understandable. 
 
-Typically, nodes in a graph are related to each other, for example, a company has employees, university has scientists, scientist has awards, scientist writes scientific papers, university has departments, and many other examples. In what follows, for simplicity, we will consider universities and departments as an example, and relation between them will be - "university has department(s)".
+<h1 id="glossary">Glossary</h1>
 
-One possible way to visualize such relationships is to create an edge between nodes. But there is another way, namely adding a hierarchy between the nodes, that is, in our example, the university acts as a parent node, and its departments act as child nodes. In such case, "university has department(s)" relation is hierarchical one. 
+In this part of the documentation, you will learn the necessary terms that will help you understand the basic principle of how the extension works. They may differ from the usual terms you may be familiar with. This glossary might slightly differ from the [glossary](clustering_user_documentation.md#glossary) in the user documentation
 
-In our Knowledge Graph Browser application university can be visualized as a big node containing inside child nodes representing departments as shown at the picture below: //TODO add picture
+<h3 id="parent-child-or-child-parent-hierarchical-relationship-glossary">Parent-child or child-parent hierarchical relationship</h3>
 
-In our implementation, each such node hierarchy has its own class. Each node has an additional class indicating which hierarchy class it belongs to.
+Typically, nodes in a graph are related to each other, for example, a company has employees, university has scientists, scientist has awards, scientist writes scientific papers, university has departments, and many other examples. 
 
-### Non-hierarchical relations
+One possible way to visualize such relationship is to create an edge between parent and child. But there is also another way, namely adding a hierarchy between the nodes. In such case, parent node is visualized as a bigger node containing the children inside.
 
-Non-hierarchical relations are also possible. For example, we can extend our example and consider also the relation - "the department teaches the subject". We can show such a relation as hierarchical, but we chose to show it as non-hierarchical. This can be configured in the visual configuration file (it is explained further here //TODO add link). See the picture below: //TODO
+University can be visualized as a big node (blue) containing inside child nodes (light-blue) representing departments as shown at the Figure 1 below: 
 
-### Clustering of nodes based on its classes
+<p align="center">
+    <img src="img/child_parent_relation.png" alt="parent-child-relationship" title="Parent-child relationship" width="600"/><br/>
+    <em>Figure 1. Parent-child relationship</em>
+</p>
 
-Each node in our Knowledge Graph Browser has an entity class or classes to which it belongs, such as the Department or the Subject. This property is used to cluster nodes and combine them into one group. Nodes can be either clustered based on the same class (by default) or a group of classes predefined in the visual configuration file. 
+In our extension, each such node hierarchy represents a [hierarchical group](#hierarchical-groups-glossary).
 
-### Visual groups
+Hierarchical relationships are predefined by the technician in the visual configuration.
 
-Let's imagine that a certain class of nodes may not have hierarchical relations, but we still want to cluster them. For example, the subjects do not have a hierarchical relations, but we want them all to be clustered in the same place on the graph. In such a case, we can set up the visual group in the visual configuration so that all nodes of the "Subject" class are placed under one "pseudo-parent" node representing the visual group "Subject". See an example below: //TODO picture
+Expansion query can be triggered from a parent node (expand child nodes) as well as form a child node (expand parent node). In both cases it may use same property in SPARQL CONSTRUCT, for example *skos:broader*.
+
+//TODO used nowhere 
+<h3 id="non-hierarchical-relationships-glossary">Non-hierarchical relationships </h3>
+
+> Non-hierarchical relationships are represented by edge between nodes.
+
+Non-hierarchical relationships are also possible. For example, we can extend our example and consider also the relation - "the department teaches the subject". Such a relationship can be visualized as hierarchical, but we chose to visualize it as non-hierarchical. Example is shown in the Figure 2 below.
+
+<p align="center">
+    <img src="img/non_hierarchical_edge.png" alt="non-hierarchical-edge" title="Non-hierarchical edge" width="600"/><br/>
+    <em>Figure 2. Non-hierarchical edge</em>
+</p>
+
+Non-hierarchical relationships are all relationships other than hierarchical.
+
+<h3 id="visual-layout-constraint">Visual layout constraint</h3>
+
+> A visual layout constraint is a rule applied to a graph to change the way it is visualized 
+
+<h3 id="hierarchical-groups-glossary">Hierarchical group</h3>
+
+> A hierarchical group is a cluster of nodes that are related to each other by [parent-child relationships](#parent-child-or-child-parent-hierarchical-relationship-glossary). 
+
+Each node in a hierarchical group must have the [hierarchical class](#hierarchical-class-glossary) that represents that hierarchical group.
+
+An example of one such hierarchical group is shown in Figure 1.
+
+The hierarchical group is predefined by the technician in the visual configuration.
+
+<h3 id="hierarchical-class-glossary">Hierarchical class<h3>
+
+> A hierarchical class is a visual class that determines which [hierarchical group](#hierarchical-groups-glossary) a node belongs to. A node can only be assigned to one hierarchical class.
+
+The hierarchical class, if it exists, is shown along with the label of a node. See Figure 4 below for more details.
+
+<p align="center">
+    <img src="img/hierarchical_class.png" alt="hierarchical-class" title="Hierarchical class" width="350"/><br/>
+    <em>Figure 4. Hierarchical class</em>
+</p>
+
+A hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in the same hierarchical group. It is assigned to a node in the SPARQL CONSTRUCT query in the same way as a visual class, i.e. using the *browser:class* property. 
+
+> **Warning** 
+> Each node must be assigned to some hierarchical group class in case it is to be placed in any hierarchy.
+
+//TODO Used nowhere
+<h3 id="clustering-of-nodes-based-on-its-classes-glossary">Clustering of nodes based on its classes</h3>
+
+> Nodes can be clustered into one same cluster based on the same class (default) or a group of classes predefined in the visual configuration file.
+
+Each node in the Knowledge Graph browser has assigned a visual class (it usually differs from [hierarchical class](#hierarchical-class-glossary)). This property can also be used to cluster nodes and combine them into one group. 
+
+<h3 id="visual-group-glossary">Visual groups<h3>
+
+> A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" node representing the visual group itself.
+
+<p align="center">
+    <img src="img/visual_group.png" alt="visual-group" title="Visual group" width="600"/><br/>
+    <em>Figure 2. Visual group</em>
+</p>
+
+The visual group is predefined by the technician in the visual configuration.
+
+Example of visual group is shown above in the Figure 2.
+
+Each node in a visual group must have a visual class representing that visual group. It can be identical to the hierarchical class.
+
+<p align="center">
+    <img src="img/visual_groups.png" alt="visual-groups" title="Visual groups" width="600"/><br/>
+    <em>Figure 3. Visual groups</em>
+</p>
+
+> The hierarchical groups themselves can be interpreted as visual groups. In such a case, there is no need for a "pseudo-parent".
+
+An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in Figure 3 above.
+
+> **Note**
+> The main advantage of visual groups is that you can easily move all the nodes that belong to the same group across the entire graph area at the same time. This way they won't be scattered all over the graph area. 
+
+<h3 id="grouping-of-clusters-glossary">Grouping of clusters</h3>
+
+> Grouping of clusters is the process of creating clusters of nodes with the same or similar attribute values ​​and then combining them into a single group.
+
+When you zoom in on a specific point on the mapping platforms, at each zoom level, you see more and more details about the region you zoom in, and also otherwise, when you zoom out, some details disappear. The same principle is used in the *"grouping of clusters"* algorithm, namely, when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes.
+
+The *"grouping of clusters"* algorithm must first cluster the nodes into a [cluster](#cluster-glossary), and then collapse this cluster into a single group node. Which nodes to cluster and then group into a single node is determined by an algorithm based on the location of the nodes. This algorithm uses well-known clustering methods such as k-Means clustering [1] and k-Medoids clustering [2] (the method used is set by the technician).
+
+The basic approach of the algorithm is that it creates several centroids, combines them into an empty group (k-Means clustering [1]) or into a group consisting of a single node (k-Medoids clustering [2]), and then adds surrounding nodes to the closest group.
+
+The grouping of nodes is determined based on the [hierarchical class](#hierarchical-class-glossary), the parent node, the [level of the hierarchy](#hierarchical-level), and the visual class. First of all, the nodes must be grouped by the hierarchical group class to which they belong. 
+
+As the map (in the mapping platforms) scales down and details disappear, new correlated details appear in their place that generalize the disappeared details. In our case, the parent node is such a generalization. Therefore, the second condition of the grouping algorithm must be the grouping of nodes that have the same parent node.
+
+> **Wartning**
+> The algorithm always groups the nodes that are at the [current hierarchical level](#current-hierarchical-level-glossary). Only when all nodes in a level will be the only nodes of their parents, the algorithm will collapse those nodes into their parents and increase the [current hierarchical level](#current-hierarchical-level-glossary) by 1.
+
+When zooming out, child nodes are collapsed into their parents, and all incoming and outgoing edges of child nodes remain preserved. This is done by moving edges to parent nodes.
+
+When switching between zoom levels and therefore hierarchy levels, the graph shows more or less details in terms of the number of nodes. They only disappear, but still exist on the graph (in other words, they are not mounted in the hierarchy, but still mounted in the graph). Also otherwise, when you zoom in, the disappeared nodes reappear (similar to mapping platforms). 
+
+> **Warning**
+> When you zoom in, the disappeared nodes reappear in a different way than they were grouped and collapsed, namely when the parent node expands during the zoom operation, only one node appears inside the parent node (either a group or a single node). In such case the [current hierarchical level](#current-hierarchical-level-glossary) may decrease by 1. And on the next zoom in (in case this node is a group), the group gets broken and releases all child nodes of the expanded parent node. 
+
+By default, only nodes of the same visual class (other than [hierarchical class](#hierarchical-class-glossary)) can be grouped together, but it is also possible to group multiple nodes of different visual classes into one group node (this is predefined in the visual configuration by the technician). Therefore, when grouping nodes, their visual classes must also be taken into account.
+
+<h3 id="hierarchical-level">Hierarchical level</h3>
+
+> The hierarchical level indicates the depth of the hierarchy at which the node resides.
+
+The amount of detail displayed on the maps (in mapping platforms) depends on the zoom level. Our implementation uses the same idea. At the deepest level of the hierarchy, the graph shows all possible details. And at the highest level of the hierarchy, the graph shows only those single nodes that are representatives of the hierarchies themselves. 
+
+<h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3> //TODO add to text
+
+> A current hierarchical level is the deepest [hierarchical level](#hierarchical-level) shown in the graph area.
+
+When you zoom in, at some point the "*grouping of clusters*" algorithm collapses the nodes into their parents and increases the current hierarchical level by 1, and when you zoom out, it generalizes the child nodes to the parent nodes and therefore shows less detail on the graph area (current hierarchical level decreases).
 
 
 
@@ -47,141 +172,142 @@ Let's imagine that a certain class of nodes may not have hierarchical relations,
 
 
 
-
-
-
-
-
-Implementation of grouping method is split into two parts: 
-1. [Backend](#Backend)
-2. [Fronted](#Frontend)
+Implementation of [*"Grouping of clusters"*](#grouping-of-clusters-glossary) extension is split into two parts: 
+1. [Backend](#backend)
+2. [Fronted](#frontend)
 
 --- 
 
-# Backend
+<h1 id="backend">Backend</h1>
 
-## Backend service
+<h2 id="backend-service">Backend service</h2>
 
 The original backend service is extended with a new request handler *"/layout-constraints"*.
 
-This handler sends a query to a SPARQL endpoint and receives layout constraints to apply in the main application.
+This handler sends a query defined in the visual configuration to a SPARQL endpoint and receives [visual layout constraints](#visual-layout-constraint) to apply in the main application.
 
 The output of the request handler is a JSON object containing all the constraints.
 
-### Implementation
+<h3 id="backend-implementation">Implementation</h3>
 
-See the implementation for [backend service]()
+See the implementation of [backend service](https://github.com/linkedpipes/knowledge-graph-browser-backend)
 
-## Visual configuration
+<h2 id="visual-configuration">Visual configuration<h2>
 
-The original visual configuration is extended with a set of layout constraints that is assigned using the *browser:hasLayoutConstraints* property. 
+The original visual configuration is extended with a set of [visual layout constraints](#visual-layout-constraint) that are assigned using the *browser:hasLayoutConstraints* property. 
 
-A layout constraint set is a set of visual layout constraints to be applied to a graph. It is expressed as an instance of the *browser:LayoutConstraintSet* class. Individual layout constraints are instances of a special layout constraint classes and are assigned to a set of layout constraints using the *browser:hasConstraint* property. 
+A visual layout constraint set is a set of [visual layout constraints](#visual-layout-constraint) to be applied to a graph. It is expressed as an instance of the *browser:LayoutConstraintSet* class. Individual [visual layout constraints](#visual-layout-constraint) are instances of an individual layout constraint classes and are assigned to a visual layout constraints set using the *browser:hasConstraint* property. 
 
-The next few sections describe each layout constraint class in more detail. It is expected that each node has an additional class indicating which hierarchy class it belongs to. 
+The next few sections describe each layout constraint class in more details. It is expected that each node has a [hierarchical class](#hierarchical-class-glossary) assigned. 
 
-### Hierarchical group class
+<h3 id="visual-group">"VisualGroupLayoutConstraint" class</h3>
 
-A hierarchical group class is a generic class for all nodes to be placed in the same hierarchical group.
+A [visual layout constraint](#visual-layout-constraint) defining [visual group](#visual-group-glossary) is expressed as an instance of the *browser:VisualGroupLayoutConstraint* class. Visual class is assigned to the visual group layout constraint via *browser:groupingSelector* property. It is usually identical to the [hierarchical class](#hierarchical-class-glossary), so there is no need for an extra visual class.
 
-A hierarchical group class is assigned to a node in the SPARQL CONSTRUCT query in the same way as a visual class, i.e. using the *browser:class* property. 
+> **Warning** 
+> Each visual class must be assigned to a separate instance of *browser:VisualGroupLayoutConstraint* class.
 
-**Warning** Each node must be assigned to some hierarchical group class in case it is to be placed in any hierarchy.
+<h3 id="hierarchical-groups-to-cluster">"HierarchicalGroupsToClusterLayoutConstraint" class</h3>
 
-### Visual group
+It can be useful not to group nodes that belong to the same [hierarchical group](#hierarchical-groups-glossary) (within that group). 
 
-Nodes that belong to the same visual group are placed under the same "pseudo-parent" representing the visual group itself. Layout constraint defining visual group is expressed as an instance of the *browser:VisualGroupLayoutConstraint* class. Nodes that are to be placed under the same pseudo-parent node must belong to the same hierarchical group class, i.e. in this case the visual group corresponds to the hierarchical group class. This class is assigned to the visual group layout constraint via *browser:groupingSelector* property. 
+A [visual layout constraint](#visual-layout-constraint) that defines the [hierarchical groups](#hierarchical-groups-glossary), in which we can run ["*grouping of clusters*"](#grouping-of-clusters-glossary), is expressed as an instance of the *browser:HierarchyGroupToClusterLayoutConstraint* class. The [hierarchical (group) class](#hierarchical-class-glossary) is assigned using the *browser:clusteringSelector* property. 
 
-**Warning** Each hierarchical group class must be assigned to a separate instance of *browser:VisualGroupLayoutConstraint* class.
+> **Warning** 
+> Each hierarchical group class must be assigned to a separate instance of the *browser:HierarchyGroupToClusterLayoutConstraint* class. The whole process of ["*grouping of clusters*"](#grouping-of-clusters-glossary) algorithm is written in [Glossary](#glossary).
 
-<h3 id="child-parent-or-parent-child-relations">Child-parent or parent-child relations</h3>
+<h3 id="classes-to-cluster-together">"ClassesToClusterTogetherLayoutConstraint" class</h3>
 
-These relations have a special place in our grouping of clusters extension of the Knowledge Graph Browser because they establish how hierarchical groups of nodes can be visualized. Expansion query can be triggered from a parent node (expand child nodes) as well as form a child node (expand parent node). In both cases it may use same property in SPARQL CONSTRUCT, for example *skos:broader*.
+By default the ["*grouping of clusters*"](#grouping-of-clusters-glossary) algorithm only cluster and group nodes of the same visual classes (may very from hierarchical classes) within parent node. But, it is possible to define which visual classes can be clustered and grouped together (within the parent node). 
 
-Layout constraint defining child-parent (resp. parent-child) relations is expressed as an instance of the *browser:ChildParentLayoutConstraint* (resp. *browser:ParentChildLayoutConstraint*). Classes playing a child role (resp. parent role) are assigned to the *browser:ChildParentLayoutConstraint* (resp. *browser:ParentChildLayoutConstraint*) class using the *browser:childNodeSelector* (resp. *browser:parentNodeSelector*) property. Expansion property in expansion query is selected using the *browser:hierarchyEdgeSelector*.
+A [visual layout constraint](#visual-layout-constraint) that defines classes to cluster and group together is expressed as an instance of the *browser:ClassesToClusterTogetherLayoutConstraint* class. Classes are assigned using the *browser:clusteringSelector* property.
 
-<h3 id="hierarchical-groups-to-cluster">Hierarchical groups to cluster</h3>
+> **Warning**
+> Use this layout constraint only if you want to create groups containing nodes of different classes. Put all classes you want to cluster and group together in the one instance of the *browser:ClassesToClusterTogetherLayoutConstraint* class.
 
-It can be useful to group together nodes that belong to the same hierarchical group (but within that group). 
+<h3 id="child-parent-or-parent-child-layout-constraint">"ChildParentLayoutConstraint" and "ParentChildLayoutConstraint" classes</h3>
 
-The layout constraint that defines the hierarchical groups for clustering is expressed as an instance of the *browser:HierarchyGroupToClusterLayoutConstraint* class. The hierarchical group class is assigned using the *browser:clusteringSelector* property. 
+A [visual layout constraint](#visual-layout-constraint) defining [child-parent](#parent-child-or-child-parent-hierarchical-relationship-glossary) (resp. [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary)) relationships is expressed as an instance of the *browser:ChildParentLayoutConstraint* (resp. *browser:ParentChildLayoutConstraint*). Classes playing a child role (resp. parent role) are assigned using the *browser:childNodeSelector* (resp. *browser:parentNodeSelector*) property. Expansion property in expansion query (also a class of an expansion edge in the graph) is selected using the *browser:hierarchyEdgeSelector*.
 
-**Warning** Each hierarchical group class must be assigned to a separate instance of the *browser:HierarchyGroupToClusterLayoutConstraint* class. The whole process of grouping nodes is written in //TODO (add a link).
- 
+<h2 id="backend-configuration-implementation">Implementation</h3>
 
-<h3 id="classes-to-cluster-together">Classes to cluster together</h3>
-
-It is possible to define which classes can be clustered and grouped together. By default, in our grouping algorithm, only nodes of the same visual and hierarchical classes are clustered and grouped together.
-
-The layout constraint that defines classes to cluster and group together is expressed as an instance of the *browser:ClassesToClusterTogetherLayoutConstraint* class. Classes are assigned using the *browser:clusteringSelector* property.
-
-**Warning** Use this layout constraint only if you want to create groups containing nodes of different classes. Put all these classes that you want to cluster and group together in one instance of the *browser:ClassesToCluster Together Layout Constraint* class.
-
-### Implementation
-
-See the implementation for [backend configuration]()
+See the backend configuration example [here](https://github.com/linkedpipes/knowledge-graph-browser-configurations/blob/main/configurations/university-topic-map-with-constraints.ttl) (base configuration is [here](https://github.com/linkedpipes/knowledge-graph-browser-configurations/blob/main/configurations/university-topic-map.ttl)).
 
 ---
 
-## Frontend script
+<h1 id="frontend">Frontend script</h1>
 
-Our extension of the original Knowledge Graph Browser is inspired by mapping platforms like [google maps](https://maps.google.com), maps.cz, etc. When you zoom in, at each zoom level, you see more and more details about the region you zoom in, and also otherwise, when you zoom out, some details disappear.
+We all know how zoom in/out works on mapping platforms such as [google maps](https://maps.google.com), maps.cz, etc. Zoom is used to increase or decrease the zoom level at a specific point and show more or less detail on a map.
 
-Our extension uses a similar principle, that is, when you zoom in, you see more detail, and when you zoom out, you see less detail. 
+The [*"grouping of clusters"*](#grouping-of-clusters) extension of the original Knowledge Graph browser is inspired by such mapping platforms.
 
-The grouping of nodes is determined based on the class of the hierarchical group, the parent node, the level of the hierarchy in which it is placed, and the visual class. First of all, the nodes must be grouped by the hierarchical group class to which they belong, because as the map scales down and details disappear, new correlated details appear in their place that generalize the disappeared details. In our case, the parent node is such a generalization. Therefore, the second condition of the grouping algorithm must be the grouping of nodes that have the same parent node.
+The next few sections describe extensions to the main components of the source code.
 
-The amount of detail displayed on the maps depends on the zoom level. Our implementation uses the same idea. At the deepest level of the hierarchy, the graph shows all possible details, and as you zoom out, it generalizes the details to the parent nodes and shows less detail in the graph. And at the highest level of the hierarchy, the graph shows only the nodes that represent the hierarchies themselves.
+<h3 id="">kClustering
 
-As described in the [Classes to cluster together](#classes-to-cluster-together) section, multiple different visual classes can be grouped together, and the default is that only nodes of the same visual class can be grouped together. Therefore, when grouping nodes, their visual classes must also be taken into account.
+<h3 id="extension-of-the-grapharea">Extension of the GraphArea.vue</h3>
 
-When switching between zoom levels and therefore hierarchy levels, the graph shows more or less detail in relation to the number of nodes. In other words, child nodes become their parents. They only disappear, but still exist on the graph (in other words, they are not mounted in the hierarchy, but still mounted in the graph). Therefore, it is necessary to preserve their incoming and outgoing edges. This is done by moving their edges towards their parents. That is, when all child nodes disappear and it's time to show only the parent node, all their edges move to the parent node.
+The original GraphArea component is extended with a checkbox that allows the user to choose whether to zoom or run the [*"grouping of clusters"*](#grouping-of-clusters) algorithm.
 
-The next few sections will describe extensions to main code components.
-
-<h3 id="extension-of-the-grapharea-component">Extension of the GraphArea component</h3>
-
-The original GraphArea component is extended with a checkbox that allows the user to choose whether to scale or group. 
-
-### Extension of the GraphAreaStylesheetMixin
+<h3 id="extension-of-the-graphareastylesheetmixin">Extension of the GraphAreaStylesheetMixin.ts</h3>
 
 The original component is extended with visual styles for the parent node. When a node becomes a parent, its label is moved to the node's top and center position. Also, the shape of the node becomes octagonal.
 
-### Extension of the GraphElementEdges
+// TODO to continue from here
 
-Because the visualization of the parent-child relationship is implemented as described in [Node hierarchy and hierarchical relations](#node-hierarchy-and-hierarchical-relations) section, creating an edge between parent and child nodes is redundant. Therefore, the creation of an edge is subject to the condition that the nodes in the expansion are not in a parent-child relationship with the expanded nodes.
+<h3 id="extension-of-the-graphelementedges">Extension of the GraphElementEdges.ts</h3>
 
-### Extension of the GraphElementNodeMixin
+Because the visualization of the [parent-child relationship](#parent-child-or-child-parent-hierarchical-relationship-glossary) is implemented as described in [Node hierarchy and hierarchical relations](#node-hierarchy-and-hierarchical-relations) section, creating an edge between parent and child nodes is redundant. Therefore, the creation of an edge is subject to the condition that the nodes in the expansion are not in a [parent-child relationship](#parent-child-or-child-parent-hierarchical-relationship-glossary) with the expanded nodes.
 
-There is an issue with parent-child hierarchical visualization in that when a child node is selected, the parent node is also selected because it is below the child node. Therefore, it is necessary to make the parent node unselectable when the child node is selected, and then, after the child node is already selected, make the parent node selectable again.
+<h3 id="extension-of-the-graphelementnodemixin">Extension of the GraphElementNodeMixin.ts</h3>
 
-The Cytoscape library uses the "parent" property define a parent of a node and  visualize a parent-child hierarchy (i.e. a parent node is shown as a large node and its child nodes as nodes placed inside the parent node). Therefore, when expanding a parent node from a child node, it is necessary to explicitly specify the parent for a Cytoscape element that representing a child node and might already be present in the graph.
+There is an issue with [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary) hierarchical visualization in that when a child node is selected, the parent node is also selected because it is below the child node. Therefore, it is necessary to make the parent node unselectable when the child node is selected, and then, after the child node is already selected, make the parent node selectable again.
 
-<h3 id='extension-of-the-configuration'>Extension of the Configuration.ts</h3>
+The Cytoscape library uses the "parent" property define a parent of a node and  visualize a [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary) hierarchy (i.e. a parent node is shown as a large node and its child nodes as nodes placed inside the parent node). Therefore, when expanding a parent node from a child node, it is necessary to explicitly specify the parent for a Cytoscape element that representing a child node and might already be present in the graph.
+
+<h3 id="extension-of-the-configuration">Extension of the Configuration.ts</h3>
 
 The original component is extended with new attribute *constraints* in which the loaded constraints are stored in the configuration.
 
-<h3 id='extension-of-the-application'>Extension of the Application.vue</h3>
+<h3 id="extension-of-the-application">Extension of the Application.vue</h3>
 
 It is extended with a new feature to query and retrieve layout constraints from the server.
 
-<h3 id='extension-of-the-edge'>Extension of the Edge.ts</h3>
+<h3 id="extension-of-the-edge">Extension of the Edge.ts</h3>
 
 Edge is extended with a new attribute showing that the edge is coming from the children.
 
-<h3 id='extension-of-the-graph-area-manipulator'>Extension of the GraphAreaManipulator.ts</h3>
+<h3 id="extension-of-the-graph-area-manipulator">Extension of the GraphAreaManipulator.ts</h3>
 
-The original component is extended with a new private *clustering* method that performs clustering and grouping of nodes. It is also extended with the *globalHierarchyDepth* attribute, whose value indicates the current depth of the hierarchy.
+The original component is extended with a new private *groupingOfClustersManager* method that can cluster and group nodes, ungroup existing groups, or show child nodes collapsed in their parent nodes. The component is also extended with the *globalHierarchyDepth* attribute, whose value indicates the [current hierarchical level](#current-hierarchical-level-glossary).
 
-When grouping, the *clustering* method filters all nodes that have a hierarchical group class that is allowed to be grouped in the visual configuration (more in [Hierarchical groups to cluster](#hierarchical-groups-to-cluster) section). The algorithm then filters out of all previously filtered nodes only those that are at the deepest level of the hierarchy shown in the graph (based on the value of the *globalHierarchyDepth* attribute). 
+When grouping, the *groupingOfClustersManager* method filters all nodes that have a [hierarchical group class](#hierarchical-class-glossary) that is allowed to be grouped in the visual configuration (more in [Hierarchical groups to cluster](#hierarchical-groups-to-cluster) section). The algorithm then filters out of all previously filtered nodes only those that reside at the [current hierarchical level](#current-hierarchical-level-glossary) (based on the value of the *globalHierarchyDepth* attribute). 
 
-**Warning** Value of the *globalHierarchyDepth* attribute does not show the deepest hierarchical level that has been achieved in the graph, but the deepest level of nodes that are still visible in the graph.
+> **Note** 
+> Value of the *globalHierarchyDepth* attribute does not show the deepest hierarchical level that has been achieved in the graph during the research, but the deepest level of nodes that are still visible in the graph.
 
-From now on, the algorithm groups all filtered nodes, but based on the parent and visual classes. First, it filters all nodes that have the same parent, then from the filtered nodes, it filters out nodes that have the same visual class, unless multiple classes are explicitly set in the visual configuration (more in [Classes to cluster together](#classes-to-cluster-together) section).
+From now on, the algorithm groups all filtered nodes, but based on the parent and visual classes (may vary from the [hierarchical class](#hierarchical-class-glossary) of a node). First, it filters all nodes that have the same parent, then from the filtered nodes, it filters out nodes that have the same visual class, unless multiple visual classes are explicitly set in the visual configuration (more in [Classes to cluster together](#classes-to-cluster-together) section).
 
-Two cases can occur during grouping. In the first case, at the end of the filtering, there are several nodes that can be grouped. The algorithm then calls the *kClustering* function, which performs the grouping of the filtered nodes. This function is described in more detail in the //TODO section.
+Two cases can occur during grouping:
 
-In the second case, only one node can remain at the end of the filtering, which means that the parent contains only one child. This child node can represent a single node or a group containing all of the parent's child nodes. In this case, the remaining child node should be collapsed into the parent node, but this should only happen when all the nodes (or groups) having hierarchical level equal to *globalHierarchyDepth* value are single child nodes of their parents. If there are still pair of nodes that can be grouped, the algorithm simply remembers that in the future it must collapse single child nodes, and groups this pair of nodes. In the case where each node that has a depth equal to *globalHierarchyDepth* is the only node of its parent, the algorithm switches the hierarchy level one level higher (value of the *globalHierarchyDepth* attribute plus one) and collapses the child nodes into their parents. During this operation, all edges from child nodes are moved to the parent node.
+- In the first case (example is shown in the Figure 8 below), at the end of the filtering, there are several nodes that can be clustered and grouped (within same parent). The algorithm then calls the *groupingOfClusters* function, which performs the clustering and grouping of the filtered nodes. This function is described in more detail in the [KCluster](#KCluster) section.
+
+<p align="center">
+    <img src="img/grouping_of_clusters_several_child_nodes.png" alt="grouping-of-clusters-several-child-nodes" title="Grouping of clusters several child nodes" width="600"/><br/>
+    <em>Figure 8. Grouping of clusters (use-case of several child nodes)</em>
+</p>
+
+- In the second case, only one child node remain (per parent) at the end of the filtering (example is shown in the Figure 9 below). 
+
+<p align="center">
+    <img src="img/grouping_of_clusters_one_child_node.png" alt="grouping-of-clusters-one-child-node" title="Grouping of clusters with one child node" width="600"/><br/>
+    <em>Figure 9. Grouping of clusters (use-case of one child node)</em>
+</p>
+
+This child node can represent a single node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 9 above).
+
+> **Note**
+> After collapsing child nodes, the algorithm switches the [current hierarchical level](#current-hierarchical-level-glossary) one level higher (*globalHierarchyDepth* attribute value is increased by one). During this operation, all edges from child nodes are moved to the parent node.
 
 When ungrouping, only nodes of the same hierarchical level can be ungrouped (nodes shown in the graph and having a hierarchical level equal to the value of the *globalHierarchyDepth* attribute). Here again there are two cases. The first case, when there is at least one group at a level equal to *globalHierarchyDepth*, then this group can be ungrouped and the algorithm stops its execution. In the second case, there can only be single nodes representing the parents of the nodes that disappeared during the grouping operation. This can be verified using the *isMountedInHierarchy* attribute of a node (more detail in the [Extension of the NodeCommon.ts](#extension-of-the-node-common)). Thus, nodes that are not mounted in the hierarchy but are mounted in the graph (i.e. they were expanded and then collapsed to a parent node during a grouping operation in the past) appear in the graph as child nodes and their *isMountedInHierarchy* attribute value takes the value *true*.
 
@@ -207,7 +333,7 @@ To check if a node has been expanded and not disappeared during the grouping ope
 
 <h3 id="extension-of-the-node-view">Extension of the NodeGroup.ts</h3>
 
-*expand* method is changed to handle *child-parent/parent-child relation* layout constraint (described in more detail in [Child-parent or parent-child relations](#child-parent-or-parent-child-relations) and [Node hierarchy and hierarchical relations](#node-hierarchy-and-hierarchical-relations)) section. At the moment, our implementation only supports child-parent relationships, but it's easy to add support for parent-child relationships as well.
+*expand* method is changed to handle [child-parent/parent-child relation layout constraint](#child-parent-or-parent-child-layout-constraint). At the moment, our implementation only supports [child-parent relationships](#parent-child-or-child-parent-hierarchical-relationship-glossary), but it's easy to add support for [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary) as well.
 
 <h3 id="extension-of-the-view-options">Extension of the NodeGroup.ts</h3>
 
@@ -236,4 +362,6 @@ The ResponseInterfaces.ts component is extended with a new interfaces used for l
 
 
 
+<h3 id="KCluster">KCluster</h3>
 //TODO kClustering
+to change zoom in/ zoom out in grouping of clusters description

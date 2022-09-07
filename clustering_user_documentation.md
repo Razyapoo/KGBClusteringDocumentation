@@ -2,7 +2,7 @@
 
 - [Motivation](#motivation)
 - [Glossary](#glossary)
-- [Get started with graph exploration](#get-started-with-graph-exploration)
+- [How to use the extension?](#how-to-use-the-extension)
   - [Configuration selection](#configuration-selection)
   - [Get started with graph exploration](#get-started-with-graph-exploration)
 
@@ -22,9 +22,9 @@ In this part of the guide, you will learn the necessary terms that will help you
 
 In our approach, we introduce the concept of hierarchical relationships. 
 
-Typically, nodes in a graph are related to each other, for example, a company has employees, university has scientists, scientist has awards, scientist writes scientific papers, university has departments, and many other examples. In what follows, for simplicity, we will consider universities and departments as an example, and relation between them will be - "university has department(s)".
+Typically, nodes in a graph are related to each other, for example, a company has employees, university has scientists, scientist has awards, scientist writes scientific papers, university has departments, and many other examples. In what follows, for simplicity, we will consider universities and departments as an example, and relationship between them will be - "university has department(s)".
 
-One possible way to visualize such relation is to create an edge between nodes. But there is also another way, namely adding a hierarchy between the nodes, that is, in our example, the university acts as a parent node, and its departments act as child nodes. In such case, "university has department(s)" relation is hierarchical one, i.e. representing a *"parent-child"* relationship.
+One possible way to visualize such relationship is to create an edge between nodes. But there is also another way, namely adding a hierarchy between the nodes, that is, in our example, the university acts as a parent node, and its departments act as child nodes. In such case, "university has department(s)" relation is hierarchical one, i.e. representing a *"parent-child"* relationship.
 
 See the picture below for an example:
 
@@ -49,7 +49,7 @@ The hierarchical group is predefined by the technician in the visual configurati
 
 <h3 id="visual-groups-glossary">Visual group</h3>
 
-> A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" representing the visual group itself.
+> A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" node representing the visual group itself.
 
 <p align="center">
     <img src="img/visual_group.png" alt="visual-group" title="Visual group" width="600"/><br/>
@@ -77,7 +77,7 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 
 <h3 id="hierarchical-class">Hierarchical class</h3>
 
-> A hierarchical class is a visual class that determines which hierarchical group a node belongs to. A node can only be assigned to one hierarchical class.
+> A hierarchical class is a visual class that determines which [hierarchical group](#hierarchical-groups) a node belongs to. A node can only be assigned to one hierarchical class.
 
 The hierarchical class, if it exists, is shown along with the label of a node. See Figure 4 below for more details.
 
@@ -91,7 +91,13 @@ The hierarchical class, if it exists, is shown along with the label of a node. S
 
 > The hierarchical level indicates the depth of the hierarchy at which the node resides.
 
-The amount of detail displayed on the maps (in mapping platforms) depends on the zoom level. Our implementation uses the same idea. At the deepest [level of the hierarchy](#hierarchical-level), the graph shows all possible details, and as you zoom out, it generalizes the details to the parent nodes and shows less detail (the depth of the [hierarchical level](#hierarchical-level) decreases). And at the highest [level of the hierarchy](#hierarchical-level), the graph shows only those single nodes that are representatives of the hierarchies themselves. 
+The amount of detail displayed on the maps (in mapping platforms) depends on the zoom level. Our implementation uses the same idea. At the deepest level of the hierarchy, the graph shows all possible details. And at the highest level of the hierarchy, the graph shows only those single nodes that are representatives of the hierarchies themselves. 
+
+<h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3> //TODO add to text
+
+> A current hierarchical level is the deepest [hierarchical level](#hierarchical-level) shown in the graph area.
+
+When you zoom in, at some point the "*grouping of clusters*" algorithm collapses the nodes into their parents and increases the current hierarchical level by 1, and when you zoom out, it generalizes the child nodes to the parent nodes and therefore shows less detail on the graph area (current hierarchical level decreases).
 
 <h3 id="cluster-glossary">Cluster</h3>
 
@@ -123,14 +129,14 @@ The grouping of nodes is determined based on the [hierarchical class](#hierarchi
 As the map (in the mapping platforms) scales down and details disappear, new correlated details appear in their place that generalize the disappeared details. In our case, the parent node is such a generalization. Therefore, the second condition of the grouping algorithm must be the grouping of nodes that have the same parent node.
 
 > **Wartning**
-> The algorithm always groups the nodes that are at the deepest [hierarchical level](#hierarchical-level) shown in the graph area. Only when all nodes in a level will be the only nodes of their parents, the algorithm will collapse those nodes into their parents and increase the hierarchical level by 1.
+> The algorithm always groups the nodes that are at the [current hierarchical level](#current-hierarchical-level-glossary). Only when all nodes in a level will be the only nodes of their parents, the algorithm will collapse those nodes into their parents and increase the [current hierarchical level](#current-hierarchical-level-glossary) by 1.
 
 When zooming out, child nodes are collapsed into their parents, and all incoming and outgoing edges of child nodes remain preserved. This is done by moving edges to parent nodes.
 
 When switching between zoom levels and therefore hierarchy levels, the graph shows more or less details in terms of the number of nodes. They only disappear, but still exist on the graph (in other words, they are not mounted in the hierarchy, but still mounted in the graph). Also otherwise, when you zoom in, the disappeared nodes reappear (similar to mapping platforms). 
 
 > **Warning**
-> When you zoom in, the disappeared nodes reappear in a different way than they were grouped and collapsed, namely when the parent node expands during the zoom operation, only one node appears inside the parent node (either a group or a single node), and on the next zoom in (in case this node is a group), the group gets broken and releases all child nodes of the expanded parent node. In such case the hierarchical level may increase by 1.
+> When you zoom in, the disappeared nodes reappear in a different way than they were grouped and collapsed, namely when the parent node expands during the zoom operation, only one node appears inside the parent node (either a group or a single node). In such case the [current hierarchical level](#current-hierarchical-level-glossary) may increase by 1. And on the next zoom in (in case this node is a group), the group gets broken and releases all child nodes of the expanded parent node. 
 
 By default, only nodes of the same visual class (other than [hierarchical class](#hierarchical-class)) can be grouped together, but it is also possible to group multiple nodes of different visual classes into one group node (this is predefined in the visual configuration by the technician). Therefore, when grouping nodes, their visual classes must also be taken into account.
 
