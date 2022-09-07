@@ -304,7 +304,7 @@ Two cases can occur during grouping:
     <em>Figure 9. Grouping of clusters (use-case of one child node)</em>
 </p>
 
-This child node can represent a single node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 9 above).
+>> This child node can represent a single node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 9 above).
 
 > **Note**
 > After collapsing child nodes, the algorithm switches the [current hierarchical level](#current-hierarchical-level-glossary) one level higher (*globalHierarchyDepth* attribute value is increased by one). During this operation, all edges from child nodes are moved to the parent node.
