@@ -244,8 +244,6 @@ The [*"grouping of clusters"*](#grouping-of-clusters) extension of the original 
 
 The next few sections describe extensions to the main components of the source code.
 
-<h3 id="">kClustering
-
 <h3 id="extension-of-the-grapharea">Extension of the GraphArea.vue</h3>
 
 The original GraphArea component is extended with a checkbox that allows the user to choose whether to zoom or run the [*"grouping of clusters"*](#grouping-of-clusters) algorithm.
@@ -254,15 +252,17 @@ The original GraphArea component is extended with a checkbox that allows the use
 
 The original component is extended with visual styles for the parent node. When a node becomes a parent, having at least one child node placed inside, its visual style changes so that its label appears at the top and center. Also, the shape of the node becomes octagonal.
 
-// TODO to continue from here
-
 <h3 id="extension-of-the-graphelementedges">Extension of the GraphElementEdges.ts</h3>
 
-Because the visualization of the [parent-child relationship](#parent-child-or-child-parent-hierarchical-relationship-glossary) is implemented as described in [Node hierarchy and hierarchical relations](#node-hierarchy-and-hierarchical-relations) section, creating an edge between parent and child nodes is redundant. Therefore, the creation of an edge is subject to the condition that the nodes in the expansion are not in a [parent-child relationship](#parent-child-or-child-parent-hierarchical-relationship-glossary) with the expanded nodes.
+This component is extended to check if the ends of an edge are in a [parent-child relationship](#parent-child-or-child-parent-hierarchical-relationship-glossary) relationship. If so, creating an arrow-shaped edge between the parent and child nodes is redundant.
+
+// TODO to continue from here
 
 <h3 id="extension-of-the-graphelementnodemixin">Extension of the GraphElementNodeMixin.ts</h3>
 
-There is an issue with [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary) hierarchical visualization in that when a child node is selected, the parent node is also selected because it is below the child node. Therefore, it is necessary to make the parent node unselectable when the child node is selected, and then, after the child node is already selected, make the parent node selectable again.
+By default in [Cytoscape](https://js.cytoscape.org/) library, selecting a child node also selects its parent.
+
+Therefore, it is necessary to make the parent node unselectable when the child node is selected, and then, after the child node is already selected, make the parent node selectable again.
 
 The Cytoscape library uses the "parent" property define a parent of a node and  visualize a [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary) hierarchy (i.e. a parent node is shown as a large node and its child nodes as nodes placed inside the parent node). Therefore, when expanding a parent node from a child node, it is necessary to explicitly specify the parent for a Cytoscape element that representing a child node and might already be present in the graph.
 
