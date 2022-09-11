@@ -57,9 +57,9 @@ Non-hierarchical relationships are also possible. For example, we can extend our
 
 Non-hierarchical relationships are all relationships other than hierarchical.
 
-<h3 id="visual-layout-constraint">Visual layout constraint</h3>
+<h3 id="visual-layout-constraint-glossary">Visual layout constraint</h3>
 
-> A visual layout constraint is a rule applied to a graph to change the way it is visualized 
+> A visual layout constraint is a rule applied to a graph to change the way it is visualized
 
 <h3 id="hierarchical-group-glossary">Hierarchical group</h3>
 
@@ -71,7 +71,7 @@ An example of one such hierarchical group is shown in Figure 1.
 
 The hierarchical group is predefined by the technician in the visual configuration.
 
-<h3 id="hierarchical-class-glossary">Hierarchical class<h3>
+<h3 id="hierarchical-class-glossary">Hierarchical class</h3>
 
 > A hierarchical class is a visual class that determines which [hierarchical group](#hierarchical-group-glossary) a node belongs to. A node can only be assigned to one hierarchical class.
 
@@ -94,7 +94,7 @@ A hierarchical class (or hierarchical group class) is a common class for all nod
 
 Each node in the Knowledge Graph browser has assigned a visual class (it usually differs from [hierarchical class](#hierarchical-class-glossary)). This property can also be used to cluster nodes and combine them into one group. 
 
-<h3 id="visual-group-glossary">Visual groups<h3>
+<h3 id="visual-group-glossary">Visual groups</h3>
 
 > A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" node representing the visual group itself.
 
@@ -125,9 +125,7 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 
 > Grouping of clusters is the process of creating clusters of nodes with the same or similar attribute values ​​and then combining them into a single group.
 
-When you zoom in on a specific point on the mapping platforms, at each zoom level, you see more and more details about the region you zoom in, and also otherwise, when you zoom out, some details disappear. The same principle is used in the *"grouping of clusters"* algorithm, namely, when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes.
-
-The *"grouping of clusters"* algorithm must first cluster the nodes into a [cluster](#cluster-glossary), and then collapse this cluster into a single group node. Which nodes to cluster and then group into a single node is determined by an algorithm based on the location of the nodes. This algorithm uses well-known clustering methods such as k-Means clustering [1] and k-Medoids clustering [2] (the method used is set by the technician).
+The *"grouping of clusters"* algorithm must first cluster the nodes into a [cluster](#cluster-glossary), and then collapse this cluster into a single group node. Which nodes to cluster and then group into a single node is determined by an algorithm using positions of the nodes. This algorithm uses well-known clustering methods such as k-Means clustering [1] and k-Medoids clustering [2] (the method used is set by the technician).
 
 The basic approach of the algorithm is that it creates several centroids, combines them into an empty group (k-Means clustering [1]) or into a group consisting of a single node (k-Medoids clustering [2]), and then adds surrounding nodes to the closest group.
 
@@ -185,7 +183,7 @@ Implementation of [*"Grouping of clusters"*](#grouping-of-clusters-glossary) ext
 
 The original backend service is extended with a new request handler *"/layout-constraints"*.
 
-This handler sends a query defined in the visual configuration to a SPARQL endpoint and receives [visual layout constraints](#visual-layout-constraint) to apply in the main application.
+This handler sends a query defined in the visual configuration to a SPARQL endpoint and receives [visual layout constraints](#visual-layout-constraint-glossary) to apply in the main application.
 
 The output of the request handler is a JSON object containing all the constraints.
 
@@ -193,17 +191,17 @@ The output of the request handler is a JSON object containing all the constraint
 
 See the implementation of [backend service](https://github.com/linkedpipes/knowledge-graph-browser-backend)
 
-<h2 id="visual-configuration">Visual configuration<h2>
+<h2 id="visual-configuration">Visual configuration</h2>
 
-The original visual configuration is extended with a set of [visual layout constraints](#visual-layout-constraint) that are assigned using the *browser:hasLayoutConstraints* property. 
+The original visual configuration is extended with a set of [visual layout constraints](#visual-layout-constraint-glossary) that are assigned using the *browser:hasLayoutConstraints* property. 
 
-A visual layout constraint set is a set of [visual layout constraints](#visual-layout-constraint) to be applied to a graph. It is expressed as an instance of the *browser:LayoutConstraintSet* class. Individual [visual layout constraints](#visual-layout-constraint) are instances of an individual layout constraint classes and are assigned to a visual layout constraints set using the *browser:hasConstraint* property. 
+A visual layout constraint set is a set of [visual layout constraints](#visual-layout-constraint-glossary) to be applied to a graph. It is expressed as an instance of the *browser:LayoutConstraintSet* class. Individual [visual layout constraints](#visual-layout-constraint-glossary) are instances of an individual layout constraint classes and are assigned to a visual layout constraints set using the *browser:hasConstraint* property. 
 
 The next few sections describe each layout constraint class in more details. It is expected that each node has a [hierarchical class](#hierarchical-class-glossary) assigned. 
 
 <h3 id="visual-group">"VisualGroupLayoutConstraint" class</h3>
 
-A [visual layout constraint](#visual-layout-constraint) defining [visual group](#visual-group-glossary) is expressed as an instance of the *browser:VisualGroupLayoutConstraint* class. Visual class is assigned to the visual group layout constraint via *browser:groupingSelector* property. It is usually identical to the [hierarchical class](#hierarchical-class-glossary), so there is no need for an extra visual class.
+A [visual layout constraint](#visual-layout-constraint-glossary) defining [visual group](#visual-group-glossary) is expressed as an instance of the *browser:VisualGroupLayoutConstraint* class. Visual class is assigned to the visual group layout constraint via *browser:groupingSelector* property. It is usually identical to the [hierarchical class](#hierarchical-class-glossary), so there is no need for an extra visual class.
 
 > **Warning** 
 > Each visual class must be assigned to a separate instance of *browser:VisualGroupLayoutConstraint* class.
@@ -212,7 +210,7 @@ A [visual layout constraint](#visual-layout-constraint) defining [visual group](
 
 It can be useful not to group nodes that belong to the same [hierarchical group](#hierarchical-group-glossary) (within that group). 
 
-A [visual layout constraint](#visual-layout-constraint) that defines the [hierarchical groups](#hierarchical-group-glossary), in which we can run ["*grouping of clusters*"](#grouping-of-clusters-glossary), is expressed as an instance of the *browser:HierarchyGroupToClusterLayoutConstraint* class. The [hierarchical (group) class](#hierarchical-class-glossary) is assigned using the *browser:clusteringSelector* property. 
+A [visual layout constraint](#visual-layout-constraint-glossary) that defines the [hierarchical groups](#hierarchical-group-glossary), in which we can run ["*grouping of clusters*"](#grouping-of-clusters-glossary), is expressed as an instance of the *browser:HierarchyGroupToClusterLayoutConstraint* class. The [hierarchical (group) class](#hierarchical-class-glossary) is assigned using the *browser:clusteringSelector* property. 
 
 > **Warning** 
 > Each hierarchical group class must be assigned to a separate instance of the *browser:HierarchyGroupToClusterLayoutConstraint* class. The whole process of ["*grouping of clusters*"](#grouping-of-clusters-glossary) algorithm is written in [Glossary](#glossary).
@@ -221,14 +219,14 @@ A [visual layout constraint](#visual-layout-constraint) that defines the [hierar
 
 By default the ["*grouping of clusters*"](#grouping-of-clusters-glossary) algorithm only cluster and group nodes of the same visual classes (may very from hierarchical classes) within parent node. But, it is possible to define which visual classes can be clustered and grouped together (within the parent node). 
 
-A [visual layout constraint](#visual-layout-constraint) that defines classes to cluster and group together is expressed as an instance of the *browser:ClassesToClusterTogetherLayoutConstraint* class. Classes are assigned using the *browser:clusteringSelector* property.
+A [visual layout constraint](#visual-layout-constraint-glossary) that defines classes to cluster and group together is expressed as an instance of the *browser:ClassesToClusterTogetherLayoutConstraint* class. Classes are assigned using the *browser:clusteringSelector* property.
 
 > **Warning**
 > Use this layout constraint only if you want to create groups containing nodes of different classes. Put all classes you want to cluster and group together in the one instance of the *browser:ClassesToClusterTogetherLayoutConstraint* class.
 
 <h3 id="child-parent-or-parent-child-layout-constraint">"ChildParentLayoutConstraint" and "ParentChildLayoutConstraint" classes</h3>
 
-A [visual layout constraint](#visual-layout-constraint) defining [child-parent](#parent-child-or-child-parent-hierarchical-relationship-glossary) (resp. [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary)) relationships is expressed as an instance of the *browser:ChildParentLayoutConstraint* (resp. *browser:ParentChildLayoutConstraint*). Classes playing a child role (resp. parent role) are assigned using the *browser:childNodeSelector* (resp. *browser:parentNodeSelector*) property. Expansion property in expansion query (also a class of an expansion edge in the graph) is selected using the *browser:hierarchyEdgeSelector*.
+A [visual layout constraint](#visual-layout-constraint-glossary) defining [child-parent](#parent-child-or-child-parent-hierarchical-relationship-glossary) (resp. [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary)) relationships is expressed as an instance of the *browser:ChildParentLayoutConstraint* (resp. *browser:ParentChildLayoutConstraint*). Classes playing a child role (resp. parent role) are assigned using the *browser:childNodeSelector* (resp. *browser:parentNodeSelector*) property. Expansion property in expansion query (also a class of an expansion edge in the graph) is selected using the *browser:hierarchyEdgeSelector*.
 
 <h2 id="backend-configuration-implementation">Implementation</h3>
 
@@ -240,13 +238,13 @@ See the backend configuration example [here](https://github.com/linkedpipes/know
 
 We all know how zoom in/out works on mapping platforms such as [google maps](https://maps.google.com), maps.cz, etc. Zoom is used to increase or decrease the zoom level at a specific point and show more or less detail on a map.
 
-The [*"grouping of clusters"*](#grouping-of-clusters) extension of the original Knowledge Graph browser is inspired by such mapping platforms.
+The [*"grouping of clusters"*](#grouping-of-clusters-glossary) extension of the original Knowledge Graph browser is inspired by such mapping platforms.
 
 The next few sections describe extensions to the main components of the source code.
 
 <h3 id="extension-of-the-grapharea">Extension of the GraphArea.vue</h3>
 
-The original GraphArea component is extended with a checkbox that allows the user to choose whether to zoom or run the [*"grouping of clusters"*](#grouping-of-clusters) algorithm.
+The original GraphArea component is extended with a checkbox that allows the user to choose whether to zoom or run the [*"grouping of clusters"*](#grouping-of-clusters-glossary) algorithm.
 
 <h3 id="extension-of-the-graphareastylesheetmixin">Extension of the GraphAreaStylesheetMixin.ts</h3>
 
@@ -256,31 +254,32 @@ The original component is extended with visual styles for the parent node. When 
 
 This component is extended to check if the ends of an edge are in a [parent-child relationship](#parent-child-or-child-parent-hierarchical-relationship-glossary) relationship. If so, creating an arrow-shaped edge between the parent and child nodes is redundant.
 
-// TODO to continue from here
 
 <h3 id="extension-of-the-graphelementnodemixin">Extension of the GraphElementNodeMixin.ts</h3>
 
-By default in [Cytoscape](https://js.cytoscape.org/) library, selecting a child node also selects its parent.
+By default (property of [Cytoscape](https://js.cytoscape.org/) library) selecting a child node also selects its parent.
 
-Therefore, it is necessary to make the parent node unselectable when the child node is selected, and then, after the child node is already selected, make the parent node selectable again.
+Therefore, when selecting a node, it is necessary to make all its ancestor nodes unselectable, and after selecting a node, make the ancestor nodes selectable again.
 
-The Cytoscape library uses the "parent" property define a parent of a node and  visualize a [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary) hierarchy (i.e. a parent node is shown as a large node and its child nodes as nodes placed inside the parent node). Therefore, when expanding a parent node from a child node, it is necessary to explicitly specify the parent for a Cytoscape element that representing a child node and might already be present in the graph.
+The [Cytoscape](https://js.cytoscape.org/) library uses the "parent" property of the element to visualize a [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary) hierarchy. Therefore, when expanding a parent node from a child node, it is necessary to explicitly specify the parent for a Cytoscape element that representing a child node.
 
 <h3 id="extension-of-the-configuration">Extension of the Configuration.ts</h3>
 
-The original component is extended with new attribute *constraints* in which the loaded constraints are stored in the configuration.
+The original component is extended with a new attribute *constraints* that is used to store the IRI representing a [set of visual layout constraints](#visual-configuration) to be loaded.
 
 <h3 id="extension-of-the-application">Extension of the Application.vue</h3>
 
-It is extended with a new feature to query and retrieve layout constraints from the server. *isHierarchyView* and *constraintRulesLoaded* attributes indicate whether constraints are loaded from the server successfully. 
+This component is extended with a new method **loadConstraints()** to get [visual layout constraints](#visual-layout-constraint-glossary) from the server, as well as new *isHierarchyView* and *constraintRulesLoaded* attributes to indicate whether a visual style of a parent node needs to be changed (more in [Extension of the ViewOptions.ts](#extension-of-the-view-options) section) and whether constraints are loaded from the server successfully. 
 
 <h3 id="extension-of-the-edge">Extension of the Edge.ts</h3>
 
-Edge is extended with a new attribute showing that the edge is coming from the children.
+Edge is extended with a new *isEdgeFromChild* attribute showing whether an edge is coming from a child node.
 
 <h3 id="extension-of-the-graph-area-manipulator">Extension of the GraphAreaManipulator.ts</h3>
 
-The original component is extended with a new private *groupingOfClustersManager* method that can cluster and group nodes, ungroup existing groups, or show child nodes collapsed in their parent nodes. The component is also extended with the *globalHierarchyDepth* attribute, whose value indicates the [current hierarchical level](#current-hierarchical-level-glossary).
+When you zoom in on a specific point on the mapping platforms, at each zoom level, you see more and more details about the region you zoom in, and also otherwise, when you zoom out, some details disappear. The same principle is used in this "Grouping of clusters" extension, namely, when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes.
+
+The original component is extended with a new private *groupingOfClustersManager* method that can filters nodes to cluster and group, ungroup existing groups, collapse child nodes or show child nodes collapsed in their parent nodes. The component is also extended with the *globalHierarchyDepth* attribute, whose value indicates the [current hierarchical level](#current-hierarchical-level-glossary).
 
 When grouping, the *groupingOfClustersManager* method filters all nodes that have a [hierarchical group class](#hierarchical-class-glossary) that is allowed to be grouped in the visual configuration (more in [Hierarchical groups to cluster](#hierarchical-groups-to-cluster) section). The algorithm then filters out of all previously filtered nodes only those that reside at the [current hierarchical level](#current-hierarchical-level-glossary) (based on the value of the *globalHierarchyDepth* attribute). 
 
@@ -315,14 +314,14 @@ When ungrouping, only nodes at the [current hierarchical level](#current-hierarc
 There are two cases:
 
 - In the first case, there is at least one group at the [current hierarchical level](#current-hierarchical-level-glossary). In such case, algorithm randomly ungroups one of such group. 
-- In the second case, there are only single nodes representing the parents of the nodes that were collapsed during the previous calls of the [*groupingOfClusters*](#grouping-of-clusters-glossary) operation in the past (see [Extension of the NodeCommon.ts](#extension-of-the-node-common) for more details). In such case, after a call of the *groupingOfClustersManager* operation, collapsed nodes appear on the graph area as child nodes and their *isMountedInHierarchy* attribute value takes the value *true*.
+- In the second case, there are only single nodes representing the parents of the nodes that were collapsed during the previous calls of the ["groupingOfClusters"](#grouping-of-clusters-glossary) operation in the past (see [Extension of the NodeCommon.ts](#extension-of-the-node-common) for more details). In such case, after a call of the *groupingOfClustersManager* operation, collapsed nodes appear on the graph area as child nodes and their *isMountedInHierarchy* attribute value takes the value *true*.
 
 <h3 id="extension-of-the-graph-manipulator">Extension of the GraphManipulator.ts</h3>
 
 In this component, only group management methods are extended to set a parent node, a [hierarchical level](#hierarchical-level-glossary), and a [hierarchical group](#hierarchical-group-glossary). 
 
 > **Warning**
-> Make sure that when you ungroup a group you need to remove that group from the parent list of child nodes and also otherwise when you group nodes you need to remove them from the parent list of children but add the newly created group as a child node.
+> Make sure that when you ungroup a group you need to remove that group from the parent list of child nodes and also otherwise when you group nodes you need to remove them from the parent list of child nodes but add the newly created group as a child node.
 
 <h3 id="extension-of-the-node">Extension of the Node.ts</h3>
 
