@@ -38,4 +38,4 @@ If you are interested in the raw visual configurations demonstrated in the paper
 # Tutorial
 
 ### Learn about other helpful Knowledge Graph Browser features
-- [Clustering and grouping](clustering_user_documentation.md)
+- [Clustering and grouping](user_documentation.md)

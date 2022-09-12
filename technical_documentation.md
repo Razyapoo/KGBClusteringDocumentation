@@ -22,7 +22,7 @@ The main purpose of the implemented grouping method is to make a large graph mor
 
 <h1 id="glossary">Glossary</h1>
 
-In this part of the documentation, you will learn the necessary terms that will help you understand the basic principle of how the extension works. They may differ from the usual terms you may be familiar with. This glossary might slightly differ from the [glossary](clustering_user_documentation.md#glossary) in the user documentation.
+In this part of the documentation, you will learn the necessary terms that will help you understand the basic principle of how the extension works. They may differ from the usual terms you may be familiar with. This glossary might slightly differ from the [glossary](user_documentation.md#glossary) in the user documentation.
 
 <h3 id="visual-layout-constraint-glossary">Visual layout constraint</h3>
 
@@ -189,7 +189,7 @@ A [visual layout constraint](#visual-layout-constraint-glossary) defining [child
 
 <h3 id="backend-configuration-implementation">Implementation</h3>
 
-See the backend configuration example [here](https://github.com/linkedpipes/knowledge-graph-browser-configurations/blob/main/configurations/university-topic-map-with-constraints.ttl) (base configuration is [here](https://github.com/linkedpipes/knowledge-graph-browser-configurations/blob/main/configurations/university-topic-map.ttl)).
+See a visual configuration example [here](https://github.com/linkedpipes/knowledge-graph-browser-configurations/blob/main/configurations/university-topic-map-with-constraints.ttl) (base configuration is [here](https://github.com/linkedpipes/knowledge-graph-browser-configurations/blob/main/configurations/university-topic-map.ttl)).
 
 ---
 
@@ -352,4 +352,9 @@ The basic approach of the algorithm is that it creates several centroids, combin
 The groupingOfClustersManager() method is explained in more detail in the code comments. See implementation of [groupingOfClustersManager()](https://github.com/Razyapoo/knowledge-graph-browser-frontend/blob/master/src/cluster/clusters/KMeans/KMeans.ts) for more details.
 
 
-to change zoom in/ zoom out in grouping of clusters description
+
+
+// TODO
+- zoom in + clustering (scale, onZoom)
+- to change zoom in/ zoom out in grouping of clusters description
+- 

@@ -217,16 +217,14 @@ The main tool that enable you to utilize the extension is the [checkbox](#checkb
 Using the checkbox, you can choose whether to:
 - [Grouping of clusters](#grouping-of-clusters-glossary)
 - Zooming
-- Grouping of clusters and zooming at the same time
+- [Grouping of clusters](#grouping-of-clusters-glossary) and zooming at the same time
 - Neither one of them
 
 By selecting a "Grouping of clusters" and "zooming" at the same time, you can take an advantage of the main features of the mapping platforms.
 
 <h3 id="node-removal-guide">Node removal</h3>
 
-[Removing](#node-removal-glossary) a node is described in the [Glossary](#glossary)
-
-Example of the node removal. Node's label is "Informaticka sekce":
+Below is shown an example of the node [removal](#node-removal-glossary):
 
 Before removal of the "Informaticka sekce":
 
