@@ -337,9 +337,7 @@ This component is extended with the requestor, which receives layout constraints
 
 This component is extended with a new interfaces used for layout constraints received from the backend server.
 
-<h3 id="KCluster">KCluster</h3>
-
-<h3 id="grouping-of-clusters-KCluster">KCluster.ts - Grouping of clusters</h3>
+<h3 id="grouping-of-clusters-KCluster">KCluster.ts</h3>
 
 The new KCluster.ts component is added to the main application. This component contains a groupingOfClusters() method which performs a clustering and grouping of chosen nodes. As a parameter it accepts a set of nodes filtered in [groupingOfClustersManager()](#extension-of-the-graph-area-manipulator) method.
 
