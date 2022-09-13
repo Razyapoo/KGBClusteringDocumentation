@@ -28,7 +28,7 @@ Terms described here may differ from the usual terms you may be familiar with. T
 
 <h3 id="visual-layout-constraint-glossary">Visual layout constraint</h3>
 
-> **Definition**
+> **Definition** \
 > A visual layout constraint is a rule applied to a graph to change the way it is visualized
 
 <h3 id="parent-child-or-child-parent-hierarchical-relationship-glossary">Parent-child or child-parent hierarchical relationship</h3>
