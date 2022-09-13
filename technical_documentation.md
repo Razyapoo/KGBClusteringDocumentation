@@ -87,11 +87,12 @@ A hierarchical class (or hierarchical group class) is a common class for all nod
 
 <h3 id="hierarchical-level-glossary">Hierarchical level</h3>
 
-> The hierarchical level indicates the depth of the hierarchy at which the node resides.
+> **Definition** \
+> A hierarchical level of a node indicates the depth of a hierarchy at which a node resides.
 
-The amount of detail displayed on the maps (in mapping platforms) depends on the zoom level. Our implementation uses the same idea. At the deepest level of the hierarchy, the graph shows all possible details. And at the highest level of the hierarchy, the graph shows only those single nodes that are representatives of the hierarchies themselves. 
+The amount of detail displayed on the maps (in mapping platforms) depends on the zoom level. Grouping of clusters approach uses the same idea. At the deepest level of the hierarchy, the graph shows all possible details. And at the highest level of the hierarchy, the graph shows only those single nodes that are representatives of the hierarchies themselves. 
 
-<h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3> //TODO add to text
+<h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3>
 
 > A current hierarchical level is the deepest [hierarchical level](#hierarchical-level-glossary) shown in the graph area.
 
@@ -215,7 +216,7 @@ The "grouping of clusters" extension of the original Knowledge Graph browser is 
 The next few sections describe extensions to the main components of the source code. 
 
 > **Note**
-> Implementation of each component extension is described in more detail directly in the code comments.
+> Implementation of each component extension is described in more details in the code comments.
 
 <h3 id="extension-of-the-grapharea">Extension of the GraphArea.vue</h3>
 
@@ -355,7 +356,7 @@ This component is extended with the requestor, which receives layout constraints
 
 This component is extended with a new interfaces used for layout constraints received from the backend server.
 
-<h3 id="grouping-of-clusters-KCluster">KCluster.ts</h3>
+<h3 id="grouping-of-clusters-KCluster">New KCluster.ts component</h3>
 
 The new KCluster.ts component is added to the main application. This component contains a groupingOfClusters() method which performs a clustering and grouping of chosen nodes. As a parameter it accepts a set of nodes filtered in [groupingOfClustersManager()](#extension-of-the-graph-area-manipulator) method.
 
