@@ -1,6 +1,6 @@
 # Grouping of clusters
 
-_This page describes how the grouping methods are implemented in the Knowledge Graph Browser and how to configure them._
+_This page describes how the grouping of clusters approach is implemented in the Knowledge Graph Browser._
 
 ---
 ### Table of Contents
@@ -10,7 +10,7 @@ _This page describes how the grouping methods are implemented in the Knowledge G
 - Knowledge Graph browser
   - [Frontend](#frontend)
   - [Backend](#backend)
-  - [Configuration]
+  - [Configuration](#configuration)
 
 ---
  
@@ -18,11 +18,13 @@ _This page describes how the grouping methods are implemented in the Knowledge G
 
 So far, in the Knowledge Graph browser, it was only possible to group nodes in such a way that the user selects a couple of nodes and makes a group out of them manually. But in many cases it is more efficient and easier for the user to escape such work and allow the application to automatically group nodes based on similar attribute values.
 
-The main purpose of the implemented grouping method is to make a large graph more user-friendly, i.e. more readable and understandable. 
+The main purpose of the implemented grouping of clusters approach is to make a large graph more user-friendly, i.e. more readable and understandable. 
 
 <h1 id="glossary">Glossary</h1>
 
-This part of the documentation contains the necessary terms that will help you understand the basic principle of how the extension works. They may differ from the usual terms you may be familiar with. This glossary is slightly different from the [glossary](user_documentation.md#glossary) in the user documentation.
+This part of the documentation contains the necessary terms that will help you understand the basic principle of how the extension works. They are used further in the documentation.
+
+Terms described in the glossary may differ from the usual terms you may be familiar with. This glossary is slightly different from the [glossary in the user documentation](user_documentation.md#glossary).
 
 <h3 id="visual-layout-constraint-glossary">Visual layout constraint</h3>
 
