@@ -22,12 +22,13 @@ The main purpose of the implemented grouping of clusters approach is to make a l
 
 <h1 id="glossary">Glossary</h1>
 
-This part of the documentation contains the necessary terms that will help you understand the basic principle of how the extension works. They are used further in the documentation.
+This part of the documentation contains the necessary terms that are used later in the documentation. They will help you understand the basic principle of how the extension works.
 
-Terms described in the glossary may differ from the usual terms you may be familiar with. This glossary is slightly different from the [glossary in the user documentation](user_documentation.md#glossary).
+Terms described here may differ from the usual terms you may be familiar with. This glossary is slightly different from the [glossary in the user documentation](user_documentation.md#glossary).
 
 <h3 id="visual-layout-constraint-glossary">Visual layout constraint</h3>
 
+> **Definition**
 > A visual layout constraint is a rule applied to a graph to change the way it is visualized
 
 <h3 id="parent-child-or-child-parent-hierarchical-relationship-glossary">Parent-child or child-parent hierarchical relationship</h3>
