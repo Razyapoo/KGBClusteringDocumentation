@@ -66,22 +66,23 @@ For example, "the department teaches the subject" relationship can be visualized
 </p>
 
 > **Note** \
-> Non-hierarchical relationships are all relationships other than hierarchical.
+> Non-hierarchical relationships are all relationships other than [hierarchical](#parent-child-or-child-parent-hierarchical-relationship-glossary).
 
 <h3 id="hierarchical-class-glossary">Hierarchical class</h3>
 
-> A hierarchical class is a visual class that determines which [hierarchical group](#hierarchical-group-glossary) a node belongs to. A node can only be assigned to one hierarchical class.
+> **Definition** \
+> A hierarchical class is a visual class that defines which [hierarchical group](#hierarchical-group-glossary) a node belongs to. A node can only be assigned to one hierarchical class.
 
-The hierarchical class, if it exists, is shown along with the label of a node. See Figure 4 below for more details.
+A hierarchical class, if it exists, is shown along with the label of a node on the detail panel. See Figure 4 below for more details.
 
 <p align="center">
     <img src="img/hierarchical_class.png" alt="hierarchical-class" title="Hierarchical class" width="350"/><br/>
     <em>Figure 4. Hierarchical class</em>
 </p>
 
-A hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in the same hierarchical group. It is assigned to a node in the SPARQL CONSTRUCT query in the same way as a visual class, i.e. using the *browser:class* property. 
+A hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in the same hierarchical group. It is assigned to a node in the SPARQL CONSTRUCT query in the same way as a visual class, i.e. using the `browser:class` predicate. 
 
-> **Warning** 
+> **Warning** \
 > Each node must be assigned to some hierarchical group class in case it is to be placed in any hierarchy.
 
 <h3 id="hierarchical-level-glossary">Hierarchical level</h3>
