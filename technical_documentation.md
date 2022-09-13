@@ -53,6 +53,7 @@ Expansion query can be triggered from a parent node (expand child nodes) as well
 
 <h3 id="non-hierarchical-relationships-glossary">Non-hierarchical relationships </h3>
 
+> [!NOTE]
 > Non-hierarchical relationships are represented by edge between nodes.
 
 Non-hierarchical relationships are also possible. For example, we can extend our example and consider also the relation - "the department teaches the subject". Such a relationship can be visualized as hierarchical, but we chose to visualize it as non-hierarchical. Example is shown in the Figure 2 below.
