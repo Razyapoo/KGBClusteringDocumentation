@@ -35,20 +35,21 @@ Terms described here may differ from the usual terms you may be familiar with. T
 
 Typically, nodes in a graph are related to each other, for example, a company has employees, university has scientists, scientist has awards, scientist writes scientific papers, university has departments, and many other examples. 
 
-One possible way to visualize such relationship is to create an edge between parent and child. But there is also another way, namely adding a hierarchy between the nodes. In such case, parent node is visualized as a bigger node containing the children inside.
+One possible way to visualize such relationship is to create an edge between parent and child. But there is also another way, namely adding a hierarchy between the nodes. In such case, parent node is visualized as a larger node containing the child elements inside.
 
-University can be visualized as a big node (blue) containing inside child nodes (light-blue) representing departments as shown at the Figure 1 below: 
+Figure 1 below shows an example with universities and departments. A university can be thought of as a larger node (blue) containing child nodes (light blue) inside, representing departments: 
 
 <p align="center">
     <img src="img/child_parent_relation.png" alt="parent-child-relationship" title="Parent-child relationship" width="600"/><br/>
     <em>Figure 1. Parent-child relationship</em>
 </p>
 
-In our extension, each such node hierarchy represents a [hierarchical group](#hierarchical-group-glossary).
+Each such node hierarchy represents a [hierarchical group](#hierarchical-group-glossary).
 
-Hierarchical relationships are predefined by the technician in the visual configuration.
+> **Warning** \
+> Hierarchical relationships are predefined by the technician in the visual configuration.
 
-Expansion query can be triggered from a parent node (expand child nodes) as well as form a child node (expand parent node). In both cases it may use same property in SPARQL CONSTRUCT, for example *skos:broader*.
+Expansion query can be triggered from a parent node (expand child nodes) as well as form a child node (expand parent node). In both cases it may use same predicate in SPARQL CONSTRUCT, for example `skos:broader`.
 
 <h3 id="non-hierarchical-relationships-glossary">Non-hierarchical relationships </h3>
 
