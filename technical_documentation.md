@@ -3,18 +3,18 @@
 _This page describes how the grouping methods are implemented in the Knowledge Graph Browser and how to configure them._
 
 ---
-//TODO add table of content 
 ### Table of Contents
 
 - [Main goal](#main-goal)
-- [Glossary]($glossary)
-
+- [Glossary](#glossary)
+- Knowledge Graph browser
+  - [Frontend](#frontend)
+  - [Backend](#backend)
+  - [Configuration]
 
 ---
  
 <h1 id="main-goal">Main goal</h1>
-
-//TODO to write that "*grouping of clusters*" alg is used here
 
 So far, in the Knowledge Graph browser, it was only possible to group nodes in such a way that the user selects a couple of nodes and makes a group out of them manually. But in many cases it is more efficient and easier for the user to escape such work and allow the application to automatically group nodes based on similar attribute values.
 
@@ -22,7 +22,7 @@ The main purpose of the implemented grouping method is to make a large graph mor
 
 <h1 id="glossary">Glossary</h1>
 
-In this part of the documentation, you will learn the necessary terms that will help you understand the basic principle of how the extension works. They may differ from the usual terms you may be familiar with. This glossary might slightly differ from the [glossary](user_documentation.md#glossary) in the user documentation.
+This part of the documentation contains the necessary terms that will help you understand the basic principle of how the extension works. They may differ from the usual terms you may be familiar with. This glossary is slightly different from the [glossary](user_documentation.md#glossary) in the user documentation.
 
 <h3 id="visual-layout-constraint-glossary">Visual layout constraint</h3>
 
@@ -185,7 +185,11 @@ A [visual layout constraint](#visual-layout-constraint-glossary) that defines cl
 
 <h3 id="child-parent-or-parent-child-layout-constraint">"ChildParentLayoutConstraint" and "ParentChildLayoutConstraint" classes</h3>
 
-A [visual layout constraint](#visual-layout-constraint-glossary) defining [child-parent](#parent-child-or-child-parent-hierarchical-relationship-glossary) (resp. [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary)) relationships is expressed as an instance of the *browser:ChildParentLayoutConstraint* (resp. *browser:ParentChildLayoutConstraint*). Classes playing a child role (resp. parent role) are assigned using the *browser:childNodeSelector* (resp. *browser:parentNodeSelector*) property. Expansion property in expansion query (also a class of an expansion edge in the graph) is selected using the *browser:hierarchyEdgeSelector*.
+A [visual layout constraint](#visual-layout-constraint-glossary) defining [child-parent](#parent-child-or-child-parent-hierarchical-relationship-glossary) (resp. [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary)) relationships is expressed as an instance of the *browser:ChildParentLayoutConstraint* (resp. *browser:ParentChildLayoutConstraint*). Classes playing a child role (resp. parent role) are assigned using the *browser:childNodeSelector* (resp. *browser:parentNodeSelector*) property. Expansion property in expansion SPARQL query (also a class of an expansion edge in the graph) is selected using the *browser:hierarchyEdgeSelector*.
+
+> **Warning** 
+> Each pair of node and edge selectors must be assigned to a separate instance of the *browser:ChildParentLayoutConstraint* (resp. *browser:ParentChildLayoutConstraint*) class.
+
 
 <h3 id="backend-configuration-implementation">Implementation</h3>
 
@@ -212,10 +216,17 @@ The original GraphArea component is extended with a checkbox that allows the use
 
 The original component is extended with visual styles for the parent node. When a node becomes a parent, having at least one child node placed inside, its visual style changes so that its label appears at the top and center. Also, the shape of the node becomes octagonal.
 
-<h3 id="extension-of-the-graphelementedges">Extension of the GraphElementEdges.ts</h3>
+<h3 id="extension-of-the-graphelementedge">Extension of the GraphElementEdge.ts</h3>
 
 This component is extended to check if the ends of an edge are in a [parent-child relationship](#parent-child-or-child-parent-hierarchical-relationship-glossary) relationship. If so, creating an arrow-shaped [non-hierarchical](#non-hierarchical-relationships-glossary) edge between the parent and child nodes is redundant.
 
+<h3 id="extension-of-the-graphelementnode">Extension of the GraphElementNode.ts</h3>
+
+This component is extended with method setHierarchicalInfo() which establishes the[hierarchical class](#hierarchical-class-glossary), the [hierarchical level](#hierarchical-level-glossary) and the pseudo-parent (see [visual group](#visual-group-glossary) for more information) of a node and updates *globalHierarchicalDepth* attribute if a node is opened at a new lower [hierarchical level](#hierarchical-level-glossary).
+
+<h3 id="extension-of-the-graphelementnode">Extension of the GraphElementNode.ts</h3>
+
+This component is extended with method setHierarchicalInfo() which establishes the[hierarchical class](#hierarchical-class-glossary), the [hierarchical level](#hierarchical-level-glossary) and the pseudo-parent (see [visual group](#visual-group-glossary) for more information) of a group node and updates *globalHierarchicalDepth* attribute if a group node is opened at a new lower [hierarchical level](#hierarchical-level-glossary).
 
 <h3 id="extension-of-the-graphelementnodemixin">Extension of the GraphElementNodeMixin.ts</h3>
 
@@ -231,7 +242,7 @@ The original component is extended with a new attribute *constraints* that is us
 
 <h3 id="extension-of-the-application">Extension of the Application.vue</h3>
 
-This component is extended with a new method **loadConstraints()** to get [visual layout constraints](#visual-layout-constraint-glossary) from the server, as well as new *isHierarchyView* and *constraintRulesLoaded* attributes to indicate whether a visual style of a parent node needs to be changed (more in [Extension of the ViewOptions.ts](#extension-of-the-view-options) section) and whether constraints are loaded from the server successfully. 
+This component is extended with a new method **loadConstraints()** to get [visual layout constraints](#visual-layout-constraint-glossary) from the server, as well as new *isHierarchyView* and *constraintRulesLoaded* attributes to indicate whether a visual style of a parent node needs to be changed (more in "[Extension of the ViewOptions.ts](#extension-of-the-view-options)" section) and whether constraints are loaded from the server successfully.
 
 <h3 id="extension-of-the-edge">Extension of the Edge.ts</h3>
 
@@ -279,9 +290,9 @@ There are two cases:
 
 - In the first case, there is at least one group at the [current hierarchical level](#current-hierarchical-level-glossary). 
   > **Warning**
-  > In such case, algorithm **randomly** ungroups one of such group. 
+  > In such case, algorithm ungroups random number of random groups. 
 
-- In the second case, there are only single nodes representing the parents of the nodes that were collapsed during the previous calls of the ["groupingOfClusters"](#grouping-of-clusters-KCluster) algorithm in the past (see [Extension of the NodeCommon.ts](#extension-of-the-node-common) for more details). In such case, after a call of the *groupingOfClustersManager* operation, collapsed nodes appear on the graph area as child nodes and their *isMountedInHierarchy* attribute value takes the value *true*.
+- In the second case, there are only single nodes representing the parents of the nodes that were collapsed during the previous calls of the ["groupingOfClusters"](#grouping-of-clusters-KCluster) algorithm in the past (see [Extension of the NodeCommon.ts](#extension-of-the-node-common) for more details). In such case, after a call of the *groupingOfClustersManager* operation, collapsed nodes appear on the graph area as child nodes. In
 
     > **NOTE**
     > In such case the [current hierarchical level](#current-hierarchical-level-glossary) **may** decrease by 1.
@@ -302,8 +313,6 @@ An extension of this component is the *remove* method, which is extended to hand
 <h3 id="extension-of-the-node-common">Extension of the NodeCommon.ts</h3>
 
 The NodeCommon.ts component is extended with attributes that set the hierarchical attributes of a node, namely a parent node, child nodes, a [hierarchical group](#hierarchical-group-glossary), [hierarchical level](#hierarchical-level-glossary) //TODO ?getters? and their getters.
-
-To check if a node has been expanded and disappeared during the execution of the [*groupingOfClusters*](#grouping-of-clusters-KCluster) algorithm, a new *isMountedInHierarchy* attribute is also added to indicate if the node is collapsed inside its parent. The *true* value indicates that a node is still visible on the graph area and the *false* value indicates that a node was expanded and then collapsed to a parent node in the past.
 
 <h3 id="extension-of-the-node-group">Extension of the NodeGroup.ts</h3>
 
