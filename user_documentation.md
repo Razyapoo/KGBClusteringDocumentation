@@ -40,7 +40,7 @@ Here the node *"Fakulty"* is the parent node of the node *"Matematicko-fyzikáln
 Each such node hierarchy represents a [hierarchical group](#hierarchical-group-glossary).
 
 > **Warning** \
-> Hierarchical relationships are predefined by a technician in the [visual configuration](#https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#childparentlayoutconstraint-and-parentchildlayoutconstraint-classes).
+> Hierarchical relationships are predefined by a technician in the visual configuration.
 
 [Non-hierarchical](#non-hierarchical-relationships-glossary) relationships are also possible. 
 
@@ -59,6 +59,37 @@ For example, "the department teaches the subject" relationship can be visualized
 > **Note** \
 > Non-hierarchical relationships are all relationships other than [hierarchical](#hierarchical-relationships-glossary).
 
+<h3 id="hierarchical-class">Hierarchical class</h3>
+
+> A hierarchical class is a visual class that defines which [hierarchical group](#hierarchical-groups) a node belongs to. A node can only be assigned to one hierarchical class.
+
+A hierarchical class, if it exists, is shown along with a label of a node on the detail panel. See Figure 4 below for more details.
+
+<p align="center">
+    <img src="img/hierarchical_class.png" alt="hierarchical-class" title="Hierarchical class" width="350"/><br/>
+    <em>Figure 4. Hierarchical class</em>
+</p>
+
+> **Note** \
+> A hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in a same hierarchical group.
+
+> **Warning** \
+> Each node must be assigned to some hierarchical group class in case it is to be placed in any hierarchy.
+
+<h3 id="hierarchical-level-glossary">Hierarchical level</h3>
+
+> **Definition** \
+> A hierarchical level of a node indicates the depth of a hierarchy at which a node resides.
+
+The amount of detail displayed on maps (in mapping platforms) depends on a zoom level. [Grouping of clusters](#grouping-of-clusters-glossary) approach uses the same idea. At the deepest level of the hierarchy, the graph shows all possible details. And at the highest level of the hierarchy, the graph shows only those single nodes that are representatives of hierarchies themselves. 
+
+<h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3>
+
+> **Definition** \
+> A current hierarchical level is the deepest [hierarchical level](#hierarchical-level-glossary) shown in the graph area.
+
+At the moment when child nodes collapse into their parents, the current hierarchical level decreases by 1, and when child nodes with a hierarchical level higher (deeper) by 1 than the current hierarchical level appear, the current hierarchical level increases by 1.
+
 <h3 id="hierarchical-groups">Hierarchical group</h3>
 
 > **Definition** \
@@ -71,65 +102,44 @@ An example of one such hierarchical group is shown in Figure 1.
 > **Warning** \
 > Hierarchical groups are predefined by a technician in the visual configuration.
 
-<h3 id="visual-groups-glossary">Visual group</h3>
+<h3 id="visual-group-glossary">Visual groups</h3>
 
 > **Definition** \
 > A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" node representing the visual group itself.
+
+An example of a visual group is shown in the Figure 2 below. The "pseudo-parent" node is a gray node with white nodes inside.
 
 <p align="center">
     <img src="img/visual_group.png" alt="visual-group" title="Visual group" width="600"/><br/>
     <em>Figure 2. Visual group</em>
 </p>
 
-The visual group is predefined by the technician in the visual configuration.
+> **Warning** \
+> A visual group is predefined by a technician in the [visual configuration](#visual-group-layout-constraint).
 
-Example of visual group is shown above in the Figure 2.
+Each node in a visual group must have an additional visual group class representing that visual group. It can be identical to the hierarchical class.
 
-Each node in a visual group must have a visual class representing that visual group. It can be the same class as the hierarchical class.
+> **Note** \
+> Hierarchical groups themselves can be interpreted as visual groups. In such a case, there is no need for a "pseudo-parent".
 
+An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in Figure 3 below (later on we will use "pracovisteVisualGroup" as the visual group).
 
 <p align="center">
     <img src="img/visual_groups.png" alt="visual-groups" title="Visual groups" width="600"/><br/>
-    <em>Figure 3. Visual groups</em>
+    <em>Figure 3. Visual groups. To the left is "pracovisteVisualGroup" visual group and to the right is "tema" visual group</em>
 </p>
-
-> The hierarchical groups themselves can be interpreted as visual groups. In such a case, there is no need for a "pseudo-parent".
-
-An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in Figure 3 above.
 
 > **Note** \
 > The main advantage of visual groups is that you can easily move all the nodes that belong to the same group across the entire graph area at the same time. This way they won't be scattered all over the graph area. 
 
-<h3 id="hierarchical-class">Hierarchical class</h3>
-
-> A hierarchical class is a visual class that determines which [hierarchical group](#hierarchical-groups) a node belongs to. A node can only be assigned to one hierarchical class.
-
-The hierarchical class, if it exists, is shown along with the label of a node. See Figure 4 below for more details.
-
-<p align="center">
-    <img src="img/hierarchical_class.png" alt="hierarchical-class" title="Hierarchical class" width="350"/><br/>
-    <em>Figure 4. Hierarchical class</em>
-</p>
-
-
-<h3 id="hierarchical-level">Hierarchical level</h3>
-
-> The hierarchical level indicates the depth of the hierarchy at which the node resides.
-
-The amount of detail displayed on the maps (in mapping platforms) depends on the zoom level. Our implementation uses the same idea. At the deepest level of the hierarchy, the graph shows all possible details. And at the highest level of the hierarchy, the graph shows only those single nodes that are representatives of the hierarchies themselves. 
-
-<h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3>
-
-> A current hierarchical level is the deepest [hierarchical level](#hierarchical-level) shown in the graph area.
-
-When you zoom in, at some point the "*grouping of clusters*" algorithm collapses the nodes into their parents and increases the current hierarchical level by 1, and when you zoom out, it generalizes the child nodes to the parent nodes and therefore shows less detail on the graph area (current hierarchical level decreases).
-
 <h3 id="cluster-glossary">Cluster</h3>
 
+> **Definition** \
 > Cluster is a set of the same or similar elements, assembled or located close to each other. 
 
 <h3 id="grouping-glossary">Grouping</h3>
 
+> **Definition**
 > Grouping is the task of converting clusters into a single node.
 
 <h3 id="checkbox-glossary">Checkbox</h3>
@@ -215,9 +225,9 @@ The starting node is shown in the same way as in other configurations.
 
 There are [hierarchical](#hierarchical-relationships-glossary) and [non-hierarchical](#non-hierarchical-relationships-glossary) relationships.
 
-An expansion query predefined in the visual configuration allows you to show the neighborhood of the node in which that node is in either a [hierarchical](#hierarchical-relationships-glossary) or [non-hierarchical](#non-hierarchical-relationships-glossary) relationship with its neighbors.
+Expansion queries listed in the detail panel under the "Available views" label allow you to show the neighborhood of the node in which that node is in either a [hierarchical](#hierarchical-relationships-glossary) or [non-hierarchical](#non-hierarchical-relationships-glossary) relationship with its neighbors.
 
-The hierarchical and non-hierarchical expansions are listed below:
+The hierarchical and non-hierarchical expansions are listed below and shown in the Figure 9 below:
 
 - Hierarchical expansions:
   - "Nadřazená pracoviště"
@@ -227,15 +237,13 @@ The hierarchical and non-hierarchical expansions are listed below:
   - "Témata pracoviště"
   - "Sdílená témata pracoviště"
 
-See the Figure 9 for an example.
-
 <p align="center">
     <img src="img/hierarchical_non_hierarchical_expansions.png" alt="hierarchical-and-non-hierarchical-expansions" title="Hierarchical and non hierarchical expansions" width="530"/><br/>
     <em>Figure 9. Hierarchical and non-hierarchical expansions</em>
 </p>
 
 > **Note** 
-> - A [hierarchical group](#hierarchical-groups) can be continuously build using a hierarchical expansions (example is shown in the Figure 1).
+> - A [hierarchical group](#hierarchical-groups) can be continuously build using hierarchical expansions (example is shown in the Figure 1).
 > - Non-hierarchical expansions expand a node with its neighborhood, where each neighbor is connected to that node by an edge.
 
 <h3 id="checkbox-guide">Checkbox</h3>

@@ -93,7 +93,8 @@ A hierarchical class, if it exists, is shown along with a label of a node on the
     <em>Figure 4. Hierarchical class</em>
 </p>
 
-A hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in a same hierarchical group. It is assigned to a node in a SPARQL CONSTRUCT query in the same way as a visual class, i.e. using the `browser:class` predicate. 
+> **Note** \
+> A hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in a same hierarchical group. It is assigned to a node in a SPARQL CONSTRUCT query in the same way as a visual class, i.e. using the `browser:class` predicate. 
 
 > **Warning** \
 > Each node must be assigned to some hierarchical group class in case it is to be placed in any hierarchy.
@@ -417,3 +418,9 @@ The `groupingOfClusters` method is explained in more detail in the code comments
 2. Place nodes of different hierarchical classes under the same pseudo-parent node.
 3. Cluster nodes based on attributes other than their positions.
 4. Fix the position of the pseudo-parent when moving (not currently supported due to limitations of the Cytoscape library).
+
+<h1 id="references">References</h1>
+
+[1] https://en.wikipedia.org/wiki/K-means_clustering
+
+[2] https://en.wikipedia.org/wiki/K-medoids
