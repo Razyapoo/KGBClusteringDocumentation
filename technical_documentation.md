@@ -162,8 +162,6 @@ The implementation of "Grouping of clusters" extension is split into two parts:
   - [Backend server](#backend-server)
   - [Visual configuration](#visual-configuration)
 
---- 
-
 <h2 id="backend">Backend</h2>
 
 This section of the documentation is split into two parts: 
@@ -191,17 +189,16 @@ A [set](#set-of-visual-constraints-glossary) is expressed as an instance of the 
 
 Each [visual layout constraint](#visual-layout-constraint-glossary) must be expressed as an instance of an individual layout constraint class and assigned to a set of visual layout constraints using the `browser:hasConstraint` predicate. 
 
----
-
 Next few sections describe each layout constraint class in more details. It is expected that each node has a [hierarchical class](#hierarchical-class-glossary) assigned. 
 
-<h3 id="visual-group">"VisualGroupLayoutConstraint" class</h3>
+<h3 id="visual-group-layout-constraint">"VisualGroupLayoutConstraint" class</h3>
 
-A [visual layout constraint](#visual-layout-constraint-glossary) defining [visual group](#visual-group-glossary) is expressed as an instance of the *browser:VisualGroupLayoutConstraint* class. Visual class is assigned to the visual group layout constraint via *browser:groupingSelector* property. It is usually identical to the [hierarchical class](#hierarchical-class-glossary), so there is no need for an extra visual class.
+A [visual layout constraint](#visual-layout-constraint-glossary) defining [visual group](#visual-group-glossary) is expressed as an instance of the `browser:VisualGroupLayoutConstraint` class. A visual class is assigned to the visual group layout constraint via `browser:groupingSelector` predicate. It is usually identical to the [hierarchical class](#hierarchical-class-glossary), so there is no need for an extra visual class.
 
-> **Warning** 
-> Each visual class must be assigned to a separate instance of *browser:VisualGroupLayoutConstraint* class.
+> **Warning** \
+> Each visual class must be assigned to a separate instance of `browser:VisualGroupLayoutConstraint` class.
 
+// TODO
 <h3 id="hierarchical-groups-to-cluster">"HierarchicalGroupsToClusterLayoutConstraint" class</h3>
 
 It can be useful not to group nodes that belong to the same [hierarchical group](#hierarchical-group-glossary) (within that group). 
