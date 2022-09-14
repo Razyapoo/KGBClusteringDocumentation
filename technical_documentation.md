@@ -145,7 +145,7 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 
 <p align="center">
     <img src="img/visual_groups.png" alt="visual-groups" title="Visual groups" width="600"/><br/>
-    <em>Figure 3. Visual groups</em>
+    <em>Figure 3. Visual groups. To the left is "pracovisteVisualGroup" hierarchical group and to the right is "tema" visual group</em>
 </p>
 
 > **Note** \
@@ -201,12 +201,13 @@ A [visual layout constraint](#visual-layout-constraint-glossary) defining [visua
 // TODO
 <h3 id="hierarchical-groups-to-cluster">"HierarchicalGroupsToClusterLayoutConstraint" class</h3>
 
-It can be useful not to group nodes that belong to the same [hierarchical group](#hierarchical-group-glossary) (within that group). 
+> **Note** \
+> It can be useful not to group clusters of nodes that belong to the same [hierarchical group](#hierarchical-group-glossary) (or [visual group](#visual-group-glossary)). For example, to group just clusters belonging to "tema" visual group but not to "pracovisteVisualGroup" hierarchical group (shown on the Figure 3 above).
 
-A [visual layout constraint](#visual-layout-constraint-glossary) that determines [hierarchical groups](#hierarchical-group-glossary), in which we can run ["*grouping of clusters*"](#grouping-of-clusters-KCluster), is expressed as an instance of the *browser:HierarchyGroupToClusterLayoutConstraint* class. The [hierarchical (group) class](#hierarchical-class-glossary) is assigned using the *browser:clusteringSelector* property. 
+A [visual layout constraint](#visual-layout-constraint-glossary) that determines [hierarchical groups](#hierarchical-group-glossary), in which we can group clusters, is expressed as an instance of the `browser:HierarchyGroupToClusterLayoutConstraint` class. The [hierarchical (group) class](#hierarchical-class-glossary) is assigned using the `browser:clusteringSelector` predicate. 
 
 > **Warning** 
-> Each hierarchical group class must be assigned to a separate instance of the *browser:HierarchyGroupToClusterLayoutConstraint* class.
+> Each hierarchical group class must be assigned to a separate instance of the `browser:HierarchyGroupToClusterLayoutConstraint` class.
 
 <h3 id="classes-to-cluster-together">"ClassesToClusterTogetherLayoutConstraint" class</h3>
 
@@ -398,4 +399,9 @@ The groupingOfClustersManager() method is explained in more detail in the code c
 // TODO
 - zoom in + clustering (scale, onZoom)
 - to change zoom in/ zoom out in grouping of clusters description
-- 
+
+
+
+<h1 id="">What to de next?</h1>
+
+1. support for user, user is able to set up visual groups, choose what hierarchical groups to cluster
