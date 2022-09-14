@@ -118,15 +118,15 @@ An example of one such hierarchical group is shown in Figure 1 above.
 > **Definition** \
 > A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" node representing the visual group itself.
 
+An example of a visual group is shown in the Figure 2 below. The "pseudo-parent" node is a gray node with white nodes inside.
+
 <p align="center">
     <img src="img/visual_group.png" alt="visual-group" title="Visual group" width="600"/><br/>
     <em>Figure 2. Visual group</em>
 </p>
 
-> **Warning** \ 
+> **Warning** \
 > A visual group is predefined by a technician in the visual configuration.
-
-Example of a visual group is shown above in the Figure 2. The "pseudo-parent" node is a gray node with white nodes inside.
 
 Each node in a visual group must have an additional visual class representing that visual group. It can be identical to the hierarchical class.
 
