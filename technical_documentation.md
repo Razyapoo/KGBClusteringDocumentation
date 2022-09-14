@@ -220,7 +220,7 @@ A [visual layout constraint](#visual-layout-constraint-glossary) that defines cl
 
 <h3 id="child-parent-or-parent-child-layout-constraint">"ChildParentLayoutConstraint" and "ParentChildLayoutConstraint" classes</h3>
 
-A [visual layout constraint](#visual-layout-constraint-glossary) defining [child-parent](#parent-child-or-child-parent-hierarchical-relationship-glossary) (resp. [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary)) relationships is expressed as an instance of the `browser:ChildParentLayoutConstraint` (resp. `browser:ParentChildLayoutConstraint`) class. Classes playing a child role (resp. parent role) are assigned using the `browser:childNodeSelector` (resp. `browser:parentNodeSelector`) predicate. A predicate in the expansion SPARQL query (also a class of an expansion edge in the graph) is selected using the `browser:hierarchyEdgeSelector` predicate.
+A [visual layout constraint](#visual-layout-constraint-glossary) defining [child-parent](#parent-child-or-child-parent-hierarchical-relationship-glossary) (resp. [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary)) relationships is expressed as an instance of the `browser:ChildParentLayoutConstraint` (resp. `browser:ParentChildLayoutConstraint`) class. Classes playing a child role (resp. parent role) are assigned using the `browser:childNodeSelector` (resp. `browser:parentNodeSelector`) predicate. A predicate `?node **skos:broader** ?pracoviště` in the expansion SPARQL query (also a class of an expansion edge in the graph) is selected using the `browser:hierarchyEdgeSelector` predicate.
 
 > **Warning** 
 > Each pair of node and edge selectors must be assigned to a separate instance of the `browser:ChildParentLayoutConstraint` (resp. `browser:ParentChildLayoutConstraint`) class.
@@ -232,7 +232,7 @@ See a visual configuration example [here](https://github.com/linkedpipes/knowled
 
 ---
 
-<h2 id="frontend">Frontend script</h2>
+<h2 id="frontend">Frontend</h2>
 
 We all know how zoom in/out works on mapping platforms such as [google maps](https://maps.google.com), maps.cz, etc. Zoom is used to increase or decrease the zoom level at a specific point and show more or less detail on a map.
 
