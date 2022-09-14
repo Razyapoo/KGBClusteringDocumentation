@@ -20,6 +20,8 @@ So far, in the Knowledge Graph browser, it was only possible to group nodes in s
 
 The main purpose of the implemented grouping of clusters approach is to make a large graph more user-friendly, i.e. more readable and understandable. 
 
+---
+
 <h1 id="glossary">Glossary</h1>
 
 This part of the documentation contains necessary terms that are used later in the documentation. They will help you understand the basic principle of how the extension works.
@@ -47,7 +49,7 @@ Figure 1 below shows an example with universities and departments. A university 
 Each such node hierarchy represents a [hierarchical group](#hierarchical-group-glossary).
 
 > **Warning** \
-> Hierarchical relationships are predefined by a technician in the visual configuration.
+> Hierarchical relationships are predefined by a technician in the [visual configuration](#https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#childparentlayoutconstraint-and-parentchildlayoutconstraint-classes).
 
 Expansion query can be triggered from a parent node (expand child nodes) as well as form a child node (expand parent node). In both cases it may use same predicate in SPARQL CONSTRUCT, for example `skos:broader`.
 
@@ -111,7 +113,7 @@ Each node in a hierarchical group must have a [hierarchical class](#hierarchical
 An example of one such hierarchical group is shown in Figure 1 above.
 
 > **Warning** \
-> A hierarchical group is predefined by a technician in the visual configuration.
+> A hierarchical group is predefined by a technician in the [visual configuration](#https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchicalgroupstoclusterlayoutconstraint-class).
 
 <h3 id="visual-group-glossary">Visual groups</h3>
 
@@ -126,7 +128,7 @@ An example of a visual group is shown in the Figure 2 below. The "pseudo-parent"
 </p>
 
 > **Warning** \
-> A visual group is predefined by a technician in the visual configuration.
+> A visual group is predefined by a technician in the [visual configuration](#https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visualgrouplayoutconstraint-class).
 
 Each node in a visual group must have an additional visual class representing that visual group. It can be identical to the hierarchical class.
 
@@ -142,6 +144,8 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 
 > **Note** \
 > The main advantage of visual groups is that you can easily move all the nodes that belong to the same group across the entire graph area at the same time. This way they won't be scattered all over the graph area. 
+
+---
 
 <h1 id="implementation">Implementation</h1>
 
