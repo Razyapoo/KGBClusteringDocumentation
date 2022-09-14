@@ -27,14 +27,17 @@ This part of the documentation contains necessary terms that are used later in t
 
 Terms described here may differ from usual terms you may be familiar with. This glossary is slightly different from the [glossary in the user documentation](user_documentation.md#glossary).
 
-<details>
-    <summary>Expand glossary</summary>
-
+You can skip this section for now and go to [Implementation](#implementation) section
 
 <h3 id="visual-layout-constraint-glossary">Visual layout constraint</h3>
 
 > **Definition** \
 > A visual layout constraint is a rule (constraint) applied to a graph to change a way it is visualized.
+
+<h3 id="set-of-visual-constraints-glossary">Set of visual layout constraints</h3>
+
+> **Definition** \
+> A visual layout constraint set is a set of [visual layout constraints](#visual-layout-constraint-glossary) to be applied to a graph.
 
 <h3 id="parent-child-or-child-parent-hierarchical-relationship-glossary">Parent-child or child-parent hierarchical relationship</h3>
 
@@ -148,22 +151,29 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 > **Note** \
 > The main advantage of visual groups is that you can easily move all the nodes that belong to the same group across the entire graph area at the same time. This way they won't be scattered all over the graph area. 
 
-</details>
+
 
 <h1 id="implementation">Implementation</h1>
 
 The implementation of "Grouping of clusters" extension is split into two parts: 
 
-1. [Backend](#backend)
-2. [Fronted](#frontend)
+- [Fronted](#frontend)
+- [Backend](#backend)
+  - [Backend server](#backend-server)
+  - [Visual configuration](#visual-configuration)
 
 --- 
 
 <h2 id="backend">Backend</h2>
 
-<h2 id="backend-service">Backend service</h2>
+This section of the documentation is split into two parts: 
 
-The original backend service is extended with a new request handler *"/layout-constraints"*.
+- [Backend server](#backend-server)
+- [Visual configuration](#visual-configuration)
+
+<h2 id="backend-server">Backend server</h2>
+
+The original "kgserver.js" backend server is extended with a new request handler `layout-constraints`.
 
 This handler sends a query defined in the visual configuration to a SPARQL endpoint and receives [visual layout constraints](#visual-layout-constraint-glossary) to apply in the main application.
 
@@ -171,15 +181,19 @@ The output of the request handler is a JSON object containing all the constraint
 
 <h3 id="backend-implementation">Implementation</h3>
 
-See the implementation of [backend service](https://github.com/Razyapoo/knowledge-graph-browser-backend).
+See the implementation of the backend server [here](https://github.com/Razyapoo/knowledge-graph-browser-backend).
 
 <h2 id="visual-configuration">Visual configuration</h2>
 
-The original visual configuration is extended with a set of [visual layout constraints](#visual-layout-constraint-glossary) that are assigned using the *browser:hasLayoutConstraints* property. 
+The original visual configuration is extended with a [set of visual layout constraints](#set-of-visual-constraints-glossary) that are assigned using the `browser:hasLayoutConstraints` predicate. 
 
-A visual layout constraint set is a set of [visual layout constraints](#visual-layout-constraint-glossary) to be applied to a graph. It is expressed as an instance of the *browser:LayoutConstraintSet* class. Individual [visual layout constraints](#visual-layout-constraint-glossary) are instances of an individual layout constraint classes and are assigned to a visual layout constraints set using the *browser:hasConstraint* property. 
+A [set](#set-of-visual-constraints-glossary) is expressed as an instance of the `browser:LayoutConstraintSet` class. 
 
-The next few sections describe each layout constraint class in more details. It is expected that each node has a [hierarchical class](#hierarchical-class-glossary) assigned. 
+Each [visual layout constraint](#visual-layout-constraint-glossary) must be expressed as an instance of an individual layout constraint class and assigned to a set of visual layout constraints using the `browser:hasConstraint` predicate. 
+
+---
+
+Next few sections describe each layout constraint class in more details. It is expected that each node has a [hierarchical class](#hierarchical-class-glossary) assigned. 
 
 <h3 id="visual-group">"VisualGroupLayoutConstraint" class</h3>
 
