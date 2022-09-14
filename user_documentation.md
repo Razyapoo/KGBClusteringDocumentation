@@ -140,6 +140,9 @@ When switching between zoom levels and therefore hierarchy levels, the graph sho
 
 By default, only nodes of the same visual class (other than [hierarchical class](#hierarchical-class)) can be grouped together, but it is also possible to group multiple nodes of different visual classes into one group node (this is predefined in the visual configuration by the technician). Therefore, when grouping nodes, their visual classes must also be taken into account.
 
+> **Warning** \
+> Classes that can be grouped together are predefined in the visual configuration by a technician.
+
 <h3 id="node-removal-glossary">Node removal</h3>
 
 > The deletion of a node propagates recursively to the deletion of the node's descendants.

@@ -141,11 +141,11 @@ Each node in a visual group must have an additional visual class representing th
 > **Note** \
 > Hierarchical groups themselves can be interpreted as visual groups. In such a case, there is no need for a "pseudo-parent".
 
-An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in Figure 3 below.
+An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in Figure 3 below (later on we will use "pracovisteVisualGroup" as the visual group).
 
 <p align="center">
     <img src="img/visual_groups.png" alt="visual-groups" title="Visual groups" width="600"/><br/>
-    <em>Figure 3. Visual groups. To the left is "pracovisteVisualGroup" hierarchical group and to the right is "tema" visual group</em>
+    <em>Figure 3. Visual groups. To the left is "pracovisteVisualGroup" visual group and to the right is "tema" visual group</em>
 </p>
 
 > **Note** \
@@ -202,7 +202,7 @@ A [visual layout constraint](#visual-layout-constraint-glossary) defining [visua
 <h3 id="hierarchical-groups-to-cluster">"HierarchicalGroupsToClusterLayoutConstraint" class</h3>
 
 > **Note** \
-> It can be useful not to group clusters of nodes that belong to the same [hierarchical group](#hierarchical-group-glossary) (or [visual group](#visual-group-glossary)). For example, to group just clusters belonging to "tema" visual group but not to "pracovisteVisualGroup" hierarchical group (shown on the Figure 3 above).
+> It can be useful not to group clusters of nodes that belong to the same [hierarchical group](#hierarchical-group-glossary) (or [visual group](#visual-group-glossary)). For example, group only clusters that belong to the "tema" visual group, but do not belong to the "pracovisteVisualGroup" visual group (shown in Figure 3 above).
 
 A [visual layout constraint](#visual-layout-constraint-glossary) that determines [hierarchical groups](#hierarchical-group-glossary), in which we can group clusters, is expressed as an instance of the `browser:HierarchyGroupToClusterLayoutConstraint` class. The [hierarchical (group) class](#hierarchical-class-glossary) is assigned using the `browser:clusteringSelector` predicate. 
 
@@ -211,12 +211,13 @@ A [visual layout constraint](#visual-layout-constraint-glossary) that determines
 
 <h3 id="classes-to-cluster-together">"ClassesToClusterTogetherLayoutConstraint" class</h3>
 
-By default the ["*grouping of clusters*"](#grouping-of-clusters-KCluster) algorithm only cluster and group nodes of the same visual classes (may very from hierarchical classes) within parent node. But, it is possible to define which visual classes can be clustered and grouped together (within the parent node). 
+By default, the algorithm only groups clusters of nodes of the same visual class (usually different from the hierarchical class). But it is possible to define which visual classes can be clustered and grouped together (within the parent node).
 
-A [visual layout constraint](#visual-layout-constraint-glossary) that defines classes to cluster and group together is expressed as an instance of the *browser:ClassesToClusterTogetherLayoutConstraint* class. Classes are assigned using the *browser:clusteringSelector* property.
+A [visual layout constraint](#visual-layout-constraint-glossary) that defines classes to cluster and group together is expressed as an instance of the `browser:ClassesToClusterTogetherLayoutConstraint` class. Classes are assigned using the `browser:clusteringSelector` predicate.
 
-> **Warning**
-> Use this layout constraint only if you want to create groups containing nodes of different classes. Put all classes you want to cluster and group together in the one instance of the *browser:ClassesToClusterTogetherLayoutConstraint* class.
+> **Warning** \
+> The classes to cluster together are defined by a technician in the visual configuration. \
+> Use this layout constraint only if you want to create groups containing nodes of different classes. Put all classes you want to cluster and group together in the one instance of the `browser:ClassesToClusterTogetherLayoutConstraint` class.
 
 <h3 id="child-parent-or-parent-child-layout-constraint">"ChildParentLayoutConstraint" and "ParentChildLayoutConstraint" classes</h3>
 
