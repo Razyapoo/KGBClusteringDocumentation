@@ -27,11 +27,11 @@ This part of the documentation contains necessary terms that are used later in t
 
 Terms described here may differ from usual terms you may be familiar with. This glossary is slightly different from the [glossary in the user documentation](user_documentation.md#glossary).
 
-You can skip this section for now and go to [Implementation](#implementation) section
+You can skip this section for now and go to [Implementation](#implementation) section.
 
 <h3 id="grouping-of-clusters-glossary">Grouping of clusters</h3>
 
-> **Definition**
+> **Definition** \
 > Grouping of clusters is the process of creating clusters of nodes with the same or similar attribute values ​​and then combining them into a single group.
 
 <h3 id="visual-layout-constraint-glossary">Visual layout constraint</h3>
@@ -48,7 +48,7 @@ You can skip this section for now and go to [Implementation](#implementation) se
 
 Typically, nodes in a graph are related to each other, for example, a company has employees, university has scientists, scientist has awards, scientist writes scientific papers, university has departments, and many other examples. 
 
-One possible way to visualize such relationship is to create an edge between parent and child. But there is also another way, namely adding a hierarchy between nodes. In such case, parent node is visualized as a larger node containing child nodes inside.
+One possible way to visualize such relationships is to create an edge between parent and child. But there is also another way, namely adding a hierarchy between nodes. In such case, parent node is visualized as a larger node containing child nodes inside.
 
 Figure 1 below shows an example with universities and departments. A university can be thought of as a larger node (blue) containing child nodes (light blue) inside, representing departments: 
 
@@ -60,7 +60,7 @@ Figure 1 below shows an example with universities and departments. A university 
 Each such node hierarchy represents a [hierarchical group](#hierarchical-group-glossary).
 
 > **Warning** \
-> Hierarchical relationships are predefined by a technician in the [visual configuration](#https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#childparentlayoutconstraint-and-parentchildlayoutconstraint-classes).
+> Hierarchical relationships are predefined by a technician in the [visual configuration](#child-parent-or-parent-child-layout-constraint).
 
 Expansion query can be triggered from a parent node (expand child nodes) as well as form a child node (expand parent node). In both cases it may use same predicate in SPARQL CONSTRUCT, for example `skos:broader`.
 
@@ -124,7 +124,7 @@ Each node in a hierarchical group must have a [hierarchical class](#hierarchical
 An example of one such hierarchical group is shown in Figure 1 above.
 
 > **Warning** \
-> A hierarchical group is predefined by a technician in the [visual configuration](#https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchicalgroupstoclusterlayoutconstraint-class).
+> A hierarchical group is predefined by a technician in the [visual configuration](#hierarchical-groups-to-cluster-layout-constraint).
 
 <h3 id="visual-group-glossary">Visual groups</h3>
 
@@ -139,7 +139,7 @@ An example of a visual group is shown in the Figure 2 below. The "pseudo-parent"
 </p>
 
 > **Warning** \
-> A visual group is predefined by a technician in the [visual configuration](#https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visualgrouplayoutconstraint-class).
+> A visual group is predefined by a technician in the [visual configuration](#visual-group-layout-constraint).
 
 Each node in a visual group must have an additional visual group class representing that visual group. It can be identical to the hierarchical class.
 
@@ -203,7 +203,7 @@ A [visual layout constraint](#visual-layout-constraint-glossary) defining [visua
 > **Warning** \
 > Each visual group class must be assigned to a separate instance of `browser:VisualGroupLayoutConstraint` class.
 
-<h3 id="hierarchical-groups-to-cluster">"HierarchicalGroupsToClusterLayoutConstraint" class</h3>
+<h3 id="hierarchical-groups-to-cluster-layout-constraint">"HierarchicalGroupsToClusterLayoutConstraint" class</h3>
 
 > **Note** \
 > It can be useful not to group clusters of nodes that belong to the same [hierarchical group](#hierarchical-group-glossary) (or [visual group](#visual-group-glossary)). For example, group only clusters that belong to the "tema" visual group, but do not belong to the "pracovisteVisualGroup" visual group (shown in Figure 3 above).
@@ -213,7 +213,7 @@ A [visual layout constraint](#visual-layout-constraint-glossary) that determines
 > **Warning** \
 > Each hierarchical group class must be assigned to a separate instance of the `browser:HierarchyGroupToClusterLayoutConstraint` class.
 
-<h3 id="classes-to-cluster-together">"ClassesToClusterTogetherLayoutConstraint" class</h3>
+<h3 id="classes-to-cluster-together-layout-constraint">"ClassesToClusterTogetherLayoutConstraint" class</h3>
 
 By default, the algorithm only groups clusters of nodes of the same visual class (usually different from the hierarchical class). But it is possible to define which visual classes can be clustered and grouped together (within the parent node).
 
@@ -305,14 +305,14 @@ The same principle is used in this "Grouping of clusters" extension, namely, whe
 
 The original component is extended with a new private `groupingOfClustersManager` method that filters nodes to be clustered and grouped, ungroups existing groups of nodes, collapses child nodes into their parent nodes or shows child nodes collapsed in their parent nodes. The component is also extended with the `globalHierarchyDepth` attribute, whose value indicates the [current hierarchical level](#current-hierarchical-level-glossary).
 
-When grouping ("Grouping of clusters" is selected in the [checkbox](user_documentation.md#checkbox-glossary) and "minus" button is clicked), the `groupingOfClustersManager` algorithm filters all the nodes that have a [hierarchical group class](#hierarchical-class-glossary) that is allowed to be grouped in the visual configuration (more in [Hierarchical groups to cluster](#hierarchical-groups-to-cluster) section). Then it filters out of all previously filtered nodes only those that reside at the [current hierarchical level](#current-hierarchical-level-glossary) (based on the value of the `globalHierarchyDepth` attribute). 
+When grouping ("Grouping of clusters" is selected in the [checkbox](user_documentation.md#checkbox-glossary) and "minus" button is clicked), the `groupingOfClustersManager` algorithm filters all the nodes that have a [hierarchical group class](#hierarchical-class-glossary) that is allowed to be grouped in the visual configuration (more in [Hierarchical groups to cluster](#hierarchical-groups-to-cluster-layout-constraint) section). Then it filters out of all previously filtered nodes only those that reside at the [current hierarchical level](#current-hierarchical-level-glossary) (based on the value of the `globalHierarchyDepth` attribute). 
 
 > **Note** \
 > Value of the `globalHierarchyDepth` attribute does not show the deepest hierarchical level that has been achieved in the graph during the research, but the deepest level of nodes that are still visible on the graph area.
 
 As the map (in the mapping platforms) scales down and details disappear, new correlated details appear in their place that generalize the disappeared details. In our case, the parent node is such a generalization. Therefore, the next condition of the grouping algorithm must be the grouping of nodes that have the same parent node.
 
-From now on, the algorithm groups all filtered nodes, but based on the parent and visual classes (may differ from the [hierarchical class](#hierarchical-class-glossary) of a node). First, it filters all nodes that have the same parent, then from the filtered nodes, it filters out nodes that have the same visual class, unless multiple visual classes are explicitly set in the visual configuration (for more information see "[Classes to cluster together](#classes-to-cluster-together)" section).
+From now on, the algorithm groups all filtered nodes, but based on the parent and visual classes (may differ from the [hierarchical class](#hierarchical-class-glossary) of a node). First, it filters all nodes that have the same parent, then from the filtered nodes, it filters out nodes that have the same visual class, unless multiple visual classes are explicitly set in the visual configuration (for more information see "[Classes to cluster together](#classes-to-cluster-together-layout-constraint)" section).
 
 Two cases can occur at the end of filtering:
 

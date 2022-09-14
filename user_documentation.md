@@ -12,21 +12,23 @@
 
 We all know how zoom in/out works on mapping platforms such as [google maps](https://maps.google.com), maps.cz, etc. Zoom is used to increase or decrease the zoom level at a specific point and show more or less detail on a map.
 
-Our extension of the original Knowledge Graph browser is inspired by such mapping platforms.
+The extension of the original Knowledge Graph browser is inspired by such mapping platforms.
 
 <h1 id="glossary">Glossary</h1>
 
 In this part of the guide, you will learn the necessary terms that will help you understand the basic principle of how the extension works. They may differ from the usual terms you may be familiar with.
 
+You can skip this section for now and go to [How to use the extension?](#how-to-use-the-extension) section.
+
 <h3 id="hierarchical-relationships-glossary">Hierarchical relationship</h3>
 
-In our approach, we introduce the concept of hierarchical relationships. 
+In the "Grouping of clusters" approach, we introduce the concept of hierarchical relationships. 
 
-Typically, nodes in a graph are related to each other, for example, a company has employees, university has scientists, scientist has awards, scientist writes scientific papers, university has departments, and many other examples. In what follows, for simplicity, we will consider universities and departments as an example, and relationship between them will be - "university has department(s)".
+Typically, nodes in a graph are related to each other, for example, a company has employees, university has scientists, scientist has awards, scientist writes scientific papers, university has departments, and many other examples. 
 
-One possible way to visualize such relationship is to create an edge between nodes. But there is also another way, namely adding a hierarchy between the nodes, that is, in our example, the university acts as a parent node, and its departments act as child nodes. In such case, "university has department(s)" relation is hierarchical one, i.e. representing a *"parent-child"* relationship.
+One possible way to visualize such relationships is to create an edge between parent and child. But there is also another way, namely adding a hierarchy between nodes. In such case, parent node is visualized as a larger node containing child nodes inside.
 
-See the picture below for an example:
+Figure 1 below shows an example with universities and departments:
 
 <p align="center">
     <img src="img/child_parent_relation.png" alt="parent-child-relationship" title="Parent-child relationship" width="600"/><br/>
@@ -35,20 +37,43 @@ See the picture below for an example:
 
 Here the node *"Fakulty"* is the parent node of the node *"Matematicko-fyzikální fakulta"*, which, in turn, is the parent of the internal nodes that are light-blue and have titles inside the node.
 
-Non-hierarchical relationships are represented by edge between nodes.
+Each such node hierarchy represents a [hierarchical group](#hierarchical-group-glossary).
+
+> **Warning** \
+> Hierarchical relationships are predefined by a technician in the [visual configuration](#https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#childparentlayoutconstraint-and-parentchildlayoutconstraint-classes).
+
+[Non-hierarchical](#non-hierarchical-relationships-glossary) relationships are also possible. 
+
+<h3 id="non-hierarchical-relationships-glossary">Non-hierarchical relationships </h3>
+
+> **Definition** \
+> Non-hierarchical relationships are represented by edge between nodes.
+
+For example, "the department teaches the subject" relationship can be visualized as non-hierarchical. Example is shown in the Figure 2 below.
+
+<p align="center">
+    <img src="img/non_hierarchical_edge.png" alt="non-hierarchical-edge" title="Non-hierarchical edge" width="600"/><br/>
+    <em>Figure 2. Non-hierarchical edge</em>
+</p>
+
+> **Note** \
+> Non-hierarchical relationships are all relationships other than [hierarchical](#hierarchical-relationships-glossary).
 
 <h3 id="hierarchical-groups">Hierarchical group</h3>
 
-> A hierarchical group is a cluster of nodes that are related to each other by parent-child relationships. 
+> **Definition** \
+> A hierarchical group is a cluster of nodes that are related to each other by hierarchical relationships. 
 
 Each node in a hierarchical group must have the [hierarchical class](#hierarchical-class) that represents that hierarchical group.
 
 An example of one such hierarchical group is shown in Figure 1.
 
-The hierarchical group is predefined by the technician in the visual configuration.
+> **Warning** \
+> Hierarchical groups are predefined by a technician in the visual configuration.
 
 <h3 id="visual-groups-glossary">Visual group</h3>
 
+> **Definition** \
 > A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" node representing the visual group itself.
 
 <p align="center">
@@ -72,7 +97,7 @@ Each node in a visual group must have a visual class representing that visual gr
 
 An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in Figure 3 above.
 
-> **Note**
+> **Note** \
 > The main advantage of visual groups is that you can easily move all the nodes that belong to the same group across the entire graph area at the same time. This way they won't be scattered all over the graph area. 
 
 <h3 id="hierarchical-class">Hierarchical class</h3>
@@ -93,7 +118,7 @@ The hierarchical class, if it exists, is shown along with the label of a node. S
 
 The amount of detail displayed on the maps (in mapping platforms) depends on the zoom level. Our implementation uses the same idea. At the deepest level of the hierarchy, the graph shows all possible details. And at the highest level of the hierarchy, the graph shows only those single nodes that are representatives of the hierarchies themselves. 
 
-<h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3> //TODO add to text
+<h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3>
 
 > A current hierarchical level is the deepest [hierarchical level](#hierarchical-level) shown in the graph area.
 
@@ -149,7 +174,7 @@ By default, only nodes of the same visual class (other than [hierarchical class]
 
 <h1 id="how-to-use-the-extension">How to use the extension?</h1>
 
-This guide will explain and teach you how the *"grouping of clusters"* extension works and what benefits it provides.
+This guide will explain and teach you how the "Grouping of clusters" extension works and what benefits it provides.
 
 <h2 id="configuration-selection">Configuration selection</h2>
 
@@ -188,19 +213,19 @@ The starting node is shown in the same way as in other configurations.
 
 <h3 id="hierarchical-extensions">Hierarchical extensions</h3>
 
-As mentioned in the [Hierarchical relationships](#hierarchical-relationships-glossary) section of the [Glossary](#glossary), there are hierarchical and non-hierarchical relationships.
+There are [hierarchical](#hierarchical-relationships-glossary) and [non-hierarchical](#non-hierarchical-relationships-glossary) relationships.
 
-An expansion query predefined in the visual configuration allows you to show the neighborhood of a node in which the node is in either a hierarchical or non-hierarchical relationship with its neighbors.
+An expansion query predefined in the visual configuration allows you to show the neighborhood of the node in which that node is in either a [hierarchical](#hierarchical-relationships-glossary) or [non-hierarchical](#non-hierarchical-relationships-glossary) relationship with its neighbors.
 
 The hierarchical and non-hierarchical expansions are listed below:
 
-Hierarchical expansions:
-- "Nadřazená pracoviště"
-- "Podřazená pracoviště"
+-Hierarchical expansions:
+  - "Nadřazená pracoviště"
+  - "Podřazená pracoviště"
 
-Non-hierarchical expansions:
-- "Témata pracoviště"
-- "Sdílená témata pracoviště"
+- Non-hierarchical expansions:
+  - "Témata pracoviště"
+  - "Sdílená témata pracoviště"
 
 See the Figure 9 for an example.
 
@@ -245,7 +270,7 @@ After removal:
 
 <h2 id="summary">Summary</h2>
 
-The main motivation behind the *"grouping of clustering"* extension is to bring the concept of zooming from mapping platforms into the Knowledge Graph browser. Feel free to use the newly implemented features that will give you a fresh perspective on the graph.
+The main motivation behind the "grouping of clustering" extension is to bring the concept of zooming from mapping platforms into the Knowledge Graph browser. Feel free to use the newly implemented features that will give you a fresh perspective on the graph.
 
 <h1 id="references">References</h1>
 
