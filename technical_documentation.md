@@ -64,7 +64,7 @@ Each such node hierarchy represents a [hierarchical group](#hierarchical-group-g
 
 Expansion query can be triggered from a parent node (expand child nodes) as well as form a child node (expand parent node). In both cases it may use same predicate in SPARQL CONSTRUCT, for example `skos:broader`.
 
-<h3 id="non-hierarchical-relationships-glossary">Non-hierarchical relationships </h3>
+<h3 id="non-hierarchical-relationships-glossary">Non-hierarchical relationship </h3>
 
 > **Definition** \
 > Non-hierarchical relationships are represented by edge between nodes.
@@ -127,7 +127,7 @@ An example of one such hierarchical group is shown in Figure 1 above.
 > **Warning** \
 > A hierarchical group is predefined by a technician in the [visual configuration](#hierarchical-groups-to-cluster-layout-constraint).
 
-<h3 id="visual-group-glossary">Visual groups</h3>
+<h3 id="visual-group-glossary">Visual group</h3>
 
 > **Definition** \
 > A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" node representing the visual group itself.
