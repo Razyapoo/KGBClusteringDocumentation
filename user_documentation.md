@@ -71,10 +71,10 @@ A hierarchical class, if it exists, is shown along with a label of a node on the
 </p>
 
 > **Note** \
-> A hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in a same hierarchical group.
+> A hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in a same [hierarchical group](#hierarchical-groups).
 
 > **Warning** \
-> Each node must be assigned to some hierarchical group class in case it is to be placed in any hierarchy.
+> Each node must be assigned to some hierarchical group class in case it needs to be placed in any hierarchy.
 
 <h3 id="hierarchical-level-glossary">Hierarchical level</h3>
 
@@ -144,7 +144,7 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 
 <h3 id="checkbox-glossary">Checkbox</h3>
 
-"Scaling options" checkbox is used to choose whether to group clusters of nodes or to zoom. It is placed in the right corner of the graph area. See the Figure 5 for more detail.
+The "Scaling options" checkbox is used to choose whether to group clusters of nodes or to zoom. It is placed in the right corner of the graph area. See the Figure 5 below for more detail.
 
 <p align="center">
     <img src="img/scaling_options.png" alt="scaling-options" title="Scaling options" width="200"/><br/>
@@ -153,7 +153,9 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 
 <h3 id="grouping-of-clusters-glossary">Grouping of clusters</h3>
 
-When you zoom in on a specific point on the mapping platforms, at each zoom level, you see more and more details about the region you zoom in, and also otherwise, when you zoom out, some details disappear. The same principle is used in the *"grouping of clusters"* algorithm, namely, when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes.
+When you zoom in on a specific point on the mapping platforms, at each zoom level, you see more and more details about the region you zoom in, and also otherwise, when you zoom out, some details disappear. 
+
+The same principle is used in the "Grouping of clusters" extension, namely, when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes.
 
 The *"grouping of clusters"* algorithm must first cluster the nodes into a [cluster](#cluster-glossary), and then collapse this cluster into a single group node. Which nodes to cluster and then group into a single node is determined by an algorithm based on the location of the nodes. This algorithm uses well-known clustering methods such as k-Means clustering [1] and k-Medoids clustering [2] (the method used is set by the technician).
 
@@ -250,13 +252,17 @@ The hierarchical and non-hierarchical expansions are listed below and shown in t
 
 The main tool that enable you to utilize the extension is the [checkbox](#checkbox-glossary). 
 
-Using the checkbox, you can choose whether to:
+Using the checkbox, you can choose whether to do:
 - [Grouping of clusters](#grouping-of-clusters-glossary)
-- Zooming
-- [Grouping of clusters](#grouping-of-clusters-glossary) and zooming at the same time
+- Zoom
+- [Grouping of clusters](#grouping-of-clusters-glossary) and Zoom at the same time
 - Neither one of them
 
-By selecting a "Grouping of clusters" and "zooming" at the same time, you can take an advantage of the main features of the mapping platforms.
+
+
+> **Note** \
+> When "Grouping of clusters" is selected, use "minus" (resp. "plus") button to group (resp. ungroup) nodes. **Mouse wheel not supported**.
+> By selecting a "Grouping of clusters" and "Zoom" at the same time, you can take an advantage of the main features of the mapping platforms (for more information see [Grouping of clusters](#grouping-of-clusters-glossary)). **Mouse wheel supported**.
 
 <h3 id="node-removal-guide">Node removal</h3>
 

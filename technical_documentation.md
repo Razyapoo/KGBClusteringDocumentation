@@ -94,10 +94,10 @@ A hierarchical class, if it exists, is shown along with a label of a node on the
 </p>
 
 > **Note** \
-> A hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in a same hierarchical group. It is assigned to a node in a SPARQL CONSTRUCT query in the same way as a visual class, i.e. using the `browser:class` predicate. 
+> A hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in a same [hierarchical group](#hierarchical-groups). It is assigned to a node in a SPARQL CONSTRUCT query in the same way as a visual class, i.e. using the `browser:class` predicate. 
 
 > **Warning** \
-> Each node must be assigned to some hierarchical group class in case it is to be placed in any hierarchy.
+> Each node must be assigned to some hierarchical group class in case it needs to be placed in any hierarchy.
 
 <h3 id="hierarchical-level-glossary">Hierarchical level</h3>
 
@@ -249,7 +249,7 @@ We all know how zoom in/out works on mapping platforms such as [google maps](htt
 The "grouping of clusters" extension is inspired by such mapping platforms.
 
 > **Note** \
-> Zooming feature from mapping platforms can be achieved by choosing both "Zoom" and "Grouping of clusters" options in the [checkbox](user_documentation.md#checkbox-glossary).
+> Zoom feature from mapping platforms can be achieved by choosing both "Zoom" and "Grouping of clusters" options in the [checkbox](user_documentation.md#checkbox-glossary).
 
 The next few sections describe extensions to the main components of the source code. 
 
@@ -302,7 +302,7 @@ Edge is extended with a new `isEdgeFromChild` attribute indicating whether an ed
 
 When you zoom in on a specific point on the mapping platforms, at each zoom level, you see more and more details about the region you zoom in, and also otherwise, when you zoom out, some details disappear. 
 
-The same principle is used in this "Grouping of clusters" extension, namely, when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes. This can be achieved by choosing both "Zoom" and "Grouping of clusters" options in the [checkbox](user_documentation.md#checkbox-glossary).
+The same principle is used in the "Grouping of clusters" extension, namely, when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes. This can be achieved by choosing both "Zoom" and "Grouping of clusters" options in the [checkbox](user_documentation.md#checkbox-glossary).
 
 The original component is extended with a new private `groupingOfClustersManager` method that filters nodes to be clustered and grouped, ungroups existing groups of nodes, collapses child nodes into their parent nodes or shows child nodes collapsed in their parent nodes. The component is also extended with the `globalHierarchyDepth` attribute, whose value indicates the [current hierarchical level](#current-hierarchical-level-glossary).
 
