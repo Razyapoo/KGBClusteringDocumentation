@@ -23,12 +23,13 @@ The main purpose of the implemented grouping of clusters approach is to make a l
 
 <h1 id="glossary">Glossary</h1>
 
-<details>
-    <summary>Expand glossary</summary>
-\
 This part of the documentation contains necessary terms that are used later in the documentation. They will help you understand the basic principle of how the extension works.
 
 Terms described here may differ from usual terms you may be familiar with. This glossary is slightly different from the [glossary in the user documentation](user_documentation.md#glossary).
+
+<details>
+    <summary>Expand glossary</summary>
+
 
 <h3 id="visual-layout-constraint-glossary">Visual layout constraint</h3>
 
