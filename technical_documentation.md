@@ -198,7 +198,6 @@ A [visual layout constraint](#visual-layout-constraint-glossary) defining [visua
 > **Warning** \
 > Each visual class must be assigned to a separate instance of `browser:VisualGroupLayoutConstraint` class.
 
-// TODO
 <h3 id="hierarchical-groups-to-cluster">"HierarchicalGroupsToClusterLayoutConstraint" class</h3>
 
 > **Note** \
