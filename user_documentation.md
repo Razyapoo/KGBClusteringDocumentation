@@ -109,7 +109,7 @@ When you zoom in, at some point the "*grouping of clusters*" algorithm collapses
 
 <h3 id="checkbox-glossary">Checkbox</h3>
 
-"Scaling options" checkbox is used to choose whether to group nodes or to zoom. It is placed in the right corner of the graph area. See the Figure 5 for more detail.
+"Scaling options" checkbox is used to choose whether to group clusters of nodes or to zoom. It is placed in the right corner of the graph area. See the Figure 5 for more detail.
 
 <p align="center">
     <img src="img/scaling_options.png" alt="scaling-options" title="Scaling options" width="200"/><br/>
