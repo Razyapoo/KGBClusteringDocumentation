@@ -22,20 +22,20 @@ The main purpose of the implemented grouping of clusters approach is to make a l
 
 <h1 id="glossary">Glossary</h1>
 
-This part of the documentation contains the necessary terms that are used later in the documentation. They will help you understand the basic principle of how the extension works.
+This part of the documentation contains necessary terms that are used later in the documentation. They will help you understand the basic principle of how the extension works.
 
-Terms described here may differ from the usual terms you may be familiar with. This glossary is slightly different from the [glossary in the user documentation](user_documentation.md#glossary).
+Terms described here may differ from usual terms you may be familiar with. This glossary is slightly different from the [glossary in the user documentation](user_documentation.md#glossary).
 
 <h3 id="visual-layout-constraint-glossary">Visual layout constraint</h3>
 
 > **Definition** \
-> A visual layout constraint is a rule (constraint) applied to a graph to change the way it is visualized.
+> A visual layout constraint is a rule (constraint) applied to a graph to change a way it is visualized.
 
 <h3 id="parent-child-or-child-parent-hierarchical-relationship-glossary">Parent-child or child-parent hierarchical relationship</h3>
 
 Typically, nodes in a graph are related to each other, for example, a company has employees, university has scientists, scientist has awards, scientist writes scientific papers, university has departments, and many other examples. 
 
-One possible way to visualize such relationship is to create an edge between parent and child. But there is also another way, namely adding a hierarchy between the nodes. In such case, parent node is visualized as a larger node containing the child elements inside.
+One possible way to visualize such relationship is to create an edge between parent and child. But there is also another way, namely adding a hierarchy between nodes. In such case, parent node is visualized as a larger node containing child nodes inside.
 
 Figure 1 below shows an example with universities and departments. A university can be thought of as a larger node (blue) containing child nodes (light blue) inside, representing departments: 
 
@@ -47,7 +47,7 @@ Figure 1 below shows an example with universities and departments. A university 
 Each such node hierarchy represents a [hierarchical group](#hierarchical-group-glossary).
 
 > **Warning** \
-> Hierarchical relationships are predefined by the technician in the visual configuration.
+> Hierarchical relationships are predefined by a technician in the visual configuration.
 
 Expansion query can be triggered from a parent node (expand child nodes) as well as form a child node (expand parent node). In both cases it may use same predicate in SPARQL CONSTRUCT, for example `skos:broader`.
 
@@ -73,14 +73,14 @@ For example, "the department teaches the subject" relationship can be visualized
 > **Definition** \
 > A hierarchical class is a visual class that defines which [hierarchical group](#hierarchical-group-glossary) a node belongs to. A node can only be assigned to one hierarchical class.
 
-A hierarchical class, if it exists, is shown along with the label of a node on the detail panel. See Figure 4 below for more details.
+A hierarchical class, if it exists, is shown along with a label of a node on the detail panel. See Figure 4 below for more details.
 
 <p align="center">
     <img src="img/hierarchical_class.png" alt="hierarchical-class" title="Hierarchical class" width="350"/><br/>
     <em>Figure 4. Hierarchical class</em>
 </p>
 
-A hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in the same hierarchical group. It is assigned to a node in the SPARQL CONSTRUCT query in the same way as a visual class, i.e. using the `browser:class` predicate. 
+A hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in a same hierarchical group. It is assigned to a node in a SPARQL CONSTRUCT query in the same way as a visual class, i.e. using the `browser:class` predicate. 
 
 > **Warning** \
 > Each node must be assigned to some hierarchical group class in case it is to be placed in any hierarchy.
@@ -90,28 +90,32 @@ A hierarchical class (or hierarchical group class) is a common class for all nod
 > **Definition** \
 > A hierarchical level of a node indicates the depth of a hierarchy at which a node resides.
 
-The amount of detail displayed on the maps (in mapping platforms) depends on the zoom level. Grouping of clusters approach uses the same idea. At the deepest level of the hierarchy, the graph shows all possible details. And at the highest level of the hierarchy, the graph shows only those single nodes that are representatives of the hierarchies themselves. 
+The amount of detail displayed on maps (in mapping platforms) depends on a zoom level. Grouping of clusters approach uses the same idea. At the deepest level of the hierarchy, the graph shows all possible details. And at the highest level of the hierarchy, the graph shows only those single nodes that are representatives of hierarchies themselves. 
 
 <h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3>
 
+> **Definition** \
 > A current hierarchical level is the deepest [hierarchical level](#hierarchical-level-glossary) shown in the graph area.
 
-When you zoom in, at some point the "*grouping of clusters*" algorithm collapses the nodes into their parents and increases the current hierarchical level by 1, and when you zoom out, it generalizes the child nodes to the parent nodes and therefore shows less detail on the graph area (current hierarchical level decreases).
+At the moment when child nodes collapse into their parents, the current hierarchical level decreases by 1, and when child nodes with a hierarchical level higher (deeper) by 1 than the current hierarchical level appear, the current hierarchical level increases by 1.
 
-The *globalHierarchyDepth* attribute value indicates the current hierarchical level.
+The `globalHierarchyDepth` attribute value indicates the current hierarchical level.
 
 <h3 id="hierarchical-group-glossary">Hierarchical group</h3>
 
+> **Definition** \
 > A hierarchical group is a cluster of nodes that are related to each other by [parent-child relationships](#parent-child-or-child-parent-hierarchical-relationship-glossary). 
 
-Each node in a hierarchical group must have the [hierarchical class](#hierarchical-class-glossary) that represents that hierarchical group.
+Each node in a hierarchical group must have a [hierarchical class](#hierarchical-class-glossary) that represents that hierarchical group.
 
-An example of one such hierarchical group is shown in Figure 1.
+An example of one such hierarchical group is shown in Figure 1 above.
 
-The hierarchical group is predefined by the technician in the visual configuration.
+> **Warning** \
+> A hierarchical group is predefined by a technician in the visual configuration.
 
 <h3 id="visual-group-glossary">Visual groups</h3>
 
+> **Definition** \
 > A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" node representing the visual group itself.
 
 <p align="center">
@@ -119,22 +123,24 @@ The hierarchical group is predefined by the technician in the visual configurati
     <em>Figure 2. Visual group</em>
 </p>
 
-The visual group is predefined by the technician in the visual configuration.
+> **Warning** \ 
+> A visual group is predefined by a technician in the visual configuration.
 
-Example of visual group is shown above in the Figure 2.
+Example of a visual group is shown above in the Figure 2. The "pseudo-parent" node is a gray node with white nodes inside.
 
-Each node in a visual group must have a visual class representing that visual group. It can be identical to the hierarchical class.
+Each node in a visual group must have an additional visual class representing that visual group. It can be identical to the hierarchical class.
+
+> **Note** \
+> Hierarchical groups themselves can be interpreted as visual groups. In such a case, there is no need for a "pseudo-parent".
+
+An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in Figure 3 below.
 
 <p align="center">
     <img src="img/visual_groups.png" alt="visual-groups" title="Visual groups" width="600"/><br/>
     <em>Figure 3. Visual groups</em>
 </p>
 
-> The hierarchical groups themselves can be interpreted as visual groups. In such a case, there is no need for a "pseudo-parent".
-
-An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in Figure 3 above.
-
-> **Note**
+> **Note** \
 > The main advantage of visual groups is that you can easily move all the nodes that belong to the same group across the entire graph area at the same time. This way they won't be scattered all over the graph area. 
 
 <h1 id="implementation">Implementation</h1>
