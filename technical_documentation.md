@@ -24,8 +24,8 @@ The main purpose of the implemented grouping of clusters approach is to make a l
 <h1 id="glossary">Glossary</h1>
 
 <details>
-    <summary>expand</summary>
-
+    <summary>Expand glossary</summary>
+\
 This part of the documentation contains necessary terms that are used later in the documentation. They will help you understand the basic principle of how the extension works.
 
 Terms described here may differ from usual terms you may be familiar with. This glossary is slightly different from the [glossary in the user documentation](user_documentation.md#glossary).
@@ -151,7 +151,7 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 
 <h1 id="implementation">Implementation</h1>
 
-Implementation of "Grouping of clusters" extension is split into two parts: 
+The implementation of "Grouping of clusters" extension is split into two parts: 
 
 1. [Backend](#backend)
 2. [Fronted](#frontend)
