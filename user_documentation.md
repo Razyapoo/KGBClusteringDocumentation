@@ -219,7 +219,7 @@ An expansion query predefined in the visual configuration allows you to show the
 
 The hierarchical and non-hierarchical expansions are listed below:
 
--Hierarchical expansions:
+- Hierarchical expansions:
   - "Nadřazená pracoviště"
   - "Podřazená pracoviště"
 
