@@ -40,7 +40,7 @@ Here the node *"Fakulty"* is the parent node of the node *"Matematicko-fyzikáln
 Each such node hierarchy represents a [hierarchical group](#hierarchical-group-glossary).
 
 > **Warning** \
-> Hierarchical relationships are predefined by a technician in the visual configuration.
+> Hierarchical relationships are predefined by a technician in the visual configuration. You cannot choose them in the user interface.
 
 [Non-hierarchical](#non-hierarchical-relationships-glossary) relationships are also possible. 
 
@@ -97,10 +97,10 @@ At the moment when child nodes collapse into their parents, the current hierarch
 
 Each node in a hierarchical group must have the [hierarchical class](#hierarchical-class) that represents that hierarchical group.
 
-An example of one such hierarchical group is shown in Figure 1.
+An example of one such hierarchical group is shown in Figure 1 above.
 
 > **Warning** \
-> Hierarchical groups are predefined by a technician in the visual configuration.
+> Hierarchical groups are predefined by a technician in the visual configuration. You cannot define them in the user interface.
 
 <h3 id="visual-group-glossary">Visual groups</h3>
 
@@ -115,7 +115,7 @@ An example of a visual group is shown in the Figure 2 below. The "pseudo-parent"
 </p>
 
 > **Warning** \
-> A visual group is predefined by a technician in the [visual configuration](#visual-group-layout-constraint).
+> A visual group is predefined by a technician in the visual configuration. You cannot define them in the user interface.
 
 Each node in a visual group must have an additional visual group class representing that visual group. It can be identical to the hierarchical class.
 
