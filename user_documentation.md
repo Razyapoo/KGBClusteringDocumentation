@@ -157,32 +157,61 @@ When you zoom in on a specific point on the mapping platforms, at each zoom leve
 
 The same principle is used in the "Grouping of clusters" extension, namely, when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes.
 
-The *"grouping of clusters"* algorithm must first cluster the nodes into a [cluster](#cluster-glossary), and then collapse this cluster into a single group node. Which nodes to cluster and then group into a single node is determined by an algorithm based on the location of the nodes. This algorithm uses well-known clustering methods such as k-Means clustering [1] and k-Medoids clustering [2] (the method used is set by the technician).
+The "Grouping of clusters" algorithm must first cluster the nodes into a [cluster](#cluster-glossary), and then collapse this cluster into a single group node. Which nodes to cluster is determined by an algorithm based on positions of the nodes. This algorithm uses well-known clustering methods: k-Means clustering [1] and k-Medoids clustering [2] (what method to use is defined by the technician).
 
-The basic approach of the algorithm is that it creates several centroids, combines them into an empty group (k-Means clustering [1]) or into a group consisting of a single node (k-Medoids clustering [2]), and then adds surrounding nodes to the closest group.
+The basic approach of the algorithm is that it creates several centroids, generates from them an empty group (k-Means clustering [1]) or a group consisting of a single node (k-Medoids clustering [2]), and then adds surrounding nodes to the closest group.
 
-The grouping of nodes is determined based on the [hierarchical class](#hierarchical-class), the parent node, the [level of the hierarchy](#hierarchical-level), and the visual class. First of all, the nodes must be grouped by the hierarchical group class to which they belong. 
+The clustering of nodes is determined based on the [hierarchical class](#hierarchical-class), the parent node, the [level of the hierarchy](#hierarchical-level), and the visual class. First of all, nodes must be clustered by the hierarchical group class to which they belong. 
 
-As the map (in the mapping platforms) scales down and details disappear, new correlated details appear in their place that generalize the disappeared details. In our case, the parent node is such a generalization. Therefore, the second condition of the grouping algorithm must be the grouping of nodes that have the same parent node.
+The second condition of clustering is that the node's [hierarchical level](#hierarchical-level) must be equal to the [current hierarchical level](#current-hierarchical-level-glossary).
 
 > **Wartning**
-> The algorithm always groups the nodes that are at the [current hierarchical level](#current-hierarchical-level-glossary). Only when all nodes in a level will be the only nodes of their parents, the algorithm will collapse those nodes into their parents and increase the [current hierarchical level](#current-hierarchical-level-glossary) by 1.
+> The algorithm always clusters the nodes located at the [current hierarchical level](#current-hierarchical-level-glossary). When all nodes in the [current hierarchical level](#current-hierarchical-level-glossary) will be the only nodes of their parents, the algorithm will collapse those nodes into their parents and increase the [current hierarchical level](#current-hierarchical-level-glossary) by 1.
 
-When zooming out, child nodes are collapsed into their parents, and all incoming and outgoing edges of child nodes remain preserved. This is done by moving edges to parent nodes.
+As the map (in the mapping platforms) scales down and details disappear, new correlated details appear in their place that generalize the disappeared details. In our case, the parent node is such a generalization. Therefore, the next condition for clustering must be to cluster nodes that have the same parent node.
 
-When switching between zoom levels and therefore hierarchy levels, the graph shows more or less details in terms of the number of nodes. They only disappear, but still exist on the graph (in other words, they are not mounted in the hierarchy, but still mounted in the graph). Also otherwise, when you zoom in, the disappeared nodes reappear (similar to mapping platforms). 
-
-> **Warning**
-> When you zoom in, the disappeared nodes reappear in a different way than they were grouped and collapsed, namely when the parent node expands during the zoom operation, only one node appears inside the parent node (either a group or a single node). In such case the [current hierarchical level](#current-hierarchical-level-glossary) may increase by 1. And on the next zoom in (in case this node is a group), the group gets broken and releases all child nodes of the expanded parent node. 
-
-By default, only nodes of the same visual class (other than [hierarchical class](#hierarchical-class)) can be grouped together, but it is also possible to group multiple nodes of different visual classes into one group node (this is predefined in the visual configuration by the technician). Therefore, when grouping nodes, their visual classes must also be taken into account.
+After all nodes that have the same parent are filtered out, the algorithm filters out nodes that have the same visual class, unless multiple visual classes are explicitly set in the visual configuration. 
 
 > **Warning** \
-> Classes that can be grouped together are predefined in the visual configuration by a technician.
+> Visual classes that are allowed to be clustered together are predefined by a technician in the visual configuration. You cannot define them in the user interface.
+
+Two cases can occur at the end of filtering:
+
+- In the first case (example is shown in the Figure 8 below), at the end of the filtering, there are several nodes that can be clustered and grouped (within same parent). The algorithm then just cluster and group filtered nodes.
+
+<p align="center">
+    <img src="img/grouping_of_clusters_several_child_nodes.png" alt="grouping-of-clusters-several-child-nodes" title="Grouping of clusters - several child nodes" width="600"/><br/>
+    <em>Figure 8. Grouping of clusters (use-case of several child nodes)</em>
+</p>
+
+- In the second case, only one child node (per parent) remains at the end of the filtering (example is shown in the Figure 9 below). 
+
+  <p align="center">
+      <img src="img/grouping_of_clusters_one_child_node.png" alt="grouping-of-clusters-one-child-node" title="Grouping of clusters with one child node" width="600"/><br/>
+      <em>Figure 9. Grouping of clusters (use-case of one child node)</em>
+  </p>
+
+  This child node can represent a single node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 9 above).
+
+  > **Note** \
+  > After collapsing child nodes, the algorithm switches the [current hierarchical level](#current-hierarchical-level-glossary) one level higher (`globalHierarchyDepth` attribute value is increased by one). During this operation, all [non-hierarchical](#non-hierarchical-relationships-glossary) edges from child nodes are moved to the parent node.
+
+When ungrouping ("Grouping of clusters" is selected in the [checkbox](checkbox-glossary) and "plus" button is clicked), only nodes at the [current hierarchical level](#current-hierarchical-level-glossary) can be ungrouped.
+
+There are two cases:
+
+- In the first case, there is at least one group at the [current hierarchical level](#current-hierarchical-level-glossary). 
+  > **Warning** \
+  > In such case, algorithm ungroups random number of random groups. 
+
+- In the second case, there are only parent nodes which contain inside collapsed child nodes. In such case, algorithm shows collapsed child nodes.
+
+    > **Note** \
+    > In such case the [current hierarchical level](#current-hierarchical-level-glossary) decreases by 1.
 
 <h3 id="node-removal-glossary">Node removal</h3>
 
-> The deletion of a node propagates recursively to the deletion of the node's descendants.
+> Deleting a node propagates the recursive deletion of a node's descendants.
 
 <h1 id="how-to-use-the-extension">How to use the extension?</h1>
 
@@ -261,8 +290,8 @@ Using the checkbox, you can choose whether to do:
 
 
 > **Note** \
-> When "Grouping of clusters" is selected, use "minus" (resp. "plus") button to group (resp. ungroup) nodes. **Mouse wheel not supported**.
-> By selecting a "Grouping of clusters" and "Zoom" at the same time, you can take an advantage of the main features of the mapping platforms (for more information see [Grouping of clusters](#grouping-of-clusters-glossary)). **Mouse wheel supported**.
+> - When "Grouping of clusters" is selected, use "minus" (resp. "plus") button to group (resp. ungroup) nodes. **Mouse wheel not supported**.
+> - By selecting a "Grouping of clusters" and "Zoom" at the same time, you can take an advantage of the main features of the mapping platforms (for more information see [Grouping of clusters](#grouping-of-clusters-glossary)). **Mouse wheel supported**.
 
 <h3 id="node-removal-guide">Node removal</h3>
 

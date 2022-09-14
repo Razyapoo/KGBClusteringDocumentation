@@ -64,12 +64,12 @@ Each such node hierarchy represents a [hierarchical group](#hierarchical-group-g
 
 Expansion query can be triggered from a parent node (expand child nodes) as well as form a child node (expand parent node). In both cases it may use same predicate in SPARQL CONSTRUCT, for example `skos:broader`.
 
+[Non-hierarchical](#non-hierarchical-relationships-glossary) relationships are also possible. 
+
 <h3 id="non-hierarchical-relationships-glossary">Non-hierarchical relationship </h3>
 
 > **Definition** \
 > Non-hierarchical relationships are represented by edge between nodes.
-
-Non-hierarchical relationships are also possible. 
 
 For example, "the department teaches the subject" relationship can be visualized as non-hierarchical. Example is shown in the Figure 2 below.
 
@@ -304,16 +304,18 @@ When you zoom in on a specific point on the mapping platforms, at each zoom leve
 
 The same principle is used in the "Grouping of clusters" extension, namely, when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes. This can be achieved by choosing both "Zoom" and "Grouping of clusters" options in the [checkbox](user_documentation.md#checkbox-glossary).
 
-The original component is extended with a new private `groupingOfClustersManager` method that filters nodes to be clustered and grouped, ungroups existing groups of nodes, collapses child nodes into their parent nodes or shows child nodes collapsed in their parent nodes. The component is also extended with the `globalHierarchyDepth` attribute, whose value indicates the [current hierarchical level](#current-hierarchical-level-glossary).
+The original component is extended with a new private `groupingOfClustersManager` method that filters nodes to be first clustered and then grouped, ungroups existing groups of nodes, collapses child nodes into their parent nodes or shows child nodes collapsed in their parent nodes. The component is also extended with the `globalHierarchyDepth` attribute, whose value indicates the [current hierarchical level](#current-hierarchical-level-glossary).
 
-When grouping ("Grouping of clusters" is selected in the [checkbox](user_documentation.md#checkbox-glossary) and "minus" button is clicked), the `groupingOfClustersManager` algorithm filters all the nodes that have a [hierarchical group class](#hierarchical-class-glossary) that is allowed to be grouped in the visual configuration (more in [Hierarchical groups to cluster](#hierarchical-groups-to-cluster-layout-constraint) section). Then it filters out of all previously filtered nodes only those that reside at the [current hierarchical level](#current-hierarchical-level-glossary) (based on the value of the `globalHierarchyDepth` attribute). 
+When grouping ("Grouping of clusters" is selected in the [checkbox](user_documentation.md#checkbox-glossary) and "minus" button is clicked), first of all, nodes must be clustered, therefore, the `groupingOfClustersManager` algorithm filters all the nodes that have a [hierarchical group class](#hierarchical-class-glossary) that is allowed to be clustered and grouped in the visual configuration (more in [Hierarchical groups to cluster](#hierarchical-groups-to-cluster-layout-constraint) section). Then it filters out of all previously filtered nodes only those that reside at the [current hierarchical level](#current-hierarchical-level-glossary) (based on the value of the `globalHierarchyDepth` attribute). 
 
 > **Note** \
 > Value of the `globalHierarchyDepth` attribute does not show the deepest hierarchical level that has been achieved in the graph during the research, but the deepest level of nodes that are still visible on the graph area.
 
-As the map (in the mapping platforms) scales down and details disappear, new correlated details appear in their place that generalize the disappeared details. In our case, the parent node is such a generalization. Therefore, the next condition of the grouping algorithm must be the grouping of nodes that have the same parent node.
+From now on, the algorithm clusters all filtered nodes, but based on the parent and visual classes (may differ from the [hierarchical class](#hierarchical-class-glossary) of a node).
 
-From now on, the algorithm groups all filtered nodes, but based on the parent and visual classes (may differ from the [hierarchical class](#hierarchical-class-glossary) of a node). First, it filters all nodes that have the same parent, then from the filtered nodes, it filters out nodes that have the same visual class, unless multiple visual classes are explicitly set in the visual configuration (for more information see "[Classes to cluster together](#classes-to-cluster-together-layout-constraint)" section).
+As the map (in the mapping platforms) scales down and details disappear, new correlated details appear in their place that generalize the disappeared details. In our case, the parent node is such a generalization. Therefore, the next condition for clustering must be to cluster nodes that have the same parent node.
+
+After all nodes that have the same parent are filtered out, the algorithm filters out nodes that have the same visual class, unless multiple visual classes are explicitly set in the visual configuration (for more information see "[Classes to cluster together](#classes-to-cluster-together-layout-constraint)" section).
 
 Two cases can occur at the end of filtering:
 
@@ -403,7 +405,7 @@ This component is extended with a new interfaces used for layout constraints.
 
 The new KCluster.ts component is added to the main application. This component contains a `groupingOfClusters` method which performs clustering of filtered nodes and their grouping. As a parameter it accepts a set of nodes filtered in [groupingOfClustersManager](#extension-of-the-graph-area-manipulator) method.
 
-The `groupingOfClusters` algorithm must first cluster the nodes into a [cluster](#cluster-glossary), and then collapse this [cluster](#cluster-glossary) into a single group node. Which nodes to cluster and then group into a single group node is determined by an algorithm using positions of the nodes. This algorithm uses well-known clustering methods: k-Means clustering [1] and k-Medoids clustering [2] (what method to use is defined by the technician).
+The `groupingOfClusters` algorithm must first cluster the nodes into a [cluster](#cluster-glossary), and then collapse this [cluster](#cluster-glossary) into a single group node. Which nodes to cluster and then group into a single group node is determined by an algorithm based on positions of the nodes. This algorithm uses well-known clustering methods: k-Means clustering [1] and k-Medoids clustering [2] (what method to use is defined by the technician).
 
 The basic approach of the algorithm is that it creates several centroids, generates from them an empty group (k-Means clustering [1]) or a group consisting of a single node (k-Medoids clustering [2]), and then adds surrounding nodes to the closest group.
 
