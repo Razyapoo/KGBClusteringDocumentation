@@ -63,11 +63,11 @@ For example, "the department teaches the subject" relationship can be visualized
 
 > A hierarchical class is a visual class that defines which [hierarchical group](#hierarchical-groups-glossary) a node belongs to. A node can only be assigned to one hierarchical class.
 
-A hierarchical class, if it exists, is shown along with a label of a node on the detail panel. See Figure 4 below for more details.
+A hierarchical class, if it exists, is shown along with a label of a node on the detail panel. See Figure 3 below for more details.
 
 <p align="center">
     <img src="img/hierarchical_class.png" alt="hierarchical-class" title="Hierarchical class" width="350"/><br/>
-    <em>Figure 4. Hierarchical class</em>
+    <em>Figure 3. Hierarchical class</em>
 </p>
 
 > **Note** \
@@ -107,11 +107,11 @@ An example of one such hierarchical group is shown in Figure 1 above.
 > **Definition** \
 > A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" node representing the visual group itself.
 
-An example of a visual group is shown in the Figure 2 below. The "pseudo-parent" node is a gray node with white nodes inside.
+An example of a visual group is shown in the Figure 4 below. The "pseudo-parent" node is a gray node with white nodes inside.
 
 <p align="center">
     <img src="img/visual_group.png" alt="visual-group" title="Visual group" width="600"/><br/>
-    <em>Figure 2. Visual group</em>
+    <em>Figure 4. Visual group</em>
 </p>
 
 > **Warning** \
@@ -122,11 +122,11 @@ Each node in a visual group must have an additional visual group class represent
 > **Note** \
 > Hierarchical groups themselves can be interpreted as visual groups. In such a case, there is no need for a "pseudo-parent".
 
-An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in Figure 3 below (later on we will use "pracovisteVisualGroup" as the visual group).
+An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in Figure 5 below (later on we will use "pracovisteVisualGroup" as the visual group).
 
 <p align="center">
     <img src="img/visual_groups.png" alt="visual-groups" title="Visual groups" width="600"/><br/>
-    <em>Figure 3. Visual groups. To the left is "pracovisteVisualGroup" visual group and to the right is "tema" visual group</em>
+    <em>Figure 5. Visual groups. To the left is "pracovisteVisualGroup" visual group and to the right is "tema" visual group</em>
 </p>
 
 > **Note** \
@@ -144,11 +144,11 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 
 <h3 id="checkbox-glossary">Checkbox</h3>
 
-The "Scaling options" checkbox is used to choose whether to group clusters of nodes or to zoom. It is placed in the right corner of the graph area. See the Figure 5 below for more detail.
+The "Scaling options" checkbox is used to choose whether to group clusters of nodes or to zoom. It is placed in the right corner of the graph area. See the Figure 6 below for more detail.
 
 <p align="center">
     <img src="img/scaling_options.png" alt="scaling-options" title="Scaling options" width="200"/><br/>
-    <em>Figure 5. Scaling options</em>
+    <em>Figure 6. Scaling options</em>
 </p>
 
 <h3 id="grouping-of-clusters-glossary">Grouping of clusters</h3>
@@ -177,21 +177,21 @@ After all nodes that have the same parent are filtered out, the algorithm filter
 
 Two cases can occur at the end of filtering:
 
-- In the first case (example is shown in the Figure 8 below), at the end of the filtering, there are several nodes that can be clustered and grouped (within same parent). The algorithm then just cluster and group filtered nodes.
+- In the first case (example is shown in the Figure 7 below), at the end of the filtering, there are several nodes that can be clustered and grouped (within same parent). The algorithm then just cluster and group filtered nodes.
 
 <p align="center">
     <img src="img/grouping_of_clusters_several_child_nodes.png" alt="grouping-of-clusters-several-child-nodes" title="Grouping of clusters - several child nodes" width="600"/><br/>
-    <em>Figure 8. Grouping of clusters (use-case of several child nodes)</em>
+    <em>Figure 7. Grouping of clusters (use-case of several child nodes)</em>
 </p>
 
-- In the second case, only one child node (per parent) remains at the end of the filtering (example is shown in the Figure 9 below). 
+- In the second case, only one child node (per parent) remains at the end of the filtering (example is shown in the Figure 8 below). 
 
   <p align="center">
       <img src="img/grouping_of_clusters_one_child_node.png" alt="grouping-of-clusters-one-child-node" title="Grouping of clusters with one child node" width="600"/><br/>
-      <em>Figure 9. Grouping of clusters (use-case of one child node)</em>
+      <em>Figure 8. Grouping of clusters (use-case of one child node)</em>
   </p>
 
-  This child node can represent a single node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 9 above).
+  This child node can represent a single node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 8 above).
 
   > **Note** \
   > After collapsing child nodes, the algorithm switches the [current hierarchical level](#current-hierarchical-level-glossary) one level higher (`globalHierarchyDepth` attribute value is increased by one). During this operation, all [non-hierarchical](#non-hierarchical-relationships-glossary) edges from child nodes are moved to the parent node.
@@ -222,18 +222,18 @@ This guide will explain and teach you how the "Grouping of clusters" extension w
 > **Note** \
 > The Knowledge Graph Browser currently supports only one configuration that allows this extension to be used.
 
-**1)** Choose "Charles Explorer" meta-configuration. See the Figure 6 for more details.
+**1)** Choose "Charles Explorer" meta-configuration. See the Figure 9 for more details.
 
 <p align="center">
     <img src="img/meta_configuration_selection.png" alt="meta-configuration-selection" title="Meta-Configuration selection" width="600"/><br/>
-    <em>Figure 6. Meta-Configuration selection</em>
+    <em>Figure 9. Meta-Configuration selection</em>
 </p>
 
 **2)** Choose "Browsing topics cultivated at Charles University (with constraints)" configuration
 
 <p align="center">
     <img src="img/configuration_selection.png" alt="configuration-selection" title="Configuration selection" width="600"/><br/>
-    <em>Figure 7. Meta-Configuration selection</em>
+    <em>Figure 10. Meta-Configuration selection</em>
 </p>
 
 **3)** Choose starting node
@@ -243,7 +243,7 @@ This guide will explain and teach you how the "Grouping of clusters" extension w
 
 <p align="center">
     <img src="img/starting_node.png" alt="starting-node" title="Starting node" width="600"/><br/>
-    <em>Figure 8. Starting node</em>
+    <em>Figure 11. Starting node</em>
 </p>
 
 <h2 id="get-started-with-graph-exploration">Get started with graph exploration</h2>
@@ -258,7 +258,7 @@ There are [hierarchical](#hierarchical-relationships-glossary) and [non-hierarch
 
 Expansion queries listed in the detail panel under the "Available views" label allow you to show the neighborhood of the node in which that node is in either a [hierarchical](#hierarchical-relationships-glossary) or [non-hierarchical](#non-hierarchical-relationships-glossary) relationship with its neighbors.
 
-The hierarchical and non-hierarchical expansions are listed below and shown in the Figure 9 below:
+The hierarchical and non-hierarchical expansions are listed below and shown in the Figure 12 below:
 
 - Hierarchical expansions:
   - "Nadřazená pracoviště"
@@ -270,7 +270,7 @@ The hierarchical and non-hierarchical expansions are listed below and shown in t
 
 <p align="center">
     <img src="img/hierarchical_non_hierarchical_expansions.png" alt="hierarchical-and-non-hierarchical-expansions" title="Hierarchical and non hierarchical expansions" width="530"/><br/>
-    <em>Figure 9. Hierarchical and non-hierarchical expansions</em>
+    <em>Figure 12. Hierarchical and non-hierarchical expansions</em>
 </p>
 
 > **Note** \
@@ -299,14 +299,14 @@ Before removal of the "Informaticka sekce":
 
 <p align="center">
     <img src="img/before_removal.png" alt="before-removal" title="Before removal" width="750"/><br/>
-    <em>Figure 10. Before removal</em>
+    <em>Figure 13. Before removal</em>
 </p>
 
 After removal:
 
 <p align="center">
     <img src="img/after_removal.png" alt="after-removal" title="After removal" width="350"/><br/>
-    <em>Figure 11. After removal</em>
+    <em>Figure 14. After removal</em>
 </p>
 
 <h2 id="summary">Summary</h2>

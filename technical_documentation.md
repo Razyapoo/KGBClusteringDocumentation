@@ -86,11 +86,11 @@ For example, "the department teaches the subject" relationship can be visualized
 > **Definition** \
 > A hierarchical class is a visual class that defines which [hierarchical group](#hierarchical-group-glossary) a node belongs to. A node can only be assigned to one hierarchical class.
 
-A hierarchical class, if it exists, is shown along with a label of a node on the detail panel. See Figure 4 below for more details.
+A hierarchical class, if it exists, is shown along with a label of a node on the detail panel. See Figure 3 below for more details.
 
 <p align="center">
     <img src="img/hierarchical_class.png" alt="hierarchical-class" title="Hierarchical class" width="350"/><br/>
-    <em>Figure 4. Hierarchical class</em>
+    <em>Figure 3. Hierarchical class</em>
 </p>
 
 > **Note** \
@@ -132,11 +132,11 @@ An example of one such hierarchical group is shown in Figure 1 above.
 > **Definition** \
 > A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" node representing the visual group itself.
 
-An example of a visual group is shown in the Figure 2 below. The "pseudo-parent" node is a gray node with white nodes inside.
+An example of a visual group is shown in the Figure 4 below. The "pseudo-parent" node is a gray node with white nodes inside.
 
 <p align="center">
     <img src="img/visual_group.png" alt="visual-group" title="Visual group" width="600"/><br/>
-    <em>Figure 2. Visual group</em>
+    <em>Figure 4. Visual group</em>
 </p>
 
 > **Warning** \
@@ -147,11 +147,11 @@ Each node in a visual group must have an additional visual group class represent
 > **Note** \
 > Hierarchical groups themselves can be interpreted as visual groups. In such a case, there is no need for a "pseudo-parent".
 
-An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in Figure 3 below (later on we will use "pracovisteVisualGroup" as the visual group).
+An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in Figure 5 below (later on we will use "pracovisteVisualGroup" as the visual group).
 
 <p align="center">
     <img src="img/visual_groups.png" alt="visual-groups" title="Visual groups" width="600"/><br/>
-    <em>Figure 3. Visual groups. To the left is "pracovisteVisualGroup" visual group and to the right is "tema" visual group</em>
+    <em>Figure 5. Visual groups. To the left is "pracovisteVisualGroup" visual group and to the right is "tema" visual group</em>
 </p>
 
 > **Note** \
@@ -207,7 +207,7 @@ A [visual layout constraint](#visual-layout-constraint-glossary) defining [visua
 <h3 id="hierarchical-groups-to-cluster-layout-constraint">"HierarchicalGroupsToClusterLayoutConstraint" class</h3>
 
 > **Note** \
-> It can be useful not to group clusters of nodes that belong to the same [hierarchical group](#hierarchical-group-glossary) (or [visual group](#visual-group-glossary)). For example, group only clusters that belong to the "tema" visual group, but do not belong to the "pracovisteVisualGroup" visual group (shown in Figure 3 above).
+> It can be useful not to group clusters of nodes that belong to the same [hierarchical group](#hierarchical-group-glossary) (or [visual group](#visual-group-glossary)). For example, group only clusters that belong to the "tema" visual group, but do not belong to the "pracovisteVisualGroup" visual group (shown in Figure 5 above).
 
 A [visual layout constraint](#visual-layout-constraint-glossary) that determines [hierarchical groups](#hierarchical-group-glossary), in which we can group clusters, is expressed as an instance of the `browser:HierarchyGroupToClusterLayoutConstraint` class. The [hierarchical (group) class](#hierarchical-class-glossary) is assigned using the `browser:clusteringSelector` predicate. 
 
@@ -319,21 +319,21 @@ After all nodes that have the same parent are filtered out, the algorithm filter
 
 Two cases can occur at the end of filtering:
 
-- In the first case (example is shown in the Figure 8 below), at the end of the filtering, there are several nodes that can be clustered and grouped (within same parent). The algorithm then calls the `groupingOfClusters` method, which performs the clustering and grouping of the filtered nodes. This function is described in more detail in the [KCluster](#KCluster) section.
+- In the first case (example is shown in the Figure 6 below), at the end of the filtering, there are several nodes that can be clustered and grouped (within same parent). The algorithm then calls the `groupingOfClusters` method, which performs the clustering and grouping of the filtered nodes. This function is described in more detail in the [KCluster](#KCluster) section.
 
 <p align="center">
     <img src="img/grouping_of_clusters_several_child_nodes.png" alt="grouping-of-clusters-several-child-nodes" title="Grouping of clusters - several child nodes" width="600"/><br/>
-    <em>Figure 8. Grouping of clusters (use-case of several child nodes)</em>
+    <em>Figure 6. Grouping of clusters (use-case of several child nodes)</em>
 </p>
 
-- In the second case, only one child node (per parent) remains at the end of the filtering (example is shown in the Figure 9 below). 
+- In the second case, only one child node (per parent) remains at the end of the filtering (example is shown in the Figure 7 below). 
 
   <p align="center">
       <img src="img/grouping_of_clusters_one_child_node.png" alt="grouping-of-clusters-one-child-node" title="Grouping of clusters with one child node" width="600"/><br/>
-      <em>Figure 9. Grouping of clusters (use-case of one child node)</em>
+      <em>Figure 7. Grouping of clusters (use-case of one child node)</em>
   </p>
 
-  This child node can represent a single node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 9 above).
+  This child node can represent a single node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 7 above).
 
   > **Note** \
   > After collapsing child nodes, the algorithm switches the [current hierarchical level](#current-hierarchical-level-glossary) one level higher (`globalHierarchyDepth` attribute value is increased by one). During this operation, all [non-hierarchical](#non-hierarchical-relationships-glossary) edges from child nodes are moved to the parent node.
