@@ -273,7 +273,7 @@ The hierarchical and non-hierarchical expansions are listed below and shown in t
     <em>Figure 12. Hierarchical and non-hierarchical expansions</em>
 </p>
 
-> **Note** \
+> **Note**
 > - A [hierarchical group](#hierarchical-groups-glossary) can be sequentially build using hierarchical expansions (example is shown in the Figure 1).
 > - Non-hierarchical expansions expand a node with its neighborhood, where each neighbor is connected to that node by an edge.
 
@@ -287,7 +287,7 @@ Using the checkbox, you can choose whether to do:
 - [Grouping of clusters](#grouping-of-clusters-glossary) and Zoom at the same time
 - Neither one of them
 
-> **Note** \
+> **Note**
 > - When "Grouping of clusters" is selected, use "minus" (resp. "plus") button to group (resp. ungroup) nodes. **Mouse wheel not supported**.
 > - By selecting a "Grouping of clusters" and "Zoom" at the same time, you can take an advantage of the main features of the mapping platforms (for more information see [Grouping of clusters](#grouping-of-clusters-glossary)). **Mouse wheel supported**.
 
