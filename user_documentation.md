@@ -179,7 +179,7 @@ After all nodes that have the same parent node are filtered out, the algorithm f
 
 Two cases can occur at the end of filtering:
 
-- In the first case (an example is shown in the Figure 7 below), at the end of the filtering, there are several nodes that can be clustered and grouped (within same parent). The algorithm then just cluster and group filtered nodes.
+- In the first case (an example is shown in the Figure 7 below), at the end of the filtering there are several nodes that can be clustered and grouped (within same parent). The algorithm then simply clusters and groups filtered nodes.
 
 <p align="center">
     <img src="img/grouping_of_clusters_several_child_nodes.png" alt="grouping-of-clusters-several-child-nodes" title="Grouping of clusters - several child nodes" width="600"/><br/>

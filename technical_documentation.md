@@ -319,7 +319,7 @@ After all nodes that have the same parent node are filtered out, the algorithm f
 
 Two cases can occur at the end of filtering:
 
-- In the first case (an example is shown in the Figure 6 below), at the end of the filtering, there are several nodes that can be clustered and grouped (within same parent). The algorithm then calls the `groupingOfClusters` method, which performs the clustering and grouping of the filtered nodes. This function is described in more detail in the [KCluster](#KCluster) section.
+- In the first case (an example is shown in the Figure 6 below), at the end of the filtering there are several nodes that can be clustered and grouped (within same parent). The algorithm then calls the `groupingOfClusters` method, which performs the clustering and grouping of the filtered nodes. This function is described in more detail in the [KCluster](#KCluster) section.
 
 <p align="center">
     <img src="img/grouping_of_clusters_several_child_nodes.png" alt="grouping-of-clusters-several-child-nodes" title="Grouping of clusters - several child nodes" width="600"/><br/>
