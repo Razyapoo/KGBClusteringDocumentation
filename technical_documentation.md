@@ -421,7 +421,8 @@ The `groupingOfClusters` method is explained in more detail in the code comments
 
 2. Place nodes of different hierarchical classes under the same pseudo-parent node.
 3. Cluster nodes based on attributes other than their positions.
-4. Fix the position of the pseudo-parent when moving (not currently supported due to limitations of the Cytoscape library).
+4. Switching between hierarchical and normal views.
+5. Fix the position of the pseudo-parent when moving (not currently supported due to limitations of the Cytoscape library).
 
 <h1 id="references">References</h1>
 
