@@ -120,7 +120,7 @@ The `globalHierarchyDepth` attribute value indicates the current hierarchical le
 > **Definition** \
 > A hierarchical group is a cluster of nodes that are related to each other by [parent-child relationships](#parent-child-or-child-parent-hierarchical-relationship-glossary). 
 
-Each node in a hierarchical group must have a [hierarchical class](#hierarchical-class-glossary) that represents that hierarchical group.
+Each node in a hierarchical group must have the [hierarchical class](#hierarchical-class-glossary) that represents that hierarchical group.
 
 An example of one such hierarchical group is shown in Figure 1 above.
 

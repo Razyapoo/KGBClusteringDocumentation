@@ -44,7 +44,7 @@ Each such node hierarchy represents a [hierarchical group](#hierarchical-group-g
 
 [Non-hierarchical](#non-hierarchical-relationships-glossary) relationships are also possible. 
 
-<h3 id="non-hierarchical-relationships-glossary">Non-hierarchical relationships </h3>
+<h3 id="non-hierarchical-relationships-glossary">Non-hierarchical relationship </h3>
 
 > **Definition** \
 > Non-hierarchical relationships are represented by edge between nodes.
@@ -59,9 +59,9 @@ For example, "the department teaches the subject" relationship can be visualized
 > **Note** \
 > Non-hierarchical relationships are all relationships other than [hierarchical](#hierarchical-relationships-glossary).
 
-<h3 id="hierarchical-class">Hierarchical class</h3>
+<h3 id="hierarchical-class-glossary">Hierarchical class</h3>
 
-> A hierarchical class is a visual class that defines which [hierarchical group](#hierarchical-groups) a node belongs to. A node can only be assigned to one hierarchical class.
+> A hierarchical class is a visual class that defines which [hierarchical group](#hierarchical-groups-glossary) a node belongs to. A node can only be assigned to one hierarchical class.
 
 A hierarchical class, if it exists, is shown along with a label of a node on the detail panel. See Figure 4 below for more details.
 
@@ -71,7 +71,7 @@ A hierarchical class, if it exists, is shown along with a label of a node on the
 </p>
 
 > **Note** \
-> A hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in a same [hierarchical group](#hierarchical-groups).
+> A hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in a same [hierarchical group](#hierarchical-groups-glossary).
 
 > **Warning** \
 > Each node must be assigned to some hierarchical group class in case it needs to be placed in any hierarchy.
@@ -90,19 +90,19 @@ The amount of detail displayed on maps (in mapping platforms) depends on a zoom 
 
 At the moment when child nodes collapse into their parents, the current hierarchical level decreases by 1, and when child nodes with a hierarchical level higher (deeper) by 1 than the current hierarchical level appear, the current hierarchical level increases by 1.
 
-<h3 id="hierarchical-groups">Hierarchical group</h3>
+<h3 id="hierarchical-groups-glossary">Hierarchical group</h3>
 
 > **Definition** \
 > A hierarchical group is a cluster of nodes that are related to each other by hierarchical relationships. 
 
-Each node in a hierarchical group must have the [hierarchical class](#hierarchical-class) that represents that hierarchical group.
+Each node in a hierarchical group must have the [hierarchical class](#hierarchical-class-glossary) that represents that hierarchical group.
 
 An example of one such hierarchical group is shown in Figure 1 above.
 
 > **Warning** \
 > Hierarchical groups are predefined by a technician in the visual configuration. You cannot define them in the user interface.
 
-<h3 id="visual-group-glossary">Visual groups</h3>
+<h3 id="visual-group-glossary">Visual group</h3>
 
 > **Definition** \
 > A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" node representing the visual group itself.
@@ -161,7 +161,7 @@ The "Grouping of clusters" algorithm must first cluster the nodes into a [cluste
 
 The basic approach of the algorithm is that it creates several centroids, generates from them an empty group (k-Means clustering [1]) or a group consisting of a single node (k-Medoids clustering [2]), and then adds surrounding nodes to the closest group.
 
-The clustering of nodes is determined based on the [hierarchical class](#hierarchical-class), the parent node, the [level of the hierarchy](#hierarchical-level), and the visual class. First of all, nodes must be clustered by the hierarchical group class to which they belong. 
+The clustering of nodes is determined based on the [hierarchical class](#hierarchical-class-glossary), the parent node, the [level of the hierarchy](#hierarchical-level), and the visual class. First of all, nodes must be clustered by the hierarchical group class to which they belong. 
 
 The second condition of clustering is that the node's [hierarchical level](#hierarchical-level) must be equal to the [current hierarchical level](#current-hierarchical-level-glossary).
 
@@ -274,7 +274,7 @@ The hierarchical and non-hierarchical expansions are listed below and shown in t
 </p>
 
 > **Note** 
-> - A [hierarchical group](#hierarchical-groups) can be continuously build using hierarchical expansions (example is shown in the Figure 1).
+> - A [hierarchical group](#hierarchical-groups-glossary) can be continuously build using hierarchical expansions (example is shown in the Figure 1).
 > - Non-hierarchical expansions expand a node with its neighborhood, where each neighbor is connected to that node by an edge.
 
 <h3 id="checkbox-guide">Checkbox</h3>
@@ -286,8 +286,6 @@ Using the checkbox, you can choose whether to do:
 - Zoom
 - [Grouping of clusters](#grouping-of-clusters-glossary) and Zoom at the same time
 - Neither one of them
-
-
 
 > **Note** \
 > - When "Grouping of clusters" is selected, use "minus" (resp. "plus") button to group (resp. ungroup) nodes. **Mouse wheel not supported**.
