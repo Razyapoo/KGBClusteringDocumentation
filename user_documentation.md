@@ -12,7 +12,7 @@
 
 We all know how zoom in/out works on mapping platforms such as [google maps](https://maps.google.com), maps.cz, etc. Zoom is used to increase or decrease the zoom level at a specific point and show more or less detail on the map.
 
-The extension of the original Knowledge Graph browser is inspired by such feature of the mapping platforms.
+The extension of the original Knowledge Graph browser is inspired by this feature of mapping platforms.
 
 <h1 id="glossary">Glossary</h1>
 
