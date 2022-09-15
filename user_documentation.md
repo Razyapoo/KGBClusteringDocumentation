@@ -18,7 +18,7 @@ The extension of the original Knowledge Graph browser is inspired by this featur
 
 In this part of the guide, you will learn the necessary terms that will help you understand the basic principle of how the extension works. They may differ from the usual terms you may be familiar with.
 
-You can skip this section for now and go to [How to use the extension?](#how-to-use-the-extension) section.
+You can skip this section for now and go to [How to use the extension?](#how-to-use-the-extension).
 
 <h3 id="hierarchical-relationships-glossary">Hierarchical relationship</h3>
 
@@ -239,7 +239,7 @@ This guide will explain and teach you how the "Grouping of clusters" extension w
 **3)** Choose starting node
 
 > **Warning** \
-> Wait for the starting node to fully load (the loading sign will disappear and starting node will look like at the picture below). This is a necessary step for the extension to work correctly. See the Figure 11 below.
+> Wait for the starting node to fully load (the loading sign will disappear and the starting node will look like at the picture below). This is a necessary step for the extension to work correctly. See the Figure 11 below.
 
 <p align="center">
     <img src="img/starting_node.png" alt="starting-node" title="Starting node" width="600"/><br/>
@@ -252,7 +252,7 @@ This guide will explain and teach you how the "Grouping of clusters" extension w
 
 The starting node is shown in the same way as in other configurations.
 
-<h3 id="hierarchical-extensions">Hierarchical extensions</h3>
+<h3 id="hierarchical-expansions">Hierarchical expansions</h3>
 
 There are [hierarchical](#hierarchical-relationships-glossary) and [non-hierarchical](#non-hierarchical-relationships-glossary) relationships.
 
@@ -274,7 +274,7 @@ The hierarchical and non-hierarchical expansions are listed below and shown in t
 </p>
 
 > **Note** \
-> - A [hierarchical group](#hierarchical-groups-glossary) can be continuously build using hierarchical expansions (example is shown in the Figure 1).
+> - A [hierarchical group](#hierarchical-groups-glossary) can be sequentially build using hierarchical expansions (example is shown in the Figure 1).
 > - Non-hierarchical expansions expand a node with its neighborhood, where each neighbor is connected to that node by an edge.
 
 <h3 id="checkbox-guide">Checkbox</h3>
