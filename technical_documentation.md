@@ -71,7 +71,7 @@ Expansion query can be triggered from a parent node (expand child nodes) as well
 > **Definition** \
 > Non-hierarchical relationships are represented by edge between nodes.
 
-For example, "the department teaches the subject" relationship can be visualized as non-hierarchical. Example is shown in the Figure 2 below.
+For example, "the department teaches the subject" relationship can be visualized as non-hierarchical. An example is shown in the Figure 2 below.
 
 <p align="center">
     <img src="img/non_hierarchical_edge.png" alt="non-hierarchical-edge" title="Non-hierarchical edge" width="600"/><br/>
@@ -104,7 +104,7 @@ A hierarchical class, if it exists, is shown along with a label of a node on the
 > **Definition** \
 > A hierarchical level of a node indicates the depth of a hierarchy at which a node resides.
 
-The amount of detail displayed on maps (in mapping platforms) depends on a zoom level. [Grouping of clusters](#grouping-of-clusters-glossary) approach uses the same idea. At the deepest level of the hierarchy, the graph shows all possible details. And at the highest level of the hierarchy, the graph shows only those single nodes that are representatives of hierarchies themselves. 
+The amount of detail displayed on maps (in mapping platforms) depends on a zoom level. [Grouping of clusters](#grouping-of-clusters-glossary) approach uses the same idea. At the deepest (highest) level of the hierarchy, the graph shows all possible details. And at the lowest level of the hierarchy, the graph shows only those single nodes that are representatives of hierarchies themselves. 
 
 <h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3>
 
@@ -120,7 +120,7 @@ The `globalHierarchyDepth` attribute value indicates the current hierarchical le
 > **Definition** \
 > A hierarchical group is a cluster of nodes that are related to each other by [parent-child relationships](#parent-child-or-child-parent-hierarchical-relationship-glossary). 
 
-Each node in a hierarchical group must have the [hierarchical class](#hierarchical-class-glossary) that represents that hierarchical group.
+Each node in a hierarchical group must have the [hierarchical class](#hierarchical-class-glossary) which represents that hierarchical group.
 
 An example of one such hierarchical group is shown in Figure 1 above.
 
@@ -300,7 +300,7 @@ Edge is extended with a new `isEdgeFromChild` attribute indicating whether an ed
 
 <h3 id="extension-of-the-graph-area-manipulator">Extension of the GraphAreaManipulator.ts</h3>
 
-When you zoom in on a specific point on the mapping platforms, at each zoom level, you see more and more details about the region you zoom in, and also otherwise, when you zoom out, some details disappear. 
+When you zoom in at a specific point on the mapping platforms, at each zoom level you see more and more details about the region you zoom in, and when you zoom out, some details disappear.  
 
 The same principle is used in the "Grouping of clusters" extension, namely, when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes. This can be achieved by choosing both "Zoom" and "Grouping of clusters" options in the [checkbox](user_documentation.md#checkbox-glossary).
 
@@ -319,14 +319,14 @@ After all nodes that have the same parent are filtered out, the algorithm filter
 
 Two cases can occur at the end of filtering:
 
-- In the first case (example is shown in the Figure 6 below), at the end of the filtering, there are several nodes that can be clustered and grouped (within same parent). The algorithm then calls the `groupingOfClusters` method, which performs the clustering and grouping of the filtered nodes. This function is described in more detail in the [KCluster](#KCluster) section.
+- In the first case (an example is shown in the Figure 6 below), at the end of the filtering, there are several nodes that can be clustered and grouped (within same parent). The algorithm then calls the `groupingOfClusters` method, which performs the clustering and grouping of the filtered nodes. This function is described in more detail in the [KCluster](#KCluster) section.
 
 <p align="center">
     <img src="img/grouping_of_clusters_several_child_nodes.png" alt="grouping-of-clusters-several-child-nodes" title="Grouping of clusters - several child nodes" width="600"/><br/>
     <em>Figure 6. Grouping of clusters (use-case of several child nodes)</em>
 </p>
 
-- In the second case, only one child node (per parent) remains at the end of the filtering (example is shown in the Figure 7 below). 
+- In the second case, only one child node (per parent) remains at the end of the filtering (an example is shown in the Figure 7 below). 
 
   <p align="center">
       <img src="img/grouping_of_clusters_one_child_node.png" alt="grouping-of-clusters-one-child-node" title="Grouping of clusters with one child node" width="600"/><br/>

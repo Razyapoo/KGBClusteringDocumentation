@@ -47,9 +47,9 @@ Each such node hierarchy represents a [hierarchical group](#hierarchical-group-g
 <h3 id="non-hierarchical-relationships-glossary">Non-hierarchical relationship </h3>
 
 > **Definition** \
-> Non-hierarchical relationships are represented by edge between nodes.
+> Non-hierarchical relationships are represented by an edge between nodes.
 
-For example, "the department teaches the subject" relationship can be visualized as non-hierarchical. Example is shown in the Figure 2 below.
+For example, "the department teaches the subject" relationship can be visualized as non-hierarchical. An example is shown in the Figure 2 below.
 
 <p align="center">
     <img src="img/non_hierarchical_edge.png" alt="non-hierarchical-edge" title="Non-hierarchical edge" width="600"/><br/>
@@ -81,7 +81,7 @@ A hierarchical class, if it exists, is shown along with a label of a node on the
 > **Definition** \
 > A hierarchical level of a node indicates the depth of a hierarchy at which a node resides.
 
-The amount of detail displayed on maps (in mapping platforms) depends on a zoom level. [Grouping of clusters](#grouping-of-clusters-glossary) approach uses the same idea. At the deepest level of the hierarchy, the graph shows all possible details. And at the highest level of the hierarchy, the graph shows only those single nodes that are representatives of hierarchies themselves. 
+The amount of detail displayed on maps (in mapping platforms) depends on a zoom level. [Grouping of clusters](#grouping-of-clusters-glossary) approach uses the same idea. At the deepest (highest) level of the hierarchy, the graph shows all possible details. And at the lowest level of the hierarchy, the graph shows only those single nodes that are representatives of hierarchies themselves. 
 
 <h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3>
 
@@ -95,7 +95,7 @@ At the moment when child nodes collapse into their parents, the current hierarch
 > **Definition** \
 > A hierarchical group is a cluster of nodes that are related to each other by hierarchical relationships. 
 
-Each node in a hierarchical group must have the [hierarchical class](#hierarchical-class-glossary) that represents that hierarchical group.
+Each node in a hierarchical group must have the [hierarchical class](#hierarchical-class-glossary) which represents that hierarchical group.
 
 An example of one such hierarchical group is shown in Figure 1 above.
 
@@ -144,7 +144,7 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 
 <h3 id="checkbox-glossary">Checkbox</h3>
 
-The "Scaling options" checkbox is used to choose whether to group clusters of nodes or to zoom. It is placed in the right corner of the graph area. See the Figure 6 below for more detail.
+The "Scaling options" checkbox is used to choose whether to group clusters or to zoom. It is placed in the right top corner of the graph area. See the Figure 6 below for more detail.
 
 <p align="center">
     <img src="img/scaling_options.png" alt="scaling-options" title="Scaling options" width="200"/><br/>
@@ -153,7 +153,7 @@ The "Scaling options" checkbox is used to choose whether to group clusters of no
 
 <h3 id="grouping-of-clusters-glossary">Grouping of clusters</h3>
 
-When you zoom in on a specific point on the mapping platforms, at each zoom level, you see more and more details about the region you zoom in, and also otherwise, when you zoom out, some details disappear. 
+When you zoom in at a specific point on the mapping platforms, at each zoom level you see more and more details about the region you zoom in, and when you zoom out, some details disappear. 
 
 The same principle is used in the "Grouping of clusters" extension, namely, when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes.
 
@@ -177,14 +177,14 @@ After all nodes that have the same parent are filtered out, the algorithm filter
 
 Two cases can occur at the end of filtering:
 
-- In the first case (example is shown in the Figure 7 below), at the end of the filtering, there are several nodes that can be clustered and grouped (within same parent). The algorithm then just cluster and group filtered nodes.
+- In the first case (an example is shown in the Figure 7 below), at the end of the filtering, there are several nodes that can be clustered and grouped (within same parent). The algorithm then just cluster and group filtered nodes.
 
 <p align="center">
     <img src="img/grouping_of_clusters_several_child_nodes.png" alt="grouping-of-clusters-several-child-nodes" title="Grouping of clusters - several child nodes" width="600"/><br/>
     <em>Figure 7. Grouping of clusters (use-case of several child nodes)</em>
 </p>
 
-- In the second case, only one child node (per parent) remains at the end of the filtering (example is shown in the Figure 8 below). 
+- In the second case, only one child node (per parent) remains at the end of the filtering (an example is shown in the Figure 8 below). 
 
   <p align="center">
       <img src="img/grouping_of_clusters_one_child_node.png" alt="grouping-of-clusters-one-child-node" title="Grouping of clusters with one child node" width="600"/><br/>
@@ -274,7 +274,7 @@ The hierarchical and non-hierarchical expansions are listed below and shown in t
 </p>
 
 > **Note**
-> - A [hierarchical group](#hierarchical-groups-glossary) can be sequentially build using hierarchical expansions (example is shown in the Figure 1).
+> - A [hierarchical group](#hierarchical-groups-glossary) can be sequentially build using hierarchical expansions (an example is shown in the Figure 1).
 > - Non-hierarchical expansions expand a node with its neighborhood, where each neighbor is connected to that node by an edge.
 
 <h3 id="checkbox-guide">Checkbox</h3>
@@ -299,7 +299,7 @@ Before removal of the "Informaticka sekce":
 
 <p align="center">
     <img src="img/before_removal.png" alt="before-removal" title="Before removal" width="750"/><br/>
-    <em>Figure 13. Before removal</em>
+    <em>Figure 13. Before removal (the node "Informaticka sekce" is selected for deletion)</em>
 </p>
 
 After removal:
