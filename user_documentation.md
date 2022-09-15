@@ -222,14 +222,14 @@ This guide will explain and teach you how the "Grouping of clusters" extension w
 > **Note** \
 > The Knowledge Graph Browser currently supports only one configuration that allows this extension to be used.
 
-**1)** Choose "Charles Explorer" meta-configuration. See the Figure 9 for more details.
+**1)** Choose "Charles Explorer" meta-configuration. See the Figure 9 below.
 
 <p align="center">
     <img src="img/meta_configuration_selection.png" alt="meta-configuration-selection" title="Meta-Configuration selection" width="600"/><br/>
     <em>Figure 9. Meta-Configuration selection</em>
 </p>
 
-**2)** Choose "Browsing topics cultivated at Charles University (with constraints)" configuration
+**2)** Choose "Browsing topics cultivated at Charles University (with constraints)" configuration. See the Figure 10 below.
 
 <p align="center">
     <img src="img/configuration_selection.png" alt="configuration-selection" title="Configuration selection" width="600"/><br/>
@@ -239,7 +239,7 @@ This guide will explain and teach you how the "Grouping of clusters" extension w
 **3)** Choose starting node
 
 > **Warning** \
-> Wait for the starting node to fully load (the loading sign will disappear and starting node will look like at the picture below). This is a necessary step for the extension to work correctly. 
+> Wait for the starting node to fully load (the loading sign will disappear and starting node will look like at the picture below). This is a necessary step for the extension to work correctly. See the Figure 11 below.
 
 <p align="center">
     <img src="img/starting_node.png" alt="starting-node" title="Starting node" width="600"/><br/>
