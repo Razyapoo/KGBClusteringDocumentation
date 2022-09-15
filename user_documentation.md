@@ -139,7 +139,7 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 
 <h3 id="grouping-glossary">Grouping</h3>
 
-> **Definition**
+> **Definition** \
 > Grouping is the task of converting clusters into a single node.
 
 <h3 id="checkbox-glossary">Checkbox</h3>
@@ -165,7 +165,7 @@ The clustering of nodes is determined based on the [hierarchical class](#hierarc
 
 The second condition of clustering is that the node's [hierarchical level](#hierarchical-level) must be equal to the [current hierarchical level](#current-hierarchical-level-glossary).
 
-> **Wartning**
+> **Wartning** \
 > The algorithm always clusters the nodes located at the [current hierarchical level](#current-hierarchical-level-glossary). When all nodes in the [current hierarchical level](#current-hierarchical-level-glossary) will be the only nodes of their parents, the algorithm will collapse those nodes into their parents and increase the [current hierarchical level](#current-hierarchical-level-glossary) by 1.
 
 As the map (in the mapping platforms) scales down and details disappear, new correlated details appear in their place that generalize the disappeared details. In our case, the parent node is such a generalization. Therefore, the next condition for clustering must be to cluster nodes that have the same parent node.
@@ -219,7 +219,7 @@ This guide will explain and teach you how the "Grouping of clusters" extension w
 
 <h2 id="configuration-selection">Configuration selection</h2>
 
-> **Note**
+> **Note** \
 > The Knowledge Graph Browser currently supports only one configuration that allows this extension to be used.
 
 **1)** Choose "Charles Explorer" meta-configuration. See the Figure 6 for more details.
@@ -238,7 +238,7 @@ This guide will explain and teach you how the "Grouping of clusters" extension w
 
 **3)** Choose starting node
 
-> **Warning**
+> **Warning** \
 > Wait for the starting node to fully load (the loading sign will disappear and starting node will look like at the picture below). This is a necessary step for the extension to work correctly. 
 
 <p align="center">
@@ -273,7 +273,7 @@ The hierarchical and non-hierarchical expansions are listed below and shown in t
     <em>Figure 9. Hierarchical and non-hierarchical expansions</em>
 </p>
 
-> **Note** 
+> **Note** \
 > - A [hierarchical group](#hierarchical-groups-glossary) can be continuously build using hierarchical expansions (example is shown in the Figure 1).
 > - Non-hierarchical expansions expand a node with its neighborhood, where each neighbor is connected to that node by an edge.
 
