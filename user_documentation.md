@@ -168,7 +168,7 @@ First of all, nodes must be clustered by the hierarchical group class to which t
 The second condition of clustering is that the node's [hierarchical level](#hierarchical-level) must be equal to the [current hierarchical level](#current-hierarchical-level-glossary).
 
 > **Warning** \
-> The algorithm always clusters the nodes located at the [current hierarchical level](#current-hierarchical-level-glossary). When all nodes in the [current hierarchical level](#current-hierarchical-level-glossary) will be the only nodes of their parents, the algorithm will collapse those nodes into their parents and increase the [current hierarchical level](#current-hierarchical-level-glossary) by 1.
+> The algorithm always clusters the nodes located at the [current hierarchical level](#current-hierarchical-level-glossary). When all nodes in the [current hierarchical level](#current-hierarchical-level-glossary) will be the only nodes of their parents, the algorithm will collapse those nodes into their parents and decrease the [current hierarchical level](#current-hierarchical-level-glossary) by 1.
 
 As the map (in the mapping platforms) scales down and details disappear, new correlated details appear in their place that generalize the disappeared details. In our case, the parent node is such a generalization. Therefore, the next condition for clustering must be to cluster nodes that have the same parent node.
 
@@ -193,10 +193,10 @@ Two cases can occur at the end of filtering:
       <em>Figure 8. Grouping of clusters (use-case of one child node)</em>
   </p>
 
-  This child node can represent a single node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 8 above).
+  This child node can represent a single child node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 8 above).
 
   > **Note** \
-  > After collapsing child nodes, the algorithm switches the [current hierarchical level](#current-hierarchical-level-glossary) one level higher (`globalHierarchyDepth` attribute value is increased by one). During this operation, all [non-hierarchical](#non-hierarchical-relationships-glossary) edges from child nodes are moved to the parent node.
+  > After collapsing child nodes, the algorithm switches the [current hierarchical level](#current-hierarchical-level-glossary) one level lower. During this operation, all [non-hierarchical](#non-hierarchical-relationships-glossary) edges from child nodes are moved to the parent node.
 
 When ungrouping ("Grouping of clusters" is selected in the [checkbox](checkbox-glossary) and "plus" button is clicked), only nodes at the [current hierarchical level](#current-hierarchical-level-glossary) can be ungrouped.
 
@@ -209,7 +209,7 @@ There are two cases:
 - In the second case, there are only parent nodes which contain inside collapsed child nodes. In such case, algorithm shows collapsed child nodes.
 
     > **Note** \
-    > In such case the [current hierarchical level](#current-hierarchical-level-glossary) decreases by 1.
+    > In such case the [current hierarchical level](#current-hierarchical-level-glossary) increases by 1.
 
 <h3 id="node-removal-glossary">Node removal</h3>
 

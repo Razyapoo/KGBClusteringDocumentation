@@ -163,10 +163,10 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 
 The implementation of "Grouping of clusters" extension is split into two parts: 
 
-- [Fronted](#frontend)
 - [Backend](#backend)
   - [Backend server](#backend-server)
   - [Visual configuration](#visual-configuration)
+- [Fronted](#frontend)
 
 <h2 id="backend">Backend</h2>
 
@@ -333,10 +333,10 @@ Two cases can occur at the end of filtering:
       <em>Figure 7. Grouping of clusters (use-case of one child node)</em>
   </p>
 
-  This child node can represent a single node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 7 above).
+  This child node can represent a single child node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 7 above).
 
   > **Note** \
-  > After collapsing child nodes, the algorithm switches the [current hierarchical level](#current-hierarchical-level-glossary) one level higher (`globalHierarchyDepth` attribute value is increased by one). During this operation, all [non-hierarchical](#non-hierarchical-relationships-glossary) edges from child nodes are moved to the parent node.
+  > After collapsing child nodes, the algorithm switches the [current hierarchical level](#current-hierarchical-level-glossary) one level lower (`globalHierarchyDepth` attribute value is decreased by one). During this operation, all [non-hierarchical](#non-hierarchical-relationships-glossary) edges from child nodes are moved to the parent node.
 
 When ungrouping ("Grouping of clusters" is selected in the [checkbox](user_documentation.md#checkbox-glossary) and "plus" button is clicked), only nodes at the [current hierarchical level](#current-hierarchical-level-glossary) can be ungrouped.
 
@@ -349,7 +349,7 @@ There are two cases:
 - In the second case, there are only parent nodes which contain inside collapsed child nodes. In such case, algorithm shows collapsed child nodes.
 
     > **Note** \
-    > In such case the [current hierarchical level](#current-hierarchical-level-glossary) decreases by 1.
+    > In such case the [current hierarchical level](#current-hierarchical-level-glossary) increases by 1.
 
 <h3 id="extension-of-the-graph-manipulator">Extension of the GraphManipulator.ts</h3>
 
