@@ -20,6 +20,8 @@ So far, in the Knowledge Graph browser, it was only possible to group nodes in s
 
 The main purpose of the implemented [grouping of clusters](#grouping-of-clusters-glossary) approach is to make a large graph more user-friendly, i.e. more readable and understandable. 
 
+Original knowledge graph exploration is proposed in a research paper ["Iteractive and iterative visual exploration of knowledge graphs based on shareable and reusable visual configurations"](#https://www.sciencedirect.com/science/article/pii/S1570826822000105). Its implementations is available [here](#https://github.com/martinnec/knowledge-graph-browser-website)
+
 
 <h1 id="glossary">Glossary</h1>
 
@@ -177,7 +179,7 @@ This section of the documentation is split into two parts:
 
 <h2 id="backend-server">Backend server</h2>
 
-The original "kgserver.js" backend server is extended with a new request handler `layout-constraints`.
+The original ["kgserver.js" backend server](#https://github.com/martinnec/knowledge-graph-browser) is extended with a new request handler `layout-constraints`.
 
 This handler sends a query defined in the visual configuration to a SPARQL endpoint and receives [visual layout constraints](#visual-layout-constraint-glossary) to apply in the main application.
 
