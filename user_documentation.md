@@ -12,13 +12,13 @@
 
 We all know how zoom in/out works on mapping platforms such as [google maps](https://maps.google.com), maps.cz, etc. Zoom is used to increase or decrease the zoom level at a specific point and show more or less detail on the map.
 
-The extension of the original Knowledge Graph browser is inspired by this feature of mapping platforms. Original knowledge graph exploration is proposed in a research paper ["Iteractive and iterative visual exploration of knowledge graphs based on shareable and reusable visual configurations"](#https://www.sciencedirect.com/science/article/pii/S1570826822000105).
+The extension of the original Knowledge Graph browser is inspired by this feature of mapping platforms. Original knowledge graph exploration is proposed in a research paper ["Iteractive and iterative visual exploration of knowledge graphs based on shareable and reusable visual configurations"](https://www.sciencedirect.com/science/article/pii/S1570826822000105).
 
 <h1 id="glossary">Glossary</h1>
 
 In this part of the guide, you will learn the necessary terms that will help you understand the basic principle of how the extension works. They may differ from the usual terms you may be familiar with.
 
-You can skip this section for now and go to [How to use the extension?](#how-to-use-the-extension).
+You can skip this section for now and go to [How to use the extension?](#how-to-use-the-extension)
 
 <h3 id="hierarchical-relationships-glossary">Hierarchical relationship</h3>
 
