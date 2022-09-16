@@ -20,7 +20,7 @@ So far, in the Knowledge Graph browser, it was only possible to group nodes in s
 
 The main purpose of the implemented [grouping of clusters](#grouping-of-clusters-glossary) approach is to make a large graph more user-friendly, i.e. more readable and understandable. 
 
-Original knowledge graph exploration is proposed in a research paper ["Iteractive and iterative visual exploration of knowledge graphs based on shareable and reusable visual configurations"](#https://www.sciencedirect.com/science/article/pii/S1570826822000105). Its implementations is available [here](#https://github.com/martinnec/knowledge-graph-browser-website)
+Original knowledge graph exploration is proposed in a research paper ["Iteractive and iterative visual exploration of knowledge graphs based on shareable and reusable visual configurations"](https://www.sciencedirect.com/science/article/pii/S1570826822000105). Its implementations is available [here](https://github.com/martinnec/knowledge-graph-browser-website)
 
 
 <h1 id="glossary">Glossary</h1>
@@ -201,7 +201,7 @@ Next few sections describe each layout constraint class in more details. It is e
 
 <h3 id="visual-group-layout-constraint">"VisualGroupLayoutConstraint" class</h3>
 
-A [visual layout constraint](#visual-layout-constraint-glossary) defining [visual group](#visual-group-glossary) is expressed as an instance of the `browser:VisualGroupLayoutConstraint` class. A visual group class is assigned to the visual group layout constraint via `browser:groupingSelector` predicate. It is usually identical to the [hierarchical class](#hierarchical-class-glossary), so there is no need for an extra visual group class.
+A [visual layout constraint](#visual-layout-constraint-glossary) defining [visual group](#visual-group-glossary) is expressed as an instance of the `browser:VisualGroupLayoutConstraint` class. A visual group class is assigned to the visual group layout constraint via `browser:clusteringSelector` predicate. It is usually identical to the [hierarchical class](#hierarchical-class-glossary), so there is no need for an extra visual group class.
 
 > **Warning** \
 > Each visual group class must be assigned to a separate instance of `browser:VisualGroupLayoutConstraint` class.
