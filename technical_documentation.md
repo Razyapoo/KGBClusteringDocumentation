@@ -16,11 +16,12 @@ _This page describes how the [grouping of clusters](#grouping-of-clusters-glossa
  
 <h1 id="main-goal">Main goal</h1>
 
-So far, in the Knowledge Graph browser, it was only possible to group nodes in such a way that the user selects a couple of nodes and makes a group out of them manually. But in many cases it is more efficient and easier for the user to escape such work and allow the application to automatically group nodes based on similar attribute values.
+So far, in the Knowledge Graph Visual browser, it was only possible to group nodes in such a way that the user selects a couple of nodes and makes a group out of them manually. But in many cases it is more efficient and easier for the user to escape such work and allow the application to automatically group nodes based on similar attribute values.
 
 The main purpose of the implemented [grouping of clusters](#grouping-of-clusters-glossary) approach is to make a large graph more user-friendly, i.e. more readable and understandable. 
 
-Original knowledge graph exploration is proposed in a research paper ["Iteractive and iterative visual exploration of knowledge graphs based on shareable and reusable visual configurations"](https://www.sciencedirect.com/science/article/pii/S1570826822000105). Its implementations is available [here](https://github.com/martinnec/knowledge-graph-browser-website).
+> **Note** \
+> Original knowledge graph exploration is proposed in a research paper ["Iteractive and iterative visual exploration of knowledge graphs based on shareable and reusable visual configurations"](https://www.sciencedirect.com/science/article/pii/S1570826822000105). Its implementations is available [here](https://github.com/martinnec/knowledge-graph-browser-website).
 
 
 <h1 id="glossary">Glossary</h1>
