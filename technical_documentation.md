@@ -288,13 +288,17 @@ Therefore, before selecting a node, it is necessary to make all its ancestor nod
 
 The [Cytoscape](https://js.cytoscape.org/) library uses the "parent" property of the element to visualize a [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary) hierarchy. Therefore, when expanding a parent node from a child node, it is necessary to explicitly specify a parent for a Cytoscape element that represents a child node.
 
+<h3 id="extension-of-the-listpanel">Extension of the ListPanel.ts</h3>
+
+The original component is extended with the new method `groupManually` that handles manual grouping and special prohibited cases which can occur during manual grouping. 
+
 <h3 id="extension-of-the-configuration">Extension of the Configuration.ts</h3>
 
 The original component is extended with a new attribute `constraints` that is used to store the IRI representing a [set of visual layout constraints](#set-of-visual-constraints-glossary) to be loaded.
 
 <h3 id="extension-of-the-application">Extension of the Application.vue</h3>
 
-This component is extended with a new method `loadConstraints` which is used to load [visual layout constraints](#visual-layout-constraint-glossary) from the server. New `isHierarchyView` and `constraintRulesLoaded` attributes are used to indicate whether a visual style of a parent node need to be changed (for more information, see "[Extension of the ViewOptions.ts](#extension-of-the-view-options)" section) and whether constraints are loaded from the server successfully.
+This component is extended with the new method `loadConstraints` which is used to load [visual layout constraints](#visual-layout-constraint-glossary) from the server. New `isHierarchyView` and `constraintRulesLoaded` attributes are used to indicate whether a visual style of a parent node need to be changed (for more information, see "[Extension of the ViewOptions.ts](#extension-of-the-view-options)" section) and whether constraints are loaded from the server successfully.
 
 <h3 id="extension-of-the-edge">Extension of the Edge.ts</h3>
 
@@ -346,7 +350,7 @@ There are two cases:
 
 - In the first case, there is at least one group at the [current hierarchical level](#current-hierarchical-level-glossary). 
   > **Warning** \
-  > In such case, algorithm ungroups random number of random groups. 
+  > In such case, algorithm ungroups either all groups or random number of random groups (determined by `ungroupRandomly` variable). 
 
 - In the second case, there are only parent nodes which contain inside collapsed child nodes. In such case, algorithm shows collapsed child nodes.
 
@@ -363,6 +367,8 @@ In this component, only group management methods are extended to set a parent no
 
 <h3 id="extension-of-the-node">Extension of the Node.ts</h3>
 
+The new attribute is `mountedFromGroup` added to indicate that the node is mounted from group during its ungroup operation.
+
 When you remove a node, you must also remove all its descendant nodes in the hierarchy, as this may violate the principle of the hierarchy.
 
 An extension of this component is the `remove` method, which is extended to handle the recursive removal of child nodes (including nodes and groups).
@@ -371,9 +377,13 @@ An extension of this component is the `remove` method, which is extended to hand
 
 The NodeCommon.ts component is extended with attributes that set the hierarchical attributes of a node, namely a parent node, child nodes, a [hierarchical group](#hierarchical-group-glossary), [hierarchical level](#hierarchical-level-glossary).
 
+The new `isMountedInHierarchy` is also added to indicate that the node is mounted in hierarchy. This is used when a node collapses into its parent and gets unmounted in the graph area. If the node is collapsed, it should not be shown during expansion of its parent node.
+
 <h3 id="extension-of-the-node-group">Extension of the NodeGroup.ts</h3>
 
 The `remove` method is changed to handle node hierarchy.
+
+The new `classesOfNodes` attribute is added. It contains all classes of the nodes inside a group (different from hierarchical class).
 
 <h3 id="extension-of-the-node-view">Extension of the NodeView.ts</h3>
 

@@ -204,7 +204,7 @@ There are two cases:
 
 - In the first case, there is at least one group at the [current hierarchical level](#current-hierarchical-level-glossary). 
   > **Warning** \
-  > In such case, algorithm ungroups random number of random groups. 
+  > In such case, algorithm ungroups each such group. 
 
 - In the second case, there are only parent nodes which contain inside collapsed child nodes. In such case, algorithm shows collapsed child nodes.
 
@@ -290,7 +290,7 @@ Using the checkbox, you can choose whether to do:
 - Neither one of them
 
 > **Note**
-> - When "Grouping of clusters" is selected, use "minus" (resp. "plus") button to group (resp. ungroup) nodes. **Mouse wheel not supported**.
+> - When "Grouping of clusters" is selected, use "minus" (resp. "plus") button to group (resp. ungroup) nodes. **Mouse wheel supported**.
 > - By selecting a "Grouping of clusters" and "Zoom" at the same time, you can take an advantage of the main features of the mapping platforms (for more information see [Grouping of clusters](#grouping-of-clusters-glossary)). **Mouse wheel supported**.
 
 <h3 id="node-removal-guide">Node removal</h3>
