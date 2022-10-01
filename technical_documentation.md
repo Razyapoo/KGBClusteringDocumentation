@@ -107,7 +107,7 @@ A hierarchical class, if it exists, is shown along with a label of a node on the
 > **Definition** \
 > A hierarchical level of a node indicates the depth of a hierarchy at which a node resides.
 
-The amount of detail displayed on maps (in mapping platforms) depends on a zoom level. [Grouping of clusters](#grouping-of-clusters-glossary) approach uses the same idea. At the deepest (lowest or zero) level of the hierarchy, the graph shows all possible details. And at the highest level of the hierarchy, the graph shows only those single nodes that are representatives of hierarchies themselves. 
+The amount of detail displayed on maps (in mapping platforms) depends on a zoom level. [Grouping of clusters](#grouping-of-clusters-glossary) approach uses the same idea. At the deepest (lowest) level of the hierarchy, the graph shows all possible details. And at the highest level (zero level) of the hierarchy, the graph shows only those single nodes that are representatives of hierarchies themselves. 
 
 <h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3>
 

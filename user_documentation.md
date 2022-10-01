@@ -12,7 +12,7 @@
 
 We all know how zoom in/out works on mapping platforms such as [google maps](https://maps.google.com), maps.cz, etc. Zoom is used to increase or decrease the zoom level at a specific point and show more or less detail on the map.
 
-The extension of the original Knowledge Graph browser is inspired by this feature of mapping platforms. Original knowledge graph exploration is proposed in a research paper ["Iteractive and iterative visual exploration of knowledge graphs based on shareable and reusable visual configurations"](https://www.sciencedirect.com/science/article/pii/S1570826822000105).
+The extension of the original Knowledge Graph Visual browser is inspired by this feature of mapping platforms. Original knowledge graph exploration is proposed in a research paper ["Iteractive and iterative visual exploration of knowledge graphs based on shareable and reusable visual configurations"](https://www.sciencedirect.com/science/article/pii/S1570826822000105).
 
 <h1 id="glossary">Glossary</h1>
 
@@ -61,9 +61,9 @@ For example, "the department teaches the subject" relationship can be visualized
 
 <h3 id="hierarchical-class-glossary">Hierarchical class</h3>
 
-> A hierarchical class is a visual class that defines which [hierarchical group](#hierarchical-groups-glossary) a node belongs to. A node can only be assigned to one hierarchical class.
+> The hierarchical class is a visual class that defines which [hierarchical group](#hierarchical-groups-glossary) a node belongs to. A node can only be assigned to one hierarchical class.
 
-A hierarchical class, if it exists, is shown along with a label of a node on the detail panel. See Figure 3 below for more details.
+The hierarchical class, if it exists, is shown along with a label of a node on the detail panel. See Figure 3 below for more details.
 
 <p align="center">
     <img src="img/hierarchical_class.png" alt="hierarchical-class" title="Hierarchical class" width="350"/><br/>
@@ -71,29 +71,27 @@ A hierarchical class, if it exists, is shown along with a label of a node on the
 </p>
 
 > **Note** \
-> A hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in a same [hierarchical group](#hierarchical-groups-glossary).
-
-> **Warning** \
-> Each node must be assigned to some hierarchical group class in case it needs to be placed in any hierarchy.
+> The hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in a same [hierarchical group](#hierarchical-groups-glossary). \
+> A node must be assigned to some hierarchical group class in case it needs to be placed in any hierarchy.
 
 <h3 id="hierarchical-level-glossary">Hierarchical level</h3>
 
 > **Definition** \
-> A hierarchical level of a node indicates the depth of a hierarchy at which a node resides.
+> The hierarchical level of a node indicates the depth of a hierarchy at which a node resides.
 
-The amount of detail displayed on maps (in mapping platforms) depends on a zoom level. [Grouping of clusters](#grouping-of-clusters-glossary) approach uses the same idea. At the deepest (highest) level of the hierarchy, the graph shows all possible details. And at the lowest level of the hierarchy, the graph shows only those single nodes that are representatives of hierarchies themselves. 
+The amount of detail displayed on maps (in mapping platforms) depends on a zoom level. [Grouping of clusters](#grouping-of-clusters-glossary) approach uses the same idea. At the deepest (lowest) level of the hierarchy, the graph shows all possible details. And at the highest level (zero level) of the hierarchy, the graph shows only those single nodes that are representatives of hierarchies themselves. 
 
 <h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3>
 
 > **Definition** \
-> A current hierarchical level is the deepest [hierarchical level](#hierarchical-level-glossary) shown in the graph area.
+> The current hierarchical level is the deepest [hierarchical level](#hierarchical-level-glossary) shown in the graph area.
 
 At the moment when child nodes collapse into their parents, the current hierarchical level decreases by 1, and when child nodes with a hierarchical level higher (deeper) by 1 than the current hierarchical level appear, the current hierarchical level increases by 1.
 
 <h3 id="hierarchical-groups-glossary">Hierarchical group</h3>
 
 > **Definition** \
-> A hierarchical group is a cluster of nodes that are related to each other by hierarchical relationships. 
+> The hierarchical group is a cluster of nodes that are related to each other by hierarchical relationships. 
 
 Each node in a hierarchical group must have the [hierarchical class](#hierarchical-class-glossary) which represents that hierarchical group.
 
@@ -105,7 +103,7 @@ An example of one such hierarchical group is shown in Figure 1 above.
 <h3 id="visual-group-glossary">Visual group</h3>
 
 > **Definition** \
-> A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" node representing the visual group itself.
+> The visual group is a cluster of nodes located in the same area on the graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" node representing the visual group itself.
 
 An example of a visual group is shown in the Figure 4 below. The "pseudo-parent" node is a gray node with white nodes inside.
 
@@ -115,9 +113,9 @@ An example of a visual group is shown in the Figure 4 below. The "pseudo-parent"
 </p>
 
 > **Warning** \
-> A visual group is predefined by a technician in the visual configuration. You cannot define them in the user interface.
+> The visual group is predefined by a technician in the visual configuration. You cannot define them in the user interface.
 
-Each node in a visual group must have an additional visual group class representing that visual group. It can be identical to the hierarchical class.
+Each node in a visual group must have an additional visual group class representing that visual group. It can be (and usually) identical to the hierarchical class.
 
 > **Note** \
 > Hierarchical groups themselves can be interpreted as visual groups. In such a case, there is no need for a "pseudo-parent".
@@ -144,7 +142,7 @@ An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in F
 
 <h3 id="checkbox-glossary">Checkbox</h3>
 
-The "Scaling options" checkbox is used to choose whether to group clusters or to zoom. It is placed in the right top corner of the graph area. See the Figure 6 below for more detail.
+The "Scaling options" checkbox is used to choose whether to group clusters, to zoom, or both. It is placed in the right top corner of the graph area. See the Figure 6 below for more detail.
 
 <p align="center">
     <img src="img/scaling_options.png" alt="scaling-options" title="Scaling options" width="200"/><br/>
@@ -157,7 +155,7 @@ When you zoom in at a specific point on the mapping platforms, at each zoom leve
 
 The same principle is used in the "Grouping of clusters" extension, namely, when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes.
 
-The "Grouping of clusters" algorithm must first cluster the nodes into a [cluster](#cluster-glossary), and then collapse this cluster into a single group node. Which nodes to cluster is determined by an algorithm based on position of the nodes. This algorithm uses well-known clustering methods: k-Means clustering [1] and k-Medoids clustering [2] (what method to use is defined by the technician).
+The "Grouping of clusters" algorithm first clusters the nodes into a [cluster](#cluster-glossary), and then collapses this cluster into a single group node. Which nodes to cluster is determined by an algorithm based on position of the nodes. This algorithm uses well-known clustering methods: k-Means clustering [1] and k-Medoids clustering [2] (what method to use is defined by the technician).
 
 The basic approach of the algorithm is that it creates several centroids, generates from them an empty group (k-Means clustering [1]) or a group consisting of a single node (k-Medoids clustering [2]), and then adds surrounding nodes to the closest group.
 
@@ -196,9 +194,9 @@ Two cases can occur at the end of filtering:
   This child node can represent a single child node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 8 above).
 
   > **Note** \
-  > After collapsing child nodes, the algorithm switches the [current hierarchical level](#current-hierarchical-level-glossary) one level lower. During this operation, all [non-hierarchical](#non-hierarchical-relationships-glossary) edges from child nodes are moved to the parent node.
+  > After collapsing child nodes, the algorithm switches the [current hierarchical level](#current-hierarchical-level-glossary) one hierarchical level higher. During this operation, all [non-hierarchical](#non-hierarchical-relationships-glossary) edges from child nodes are moved to the parent node.
 
-When ungrouping ("Grouping of clusters" is selected in the [checkbox](checkbox-glossary) and "plus" button is clicked), only nodes at the [current hierarchical level](#current-hierarchical-level-glossary) can be ungrouped.
+During ungrouping operation ("Grouping of clusters" is selected in the [checkbox](checkbox-glossary) and "plus" button is clicked), only nodes at the [current hierarchical level](#current-hierarchical-level-glossary) can be ungrouped.
 
 There are two cases:
 
@@ -222,7 +220,7 @@ This guide will explain and teach you how the "Grouping of clusters" extension w
 <h2 id="configuration-selection">Configuration selection</h2>
 
 > **Note** \
-> The Knowledge Graph Browser currently supports only one configuration that allows this extension to be used.
+> The Knowledge Graph Visual browser currently supports only one configuration that allows this extension to be used.
 
 **1)** Choose "Charles Explorer" meta-configuration. See the Figure 9 below.
 
@@ -295,7 +293,7 @@ Using the checkbox, you can choose whether to do:
 
 <h3 id="node-removal-guide">Node removal</h3>
 
-Below is shown an example of the node [removal](#node-removal-glossary):
+Below is shown an example of the [node removal](#node-removal-glossary):
 
 Before removal of the "Informaticka sekce":
 
@@ -313,7 +311,7 @@ After removal:
 
 <h2 id="summary">Summary</h2>
 
-The main motivation behind the "grouping of clustering" extension is to bring the concept of zooming from mapping platforms into the Knowledge Graph browser. Feel free to use the newly implemented features that will give you a fresh perspective on the graph.
+The main motivation behind the "grouping of clustering" extension is to bring the concept of zooming from mapping platforms into the Knowledge Graph Visual browser. Feel free to use the newly implemented features that will give you a fresh perspective on the graph.
 
 <h1 id="references">References</h1>
 
