@@ -53,7 +53,7 @@ Typically, nodes in a graph are related to each other, for example, a company ha
 
 One possible way to visualize such relationships is to create an edge between parent and child. But there is also another way, namely adding a hierarchy between nodes. In such case, parent node is visualized as a larger node containing child nodes inside.
 
-Figure 1 below shows an example with universities and departments. A university can be thought of as a larger node (blue) containing child nodes (light blue) inside, representing departments: 
+Figure 1 below shows an example with faculties and sections. The faculty "Matematicko-fyzikální fakulta" can be seen as a larger node (blue) containing child nodes (light blue) inside, representing sections: 
 
 <p align="center">
     <img src="img/child_parent_relation.png" alt="parent-child-relationship" title="Parent-child relationship" width="600"/><br/>
