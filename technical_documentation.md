@@ -271,7 +271,7 @@ When a node becomes a parent, having at least one child node placed inside, its 
 
 <h3 id="extension-of-the-graphelementedge">Extension of the GraphElementEdge.ts</h3>
 
-This component is augmented with a check to see if the end nodes of an edge are in a [parent-child relationship](#parent-child-or-child-parent-hierarchical-relationship-glossary). If so, an arrow-shaped [non-hierarchical](#non-hierarchical-relationships-glossary) edge between the parent and child nodes should not be created.
+This component is augmented with a check to see if the end nodes of an edge placed in the same [hierarchical group](#hierarchical-group-glossary). If so, an arrow-shaped [non-hierarchical](#non-hierarchical-relationships-glossary) edge between the parent and child nodes should not be created.
 
 <h3 id="extension-of-the-graphelementnode">Extension of the GraphElementNode.ts</h3>
 
@@ -289,11 +289,17 @@ The [Cytoscape](https://js.cytoscape.org/) library uses the "parent" property of
 
 This component is extended to handle the case when a node is hidden. It might be the case that hidden node is the only child of the "pseudo-parent" node. In such case, pseudo-parent node is also hidden.
 
+Detail panel is extended with new section showing the nodes' [hierarchical class](#hierarchical-class-glossary) if exists.
+
 <h3 id="extension-of-the-listpanel">Extension of the ListPanel.ts</h3>
 
 The original component is extended with the new method `groupManually` that handles manual grouping and special prohibited cases which can occur during manual grouping. 
 
 Remove method is also extended to handle the case with a "pseudo-parent" node.
+
+<h3 id="extension-of-the-configuration">Extension of the Configuration.ts</h3>
+
+The original component is extended with a new attribute showing whether the expansion is hierarchical one. It is used to decide what nodes need to be shown in the graph.
 
 <h3 id="extension-of-the-configuration">Extension of the Configuration.ts</h3>
 

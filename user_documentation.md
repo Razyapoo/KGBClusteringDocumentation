@@ -211,7 +211,7 @@ There are two cases:
 
 <h3 id="node-removal-glossary">Node removal</h3>
 
-> Deleting a node propagates the recursive deletion of a node's descendants.
+> Deleting a node propagates the recursive deletion of node's descendants.
 
 <h1 id="how-to-use-the-extension">How to use the extension?</h1>
 
@@ -236,10 +236,7 @@ This guide will explain and teach you how the "Grouping of clusters" extension w
     <em>Figure 10. Meta-Configuration selection</em>
 </p>
 
-**3)** Choose starting node
-
-> **Warning** \
-> Wait for the starting node to fully load (the loading sign will disappear and the starting node will look like at the picture below). This is a necessary step for the extension to work correctly. See the Figure 11 below.
+**3)** Choose starting node from the list of starting nodes. See the Figure 11 below.
 
 <p align="center">
     <img src="img/starting_node.png" alt="starting-node" title="Starting node" width="600"/><br/>
@@ -308,6 +305,17 @@ After removal:
     <img src="img/after_removal.png" alt="after-removal" title="After removal" width="350"/><br/>
     <em>Figure 14. After removal</em>
 </p>
+
+<h2 id="restrictions">Restrictions on a graph</h2>
+
+1. It is not possible to group nodes placed in different hierarchical groups, hierarchical levels, visual classes, or having different parent node. It is not possible to add a pseudo-parent node into a group.
+2. It is not possible to delete a pseudo-parent node.
+3. It is not possible to expand node's children if some its descendants are already collapsed.
+4. If a node was expanded with its children and next they were collapsed, then the same expansion will not show children since they are already existing in the graph. In such case you should show (uncollapse) them using wheel or plus/minus button.
+5. It is still possible to use clustering in the case if some node (and possibly its descendants) was removed, and therefore the hierarchy was broken.
+6. The "plus" button or wheel ungroup all groups placed at the [current hierarchical level](#current-hierarchical-level-glossary). In the case you want to ungroup certain group, select such group and double click on it (or use "break" button).
+7. If there is at least one node of some hierarchy on the graph, then for non-hierarchical expansions, no new node and only non-hierarchical edges leading to existing nodes are displayed on the graph. All other nodes and edges are still being created and will be displayed during the next hierarchical expansions.
+8. If you want to expand a node with its children, but there are already expanded and collapsed its sibling nodes, then to display their (siblings') children, use the minus button to return to the level where only sibling nodes are shown, and then using the plus button show all children of all siblings.
 
 <h2 id="summary">Summary</h2>
 
