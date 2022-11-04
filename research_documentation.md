@@ -4,23 +4,23 @@ Table of content:
 - [Introduction](#introduction)
 - [References](#references)
 
-<h1 id="introduction">1. Introduction</h1>
+<h2 id="introduction">1. Introduction</h2>
 
 A knowledge graph, also known as a semantic network, represents a network of real-world entities: objects, events, situations, or concepts, and illustrates the relationship between them. This information is typically stored in a graph database and visualized as a graph structure, giving rise to the term "knowledge graph" [[1]](#references). The most common way to represent knowledge graphs is to use the RDF standard.
 
 However, it can be difficult for non-specialists to study knowledge graphs due to background technicalities. To solve this problem, the paper “Interactive and iterative visual exploration of knowledge graphs based on shared and reusable visual configurations” [[2]](#references) proposes the Knowledge Graph Visual browser interactive tool which allows non-specialists to explore knowledge graphs without knowing the underlying technical details.
 
-The paper is organized as follows. Section [2](#motivation) describes the motivation used in our extension. Section [3](#approaches) describes different approaches used to simplify large graphs. Section [4] contains useful links to the papers and webpages referenced in our paper.
+This paper is organized as follows. Section [2](#motivation) describes the motivation used in our extension. Section [3](#approaches) describes different approaches used to simplify large graphs. Section [4](#references) contains useful links to the papers and webpages referenced in our paper.
 
-<h1 id="motivation">2. Motivation</h1>
+<h2 id="motivation">2. Motivation</h2>
 
 Often the graphs are quite large, contain too much detail, which slows down and makes them difficult to visualize. And as a result, they do not provide easy visual learning and understanding for regular users.
 
-On the other hand, good visualization can show (reveal) patterns in the graph that are of value to the user. A good visualization can also be used for the presentation purposes.
+A good visualization can show (reveal) patterns in the graph that are of value to the user. A good visualization can also be used for the presentation purposes.
 
 This paper proposes several prototypes (developed by the student or found in other research papers) used to optimize the visualization of knowledge graphs so that they are well organized and easy to understand for ordinary users. It is also supposed to compare prototypes and implement at least one of them.
 
-<h1 id="approaches">3. Approaches</h1>
+<h2 id="approaches">3. Approaches</h2>
 
 There are two approaches to start with. The first approach is to reduce the time used to render large graphs, i.e., optimize the backend methods used in graph rendering. This approach does not reduce the amount of detail on the graph, but only the rendering time.
 
@@ -32,13 +32,13 @@ While researching what a good, understandable graph should look like and based o
 - Usefulness
 - Highlight key details
 
-<h2 id="filtering">Filtering</h2>
+<h3 id="filtering">Filtering</h3>
 
 First method to simplify graph is to use filtering. It helps users extract and understand basic information in graphs. The method should allow users to freely select the attributes and relationships they are interested in and then use these features to create a small and informative summary graph that reveals the basic characteristics of the nodes and their relationships in the original graph.
 
 However this is the topic of another student.
 
-<h2 id="layouts">Layouts</h2>
+<h3 id="layouts">Layouts</h3>
 
 My thought was to use an existing layout or implement my own. I have highlighted a few criteria that need to be considered in the layout that can be used to display large graphs:
 1. nodes connected by an edge must be close to each other
@@ -78,7 +78,7 @@ Graph clustering clusters the nodes based on their similarity measure.
 
 Its goal is to replace the original graph by one which has fewer nodes, but whose structure and characteristics are similar to those of the original graph. Usually nodes with similar properties are grouped into a clusters. These similarity clusters form the new nodes of the coarsened graph and are hence termed as supernodes [[7]](#references).
 
-<h3 id="condensation">Condensation<h3>
+<h3 id="condensation">Condensation</h3>
 
 Graph condensation returns a directed graph whose nodes represent the strong components of the original graph. This reduction provides a simplified view of the connectivity between components. 
 
@@ -107,7 +107,7 @@ This layout meets 1, 2, and 5 criteria listed at the beginning of the [Layouts](
 
 However, this layout is only good if we always expand nodes that were not in the graph up to this point. Because otherwise we would have back edges leading in the opposite direction. It is also hard to make clusters of nodes. This requires node swapping that might be time and resource consuming.
 
-<h2 id="visual-tricks">Visual tricks</h2>
+<h3 id="visual-tricks">Visual tricks</h3>
 
 I have looked at many layouts, but unfortunately they were not supported by the Cytoscape library. So I decided to integrate the visual tricks used in these layouts into existing layouts already implemented in the Cytoscape library.
 
@@ -180,7 +180,7 @@ The point was not to stick with the "Departments with Items" topic only, but to 
  
 The approach and its full implementation is described in the [technical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md) and [user](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md) documentations.
 
-<h1 id="references">References</h1>
+<h2 id="references">References</h2>
 
 1. ["What is a Knowledge Graph?"](https://www.ibm.com/cloud/learn/knowledge-graph), by IBM Cloud Education, April 12, 2021
 2. [Interactive and iterative visual exploration of knowledge graphs based on shareable and reusable visual configurations](https://www.sciencedirect.com/science/article/pii/S1570826822000105#b2) by Martin Nečaský, Štěpán Stenchlák
@@ -188,7 +188,7 @@ The approach and its full implementation is described in the [technical](https:/
 4. [Data Visualization Effectiveness Profile](http://perceptualedge.com/articles/visual_business_intelligence/data_visualization_effectiveness_profile.pdf), by Stephen Few, 2017
 5. [NetworkX. Summarization](https://networkx.org/documentation/stable/reference/algorithms/summarization.html)
 6. [Graph clustering](https://paperswithcode.com/task/graph-clustering)
-7. [Coarsening Graphs with Neural Networks](https://karush17.github.io/posts/2012/08/blog-post-24/), October 11, 2021
+7. [Coarsening Graphs with Neural Networks](https://karush27.github.io/posts/2012/08/blog-post-24/), October 11, 2021
 8. [Sequential layout: the best way to handle tiered data](https://cambridge-intelligence.com/sequential-layout-the-best-way-to-handle-tiered-data/), by Julia Robson, June 15, 2022
 9. [Customer behavior analysis with data visualization](https://cambridge-intelligence.com/customer-behavior-analysis/), by Rosy Hunt, August 30, 2022
 10. [Pharma data visualization](https://cambridge-intelligence.com/use-cases/pharma/)
