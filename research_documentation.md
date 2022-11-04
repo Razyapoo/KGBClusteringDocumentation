@@ -6,7 +6,7 @@ Table of content:
 
 <h1 id="introduction">Introduction</h1>
 
-A knowledge graph, also known as a semantic network, is a network of real world entities, i.e. objects, events, situations or concepts - and illustrates the relationship between them. This information is typically stored in a graph database and visualized as a graph structure, giving rise to the term "knowledge graph" [[1]](https://www.ibm.com/cloud/learn/knowledge-graph).
+A knowledge graph, also known as a semantic network, represents a network of real-world entities: objects, events, situations, or concepts—and illustrates the relationship between them. This information is typically stored in a graph database and visualized as a graph structure, giving rise to the term "knowledge graph" [[1]](https://www.ibm.com/cloud/learn/knowledge-graph).
 
 The most common way to build knowledge graphs is to use the RDF standard.
 
