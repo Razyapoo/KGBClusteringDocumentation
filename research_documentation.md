@@ -6,11 +6,9 @@ Table of content:
 
 <h1 id="introduction">1. Introduction</h1>
 
-A knowledge graph, also known as a semantic network, represents a network of real-world entities: objects, events, situations, or concepts—and illustrates the relationship between them. This information is typically stored in a graph database and visualized as a graph structure, giving rise to the term "knowledge graph" [[1]](https://www.ibm.com/cloud/learn/knowledge-graph).
+A knowledge graph, also known as a semantic network, represents a network of real-world entities: objects, events, situations, or concepts, and illustrates the relationship between them. This information is typically stored in a graph database and visualized as a graph structure, giving rise to the term "knowledge graph" [[1]](#references). The most common way to represent knowledge graphs is to use the RDF standard.
 
-The most common way to build knowledge graphs is to use the RDF standard.
-
-However, it can be difficult for non-specialists to study knowledge graphs. To solve this problem, the paper “Interactive and iterative visual exploration of knowledge graphs based on shared and reusable visual configurations” proposes the Knowledge Graph Visual browser interactive tool which allows non-specialists to explore knowledge graphs without knowing the underlying technical details.
+However, it can be difficult for non-specialists to study knowledge graphs due to background technicalities. To solve this problem, the paper “Interactive and iterative visual exploration of knowledge graphs based on shared and reusable visual configurations” [[2]](#references) proposes the Knowledge Graph Visual browser interactive tool which allows non-specialists to explore knowledge graphs without knowing the underlying technical details.
 
 The paper is organized as follows. Section [2](#motivation) describes the motivation used in our extension. Section [3](#approaches) describes different approaches used to simplify large graphs. Section [4] contains useful links to the papers and webpages referenced in our paper.
 
@@ -28,7 +26,7 @@ There are two approaches to start with. The first approach is to reduce the time
 
 The second approach is to make the graph more readable and understandable for non-specialists, i.e. optimize frontend visualization. For example, to reduce the amount of detail such as edges or nodes, or to use a different, more efficient, layout algorithm. This approach takes precedence because the original proposal of the Knowledge Graph Visual Browser was to hide technical complexity such as SPARQL queries and RDF standards. So, I decided to go this way.
 
-While researching what a good, understandable graph should look like and based on the papers [2], [3], I established several criteria and relied on them:
+While researching what a good, understandable graph should look like and based on the papers [[3]](#references), [[4]](#references), I established several criteria and relied on them:
 - Intuitiveness / Perceptibility / Easy navigation
 - Simplicity
 - Usefulness
@@ -66,19 +64,19 @@ A key difference between graph compression and graph summarization is that graph
 
 <h4 id="summarization">Summarization</h4>
 
-Graph summarization transforms graphs into more compact representations while preserving structural patterns. They often produce either summary graphs in the form of supergraphs or sparsified graphs, or a list of independent structures. Supergraphs are the most common product, which consist of supernodes and original nodes and are connected by edges and superedges, which represent aggregate edges between nodes and supernodes [4].
+Graph summarization transforms graphs into more compact representations while preserving structural patterns. They often produce either summary graphs in the form of supergraphs or sparsified graphs, or a list of independent structures. Supergraphs are the most common product, which consist of supernodes and original nodes and are connected by edges and superedges, which represent aggregate edges between nodes and supernodes [[5]](#references).
 
 As was mentioned in the [Elimination of redundant nodes and edges](#nodes-edges-eliminations) section above, sparsification technique removes unimportant nodes and edges from the graph that are difficult to recover, so I decided to continue exploring grouping/aggregation summarization methods.
 
 <h4 id="clustering">Clustering</h4>
 
-Graph clustering is the process of grouping the nodes of the graph into clusters, taking into account edge and node structures of the graph in such a way that there are several edges within each cluster and very few (or even no edges) between clusters [5]. 
+Graph clustering is the process of grouping the nodes of the graph into clusters, taking into account edge and node structures of the graph in such a way that there are several edges within each cluster and very few (or even no edges) between clusters [[6]](#references). 
 
 Graph clustering clusters the nodes based on their similarity measure.
 
 <h4 id="coarsening">Coarsening</h4>
 
-Its goal is to replace the original graph by one which has fewer nodes, but whose structure and characteristics are similar to those of the original graph. Usually nodes with similar properties are grouped into a clusters. These similarity clusters form the new nodes of the coarsened graph and are hence termed as supernodes [6].
+Its goal is to replace the original graph by one which has fewer nodes, but whose structure and characteristics are similar to those of the original graph. Usually nodes with similar properties are grouped into a clusters. These similarity clusters form the new nodes of the coarsened graph and are hence termed as supernodes [[7]](#references).
 
 <h3 id="condensation">Condensation<h3>
 
@@ -103,7 +101,7 @@ Because in the Knowledge Graph Visual Browser we always expand the neighborhood 
     <em>Figure 1. Sequential layout</em>
 </p>
 
-The sequential layout (shown in the Figure 1 above) is designed to display data that contains a clear sequence of distinct levels of nodes. It takes multiple components into account and minimizes link crossings [7].
+The sequential layout (shown in the Figure 1 above) is designed to display data that contains a clear sequence of distinct levels of nodes. It takes multiple components into account and minimizes link crossings [[8]](#references).
 
 This layout meets 1, 2, and 5 criteria listed at the beginning of the [Layouts](#layouts) section. It satisfies the first criterion because we always expand the neighborhood in the right direction (or whatever; the direction must be determined at the beginning), so we can place nodes in the neighborhood next to the expanding node. It meets the second criterion because we always expand nodes in the same direction, so we have room to accommodate its neighbors. It also meets the fifth criterion because it is visually understandable to non-specialists.
 
@@ -124,7 +122,7 @@ This technique allows you to show only those nodes that are of interest to the u
 
 <p align="center">
     <img src="img/hiding_nodes.png" alt="hiding_nodes" title="Hiding nodes" width="600"/><br/>
-    <em>Figure 2. Hiding redundant nodes [8].</em>
+    <em>Figure 2. Hiding redundant nodes [9].</em>
 </p>
 
 However, this technique has already been implemented in the Visual Knowledge Graph Browser by Štěpán Stenchlák.
@@ -135,7 +133,7 @@ The second approach is to highlight key nodes or areas (clusters) of nodes that 
 
 <p align="center">
     <img src="img/node_highlighting.png" alt="node_highlighting" title="node highlighting" width="600"/><br/>
-    <em>Figure 3. Node and edge highlighting [9].</em>
+    <em>Figure 3. Node and edge highlighting [10].</em>
 </p>
 
 <h3 id="node-aggregation">Node aggregation</h3>
@@ -185,11 +183,12 @@ The approach and its full implementation is described in the [technical](https:/
 <h1 id="references">References</h1>
 
 1. ["What is a Knowledge Graph?"](https://www.ibm.com/cloud/learn/knowledge-graph), by IBM Cloud Education, April 12, 2021
-2. [The 10 rules of great graph design](https://cambridge-intelligence.com/10-rules-great-graph-design/), by Corey Lanum, January 10, 2014
-3. [Data Visualization Effectiveness Profile](http://perceptualedge.com/articles/visual_business_intelligence/data_visualization_effectiveness_profile.pdf), by Stephen Few, 2017
-4. [NetworkX. Summarization](https://networkx.org/documentation/stable/reference/algorithms/summarization.html)
-5. [Graph clustering](https://paperswithcode.com/task/graph-clustering)
-6. [Coarsening Graphs with Neural Networks](https://karush17.github.io/posts/2012/08/blog-post-24/), October 11, 2021
-7. [Sequential layout: the best way to handle tiered data](https://cambridge-intelligence.com/sequential-layout-the-best-way-to-handle-tiered-data/), by Julia Robson, June 15, 2022
-8. [Customer behavior analysis with data visualization](https://cambridge-intelligence.com/customer-behavior-analysis/), by Rosy Hunt, August 30, 2022
-9. [Pharma data visualization](https://cambridge-intelligence.com/use-cases/pharma/)
+2. [Interactive and iterative visual exploration of knowledge graphs based on shareable and reusable visual configurations](https://www.sciencedirect.com/science/article/pii/S1570826822000105#b2) by Martin Nečaský, Štěpán Stenchlák
+3. [The 10 rules of great graph design](https://cambridge-intelligence.com/10-rules-great-graph-design/), by Corey Lanum, January 10, 2014
+4. [Data Visualization Effectiveness Profile](http://perceptualedge.com/articles/visual_business_intelligence/data_visualization_effectiveness_profile.pdf), by Stephen Few, 2017
+5. [NetworkX. Summarization](https://networkx.org/documentation/stable/reference/algorithms/summarization.html)
+6. [Graph clustering](https://paperswithcode.com/task/graph-clustering)
+7. [Coarsening Graphs with Neural Networks](https://karush17.github.io/posts/2012/08/blog-post-24/), October 11, 2021
+8. [Sequential layout: the best way to handle tiered data](https://cambridge-intelligence.com/sequential-layout-the-best-way-to-handle-tiered-data/), by Julia Robson, June 15, 2022
+9. [Customer behavior analysis with data visualization](https://cambridge-intelligence.com/customer-behavior-analysis/), by Rosy Hunt, August 30, 2022
+10. [Pharma data visualization](https://cambridge-intelligence.com/use-cases/pharma/)
