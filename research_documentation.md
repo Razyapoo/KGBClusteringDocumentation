@@ -4,31 +4,31 @@ Table of content:
 - [Introduction](#introduction)
 - [References](#references)
 
-<h1 id="introduction">Introduction</h1>
+<h1 id="introduction">1. Introduction</h1>
 
 A knowledge graph, also known as a semantic network, represents a network of real-world entities: objects, events, situations, or concepts—and illustrates the relationship between them. This information is typically stored in a graph database and visualized as a graph structure, giving rise to the term "knowledge graph" [[1]](https://www.ibm.com/cloud/learn/knowledge-graph).
 
 The most common way to build knowledge graphs is to use the RDF standard.
 
-However, it can be difficult for non-specialists to study knowledge graphs. Therefore, in the article “Interactive and iterative visual exploration of knowledge graphs based on shared and reusable visual configurations”, an interactive tool (visual knowledge graph browser) was proposed that allows non-specialists to explore knowledge graphs without knowing the underlying technical details.
+However, it can be difficult for non-specialists to study knowledge graphs. To solve this problem, the paper “Interactive and iterative visual exploration of knowledge graphs based on shared and reusable visual configurations” proposes the Knowledge Graph Visual browser interactive tool which allows non-specialists to explore knowledge graphs without knowing the underlying technical details.
 
-<h1 id="motivation">Motivation</h1>
+The paper is organized as follows. Section [2](#motivation) describes the motivation used in our extension. Section [3](#approaches) describes different approaches used to simplify large graphs. Section [4] contains useful links to the papers and webpages referenced in our paper.
 
-Often graphs are quite large, slow and contain too much detail, making them difficult to visualize. They do not provide easy visual learning and understanding for ordinary users.
+<h1 id="motivation">2. Motivation</h1>
 
-On the other hand, good visualization can show (reveal) patterns in the graph that are of value to the user. It can also be used for further presentation purposes.
+Often the graphs are quite large, contain too much detail, which slows down and makes them difficult to visualize. And as a result, they do not provide easy visual learning and understanding for regular users.
 
-This article proposes several prototypes (developed by a student or found in other research papers) used to optimize the visualization of the knowledge graph so that it is well organized and easy to understand for ordinary users. It is also supposed to compare them and implement at least one prototype.
+On the other hand, good visualization can show (reveal) patterns in the graph that are of value to the user. A good visualization can also be used for the presentation purposes.
 
-The article is organized as follows. //TODO
+This paper proposes several prototypes (developed by the student or found in other research papers) used to optimize the visualization of knowledge graphs so that they are well organized and easy to understand for ordinary users. It is also supposed to compare prototypes and implement at least one of them.
 
-<h1 id="approaches">Approaches</h1>
+<h1 id="approaches">3. Approaches</h1>
 
 There are two approaches to start with. The first approach is to reduce the time used to render large graphs, i.e., optimize the backend methods used in graph rendering. This approach does not reduce the amount of detail on the graph, but only the rendering time.
 
 The second approach is to make the graph more readable and understandable for non-specialists, i.e. optimize frontend visualization. For example, to reduce the amount of detail such as edges or nodes, or to use a different, more efficient, layout algorithm. This approach takes precedence because the original proposal of the Knowledge Graph Visual Browser was to hide technical complexity such as SPARQL queries and RDF standards. So, I decided to go this way.
 
-While researching what a good, understandable graph should look like and based on the articles [2], [3], I established several criteria and relied on them:
+While researching what a good, understandable graph should look like and based on the papers [2], [3], I established several criteria and relied on them:
 - Intuitiveness / Perceptibility / Easy navigation
 - Simplicity
 - Usefulness
@@ -182,7 +182,7 @@ The point was not to stick with the "Departments with Items" topic only, but to 
  
 The approach and its full implementation is described in the [technical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md) and [user](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md) documentations.
 
-<h2 id="references">References</h2>
+<h1 id="references">References</h1>
 
 1. ["What is a Knowledge Graph?"](https://www.ibm.com/cloud/learn/knowledge-graph), by IBM Cloud Education, April 12, 2021
 2. [The 10 rules of great graph design](https://cambridge-intelligence.com/10-rules-great-graph-design/), by Corey Lanum, January 10, 2014
