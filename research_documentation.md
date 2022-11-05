@@ -24,36 +24,36 @@ This paper proposes several prototypes (developed by the student or found in oth
 
 There are two approaches to start with. The first approach is to reduce the time used to render large graphs, i.e., optimize the backend methods used in graph rendering. This approach does not reduce the amount of detail shown on the graph, but only the rendering time.
 
-The second approach is to make the graph more readable and understandable for non-specialists, i.e. optimize frontend visualization. For example, to reduce the amount of detail such as edges or nodes, or to use a different, more efficient, layout algorithm. This approach takes precedence because the original proposal of the Knowledge Graph Visual Browser was to hide technical complexity such as SPARQL queries and RDF standards. Therefore, this paper will rely on this approach.
+The second approach is to make the graph more readable and understandable for non-specialists, i.e. optimize frontend visualization. For example, to reduce the amount of detail such as edges or nodes, or to use a different, more efficient, layout algorithm. This approach takes precedence because the original proposal of the Knowledge Graph Visual Browser was to hide technical complexity such as SPARQL queries and RDF standards to simplify the graph exploration for non-specialist users. This approach can also improve rendering time. Therefore, this paper will rely on this approach.
 
 By examining what a good, understandable graph should look like, and relying on articles [[3]](#references), [[4]](#references), we can establish several criteria and rely on them:
 - Intuitiveness / Perceptibility / Easy navigation
 - Simplicity
 - Usefulness
-- highlighting key details
+- Highlighting key details
 
 <h3 id="filtering">Filtering</h3>
 
-The first way to simplify the graph is to use filtering. It helps users extract and understand basic information in graphs. The method should allow users to freely select attributes and relationships they are interested in and then use these features to create a small and informative summary graph that reveals the basic characteristics of the nodes and their relationships in the original graph.
+The first way to simplify a graph is to use filtering, as it helps users extract and understand the information they need in the graph. The method should allow users to freely select attributes and relationships they are interested in and then use these features to create a small and informative summary graph that reveals the basic characteristics of the nodes and their relationships in the original graph.
 
-However, this is the topic of another student, so we can skip it.
+However, this correlates with the topic of another student, so we decided to skip it.
 
 <h3 id="layouts">Layouts</h3>
 
 The second way is to use an existing layout or implement own. 
 
 Let's highlight a few criteria that need to be considered in a good layout that can be used to show large graphs:
-1. nodes connected by an edge must be close to each other
-2. there must be the minimum number of intersections of edges, or even no intersections
-3. large amount of nodes should be split into chunks, or clusters
-4. clusters should contain related nodes
-5. overall graph representation should represent (tell) a good story in understandable way
+1. Nodes connected by an edge must be close to each other
+2. There must be the minimum number of intersections of edges, or even no intersections
+3. Large amount of nodes should be split into chunks, or clusters
+4. Clusters should contain related nodes
+5. Overall graph representation should represent (tell) a good story in understandable way
 
-It is very difficult and time consuming to implement the own layout, because this requires to make changes in the big part of the Cytoscape library.
+Unfortunately, it is very difficult and time consuming to implement the own layout, because it requires to make changes in the big part of the Cytoscape library.
 
 ---
 
-Therefore, we can integrate graph simplification techniques with existing layouts to make the graph more user-friendly. To do this, we describe the following five techniques:
+Fortunately, we can still integrate graph simplification techniques with existing layouts to make the graph visualization more user-friendly. To do this, we describe the following five techniques:
 - [Elimination of redundant nodes and edges. Sparsification](#nodes-edges-eliminations)
 - [Summarization](#summarization)
 - [Clustering](#clustering)
@@ -80,13 +80,13 @@ Graph clustering is the process of grouping the nodes of the graph into clusters
 
 The goal of this method is to replace the original graph by one which has fewer nodes, but whose structure and characteristics are similar to those of the original graph. Usually nodes with similar properties are grouped into a clusters. These similarity clusters form the new nodes of the coarsened graph and are hence termed as supernodes [[7]](#references).
 
-<h3 id="condensation">Condensation</h3>
+<h4 id="condensation">Condensation</h4>
 
 Graph condensation returns a directed graph whose nodes represent the strong components of the original graph. This reduction provides a simplified view of the connectivity between components. 
 
 The main advantage of this approach is that it simplifies the original graph so that the various algorithms that run on the graph become faster. 
 
-The disadvantage of this method is that as its output we get a directed acyclic graph (DAG), in which each strongly connected component (SCC) does not take into account node classes and consists of a mix of nodes. As an improvement, we can add a criterion that the SCC should only contain certain node classes.
+The disadvantage of this method is that as its output we get a directed acyclic graph (DAG), in which each strongly connected component (SCC) does not take into account node similarities (for example classes) and consists of a mix of nodes. As an improvement, we can add a criterion that the SCC should only contain node having similar properties.
 
 This is the first technique implemented. I implemented it just to understand the Knowledge Graph Visual Browser implementation and how it works. The idea was to use the graph condensation method and create a new graph consisting of nodes that represent strongly connected components in the original graph.
 
@@ -99,7 +99,7 @@ Let's find out what types of layouts exist that are used to present large graphs
 Because in the Knowledge Graph Visual Browser we always expand the neighborhood of a node, it can be useful to use sequential layout.
 
 <p align="center">
-    <img src="img/sequential_layout.png" alt="sequential_layout" title="Sequential layout" width="600"/><br/>
+    <img src="img/sequential_layout.png" alt="sequential_layout" title="Sequential layout" width="400"/><br/>
     <em>Figure 1. Sequential layout</em>
 </p>
 
@@ -123,7 +123,7 @@ The main visual tricks:
 This technique allows you to show only those nodes that are of interest to the user. This method also hides redundant nodes (or background) or makes them less visible to the user. A possible implementation of such a technique is shown in Figure 2 below.
 
 <p align="center">
-    <img src="img/hiding_nodes.png" alt="hiding_nodes" title="Hiding nodes" width="600"/><br/>
+    <img src="img/hiding_background.png" alt="hiding_nodes" title="Hiding nodes" width="600"/><br/>
     <em>Figure 2. Hiding redundant nodes [9].</em>
 </p>
 
