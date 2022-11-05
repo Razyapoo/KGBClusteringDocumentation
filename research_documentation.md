@@ -2,6 +2,8 @@
 
 Table of content:
 - [Introduction](#introduction)
+- [Motivation](#motivation)
+- [Approaches](#approaches)
 - [References](#references)
 
 <h2 id="introduction">1. Introduction</h2>
