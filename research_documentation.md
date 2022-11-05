@@ -105,13 +105,13 @@ Because in the Knowledge Graph Visual Browser we always expand the neighborhood 
 
 The sequential layout (shown in the Figure 1 above) is designed to display data that contains a clear sequence of distinct levels of nodes. It takes multiple components into account and minimizes link crossings [[8]](#references).
 
-This layout meets 1, 2, and 5 criteria listed at the beginning of the [Layouts](#layouts) section. It satisfies the first criterion because we always expand the neighborhood in the right direction (or whatever; the direction must be determined at the beginning), so we can place nodes in the neighborhood next to the expanding node. It meets the second criterion because we always expand nodes in the same direction, so we have room to accommodate its neighbors. It also meets the fifth criterion because it is visually understandable to non-specialists.
+This layout meets 1, 2, and 5 criteria listed at the beginning of the [Layouts](#layouts) section. It satisfies the first criterion because we expand the neighborhood in the same direction (the direction must be determined at the beginning), so we can place nodes in the neighborhood close to the expanding node. It meets the second criterion because we are expanding the nodes in the same direction, so we have room to place its neighbors in such a way that there are no edge intersections. It also meets the fifth criterion because it is visually understandable to non-specialists.
 
 However, this layout is only good if we always expand nodes that were not in the graph up to this point. Because otherwise we would have back edges leading in the opposite direction. It is also hard to make clusters of nodes. This requires node swapping that might be time and resource consuming.
 
 <h3 id="visual-tricks">Visual tricks</h3>
 
-I have looked at many layouts, but unfortunately they were not supported by the Cytoscape library. So I decided to integrate the visual tricks used in these layouts into existing layouts already implemented in the Cytoscape library.
+There are many layouts with interesting features, but unfortunately they are not supported by the Cytoscape library. But we can still integrate the visual tricks used in these layouts into existing layouts already implemented in the Cytoscape library.
 
 The main visual tricks:
 - Hiding background
@@ -120,67 +120,69 @@ The main visual tricks:
 
 <h3 id="hiding-background">Hiding background</h3>
 
-This technique allows you to show only those nodes that are of interest to the user. This method also hides redundant nodes (or background) or makes them less visible to the user. A possible implementation of such a technique is shown in Figure 2 below.
+This technique allows to show only those nodes that are of interest to the user. This method also hides redundant nodes (or background) or makes them less visible to the user. A possible implementation of such a technique is shown in Figure 2 below.
 
 <p align="center">
-    <img src="img/hiding_background.png" alt="hiding_nodes" title="Hiding nodes" width="600"/><br/>
+    <img src="img/hiding_background.png" alt="hiding_nodes" title="Hiding nodes" width="500"/><br/>
     <em>Figure 2. Hiding redundant nodes [9].</em>
 </p>
 
-However, this technique has already been implemented in the Visual Knowledge Graph Browser by Štěpán Stenchlák.
+However, this technique has already been implemented in the Knowledge Graph Visual browser by Štěpán Stenchlák.
 
 <h3 id="highlighting-key-nodes-and-edges">Highlighting key nodes and edges</h3>
 
-The second approach is to highlight key nodes or areas (clusters) of nodes that may be of interest to the user. An example of such a representation is shown in Figure 3.
+The second approach is to highlight key nodes or areas (clusters) of nodes that may be of interest to the user. The most important nodes can also be larger than others. An example of such a representation is shown in Figure 3.
 
 <p align="center">
     <img src="img/node_highlighting.png" alt="node_highlighting" title="node highlighting" width="600"/><br/>
     <em>Figure 3. Node and edge highlighting [10].</em>
 </p>
 
+The disadvantage of this method is that it only improves visual perception, but does not simplify the graph and does not make it faster.
+
 <h3 id="node-aggregation">Node aggregation</h3>
 
-Node aggregation is an example of [graph coarsening](#coarsening). A coarsened graph consists of aggregated nodes. But this is not what I wanted to do, because in this way we lost other nodes and edges. In my opinion, I imagined that it would be much better to still be able to reveal nodes and edges hidden within aggregated nodes.
+Node aggregation is an example of [graph coarsening](#coarsening). A coarsened graph consists of aggregated nodes. But this is not what we want to do, because in this way we will lose other nodes and edges that may need to be restored. It would be much better to still be able to reveal nodes and edges hidden within aggregated nodes.
 
-However, this caused a problem in the knowledge graph explorer because there are Detail queries that are used to display node details, and if I used aggregate nodes, it would be impossible to display aggregated node details because they would be auxiliary and would not exist in the endpoint database. Same was for expansion and preview queries. Thus, we would lose all the functionality that the Knowledge Graph Visual Browser provides.
+However, this can cause a problem in the Knowledge Graph Visual browser, because there are detailed queries that are used to display node details, and if we aggregate nodes, it will not be possible to display details of aggregated nodes because they will be auxiliary and will not exist in the database. The same can be said for expansion and preview requests. Thus, we may lose all the functionality that the Knowledge Graph visual browser provides.
 
-To solve this problem, I decided to use a trick: if the user clicks on an aggregated node, a browser will display the internals of that aggregated node. The Cambridge Intelligence call this approach - [combos](https://cambridge-intelligence.com/combos/). 
+To solve this problem, can use a trick: if the user clicks on the aggregated node, a browser will display the internals of that aggregated node. The Cambridge Intelligence call this approach as [combos](https://cambridge-intelligence.com/combos/). 
 
 I presented this approach to my supervisor and two weeks later he told me that he had found a customer who is interested in this approach. The customer was the Charles University and the topic was "Departments and subjects".
 
-I suggested several criteria:
+After several studies, we can state the following several criteria:
 
 - An aggregation node must be a cluster of related nodes (for example, nodes of the same class or similar property)
-- An aggregation node must somehow show the user which nodes he has inside
-- An aggregation node can have separate aggregation nodes internally representing the types of nodes it aggregates (in case it aggregates different types of nodes, such as universities and subjects).
-- An aggregation node can display the number of nodes it has inside.
+- An aggregation node must somehow show the user which nodes it has inside
+- An aggregation node might have separate aggregation nodes internally representing the types of nodes it aggregates (in case it aggregates different types of nodes, such as universities and subjects).
+- An aggregation node may display the number of nodes it has inside.
 
-The questions were:
-- based on what criteria to cluster nodes
-- how to name and represent the aggregation node
-- can cluster have different classes of nodes
-- how to represent edges between nodes that represent an aggregation of the original nodes (create only one aggregated edge, i.e. its thickness will show how many edges it combines, or show them all)
-- how to show the internals of an aggregation node
+But there are more questions:
+- Based on what criteria to cluster nodes?
+- How to name and represent the aggregation node?
+- Can cluster have nodes of different  equivalence classes (based on similarity)?
+- How to represent edges between nodes that represent an aggregation of the original nodes (create only one aggregated edge, i.e. its thickness will show how many edges it combines, or show them all)?
+- How to show the internals of an aggregation node?
 
 The first draft of the approach is shown in the Figure 4 below.
 
 <p align="center">
-    <img src="img/firts_draft_diagram.png" alt="first_draft" title="First draft" width="900"/><br/>
+    <img src="img/firts_draft_diagram.png" alt="first_draft" title="First draft" width="800"/><br/>
     <em>Figure 4. First draft.</em>
 </p>
 
-From this moment we started to use the term "hierarchy". And in discussion with my supervisor, we formulated the following main criteria:
+From this point on, we can introduce the term "hierarchy" into use and formulate the following main criteria:
 - There can be hierarchical and non-hierarchical (ordinary, represented by an edge) relationships between nodes
 - The hierarchical extension must show the extension within (inside) the expanded node
 - It should be possible in the configuration to determine if the relationship is hierarchical or non-hierarchical
-- A non-hierarchical edge can lead from a parent node, even if it contains child nodes inside
+- A non-hierarchical edge can lead from a parent node (to the node in the different hierarchy), even if it contains child nodes inside
 - Child nodes can be collapsed into parent nodes
 
 We also decided to use the map-style zoom used in mapping platforms, so that when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes.
 
-The point was not to stick with the "Departments with Items" topic only, but to make it abstract and usable with other topics.
+The point is not to stick with the "Departments and Subjects" topic only, but to make it abstract and usable with other topics.
  
-The approach and its full implementation is described in the [technical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md) and [user](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md) documentations.
+This approach, its final criteria and full implementation are described in the [technical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md) and [user](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md) documentations.
 
 <h2 id="references">References</h2>
 
