@@ -16,40 +16,44 @@ This paper is organized as follows. Section [2](#motivation) describes the motiv
 
 Often the graphs are quite large, contain too much detail, which slows down and makes them difficult to visualize. And as a result, they do not provide easy visual learning and understanding for regular users.
 
-A good visualization can show (reveal) patterns in the graph that are of value to the user. A good visualization can also be used for the presentation purposes.
+A good visualization can show (reveal) patterns in the graph that are of value to the user. And such visualization can also be used for the presentation purposes.
 
 This paper proposes several prototypes (developed by the student or found in other research papers) used to optimize the visualization of knowledge graphs so that they are well organized and easy to understand for ordinary users. It is also supposed to compare prototypes and implement at least one of them.
 
 <h2 id="approaches">3. Approaches</h2>
 
-There are two approaches to start with. The first approach is to reduce the time used to render large graphs, i.e., optimize the backend methods used in graph rendering. This approach does not reduce the amount of detail on the graph, but only the rendering time.
+There are two approaches to start with. The first approach is to reduce the time used to render large graphs, i.e., optimize the backend methods used in graph rendering. This approach does not reduce the amount of detail shown on the graph, but only the rendering time.
 
-The second approach is to make the graph more readable and understandable for non-specialists, i.e. optimize frontend visualization. For example, to reduce the amount of detail such as edges or nodes, or to use a different, more efficient, layout algorithm. This approach takes precedence because the original proposal of the Knowledge Graph Visual Browser was to hide technical complexity such as SPARQL queries and RDF standards. So, I decided to go this way.
+The second approach is to make the graph more readable and understandable for non-specialists, i.e. optimize frontend visualization. For example, to reduce the amount of detail such as edges or nodes, or to use a different, more efficient, layout algorithm. This approach takes precedence because the original proposal of the Knowledge Graph Visual Browser was to hide technical complexity such as SPARQL queries and RDF standards. Therefore, this paper will rely on this approach.
 
-While researching what a good, understandable graph should look like and based on the papers [[3]](#references), [[4]](#references), I established several criteria and relied on them:
+By examining what a good, understandable graph should look like, and relying on articles [[3]](#references), [[4]](#references), we can establish several criteria and rely on them:
 - Intuitiveness / Perceptibility / Easy navigation
 - Simplicity
 - Usefulness
-- Highlight key details
+- highlighting key details
 
 <h3 id="filtering">Filtering</h3>
 
-First method to simplify graph is to use filtering. It helps users extract and understand basic information in graphs. The method should allow users to freely select the attributes and relationships they are interested in and then use these features to create a small and informative summary graph that reveals the basic characteristics of the nodes and their relationships in the original graph.
+The first way to simplify the graph is to use filtering. It helps users extract and understand basic information in graphs. The method should allow users to freely select attributes and relationships they are interested in and then use these features to create a small and informative summary graph that reveals the basic characteristics of the nodes and their relationships in the original graph.
 
-However this is the topic of another student.
+However, this is the topic of another student, so we can skip it.
 
 <h3 id="layouts">Layouts</h3>
 
-My thought was to use an existing layout or implement my own. I have highlighted a few criteria that need to be considered in the layout that can be used to display large graphs:
+The second way is to use an existing layout or implement own. 
+
+Let's highlight a few criteria that need to be considered in a good layout that can be used to show large graphs:
 1. nodes connected by an edge must be close to each other
-2. there must be the minimum number of intersections of edges or even no intersections
-3. large amount of nodes should be split into chunks or clusters
+2. there must be the minimum number of intersections of edges, or even no intersections
+3. large amount of nodes should be split into chunks, or clusters
 4. clusters should contain related nodes
 5. overall graph representation should represent (tell) a good story in understandable way
 
-It is very difficult and time consuming to implement own layout, because this requires to make changes in the big part of the Cytoscape library. Thus, I decided to stick only with existing layouts.
+It is very difficult and time consuming to implement the own layout, because this requires to make changes in the big part of the Cytoscape library.
 
-Therefore, I decided to integrate graph simplification techniques with existing layouts to make the graph more user-friendly. To do this, I considered five techniques:
+---
+
+Therefore, we can integrate graph simplification techniques with existing layouts to make the graph more user-friendly. To do this, we describe the following five techniques:
 - [Elimination of redundant nodes and edges. Sparsification](#nodes-edges-eliminations)
 - [Summarization](#summarization)
 - [Clustering](#clustering)
@@ -58,25 +62,23 @@ Therefore, I decided to integrate graph simplification techniques with existing 
 
 <h4 id="nodes-edges-eliminations">Elimination of redundant nodes and edges. Sparsification</h4>
 
-This technique is used to compress the original graph. Remove all redundant nodes without changing the graph structure. 
+This technique is used to compress the original graph, remove all redundant nodes without changing the graph structure. 
 
 A key difference between graph compression and graph summarization is that graph summarization focuses on finding structural patterns within the original graph, whereas graph compression focuses on compressions the original graph to be as small as possible. 
 
 <h4 id="summarization">Summarization</h4>
 
-Graph summarization transforms graphs into more compact representations while preserving structural patterns. They often produce either summary graphs in the form of supergraphs or sparsified graphs, or a list of independent structures. Supergraphs are the most common product, which consist of supernodes and original nodes and are connected by edges and superedges, which represent aggregate edges between nodes and supernodes [[5]](#references).
+Graph summarization transforms graphs into more compact representations while preserving structural patterns. They produce summary graphs in the form of supergraphs. Supergraphs are the most common representation, which consists of supernodes and original nodes that are connected by edges and superedges that represent aggregated original edges [[5]](#references).
 
-As was mentioned in the [Elimination of redundant nodes and edges](#nodes-edges-eliminations) section above, sparsification technique removes unimportant nodes and edges from the graph that are difficult to recover, so I decided to continue exploring grouping/aggregation summarization methods.
+As was mentioned in the [Elimination of redundant nodes and edges](#nodes-edges-eliminations) section above, sparsification technique removes unimportant (redundant) nodes and edges from the graph that are difficult to recover, so we decided to continue exploring grouping/aggregation summarization methods.
 
 <h4 id="clustering">Clustering</h4>
 
-Graph clustering is the process of grouping the nodes of the graph into clusters, taking into account edge and node structures of the graph in such a way that there are several edges within each cluster and very few (or even no edges) between clusters [[6]](#references). 
-
-Graph clustering clusters the nodes based on their similarity measure.
+Graph clustering is the process of grouping the nodes of the graph into clusters, taking into account edge and node structures of the graph in such a way that there are several edges within each cluster and very few (or even no edges) between clusters [[6]](#references). Graph clustering clusters the nodes based on their similarity measure.
 
 <h4 id="coarsening">Coarsening</h4>
 
-Its goal is to replace the original graph by one which has fewer nodes, but whose structure and characteristics are similar to those of the original graph. Usually nodes with similar properties are grouped into a clusters. These similarity clusters form the new nodes of the coarsened graph and are hence termed as supernodes [[7]](#references).
+The goal of this method is to replace the original graph by one which has fewer nodes, but whose structure and characteristics are similar to those of the original graph. Usually nodes with similar properties are grouped into a clusters. These similarity clusters form the new nodes of the coarsened graph and are hence termed as supernodes [[7]](#references).
 
 <h3 id="condensation">Condensation</h3>
 
@@ -84,13 +86,13 @@ Graph condensation returns a directed graph whose nodes represent the strong com
 
 The main advantage of this approach is that it simplifies the original graph so that the various algorithms that run on the graph become faster. 
 
-The disadvantage of this method is that at the output we get a directed acyclic graph (DAG), in which each strongly connected component (SCC) does not take into account node classes and consists of a mix of nodes. As an improvement, I decided to add a criterion that the SCC should only contain certain node classes (but didn't implement it).
+The disadvantage of this method is that as its output we get a directed acyclic graph (DAG), in which each strongly connected component (SCC) does not take into account node classes and consists of a mix of nodes. As an improvement, we can add a criterion that the SCC should only contain certain node classes.
 
-This was the first technique I implemented. Just to understand the Knowledge Graph Visual Browser implementation and how it works. My idea was to use the graph condensation method and create a new graph consisting of nodes that represent strongly connected components in the original graph.
+This is the first technique implemented. I implemented it just to understand the Knowledge Graph Visual Browser implementation and how it works. The idea was to use the graph condensation method and create a new graph consisting of nodes that represent strongly connected components in the original graph.
 
 ---
 
-Then I decided to find out what types of layouts exist that are used to present large graphs and can be useful in Knowledge Graph Visual browser. I found following: 
+Let's find out what types of layouts exist that are used to present large graphs and can be useful in Knowledge Graph Visual browser.
 
 <h3 id="sequential-layout">Sequential layout</h3>
 
