@@ -1,4 +1,17 @@
-<h1>Optimization of knowledge graphs visualization</h1>
+<h1>Scientific documentation of the research project</h1>
+<h3>Topic: Optimization in visualization of knowledge graphs: Grouping of clusters.</h3>
+
+Team members who contribute to the Knowledge Graph Visual Browser:
+- Štěpán Stenchlák
+  - basic implementation as a bachelor's thesis
+- Jiří Resler
+  - Faceted filtering
+- Oskar Razyapov
+  - [Grouping of clusters](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#grouping-of-clusters)
+
+Full implementation and basic principals used in the "[Grouping of clusters](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#grouping-of-clusters)" extension are described in the [technical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md) and [user](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md) documentations.
+
+There also exist a contribution to [the original article](https://www.sciencedirect.com/science/article/pii/S1570826822000105#b2). Available [here](https://cunicz-my.sharepoint.com/:w:/g/personal/32372635_cuni_cz/EV7T125oVxBGkA2EyI3h1fQB4vHl4NJtNkbHMSx5be4ALw?e=FZ4HxC). 
 
 Table of content:
 - [Introduction](#introduction)
@@ -6,21 +19,21 @@ Table of content:
 - [Approaches](#approaches)
 - [References](#references)
 
+This paper proposes several prototypes (developed by the student or found in other research papers) used to optimize the visualization of knowledge graphs so that they are well organized and easy to understand for ordinary users. It is also supposed to compare prototypes and implement at least one of them.
+
+The paper is organized as follows. Section [1](#introduction) contains an introduction. Section [2](#motivation) describes the motivation used in our extension. Section [3](#approaches) describes different approaches used to simplify large graphs. Section [4](#references) contains useful links to the papers and webpages referenced in our paper.
+
 <h2 id="introduction">1. Introduction</h2>
 
-A knowledge graph, also known as a semantic network, represents a network of real-world entities: objects, events, situations, or concepts, and illustrates the relationship between them. This information is typically stored in a graph database and visualized as a graph structure, giving rise to the term "knowledge graph" [[1]](#references). The most common way to represent knowledge graphs is to use the RDF standard.
+A [knowledge graph](https://en.wikipedia.org/wiki/Knowledge_graph), also known as a semantic network, represents a network of real-world entities: objects, events, situations, or concepts, and illustrates the relationship between them. This information is typically stored in a graph database and visualized as a graph structure, giving rise to the term "knowledge graph" [[1]](#references). The most common way to represent knowledge graphs is to use the [RDF standard](https://en.wikipedia.org/wiki/Resource_Description_Framework).
 
-However, it can be difficult for non-specialists to study knowledge graphs due to background technicalities. To solve this problem, the paper “Interactive and iterative visual exploration of knowledge graphs based on shared and reusable visual configurations” [[2]](#references) proposes the Knowledge Graph Visual browser interactive tool which allows non-specialists to explore knowledge graphs without knowing the underlying technical details.
-
-This paper is organized as follows. Section [2](#motivation) describes the motivation used in our extension. Section [3](#approaches) describes different approaches used to simplify large graphs. Section [4](#references) contains useful links to the papers and webpages referenced in our paper.
+However, it can be difficult for non-specialists to study knowledge graphs due to background technicalities. To solve this problem, the paper “Interactive and iterative visual exploration of knowledge graphs based on shared and reusable visual configurations” [[2]](#references) proposes the [Knowledge Graph Visual browser](https://try.kgbrowser.opendata.cz/) interactive tool which allows non-specialists to explore knowledge graphs without knowing the underlying technical details.
 
 <h2 id="motivation">2. Motivation</h2>
 
 Often the graphs are quite large, contain too much detail, which slows down and makes them difficult to visualize. And as a result, they do not provide easy visual learning and understanding for regular users.
 
 A good visualization can show (reveal) patterns in the graph that are of value to the user. And such visualization can also be used for the presentation purposes.
-
-This paper proposes several prototypes (developed by the student or found in other research papers) used to optimize the visualization of knowledge graphs so that they are well organized and easy to understand for ordinary users. It is also supposed to compare prototypes and implement at least one of them.
 
 <h2 id="approaches">3. Approaches</h2>
 
@@ -162,7 +175,7 @@ After several studies, we can state the following several criteria:
 But there are more questions:
 - Based on what criteria to cluster nodes?
 - How to name and represent the aggregation node?
-- Can cluster have nodes of different  equivalence classes (based on similarity)?
+- Can cluster have nodes of different equivalence classes (based on similarity)?
 - How to represent edges between nodes that represent an aggregation of the original nodes (create only one aggregated edge, i.e. its thickness will show how many edges it combines, or show them all)?
 - How to show the internals of an aggregation node?
 
@@ -173,18 +186,96 @@ The first draft of the approach is shown in the Figure 4 below.
     <em>Figure 4. First draft.</em>
 </p>
 
-From this point on, we can introduce the term "hierarchy" into use and formulate the following main criteria:
-- There can be hierarchical and non-hierarchical (ordinary, represented by an edge) relationships between nodes
-- The hierarchical extension must show the extension within (inside) the expanded node
-- It should be possible in the configuration to determine if the relationship is hierarchical or non-hierarchical
-- A non-hierarchical edge can lead from a parent node (to the node in the different hierarchy), even if it contains child nodes inside
+From this point on, we can introduce the term "[hierarchy](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#parent-child-or-child-parent-hierarchical-relationship)" into use and formulate the following main criteria:
+- There can be [hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#parent-child-or-child-parent-hierarchical-relationship) and [non-hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#non-hierarchical-relationship-) (ordinary, represented by an edge) relationships between nodes
+- The [hierarchical expansion](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#parent-child-or-child-parent-hierarchical-relationship) must show the expansion within (inside) the expanded node
+- It should be possible in the configuration to determine if the relationship is [hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#parent-child-or-child-parent-hierarchical-relationship) or [non-hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#non-hierarchical-relationship-)
+- A [non-hierarchical edge](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#non-hierarchical-relationship-) can lead between nodes in the different hierarchies, even if one of them or both contain child nodes inside
 - Child nodes can be collapsed into parent nodes
+- Nodes having the same [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchical-class) must be place in the same [hierarchical group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchical-group)
+- It should be possible to define [visual groups](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-group) - big clusters of nodes that might not belong to some hierarchy
 
-We also decided to use the map-style zoom used in mapping platforms, so that when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes.
+We also introduce the map-style zoom used in mapping platforms, so that when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes.
 
 The point is not to stick with the "Departments and Subjects" topic only, but to make it abstract and usable with other topics.
- 
-This approach, its final criteria and full implementation are described in the [technical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md) and [user](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md) documentations.
+
+The following section describes the principal proposed in this paper.
+
+<h2 id="grouping-of-clusters-extension">Grouping of clusters</h2>
+
+The "[Grouping of clusters](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#parent-child-or-child-parent-hierarchical-relationship)" algorithm first clusters the nodes into a [cluster](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#cluster), and then collapses that cluster into a single group node. The clustering of nodes is determined based on the [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-class), the parent node, the [level of the hierarchy](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-level) in which the node resides, and the visual class.  
+
+The visual configuration is extended with [visual layout constraints](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-layout-constraint) which can be used to restrict the way the knowledge graph is visualized. To support visual layout constraints, we extend the Knowledge Graph Visual Browser ontology with new terms.  
+
+Figure 5 below shows the extension of the ontology as a UML class diagram. 
+
+<p align="center">
+    <img src="img/extension_diagram.png" alt="extension_diagram" title="Extension diagram" width="600"/><br/>
+    <em>Figure 5. Extended Knowledge Graph Visual Browser ontology for defining extended visual configurations.</em>
+</p>
+
+In the visual configuration we extend every entity node with additional [hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchical-class) and visual group classes, representing [hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchical-group) and [visual](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-group) groups to which the node belongs, respectively. 
+
+Expansion and preview queries defined in the visual configuration are extended with a new variable ?groupclass that is bound to the visual class representing either the hierarchical or visual group class. It is common to consider a hierarchical class as a group class as well, because we can interpret a root ancestor node in a hierarchy as a [pseudo-parent node](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-group). 
+
+The visual knowledge graph 𝒱 is associated with two new functions 𝜎 and 𝜏 that map each entity node to a set of literals called visual group classes and hierarchical group classes, respectively. Entity node is placed under the [visual group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-group) of class defined by 𝜎. And similarly, entity node is placed in the [hierarchical group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchical-group) of class defined by 𝜏. It is also possible that the node is not assigned to a visual group class or a hierarchical group class.  
+
+A visual configuration extended with [visual layout constraints](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-layout-constraint) is bounded to a concrete 𝒢. As for now, the Knowledge Graph Visual browser supports only “[visual group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visualgrouplayoutconstraint-class)”, “[hierarchical groups to cluster](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchicalgroupstoclusterlayoutconstraint-class)”, “[classes to cluster together](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#classestoclustertogetherlayoutconstraint-class)” and “[hierarchical parent-child or child-parent](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#childparentlayoutconstraint-and-parentchildlayoutconstraint-classes)" layout constraints.  
+
+The “[visual group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visualgrouplayoutconstraint-class)” visual layout constraint defines the visual class, namely visual group class, that represents a [visual group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-group). The visual layout constraint is expressed as an instance of the browser:VisualGroupLayoutConstraint class. The visual group class is assigned to this class by the browser:clusteringSelector property. 
+
+The “[hierarchical groups to cluster](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchicalgroupstoclusterlayoutconstraint-class)” visual layout constraint defines the visual class, namely hierarchical group class, that represents a [hierarchical group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchical-group). All nodes within such a hierarchical group allowed to be clustered and grouped. All other nodes within other hierarchical groups cannot be clustered and grouped by the extension algorithm. The visual layout constraint is expressed as an instance of the browser:HierarchicalGroupToClusterLayoutConstraint class. The hierarchical group class is assigned to this class by the browser:clusteringSelector property.  
+
+By default, grouping of clusters algorithm clusters nodes that only have the same visual class. The “[Classes to cluster together](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#classestoclustertogetherlayoutconstraint-class)” visual layout constraint defines a set of visual classes that can be clustered together and then grouped into one group. The visual layout constraint is expressed as an instance of the browser:ClassesToClusterTogetherLayoutConstraint class. Each visual class from a set is assigned to this class by the browser:clusteringSelector property. 
+
+The “[parent-child](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#childparentlayoutconstraint-and-parentchildlayoutconstraint-classes)” (respectively “[child-parent](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#childparentlayoutconstraint-and-parentchildlayoutconstraint-classes)”) visual layout constraint defines the visual class of the node that plays the role of the parent (respectively child) node and the visual class of the edge, which should be rendered as a hierarchical transition between the parent and the child rather than a line. The visual layout constraint is expressed as an instance of the browser:ParentChildLayoutConstraint (respectively browser:ChildParentLayoutConstraint) class. The visual class of the parent node is assigned to this class with the browser:parentNodeSelector (respectively browser:childNodeSelector) property. The visual class of the edge is assigned to the class with the browser:hierarchicalEdgeSelector property. 
+
+The stateless [server](https://github.com/linkedpipes/knowledge-graph-browser-backend) is extended with a new request handler that prepares visual layout constraints and sends them to the client, which then uses them to change how the knowledge graph is visualized. 
+
+<h3>Example</h3>
+
+<p align="center">
+    <img src="img/choose_configuration.png" alt="choose_configuration" title="Choice of the configuration" width="600"/><br/>
+    <em>Figure 6. Choice of the configuration and starting node (screenshots 1-3).</em>
+</p>
+
+Let us demonstrate our extension on a visual knowledge graph about Matematicko-fyzikální fakulta. At the beginning, the user chooses the Charles Explorer meta-configuration (Figure 6, screenshot 1). The user then chooses the configuration supporting the visual layout constraints (Figure 6, screenshot 2). Not all the configurations support visual layout constraints. The user then chooses the starting node from the list of starting nodes, in our case it is Matematicko-fyzikální fakulta (Figure 6, screenshot 3). The client then visualizes the selected starting node and reads layout constraints from the server. The rest of the visualization part is as usual. 
+
+An interesting part happens when the user starts exploring a graph. When the user selects the node on the graph, the client loads the node’s preview. If the node has assigned a hierarchical class (in the preview query) representing a hierarchical group that is allowed to be clustered and grouped, the client shows this class labeled as hierarchical class in the preview section on the side panel (Figure 7 screenshot 1). 
+
+<p align="center">
+    <img src="img/user_interaction.jpg" alt="user_interaction" title="User interaction" width="600"/><br/>
+    <em>Figure 7. A possible user’s scenario of exploring the knowledge graph with Matematicko-fyzikální fakulta in KGBrowser (screenshots 1-3).</em>
+</p>
+
+Expansions that expand the node with its neighborhood using hierarchical relationships are hierarchical expansions. There are hierarchical and non-hierarchical expansions (Figure 7, screenshot 2).  
+
+The user selects the Podřazená pracoviště view and clicks the Expand button (Figure 7, screenshot 3). The client then performs the expansion action. Since the expansion is hierarchical, the client connects the neighborhood of the node using hierarchical relationships (Figure 7, screenshot 3). Here the Matematicko-fyzikální fakulta node represents a parent node. 
+
+<p align="center">
+    <img src="img/hierarchical_expansions.jpg" alt="hierarchical_expansions" title="Hierarchical expansions" width="600"/><br/>
+    <em>Figure 8. A possible user’s scenario of exploring the knowledge graph with Matematicko-fyzikální fakulta in KGBrowser (screenshots 4-5).</em>
+</p> 
+
+The user then selects the Matematicka sekce node, clicks Podřazená pracoviště expand button in available views and selects Katedra algebry node (Figure 8, screenshot 4). 
+
+The user then selects the Témata pracoviště view of the Katedra algebry node and clicks the Expand button. Now, the expansion is non-hierarchical, so the client connects the expanded neighborhood with a visual line (Figure 8, screenshot 5). 
+
+This way, the user opens a group of nodes having tema visual class. The visual configuration specifies nodes assigned to tema visual class as a visual group. Therefore, the client creates the pseudo-parent node representing the tema visual group (Figure 8, screenshot 5, right side). 
+
+<p align="center">
+    <img src="img/scaling_options.png" alt="scaling_options" title="Scaling options" width="400"/><br/>
+    <em>Figure 9. Scaling options. The user selects “Grouping of clusters” option.</em>
+</p> 
+
+The user then decides to utilize the “Grouping of clusters” technique which brings the zoom approach used in mapping platforms to the Knowledge Graph Visual Browser. The user selects the “Grouping of clusters” option in the checkbox (Figure 9) and clicks the “minus” button. The client then groups nodes on the lowest (deepest) hierarchical level (Figure 10, screenshot 6). Then the user decides to go further and clicks multiple times the “minus” button. After a few iterations, the user gets the result shown on Figure 10, screenshot 7. The user clicks the “minus” button once again, and at this time the client collapses the child group into its Matematicka sekce parent node. After a few more iterations with the “minus” button, the user gets to the state where the graph cannot be collapsed further (Figure 10, screenshot 9). This state represents the highest abstract level of the hierarchy. In this state, the graph shows the least amount of detail possible. 
+
+<p align="center">
+    <img src="img/grouping_of_clusters.png" alt="grouping_of_clusters" title="Grouping of clusters" width="600"/><br/>
+    <em>Figure 10. A possible user’s scenario of exploring the knowledge graph with Matematicko-fyzikální fakulta in KGBrowser (screenshots 6-9).</em>
+</p> 
+
+The user then decides to click the “plus” button multiple times. With each iteration, the user gradually returns to the state from which he started (Figure 4, screenshot 5). 
 
 <h2 id="references">References</h2>
 

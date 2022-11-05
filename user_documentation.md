@@ -155,7 +155,7 @@ When you zoom in at a specific point on the mapping platforms, at each zoom leve
 
 The same principle is used in the "Grouping of clusters" extension, namely, when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes.
 
-The "Grouping of clusters" algorithm first clusters the nodes into a [cluster](#cluster-glossary), and then collapses this cluster into a single group node. Which nodes to cluster is determined by an algorithm based on position of the nodes. This algorithm uses well-known clustering methods: k-Means clustering [1] and k-Medoids clustering [2] (what method to use is defined by the technician).
+The "Grouping of clusters" algorithm first clusters the nodes into a [cluster](#cluster-glossary), and then collapses that cluster into a single group node. Which nodes to cluster is determined by an algorithm based on position of the nodes. This algorithm uses well-known clustering methods: k-Means clustering [1] and k-Medoids clustering [2] (what method to use is defined by the technician).
 
 The basic approach of the algorithm is that it creates several centroids, generates from them an empty group (k-Means clustering [1]) or a group consisting of a single node (k-Medoids clustering [2]), and then adds surrounding nodes to the closest group.
 
