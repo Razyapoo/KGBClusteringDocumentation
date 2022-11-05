@@ -7,9 +7,9 @@ Team members who contribute to the Knowledge Graph Visual Browser:
 - Jiří Resler
   - Faceted filtering
 - Oskar Razyapov
-  - [Grouping of clusters](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#grouping-of-clusters)
+  - [Grouping of clusters](https://github.com/Razyapoo/knowledge-graph-browser-frontend-grouping-of-clusters)
 
-Full implementation and basic principals used in the "[Grouping of clusters](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#grouping-of-clusters)" extension are described in the [technical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md) and [user](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md) documentations.
+Full implementation and basic principals used in the "Grouping of clusters" extension are described in the [technical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md) and [user](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md) documentations.
 
 There also exist a contribution to [the original article](https://www.sciencedirect.com/science/article/pii/S1570826822000105#b2). Available [here](https://cunicz-my.sharepoint.com/:w:/g/personal/32372635_cuni_cz/EV7T125oVxBGkA2EyI3h1fQB4vHl4NJtNkbHMSx5be4ALw?e=FZ4HxC). 
 
@@ -17,11 +17,12 @@ Table of content:
 - [Introduction](#introduction)
 - [Motivation](#motivation)
 - [Approaches](#approaches)
+- [Grouping of clusters](#grouping-of-clusters-extension)
 - [References](#references)
 
 This paper proposes several prototypes (developed by the student or found in other research papers) used to optimize the visualization of knowledge graphs so that they are well organized and easy to understand for ordinary users. It is also supposed to compare prototypes and implement at least one of them.
 
-The paper is organized as follows. Section [1](#introduction) contains an introduction. Section [2](#motivation) describes the motivation used in our extension. Section [3](#approaches) describes different approaches used to simplify large graphs. Section [4](#references) contains useful links to the papers and webpages referenced in our paper.
+The paper is organized as follows. Section [1](#introduction) contains an introduction. Section [2](#motivation) describes the motivation used in our extension. Section [3](#approaches) describes different approaches used to simplify large graphs. Section [4](#references) describes final approach.
 
 <h2 id="introduction">1. Introduction</h2>
 
@@ -33,7 +34,7 @@ However, it can be difficult for non-specialists to study knowledge graphs due t
 
 Often the graphs are quite large, contain too much detail, which slows down and makes them difficult to visualize. And as a result, they do not provide easy visual learning and understanding for regular users.
 
-A good visualization can show (reveal) patterns in the graph that are of value to the user. And such visualization can also be used for the presentation purposes.
+A good visualization can show (reveal) patterns in the graph that are of value to the user. Such visualization, for example, can be used for the presentation purposes.
 
 <h2 id="approaches">3. Approaches</h2>
 
@@ -188,29 +189,29 @@ The first draft of the approach is shown in the Figure 4 below.
 
 From this point on, we can introduce the term "[hierarchy](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#parent-child-or-child-parent-hierarchical-relationship)" into use and formulate the following main criteria:
 - There can be [hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#parent-child-or-child-parent-hierarchical-relationship) and [non-hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#non-hierarchical-relationship-) (ordinary, represented by an edge) relationships between nodes
-- The [hierarchical expansion](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#parent-child-or-child-parent-hierarchical-relationship) must show the expansion within (inside) the expanded node
+- The hierarchical expansion (from the list of available expansions) must show the expansion within (inside) the expanded node
 - It should be possible in the configuration to determine if the relationship is [hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#parent-child-or-child-parent-hierarchical-relationship) or [non-hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#non-hierarchical-relationship-)
-- A [non-hierarchical edge](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#non-hierarchical-relationship-) can lead between nodes in the different hierarchies, even if one of them or both contain child nodes inside
+- A non-hierarchical edge can lead between nodes placed in the different hierarchies, even if one of them or both contain child nodes inside
 - Child nodes can be collapsed into parent nodes
 - Nodes having the same [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchical-class) must be place in the same [hierarchical group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchical-group)
 - It should be possible to define [visual groups](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-group) - big clusters of nodes that might not belong to some hierarchy
 
 We also introduce the map-style zoom used in mapping platforms, so that when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes.
 
-The point is not to stick with the "Departments and Subjects" topic only, but to make it abstract and usable with other topics.
+The point is not to stick with the "Departments and Subjects" topic only, but to make it abstract and reusable with other topics.
 
-The following section describes the principal proposed in this paper.
+The following section describes the final approach proposed in this paper.
 
-<h2 id="grouping-of-clusters-extension">Grouping of clusters</h2>
+<h2 id="grouping-of-clusters-extension">4. Grouping of clusters</h2>
 
-The "[Grouping of clusters](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#parent-child-or-child-parent-hierarchical-relationship)" algorithm first clusters the nodes into a [cluster](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#cluster), and then collapses that cluster into a single group node. The clustering of nodes is determined based on the [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-class), the parent node, the [level of the hierarchy](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-level) in which the node resides, and the visual class.  
+The "Grouping of clusters" algorithm first clusters the nodes into a [cluster](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#cluster), and then collapses that cluster into a single group node. The clustering of nodes is determined based on the [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-class), the parent node, the [level of the hierarchy](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-level) in which the node resides, and the visual class (with respect to the order).  
 
 The visual configuration is extended with [visual layout constraints](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-layout-constraint) which can be used to restrict the way the knowledge graph is visualized. To support visual layout constraints, we extend the Knowledge Graph Visual Browser ontology with new terms.  
 
 Figure 5 below shows the extension of the ontology as a UML class diagram. 
 
 <p align="center">
-    <img src="img/extension_diagram.png" alt="extension_diagram" title="Extension diagram" width="600"/><br/>
+    <img src="img/extension_diagram.jpg" alt="extension_diagram" title="Extension diagram" width="600"/><br/>
     <em>Figure 5. Extended Knowledge Graph Visual Browser ontology for defining extended visual configurations.</em>
 </p>
 
