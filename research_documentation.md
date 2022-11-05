@@ -134,7 +134,7 @@ The main visual tricks:
 - Highlighting key nodes and edges
 - Using node aggregation
 
-<h3 id="hiding-background">Hiding background</h3>
+<h4 id="hiding-background">Hiding background</h4>
 
 This technique allows to show only those nodes that are of interest to the user. This method also hides redundant nodes (or background) or makes them less visible to the user. A possible implementation of such a technique is shown in Figure 2 below.
 
@@ -145,18 +145,18 @@ This technique allows to show only those nodes that are of interest to the user.
 
 However, this technique has already been implemented in the Knowledge Graph Visual browser by Štěpán Stenchlák.
 
-<h3 id="highlighting-key-nodes-and-edges">Highlighting key nodes and edges</h3>
+<h4 id="highlighting-key-nodes-and-edges">Highlighting key nodes and edges</h4>
 
 The second approach is to highlight key nodes or areas (clusters) of nodes that may be of interest to the user. The most important nodes can also be larger than others. An example of such a representation is shown in Figure 3.
 
 <p align="center">
-    <img src="img/node_highlighting.png" alt="node_highlighting" title="node highlighting" width="600"/><br/>
+    <img src="img/node_highlighting.png" alt="node_highlighting" title="Node highlighting" width="600"/><br/>
     <em>Figure 3. Node and edge highlighting [10].</em>
 </p>
 
 The disadvantage of this method is that it only improves visual perception, but does not simplify the graph and does not make it faster.
 
-<h3 id="node-aggregation">Node aggregation</h3>
+<h4 id="node-aggregation">Node aggregation</h4>
 
 Node aggregation is an example of [graph coarsening](#coarsening). A coarsened graph consists of aggregated nodes. But this is not what we want to do, because in this way we will lose other nodes and edges that may need to be restored. It would be much better to still be able to reveal nodes and edges hidden within aggregated nodes.
 
@@ -236,7 +236,7 @@ The stateless [server](https://github.com/linkedpipes/knowledge-graph-browser-ba
 <h3>Example</h3>
 
 <p align="center">
-    <img src="img/choose_configuration.png" alt="choose_configuration" title="Choice of the configuration" width="600"/><br/>
+    <img src="img/choose_configuration.jpg" alt="choose_configuration" title="Choice of the configuration" width="600"/><br/>
     <em>Figure 6. Choice of the configuration and starting node (screenshots 1-3).</em>
 </p>
 
@@ -265,14 +265,14 @@ The user then selects the Témata pracoviště view of the Katedra algebry node 
 This way, the user opens a group of nodes having tema visual class. The visual configuration specifies nodes assigned to tema visual class as a visual group. Therefore, the client creates the pseudo-parent node representing the tema visual group (Figure 8, screenshot 5, right side). 
 
 <p align="center">
-    <img src="img/scaling_options.png" alt="scaling_options" title="Scaling options" width="400"/><br/>
+    <img src="img/scaling_options.png" alt="scaling_options" title="Scaling options" width="250"/><br/>
     <em>Figure 9. Scaling options. The user selects “Grouping of clusters” option.</em>
 </p> 
 
-The user then decides to utilize the “Grouping of clusters” technique which brings the zoom approach used in mapping platforms to the Knowledge Graph Visual Browser. The user selects the “Grouping of clusters” option in the checkbox (Figure 9) and clicks the “minus” button. The client then groups nodes on the lowest (deepest) hierarchical level (Figure 10, screenshot 6). Then the user decides to go further and clicks multiple times the “minus” button. After a few iterations, the user gets the result shown on Figure 10, screenshot 7. The user clicks the “minus” button once again, and at this time the client collapses the child group into its Matematicka sekce parent node. After a few more iterations with the “minus” button, the user gets to the state where the graph cannot be collapsed further (Figure 10, screenshot 9). This state represents the highest abstract level of the hierarchy. In this state, the graph shows the least amount of detail possible. 
+The user then decides to utilize the “Grouping of clusters” technique which brings the zoom approach used in mapping platforms to the Knowledge Graph Visual Browser. The user selects the “Grouping of clusters” option in the checkbox (Figure 9) and clicks the “minus” button. The client then groups nodes on the [current hierarchical level](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#current-hierarchical-level) (Figure 10, screenshot 6). Then the user decides to go further and clicks multiple times the “minus” button. After a few iterations, the user gets the result shown on Figure 10, screenshot 7. The user clicks the “minus” button once again, and at this time the client collapses the child group into its Matematicka sekce parent node. After a few more iterations with the “minus” button, the user gets to the state where the graph cannot be collapsed further (Figure 10, screenshot 9). This state represents the highest abstract level of the hierarchy. In this state, the graph shows the least amount of detail possible. 
 
 <p align="center">
-    <img src="img/grouping_of_clusters.png" alt="grouping_of_clusters" title="Grouping of clusters" width="600"/><br/>
+    <img src="img/grouping_of_clusters.jpg" alt="grouping_of_clusters" title="Grouping of clusters" width="600"/><br/>
     <em>Figure 10. A possible user’s scenario of exploring the knowledge graph with Matematicko-fyzikální fakulta in KGBrowser (screenshots 6-9).</em>
 </p> 
 
