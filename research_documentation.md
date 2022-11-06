@@ -203,7 +203,7 @@ We also introduce the map-style zoom used in mapping platforms, so that when you
 
 <p align="center">
     <img src="img/map_style_zoom.png" alt="map_style_zoom" title="Map style zoom" width="600"/><br/>
-    <em>Figure 5. Map-style zoom (screenshots 1-6). Czechia (google maps, screenshot 1), which is placed at the level 0, is an aggregation of cities placed at the level 1 (screenshot 3), and analogously, MFF (screenshot 2), which is placed at the level 0, is an aggregation of departments placed at the level 1 (screenshot 4). In case there are several different hierarchical groups, the highest abstract level will show the last ancestor of each hierarchy and they will not be grouped or collapsed (screenshots 5 (countries) and 6 (departments and subjects)).</em>
+    <em>Figure 5. Map-style zoom (screenshots 1-6). Czechia (google maps, screenshot 1), which is placed at the level 0, is an aggregation of cities placed at the level 1 (google maps, screenshot 3), and analogously, MFF (screenshot 2), which is placed at the level 0, is an aggregation of departments placed at the level 1 (screenshot 4). In case there are several different hierarchical groups, the highest abstract level will show the last ancestor of each hierarchy and they will not be grouped or collapsed (screenshots 5 (google maps, countries) and 6 (departments and subjects)).</em>
 </p>
 
 The point is not to stick with the "Departments and Subjects" topic only, but to make it abstract and reusable with other topics.
