@@ -211,6 +211,13 @@ There are two cases:
     > **Note** \
     > In such case the [current hierarchical level](#current-hierarchical-level-glossary) increases by 1.
 
+In case there are several different hierarchical groups, the lowest hierarchical level will show the last ancestor of each hierarchy and they will not be grouped or collapsed (Figure 9, screenshots 5 and 6).
+
+<p align="center">
+    <img src="img/map_style_zoom_lowest.png" alt="map_style_zoom_lowest" title="Map style zoom lowest level" width="700"/><br/>
+    <em>Figure 9. Map style zoom lowest level</em>
+</p>
+
 <h3 id="node-removal-glossary">Node removal</h3>
 
 > Deleting a node propagates the recursive deletion of node's descendants.
@@ -224,25 +231,25 @@ This guide will explain and teach you how the "Grouping of clusters" extension w
 > **Note** \
 > The Knowledge Graph Visual browser currently supports only one configuration that allows this extension to be used.
 
-**1)** Choose "Charles Explorer" meta-configuration. See the Figure 9 below.
+**1)** Choose "Charles Explorer" meta-configuration. See the Figure 10 below.
 
 <p align="center">
     <img src="img/meta_configuration_selection.png" alt="meta-configuration-selection" title="Meta-Configuration selection" width="600"/><br/>
-    <em>Figure 9. Meta-Configuration selection</em>
-</p>
-
-**2)** Choose "Browsing topics cultivated at Charles University (with constraints)" configuration. See the Figure 10 below.
-
-<p align="center">
-    <img src="img/configuration_selection.png" alt="configuration-selection" title="Configuration selection" width="600"/><br/>
     <em>Figure 10. Meta-Configuration selection</em>
 </p>
 
-**3)** Choose starting node from the list of starting nodes. See the Figure 11 below.
+**2)** Choose "Browsing topics cultivated at Charles University (with constraints)" configuration. See the Figure 11 below.
+
+<p align="center">
+    <img src="img/configuration_selection.png" alt="configuration-selection" title="Configuration selection" width="600"/><br/>
+    <em>Figure 11. Meta-Configuration selection</em>
+</p>
+
+**3)** Choose starting node from the list of starting nodes. See the Figure 12 below.
 
 <p align="center">
     <img src="img/starting_node.png" alt="starting-node" title="Starting node" width="600"/><br/>
-    <em>Figure 11. Starting node</em>
+    <em>Figure 12. Starting node</em>
 </p>
 
 <h2 id="get-started-with-graph-exploration">Get started with graph exploration</h2>
@@ -257,7 +264,7 @@ There are [hierarchical](#hierarchical-relationships-glossary) and [non-hierarch
 
 Expansion queries listed in the detail panel under the "Available views" label allow you to show the neighborhood of the node in which that node is in either a [hierarchical](#hierarchical-relationships-glossary) or [non-hierarchical](#non-hierarchical-relationships-glossary) relationship with its neighbors.
 
-The hierarchical and non-hierarchical expansions are listed below and shown in the Figure 12 below:
+The hierarchical and non-hierarchical expansions are listed below and shown in the Figure 13 below:
 
 - Hierarchical expansions:
   - "Nadřazená pracoviště"
@@ -269,7 +276,7 @@ The hierarchical and non-hierarchical expansions are listed below and shown in t
 
 <p align="center">
     <img src="img/hierarchical_non_hierarchical_expansions.png" alt="hierarchical-and-non-hierarchical-expansions" title="Hierarchical and non hierarchical expansions" width="530"/><br/>
-    <em>Figure 12. Hierarchical and non-hierarchical expansions</em>
+    <em>Figure 13. Hierarchical and non-hierarchical expansions</em>
 </p>
 
 > **Note**
@@ -298,14 +305,14 @@ Before removal of the "Informaticka sekce":
 
 <p align="center">
     <img src="img/before_removal.png" alt="before-removal" title="Before removal" width="750"/><br/>
-    <em>Figure 13. Before removal (the node "Informaticka sekce" is selected for deletion)</em>
+    <em>Figure 14. Before removal (the node "Informaticka sekce" is selected for deletion)</em>
 </p>
 
 After removal:
 
 <p align="center">
     <img src="img/after_removal.png" alt="after-removal" title="After removal" width="350"/><br/>
-    <em>Figure 14. After removal</em>
+    <em>Figure 15. After removal</em>
 </p>
 
 <h2 id="restrictions">Restrictions on a graph</h2>

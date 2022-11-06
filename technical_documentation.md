@@ -366,6 +366,14 @@ There are two cases:
     > **Note** \
     > In such case the [current hierarchical level](#current-hierarchical-level-glossary) increases by 1.
 
+
+In case there are several different hierarchical groups, the lowest hierarchical level will show the last ancestor of each hierarchy and they will not be grouped or collapsed (Figure 8, screenshots 5 and 6).
+
+<p align="center">
+    <img src="img/map_style_zoom_lowest.png" alt="map_style_zoom_lowest" title="Map style zoom lowest level" width="700"/><br/>
+    <em>Figure 8. Map style zoom lowest level</em>
+</p>
+
 <h3 id="extension-of-the-graph-manipulator">Extension of the GraphManipulator.ts</h3>
 
 In this component, only group management methods are extended to set a parent node, a [hierarchical level](#hierarchical-level-glossary), and a [hierarchical group](#hierarchical-group-glossary). 

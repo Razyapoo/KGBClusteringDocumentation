@@ -166,12 +166,12 @@ To solve this problem, can use a trick: if the user clicks on the aggregated nod
 
 I presented this approach to my supervisor and two weeks later he told me that he had found a customer who is interested in this approach. The customer was the Charles University and the topic was "Departments and subjects".
 
-After several studies, we can state the following several criteria:
+After several studies, we can state the following several conceptual criteria:
 
 - An aggregation node must be a cluster of related nodes (for example, nodes of the same class or similar property)
 - An aggregation node must somehow show the user which nodes it has inside
-- An aggregation node might have separate aggregation nodes internally representing the types of nodes it aggregates (in case it aggregates different types of nodes, such as universities and subjects).
-- An aggregation node may display the number of nodes it has inside.
+- An aggregation node might have separate aggregation nodes internally representing the types of nodes it aggregates (in case it aggregates different types of nodes, such as universities and subjects) - **not implemented**.
+- An aggregation node may display the number of nodes it has inside - **not implemented**.
 
 But there are more questions:
 - Based on what criteria to cluster nodes?
@@ -189,14 +189,20 @@ The first draft of the approach is shown in the Figure 4 below.
 
 From this point on, we can introduce the term "[hierarchy](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-relationship)" into use and formulate the following main criteria:
 - There can be [hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-relationship) and [non-hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#non-hierarchical-relationship-) (ordinary, represented by an edge) relationships between nodes
+- A parent node is an aggregation of child nodes place inside
 - The [hierarchical expansion](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-expansions) (from the list of available expansions) must show the expansion [within (inside)](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-relationship) the expanded node
-- It should be possible in the configuration to determine if the relationship is hierarchical or non-hierarchical (more in [user_documentation.md](user_documentation.md#edge_moving))
+- It should be possible in the configuration to determine if the relationship is hierarchical or non-hierarchical
 - A non-hierarchical edge can lead between nodes placed in the different hierarchies, even if one of them or both contain child nodes inside
-- Child nodes can be collapsed into parent nodes
-- Nodes having the same [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchical-class) must be place in the same [hierarchical group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchical-group)
-- It should be possible to define [visual groups](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-group) - big clusters of nodes that might not belong to some hierarchy
+- Child nodes can be collapsed into parent nodes. In such case, all edges of child nodes are moved to the parent node (more in [user_documentation.md](user_documentation.md#edge_moving))
+- Nodes having the same [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-class) must be place in the same [hierarchical group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-group)
+- It should be possible to define [visual groups](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#visual-group) - big clusters of nodes that might not belong to some hierarchy
 
-We also introduce the map-style zoom used in mapping platforms, so that when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes.
+We also introduce the map-style zoom used in mapping platforms, so that when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes. In analogy with maps, we introduce the concept of [hierarchy levels](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-level).  An example is shown in the Figure 5 below. 
+
+<p align="center">
+    <img src="img/map_style_zoom.png" alt="map_style_zoom" title="Map style zoom" width="600"/><br/>
+    <em>Figure 5. Map-style zoom (screenshots 1-4). Czechia, which is placed at the level 0, is an aggregation of cities placed at the level 1 (screenshots 1 and 3), and analogously, MFF, which is placed at the level 0, is an aggregation of departments placed at the level 1 (screenshots 2 and 4). In case there are several different hierarchical groups, the lowest hierarchical level will show the last ancestor of each hierarchy and they will not be grouped or collapsed (screenshots 5 and 6).</em>
+</p>
 
 The point is not to stick with the "Departments and Subjects" topic only, but to make it abstract and reusable with other topics.
 
