@@ -11,8 +11,6 @@ Team members who contribute to the Knowledge Graph Visual Browser:
 
 Full implementation and basic principals used in the "Grouping of clusters" extension are described in the [technical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md) and [user](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md) documentations.
 
-There also exist a contribution to [the original article](https://www.sciencedirect.com/science/article/pii/S1570826822000105#b2). Available [here](https://cunicz-my.sharepoint.com/:w:/g/personal/32372635_cuni_cz/EV7T125oVxBGkA2EyI3h1fQB4vHl4NJtNkbHMSx5be4ALw?e=FZ4HxC). 
-
 Table of content:
 - [Introduction](#introduction)
 - [Motivation](#motivation)
@@ -211,6 +209,8 @@ The point is not to stick with the "Departments and Subjects" topic only, but to
 The following section describes the final approach proposed in this paper.
 
 <h2 id="grouping-of-clusters-extension">4. Grouping of clusters</h2>
+
+This part will be used as a contribution to [the original article](https://www.sciencedirect.com/science/article/pii/S1570826822000105#b2). Also available [here](https://cunicz-my.sharepoint.com/:w:/g/personal/32372635_cuni_cz/EV7T125oVxBGkA2EyI3h1fQB4vHl4NJtNkbHMSx5be4ALw?e=FZ4HxC). 
 
 The "Grouping of clusters" algorithm first clusters the nodes into a [cluster](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#cluster), and then collapses that cluster into a single group node. The clustering of nodes is determined based on the [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-class), the parent node, the [level of the hierarchy](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-level) in which the node resides, and the visual class. Full description of the approach is available [here](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#grouping-of-clusters).
 
