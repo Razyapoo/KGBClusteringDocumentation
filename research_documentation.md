@@ -170,7 +170,7 @@ After several studies, we can state the following several conceptual criteria:
 
 - An aggregation node must be a cluster of related nodes (for example, nodes of the same class or similar property)
 - An aggregation node must somehow show the user which nodes it has inside
-- An aggregation node might have separate aggregation nodes internally representing the types of nodes it aggregates (in case it aggregates different types of nodes, such as universities and subjects) - **not implemented**.
+- An aggregation node might have separate aggregation nodes internally representing the types of nodes it aggregates (in case it aggregates different types of nodes at the same time, such as universities and subjects) - **not implemented**.
 - An aggregation node may display the number of nodes it has inside - **not implemented**.
 
 But there are more questions:
@@ -179,6 +179,8 @@ But there are more questions:
 - Can cluster have nodes of different equivalence classes (based on similarity)?
 - How to represent edges between nodes that represent an aggregation of the original nodes (create only one aggregated edge, i.e. its thickness will show how many edges it combines, or show them all)?
 - How to show the internals of an aggregation node?
+
+---
 
 The first draft of the approach is shown in the Figure 4 below.
 
@@ -189,19 +191,19 @@ The first draft of the approach is shown in the Figure 4 below.
 
 From this point on, we can introduce the term "[hierarchy](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-relationship)" into use and formulate the following main criteria:
 - There can be [hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-relationship) and [non-hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#non-hierarchical-relationship-) (ordinary, represented by an edge) relationships between nodes
-- A parent node is an aggregation of child nodes place inside
+- A parent node is an aggregation of child nodes placed inside
 - The [hierarchical expansion](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-expansions) (from the list of available expansions) must show the expansion [within (inside)](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-relationship) the expanded node
 - It should be possible in the configuration to determine if the relationship is hierarchical or non-hierarchical
 - A non-hierarchical edge can lead between nodes placed in the different hierarchies, even if one of them or both contain child nodes inside
-- Child nodes can be collapsed into parent nodes. In such case, all edges of child nodes are moved to the parent node (more in [user_documentation.md](user_documentation.md#edge_moving))
-- Nodes having the same [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-class) must be place in the same [hierarchical group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-group)
-- It should be possible to define [visual groups](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#visual-group) - big clusters of nodes that might not belong to some hierarchy
+- Child nodes can be collapsed into parent nodes. In such case, all edges of child nodes are moved to the parent node (more in the [user documentation](user_documentation.md#edge_moving))
+- Nodes having the same [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-class) must be place in the same [hierarchical group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-group). Here hierarchical class represents an equivalence class and hierarchical group contains only one equivalence class
+- It should be possible to define [visual groups](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#visual-group) - big clusters of nodes that might not belong to some hierarchy. Here visual class represents an equivalence class and visual group contains only one equivalence class
 
-We also introduce the map-style zoom used in mapping platforms, so that when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes. In analogy with maps, we introduce the concept of [hierarchy levels](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-level).  An example is shown in the Figure 5 below. 
+We also introduce the map-style zoom used in mapping platforms, so that when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes. In analogy with maps, we introduce the concept of [hierarchical levels](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-level). An example is shown in the Figure 5 below. 
 
 <p align="center">
     <img src="img/map_style_zoom.png" alt="map_style_zoom" title="Map style zoom" width="600"/><br/>
-    <em>Figure 5. Map-style zoom (screenshots 1-4). Czechia, which is placed at the level 0, is an aggregation of cities placed at the level 1 (screenshots 1 and 3), and analogously, MFF, which is placed at the level 0, is an aggregation of departments placed at the level 1 (screenshots 2 and 4). In case there are several different hierarchical groups, the lowest hierarchical level will show the last ancestor of each hierarchy and they will not be grouped or collapsed (screenshots 5 and 6).</em>
+    <em>Figure 5. Map-style zoom (screenshots 1-6). Czechia (google maps, screenshot 1), which is placed at the level 0, is an aggregation of cities placed at the level 1 (screenshot 3), and analogously, MFF (screenshot 2), which is placed at the level 0, is an aggregation of departments placed at the level 1 (screenshot 4). In case there are several different hierarchical groups, the lowest hierarchical level will show the last ancestor of each hierarchy and they will not be grouped or collapsed (screenshots 5 (countries) and 6 (departments and subjects)).</em>
 </p>
 
 The point is not to stick with the "Departments and Subjects" topic only, but to make it abstract and reusable with other topics.
@@ -210,7 +212,7 @@ The following section describes the final approach proposed in this paper.
 
 <h2 id="grouping-of-clusters-extension">4. Grouping of clusters</h2>
 
-The "Grouping of clusters" algorithm first clusters the nodes into a [cluster](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#cluster), and then collapses that cluster into a single group node. The clustering of nodes is determined based on the [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-class), the parent node, the [level of the hierarchy](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-level) in which the node resides, and the visual class (with respect to the order).  
+The "Grouping of clusters" algorithm first clusters the nodes into a [cluster](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#cluster), and then collapses that cluster into a single group node. The clustering of nodes is determined based on the [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-class), the parent node, the [level of the hierarchy](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-level) in which the node resides, and the visual class. Full description of the approach is available [here](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#grouping-of-clusters).
 
 The visual configuration is extended with [visual layout constraints](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-layout-constraint) which can be used to restrict the way the knowledge graph is visualized. To support visual layout constraints, we extend the Knowledge Graph Visual Browser ontology with new terms.  
 
@@ -221,9 +223,13 @@ Figure 5 below shows the extension of the ontology as a UML class diagram.
     <em>Figure 5. Extended Knowledge Graph Visual Browser ontology for defining extended visual configurations.</em>
 </p>
 
-In the visual configuration we extend every entity node with additional [hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchical-class) and visual group classes, representing [hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchical-group) and [visual](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-group) groups to which the node belongs, respectively. 
+In the visual configuration we extend every entity node with additional hierarchical and visual group classes, representing hierarchical and visual groups to which the node belongs, respectively. 
 
-Expansion and preview queries defined in the visual configuration are extended with a new variable ?groupclass that is bound to the visual class representing either the hierarchical or visual group class. It is common to consider a hierarchical class as a group class as well, because we can interpret a root ancestor node in a hierarchy as a [pseudo-parent node](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-group). 
+A [visual group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#visual-group) is a cluster of nodes assigned to the same visual group class and placed under the same pseudo-parent node.  
+
+A [hierarchical group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-group) is a cluster of nodes related to each other by parent-child relationships and together forming a hierarchy. In a hierarchy, relationships are not represented as a line, but in such a way that the child node is placed inside the parent node. 
+
+Expansion and preview queries defined in the visual configuration are extended with a new variable `?groupclass` that is bound to the visual class representing either the hierarchical or visual group class. It is common to consider a hierarchical class as a group class as well, because we can interpret a root ancestor node in a hierarchy as a [pseudo-parent node](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-group). 
 
 The visual knowledge graph 𝒱 is associated with two new functions 𝜎 and 𝜏 that map each entity node to a set of literals called visual group classes and hierarchical group classes, respectively. Entity node is placed under the [visual group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-group) of class defined by 𝜎. And similarly, entity node is placed in the [hierarchical group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#hierarchical-group) of class defined by 𝜏. It is also possible that the node is not assigned to a visual group class or a hierarchical group class.  
 

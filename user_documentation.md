@@ -91,7 +91,7 @@ At the moment when child nodes collapse into their parents, the current hierarch
 <h3 id="hierarchical-groups-glossary">Hierarchical group</h3>
 
 > **Definition** \
-> The hierarchical group is a cluster of nodes that are related to each other by hierarchical relationships. 
+> The hierarchical group is a cluster of nodes that are related to each other by [hierarchical relationships](#hierarchical-relationships-glossary). 
 
 Each node in a hierarchical group must have the [hierarchical class](#hierarchical-class-glossary) which represents that hierarchical group.
 
@@ -211,11 +211,11 @@ There are two cases:
     > **Note** \
     > In such case the [current hierarchical level](#current-hierarchical-level-glossary) increases by 1.
 
-In case there are several different hierarchical groups, the lowest hierarchical level will show the last ancestor of each hierarchy and they will not be grouped or collapsed (Figure 9, screenshots 5 and 6).
+In case there are several different hierarchical groups, the lowest hierarchical level will show the last ancestor of each hierarchy and they will not be grouped or collapsed (Figure 9, screenshots 1 and 2).
 
 <p align="center">
     <img src="img/map_style_zoom_lowest.png" alt="map_style_zoom_lowest" title="Map style zoom lowest level" width="700"/><br/>
-    <em>Figure 9. Map style zoom lowest level</em>
+    <em>Figure 9 (screenshots 1 and 2). Map style zoom lowest level</em>
 </p>
 
 <h3 id="node-removal-glossary">Node removal</h3>
