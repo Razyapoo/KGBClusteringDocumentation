@@ -46,7 +46,7 @@ By examining what a good, understandable graph should look like, and relying on 
 
 <h3 id="filtering">Filtering</h3>
 
-The first way to simplify a graph is to use filtering, as it helps users extract and understand the information they need in the graph. The method should allow users to freely select attributes and relationships they are interested in and then use these features to create a small and informative summary graph that reveals the basic characteristics of the nodes and their relationships in the original graph.
+The first way to simplify a graph is to use filtering, as it helps users extract and understand the information they need in the graph. The method should allow users to freely select attributes and relationships they are interested in and then use these features to create a small and informative graph.
 
 <h3 id="layouts">Layouts</h3>
 
@@ -61,9 +61,7 @@ Let's highlight a few criteria that need to be considered in a good layout that 
 
 Unfortunately, it is very difficult and time consuming to implement the own layout, because it requires to make changes in the big part of the Cytoscape library.
 
----
-
-Fortunately, we can still integrate graph simplification techniques with existing layouts to make the graph visualization more user-friendly. To do this, we describe the following five techniques:
+Fortunately, we can still integrate graph simplification techniques with existing layouts to make the graph visualization more user-friendly. To do this, we can describe the following five techniques:
 - [Sparsification. Elimination of redundant edges](#nodes-edges-eliminations)
 - [Summarization](#summarization)
 - [Clustering](#clustering)
@@ -72,7 +70,7 @@ Fortunately, we can still integrate graph simplification techniques with existin
 
 <h4 id="nodes-edges-eliminations">Sparsification. Elimination of redundant edges</h4>
 
-Sparsification is approximating a given graph by a graph with fewer edges. 
+Sparsification is an approximation of a given graph by a graph with fewer edges.
 
 An example is shown in Figure 1 below.
 
@@ -143,7 +141,7 @@ The main visual tricks:
 This technique allows to show only those nodes that are of interest to the user. This method also hides redundant nodes (or background) or makes them less visible to the user. A possible implementation of such a technique is shown in Figure 4 below.
 
 <p align="center">
-    <img src="img/hiding_background.png" alt="hiding_nodes" title="Hiding nodes" width="500"/><br/>
+    <img src="img/hiding_background.png" alt="hiding_nodes" title="Hiding nodes" width="600"/><br/>
     <em>Figure 4. Hiding redundant nodes [9].</em>
 </p>
 
@@ -154,7 +152,7 @@ However, this technique has already been implemented in the Knowledge Graph Visu
 The second approach is to highlight key nodes or areas (clusters) of nodes that may be of interest to the user. The most important nodes can also be larger than others. An example of such a representation is shown in Figure 5.
 
 <p align="center">
-    <img src="img/node_highlighting.png" alt="node_highlighting" title="Node highlighting" width="600"/><br/>
+    <img src="img/node_highlighting.png" alt="node_highlighting" title="Node highlighting" width="750"/><br/>
     <em>Figure 5. Node and edge highlighting [10].</em>
 </p>
 
@@ -162,9 +160,9 @@ The disadvantage of this method is that it only improves visual perception, but 
 
 <h4 id="node-aggregation">Node aggregation</h4>
 
-Node aggregation is an example of [graph coarsening](#coarsening). A coarsened graph consists of aggregated nodes. But this is not what we want to do, because in this way we will lose other nodes and edges that may need to be restored. It would be much better to still be able to reveal nodes and edges hidden within aggregated nodes.
+Node aggregation is an example of [graph coarsening](#coarsening). A coarsened graph consists of aggregated nodes. But this is exactly not what we want to do, because in this way we will lose other nodes and edges that may need to be restored (shown) in future. It would be much better to still be able to reveal nodes and edges hidden within aggregated nodes.
 
-However, this can cause a problem in the Knowledge Graph Visual browser, because there are detailed queries that are used to display node details, and if we aggregate nodes, it will not be possible to display details of aggregated nodes because they will be auxiliary and will not exist in the database. The same can be said for expansion and preview requests. Thus, we may lose all the functionality that the Knowledge Graph visual browser provides.
+However, this can cause a problem in the Knowledge Graph Visual browser, because there are detailed queries that are used to display node details, and if we aggregate nodes, it will not be possible to display details of aggregated nodes because they will be auxiliary and will not exist in the database. The same can be said for expansion and preview queries. Thus, we may lose all the functionality that the Knowledge Graph visual browser provides.
 
 To solve this problem, can use a trick: if the user clicks on the aggregated node, a browser will display the internals of that aggregated node. The Cambridge Intelligence call this approach as [combos](https://cambridge-intelligence.com/combos/). 
 
@@ -186,12 +184,12 @@ As the result of discussions I can conclude following:
 - [Filtering](#filtering) is a good approach, but to use it, the user must know the graph in advance so that he can filter the nodes he wants to see. This approach also correlates with the topic of another student (Jiří Resler), so my supervisor and I decided not to consider.
 - Users didn't like [Sparsification](#nodes-edges-eliminations) approach because it removes all redundant edges, which can be helpful in understanding the story the graph represents.
 - [Condensation](#condensation). This is the first technique implemented. I implemented it just to understand the Knowledge Graph Visual Browser implementation and how it works. The idea was to use the graph condensation method and create a new graph consisting of nodes that represent strongly connected components in the original graph. 
-- [Summarization](#summarization) (also [Node aggregation](#node-aggregation)) sums up clustering and coarsening. This approach was preferred by working colleagues with only the remark that it would be possible to restore the details.
+- [Summarization](#summarization) (also [Node aggregation](#node-aggregation)) sums up clustering and coarsening approaches. This approach was preferred by working colleagues with only the remark that it would be useful to add the possibility to restore the details.
 - Personally, I did not like the [Sequential layout](#sequential-layout), but still wanted to receive feedbacks from colleagues. They said it is a very user-friendly layout, easy to understand and looks like "Tree of life". So I left it in case I didn't find a better solution.
 - The [background hiding](#background-hiding) method has also received good reviews. However, this can only display the area of the graph that the user wants to see and does not make it easier to present the graph as a whole.
 - I showed users the [node highlighting](#highlighting-key-nodes-and-edges) example shown in Figure 5. They found the graph too complex, but they liked that the clusters of nodes can be easily seen and that the key nodes are shown larger than the other nodes. 
 
-Based on the results of the survey, I was convinced for myself that the approach described in section "[Node aggregation](#node-aggregation)" is best suited. I presented this approach to my supervisor and two weeks later he told me that he had found a customer who is interested in this approach. The customer was the Charles University and the topic was "Departments and subjects".
+Based on the results of the survey, I convinced myself that the approach described in section "[Node aggregation](#node-aggregation)" is best suited. I presented this approach to my supervisor and two weeks later he told me that he had found a customer who is interested in this approach. The customer was the Charles University and the topic was "Departments and subjects".
 
 After several studies, we can state the following several conceptual criteria:
 
@@ -212,13 +210,13 @@ But there are more questions:
 The first draft of the approach is shown in the Figure 6 below.
 
 <p align="center">
-    <img src="img/firts_draft_diagram.png" alt="first_draft" title="First draft" width="800"/><br/>
-    <em>Figure 6. First draft.</em>
+    <img src="img/firts_draft_diagram.png" alt="first_draft" title="First draft" width="1000"/><br/>
+    <em>Figure 6. First draft. It is a concept representing the main idea used in the final approach. It represents different hierarchies and hierarchical as well as non-hierarchical relationships.</em>
 </p>
 
 From this point on, we can introduce the term "[hierarchy](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-relationship)" into use and formulate the following main criteria:
 - There can be [hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-relationship) and [non-hierarchical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#non-hierarchical-relationship-) (ordinary, represented by an edge) relationships between nodes
-- A parent node is an aggregation of child nodes placed inside
+- A parent node may be interpreted as an aggregation of child nodes placed inside
 - The [hierarchical expansion](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-expansions) (from the list of available expansions) must show the expansion [within (inside)](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-relationship) the expanded node
 - It should be possible in the configuration to determine if the relationship is hierarchical or non-hierarchical
 - A non-hierarchical edge can lead between nodes placed in the different hierarchies, even if one of them or both contain child nodes inside
@@ -229,8 +227,8 @@ From this point on, we can introduce the term "[hierarchy](https://github.com/Ra
 We also introduce the map-style zoom used in mapping platforms, so that when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes. In analogy with maps, we introduce the concept of [hierarchical levels](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-level). An example is shown in the Figure 7 below. 
 
 <p align="center">
-    <img src="img/map_style_zoom.png" alt="map_style_zoom" title="Map style zoom" width="600"/><br/>
-    <em>Figure 7. Map-style zoom (screenshots 1-6). Czechia (google maps, screenshot 1), which is placed at the level 0, is an aggregation of cities placed at the level 1 (google maps, screenshot 3), and analogously, MFF (screenshot 2), which is placed at the level 0, is an aggregation of departments placed at the level 1 (screenshot 4). In case there are several different hierarchical groups, the highest abstract level will show the last ancestor of each hierarchy and they will not be grouped or collapsed (screenshots 5 (google maps, countries) and 6 (departments and subjects)).</em>
+    <img src="img/map_style_zoom.png" alt="map_style_zoom" title="Map style zoom" width="900"/><br/>
+    <em>Figure 7. Map-style zoom (screenshots 1-3). Czechia (google maps, screenshot 1, left), which is placed at the level 0, is an aggregation of cities placed at the level 1 (google maps, screenshot 2, left), and analogously, MFF (screenshot 1, right), which is placed at the level 0, is an aggregation of departments placed at the level 1 (screenshot 2, right). In case there are several different hierarchical groups, the highest abstract level will show the last ancestor of each hierarchy and they will not be grouped or collapsed (screenshots 3, left - google maps, countries and right - departments and subjects).</em>
 </p>
 
 The point is not to stick with the "Departments and Subjects" topic only, but to make it abstract and reusable with other topics.
@@ -239,7 +237,7 @@ The following section describes the final approach proposed in this paper.
 
 <h2 id="grouping-of-clusters-extension">4. Grouping of clusters</h2>
 
-This part (also available [here](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/Research%20paper%20for%20Knowledge%20Graph%20Browser.docx)) will be used as a contribution to [the original article](https://www.sciencedirect.com/science/article/pii/S1570826822000105#b2).
+This part (also available [here](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/Research%20paper%20for%20Knowledge%20Graph%20Browser.docx)) is used as a contribution to [the original article](https://www.sciencedirect.com/science/article/pii/S1570826822000105#b2).
 
 The "Grouping of clusters" algorithm first clusters the nodes into a [cluster](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#cluster), and then collapses that cluster into a single group node. The clustering of nodes is determined based on the [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-class), the parent node, the [level of the hierarchy](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-level) in which the node resides, and the visual class. Full description of the approach is available [here](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#grouping-of-clusters).
 
@@ -248,7 +246,7 @@ The visual configuration is extended with [visual layout constraints](https://gi
 Figure 8 below shows the extension of the ontology as a UML class diagram. 
 
 <p align="center">
-    <img src="img/extension_diagram.jpg" alt="extension_diagram" title="Extension diagram" width="600"/><br/>
+    <img src="img/extension_diagram.jpg" alt="extension_diagram" title="Extension diagram" width="800"/><br/>
     <em>Figure 8. Extended Knowledge Graph Visual Browser ontology for defining extended visual configurations.</em>
 </p>
 
@@ -317,7 +315,7 @@ This way, the user opens a group of nodes having tema visual class. The visual c
     <em>Figure 13. Scaling options. The user selects “Grouping of clusters” option.</em>
 </p>
 
-The user then decides to utilize the “[Grouping of clusters](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#grouping-of-clusters)” technique which brings the zoom approach used in mapping platforms to the Knowledge Graph Visual Browser. The user selects the “Grouping of clusters” option in the checkbox (Figure 13) and clicks the “minus” button. The client then groups nodes on the [current hierarchical level](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#current-hierarchical-level) (Figure 14, screenshot 1). Then the user decides to go further and clicks multiple times the “minus” button. After a few iterations, the user gets the result shown on Figure 14, screenshot 2. The user clicks the “minus” button once again, and at this time the client collapses the child group into its Matematicka sekce parent node (Figure 14, screenshot 3). After a few more iterations with the “minus” button, the user gets to the state where the graph cannot be collapsed further (Figure 14, screenshot 4). This state represents the highest abstract level of the hierarchy. In this state, the graph shows the least amount of detail possible. 
+The user then decides to utilize the “[Grouping of clusters](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#grouping-of-clusters)” technique which brings the zoom approach used in mapping platforms to the Knowledge Graph Visual Browser. The user selects the “Grouping of clusters” option in the checkbox (Figure 13) and clicks the “minus” button. The client then groups nodes placed on the [current hierarchical level](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#current-hierarchical-level) (Figure 14, screenshot 1). Then the user decides to go further and clicks multiple times the “minus” button. After a few iterations, the user gets the result shown on Figure 14, screenshot 2. The user clicks the “minus” button once again, and at this time the client collapses the child group into its Matematicka sekce parent node (Figure 14, screenshot 3). After a few more iterations with the “minus” button, the user gets to the state where the graph cannot be collapsed further (Figure 14, screenshot 4). This state represents the highest abstract level of the hierarchy. In this state, the graph shows the least amount of detail possible. 
 
 <p align="center">
     <img src="img/grouping_of_clusters.png" alt="grouping_of_clusters" title="Grouping of clusters" width="900"/><br/>

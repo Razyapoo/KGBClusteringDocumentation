@@ -367,11 +367,11 @@ There are two cases:
     > In such case the [current hierarchical level](#current-hierarchical-level-glossary) increases by 1.
 
 
-In case there are several different hierarchical groups, the highest abstract level will show the last ancestor of each hierarchy and they will not be grouped or collapsed (Figure 8, screenshots 1 and 2).
+In case there are several different hierarchical groups, the highest abstract level will show the last ancestor of each hierarchy and they will not be grouped or collapsed (Figure 8).
 
 <p align="center">
     <img src="img/map_style_zoom_highest.png" alt="map_style_zoom_highest" title="Map style zoom highest level" width="700"/><br/>
-    <em>Figure 8. Map style zoom highest abstract level. Screenshot 1 shows an example from google maps. Screenshot 2 shows an example from Knowledge Graph Visual Browser.</em>
+    <em>Figure 8. Map style zoom highest abstract level. Left side - an example from google maps. Right side - an example from Knowledge Graph Visual Browser.</em>
 </p>
 
 <h3 id="extension-of-the-graph-manipulator">Extension of the GraphManipulator.ts</h3>
