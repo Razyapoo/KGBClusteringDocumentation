@@ -50,8 +50,6 @@ By examining what a good, understandable graph should look like, and relying on 
 
 The first way to simplify a graph is to use filtering, as it helps users extract and understand the information they need in the graph. The method should allow users to freely select attributes and relationships they are interested in and then use these features to create a small and informative summary graph that reveals the basic characteristics of the nodes and their relationships in the original graph.
 
-However, this correlates with the topic of another student, so we decided to skip it.
-
 <h3 id="layouts">Layouts</h3>
 
 The second way is to use an existing layout or implement own. 
@@ -68,23 +66,35 @@ Unfortunately, it is very difficult and time consuming to implement the own layo
 ---
 
 Fortunately, we can still integrate graph simplification techniques with existing layouts to make the graph visualization more user-friendly. To do this, we describe the following five techniques:
-- [Elimination of redundant nodes and edges. Sparsification](#nodes-edges-eliminations)
+- [Sparsification. Elimination of redundant edges](#nodes-edges-eliminations)
 - [Summarization](#summarization)
 - [Clustering](#clustering)
 - [Coarsening](#coarsening)
 - [Condensation](#condensation)
 
-<h4 id="nodes-edges-eliminations">Elimination of redundant nodes and edges. Sparsification</h4>
+<h4 id="nodes-edges-eliminations">Sparsification. Elimination of redundant edges</h4>
 
-This technique is used to compress the original graph, remove all redundant nodes without changing the graph structure. 
+Sparsification is approximating a given graph by a graph with fewer edges. 
 
-A key difference between graph compression and graph summarization is that graph summarization focuses on finding structural patterns within the original graph, whereas graph compression focuses on compressions the original graph to be as small as possible. 
+An example is shown in Figure 1 below.
+
+<p align="center">
+    <img src="img/sparsification.png" alt="sparsification" title="Sparsification" width="230"/><br/>
+    <em>Figure 1. Sparsification.</em>
+</p>
 
 <h4 id="summarization">Summarization</h4>
 
 Graph summarization transforms graphs into more compact representations while preserving structural patterns. They produce summary graphs in the form of supergraphs. Supergraphs are the most common representation, which consists of supernodes and original nodes that are connected by edges and superedges that represent aggregated original edges [[5]](#references).
 
-As was mentioned in the [Elimination of redundant nodes and edges](#nodes-edges-eliminations) section above, sparsification technique removes unimportant (redundant) nodes and edges from the graph that are difficult to recover, so we decided to continue exploring grouping/aggregation summarization methods.
+This approach sums up the clustering and coarsening.
+
+An example is shown in Figure 2 below.
+
+<p align="center">
+    <img src="img/summarization.png" alt="summarization" title="Summarization" width="400"/><br/>
+    <em>Figure 2. Summarization.</em>
+</p>
 
 <h4 id="clustering">Clustering</h4>
 
@@ -102,8 +112,6 @@ The main advantage of this approach is that it simplifies the original graph so 
 
 The disadvantage of this method is that as its output we get a directed acyclic graph (DAG), in which each strongly connected component (SCC) does not take into account node similarities (for example classes) and consists of a mix of nodes. As an improvement, we can add a criterion that the SCC should only contain node having similar properties.
 
-This is the first technique implemented. I implemented it just to understand the Knowledge Graph Visual Browser implementation and how it works. The idea was to use the graph condensation method and create a new graph consisting of nodes that represent strongly connected components in the original graph.
-
 ---
 
 Let's find out what types of layouts exist that are used to present large graphs and can be useful in Knowledge Graph Visual browser.
@@ -114,10 +122,10 @@ Because in the Knowledge Graph Visual Browser we always expand the neighborhood 
 
 <p align="center">
     <img src="img/sequential_layout.png" alt="sequential_layout" title="Sequential layout" width="400"/><br/>
-    <em>Figure 1. Sequential layout</em>
+    <em>Figure 3. Sequential layout</em>
 </p>
 
-The sequential layout (shown in the Figure 1 above) is designed to display data that contains a clear sequence of distinct levels of nodes. It takes multiple components into account and minimizes link crossings [[8]](#references).
+The sequential layout (shown in the Figure 3 above) is designed to display data that contains a clear sequence of distinct levels of nodes. It takes multiple components into account and minimizes link crossings [[8]](#references).
 
 This layout meets 1, 2, and 5 criteria listed at the beginning of the [Layouts](#layouts) section. It satisfies the first criterion because we expand the neighborhood in the same direction (the direction must be determined at the beginning), so we can place nodes in the neighborhood close to the expanding node. It meets the second criterion because we are expanding the nodes in the same direction, so we have room to place its neighbors in such a way that there are no edge intersections. It also meets the fifth criterion because it is visually understandable to non-specialists.
 
@@ -128,28 +136,28 @@ However, this layout is only good if we always expand nodes that were not in the
 There are many layouts with interesting features, but unfortunately they are not supported by the Cytoscape library. But we can still integrate the visual tricks used in these layouts into existing layouts already implemented in the Cytoscape library.
 
 The main visual tricks:
-- Hiding background
+- Background hiding
 - Highlighting key nodes and edges
 - Using node aggregation
 
-<h4 id="hiding-background">Hiding background</h4>
+<h4 id="background-hiding">Background hiding</h4>
 
-This technique allows to show only those nodes that are of interest to the user. This method also hides redundant nodes (or background) or makes them less visible to the user. A possible implementation of such a technique is shown in Figure 2 below.
+This technique allows to show only those nodes that are of interest to the user. This method also hides redundant nodes (or background) or makes them less visible to the user. A possible implementation of such a technique is shown in Figure 4 below.
 
 <p align="center">
     <img src="img/hiding_background.png" alt="hiding_nodes" title="Hiding nodes" width="500"/><br/>
-    <em>Figure 2. Hiding redundant nodes [9].</em>
+    <em>Figure 4. Hiding redundant nodes [9].</em>
 </p>
 
 However, this technique has already been implemented in the Knowledge Graph Visual browser by Štěpán Stenchlák.
 
 <h4 id="highlighting-key-nodes-and-edges">Highlighting key nodes and edges</h4>
 
-The second approach is to highlight key nodes or areas (clusters) of nodes that may be of interest to the user. The most important nodes can also be larger than others. An example of such a representation is shown in Figure 3.
+The second approach is to highlight key nodes or areas (clusters) of nodes that may be of interest to the user. The most important nodes can also be larger than others. An example of such a representation is shown in Figure 5.
 
 <p align="center">
     <img src="img/node_highlighting.png" alt="node_highlighting" title="Node highlighting" width="600"/><br/>
-    <em>Figure 3. Node and edge highlighting [10].</em>
+    <em>Figure 5. Node and edge highlighting [10].</em>
 </p>
 
 The disadvantage of this method is that it only improves visual perception, but does not simplify the graph and does not make it faster.
@@ -162,7 +170,30 @@ However, this can cause a problem in the Knowledge Graph Visual browser, because
 
 To solve this problem, can use a trick: if the user clicks on the aggregated node, a browser will display the internals of that aggregated node. The Cambridge Intelligence call this approach as [combos](https://cambridge-intelligence.com/combos/). 
 
-I presented this approach to my supervisor and two weeks later he told me that he had found a customer who is interested in this approach. The customer was the Charles University and the topic was "Departments and subjects".
+<h3 id="comparison">Comparison</h3>
+
+To see which approach is preferable for possible non-specialist users, I chose different approaches and discussed them with work colleagues, school colleagues and a teacher (supervisor).
+
+List of approaches: 
+- [Filtering](#filtering)
+- [Sparsification](#nodes-edges-eliminations)
+- [Condensation](#condensation)
+- [Summarization](#summarization) / [Node aggregation](#node-aggregation)
+- [Sequential layout](#sequential-layout)
+- [Background hiding](#background-hiding)
+- [Highlighting key nodes and edges](#highlighting-key-nodes-and-edges)
+
+As the result of discussions I can conclude following:
+
+- [Filtering](#filtering) is a good approach, but to use it, the user must know the graph in advance so that he can filter the nodes he wants to see. This approach also correlates with the topic of another student (Jiří Resler), so my supervisor and I decided to skip it.
+- [Sparsification](#nodes-edges-eliminations) removes all redundant edges. Users didn't like it because it can remove edges, which can be helpful in understanding the story the graph represents.
+- [Condensation](#condensation). This is the first technique implemented. I implemented it just to understand the Knowledge Graph Visual Browser implementation and how it works. The idea was to use the graph condensation method and create a new graph consisting of nodes that represent strongly connected components in the original graph. 
+- [Summarization](#summarization) sums up clustering and coarsening. This approach was preferred by working colleagues with only the remark that it would be possible to restore the details.
+- Personally, I did not like the [Sequential layout](#sequential-layout), but still wanted feedback from colleagues. They said it was a very user-friendly layout, easy to understand and looks like "Tree of life". So I left it in case I didn't find a better solution.
+- The [background hiding](#background-hiding) method has also received good reviews. However, this can only display the area of the graph that the user wants to see and does not make it easier to present the graph as a whole.
+- I showed users the [node highlighting](#highlighting-key-nodes-and-edges) example shown in Figure 5. They found the graph too complex, but they liked that the clusters of nodes can be easily seen and that the key nodes are shown larger than the other nodes. 
+
+Based on the results of the survey, I was convinced for myself that the approach described in section "[Node aggregation](#node-aggregation)" is best suited. I presented this approach to my supervisor and two weeks later he told me that he had found a customer who is interested in this approach. The customer was the Charles University and the topic was "Departments and subjects".
 
 After several studies, we can state the following several conceptual criteria:
 
@@ -180,11 +211,11 @@ But there are more questions:
 
 ---
 
-The first draft of the approach is shown in the Figure 4 below.
+The first draft of the approach is shown in the Figure 6 below.
 
 <p align="center">
     <img src="img/firts_draft_diagram.png" alt="first_draft" title="First draft" width="800"/><br/>
-    <em>Figure 4. First draft.</em>
+    <em>Figure 6. First draft.</em>
 </p>
 
 From this point on, we can introduce the term "[hierarchy](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-relationship)" into use and formulate the following main criteria:
@@ -197,11 +228,11 @@ From this point on, we can introduce the term "[hierarchy](https://github.com/Ra
 - Nodes having the same [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-class) must be place in the same [hierarchical group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-group). Here hierarchical class represents an equivalence class and hierarchical group contains only one equivalence class
 - It should be possible to define [visual groups](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#visual-group) - big clusters of nodes that might not belong to some hierarchy. Here visual class represents an equivalence class and visual group contains only one equivalence class
 
-We also introduce the map-style zoom used in mapping platforms, so that when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes. In analogy with maps, we introduce the concept of [hierarchical levels](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-level). An example is shown in the Figure 5 below. 
+We also introduce the map-style zoom used in mapping platforms, so that when you zoom in, you see more detail in terms of nodes, and when you zoom out, you see less detail in terms of nodes. In analogy with maps, we introduce the concept of [hierarchical levels](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-level). An example is shown in the Figure 7 below. 
 
 <p align="center">
     <img src="img/map_style_zoom.png" alt="map_style_zoom" title="Map style zoom" width="600"/><br/>
-    <em>Figure 5. Map-style zoom (screenshots 1-6). Czechia (google maps, screenshot 1), which is placed at the level 0, is an aggregation of cities placed at the level 1 (google maps, screenshot 3), and analogously, MFF (screenshot 2), which is placed at the level 0, is an aggregation of departments placed at the level 1 (screenshot 4). In case there are several different hierarchical groups, the highest abstract level will show the last ancestor of each hierarchy and they will not be grouped or collapsed (screenshots 5 (google maps, countries) and 6 (departments and subjects)).</em>
+    <em>Figure 7. Map-style zoom (screenshots 1-6). Czechia (google maps, screenshot 1), which is placed at the level 0, is an aggregation of cities placed at the level 1 (google maps, screenshot 3), and analogously, MFF (screenshot 2), which is placed at the level 0, is an aggregation of departments placed at the level 1 (screenshot 4). In case there are several different hierarchical groups, the highest abstract level will show the last ancestor of each hierarchy and they will not be grouped or collapsed (screenshots 5 (google maps, countries) and 6 (departments and subjects)).</em>
 </p>
 
 The point is not to stick with the "Departments and Subjects" topic only, but to make it abstract and reusable with other topics.
@@ -216,11 +247,11 @@ The "Grouping of clusters" algorithm first clusters the nodes into a [cluster](h
 
 The visual configuration is extended with [visual layout constraints](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-layout-constraint) which can be used to restrict the way the knowledge graph is visualized. To support visual layout constraints, we extend the Knowledge Graph Visual Browser ontology with new terms.  
 
-Figure 6 below shows the extension of the ontology as a UML class diagram. 
+Figure 8 below shows the extension of the ontology as a UML class diagram. 
 
 <p align="center">
     <img src="img/extension_diagram.jpg" alt="extension_diagram" title="Extension diagram" width="600"/><br/>
-    <em>Figure 6. Extended Knowledge Graph Visual Browser ontology for defining extended visual configurations.</em>
+    <em>Figure 8. Extended Knowledge Graph Visual Browser ontology for defining extended visual configurations.</em>
 </p>
 
 In the visual configuration we extend every entity node with additional hierarchical and visual group classes, representing hierarchical and visual groups to which the node belongs, respectively. 
@@ -249,53 +280,53 @@ The stateless [server](https://github.com/linkedpipes/knowledge-graph-browser-ba
 
 <p align="center">
     <img src="img/choose_configuration.jpg" alt="choose_configuration" title="Choice of the configuration" width="600"/><br/>
-    <em>Figure 7. Choice of the configuration and starting node (screenshots 1-3).</em>
+    <em>Figure 9. Choice of the configuration and starting node (screenshots 1-3).</em>
 </p>
 
 Let us demonstrate our extension on a visual knowledge graph about Matematicko-fyzikální fakulta. 
 
-At the beginning, the user chooses the Charles Explorer meta-configuration (Figure 7, screenshot 1). The user then chooses the configuration supporting the [visual layout constraints](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-layout-constraint) (Figure 7, screenshot 2). Not all the configurations support visual layout constraints. The user then chooses the starting node from the list of starting nodes, in our case it is Matematicko-fyzikální fakulta (Figure 7, screenshot 3). The client then visualizes the selected starting node (Figure 8 below) and reads layout constraints from the server. The rest of the visualization part is as usual. 
+At the beginning, the user chooses the Charles Explorer meta-configuration (Figure 9, screenshot 1). The user then chooses the configuration supporting the [visual layout constraints](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-layout-constraint) (Figure 9, screenshot 2). Not all the configurations support visual layout constraints. The user then chooses the starting node from the list of starting nodes, in our case it is Matematicko-fyzikální fakulta (Figure 9, screenshot 3). The client then visualizes the selected starting node (Figure 10 below) and reads layout constraints from the server. The rest of the visualization part is as usual. 
 
 <p align="center">
     <img src="img/starting_node_after_load.png" alt="starting_node_after_load" title="Starting node after load" width="400"/><br/>
-    <em>Figure 8. Choice of the configuration and starting node (screenshots 1-3).</em>
+    <em>Figure 10. Choice of the configuration and starting node (screenshots 1-3).</em>
 </p>
 
-An interesting part happens when the user starts exploring a graph. When the user selects the node on the graph, the client loads the node’s preview. If the node has assigned a [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-class) (in the preview query) representing a [hierarchical group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-group) that is allowed to be clustered and grouped, the client shows this class labeled as hierarchical class in the preview section on the side panel (Figure 9 screenshot 1). 
+An interesting part happens when the user starts exploring a graph. When the user selects the node on the graph, the client loads the node’s preview. If the node has assigned a [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-class) (in the preview query) representing a [hierarchical group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-group) that is allowed to be clustered and grouped, the client shows this class labeled as hierarchical class in the preview section on the side panel (Figure 11 screenshot 1). 
 
 <p align="center">
     <img src="img/user_interaction.jpg" alt="user_interaction" title="User interaction" width="500"/><br/>
-    <em>Figure 9. A possible user’s scenario of exploring the knowledge graph with Matematicko-fyzikální fakulta in KGBrowser (screenshots 1-3).</em>
+    <em>Figure 11. A possible user’s scenario of exploring the knowledge graph with Matematicko-fyzikální fakulta in KGBrowser (screenshots 1-3).</em>
 </p>
 
-Expansions that expand the node with its neighborhood using hierarchical relationships are [hierarchical expansions](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-expansions). There are hierarchical and non-hierarchical expansions (Figure 9, screenshot 2).  
+Expansions that expand the node with its neighborhood using hierarchical relationships are [hierarchical expansions](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-expansions). There are hierarchical and non-hierarchical expansions (Figure 11, screenshot 2).  
 
-The user selects the Podřazená pracoviště view and clicks the Expand button. The client then performs the expansion action. Since the expansion is hierarchical, the client connects the neighborhood of the node using hierarchical relationships (result is shown on the Figure 9, screenshot 3). Here the Matematicko-fyzikální fakulta node represents a parent node. 
+The user selects the Podřazená pracoviště view and clicks the Expand button. The client then performs the expansion action. Since the expansion is hierarchical, the client connects the neighborhood of the node using hierarchical relationships (result is shown on the Figure 11, screenshot 3). Here the Matematicko-fyzikální fakulta node represents a parent node. 
 
 <p align="center">
     <img src="img/hierarchical_expansions.jpg" alt="hierarchical_expansions" title="Hierarchical expansions" width="600"/><br/>
-    <em>Figure 10. A possible user’s scenario of exploring the knowledge graph with Matematicko-fyzikální fakulta in KGBrowser (screenshots 4-5).</em>
+    <em>Figure 12. A possible user’s scenario of exploring the knowledge graph with Matematicko-fyzikální fakulta in KGBrowser (screenshots 4-5).</em>
 </p> 
 
-The user then selects the Matematicka sekce node, clicks Podřazená pracoviště expand button in the list of available views and selects Katedra algebry node (Figure 10, screenshot 4). 
+The user then selects the Matematicka sekce node, clicks Podřazená pracoviště expand button in the list of available views and selects Katedra algebry node (Figure 12, screenshot 4). 
 
-The user then selects the Témata pracoviště view of the Katedra algebry node and clicks the Expand button. Now, the expansion is non-hierarchical, so the client connects the expanded neighborhood with a visual line (edge) (Figure 10, screenshot 5). 
+The user then selects the Témata pracoviště view of the Katedra algebry node and clicks the Expand button. Now, the expansion is non-hierarchical, so the client connects the expanded neighborhood with a visual line (edge) (Figure 12, screenshot 5). 
 
-This way, the user opens a group of nodes having tema visual class. The visual configuration specifies nodes assigned to tema visual class as a visual group. Therefore, the client creates the pseudo-parent node representing the tema visual group (Figure 10, screenshot 5, right side). 
+This way, the user opens a group of nodes having tema visual class. The visual configuration specifies nodes assigned to tema visual class as a visual group. Therefore, the client creates the pseudo-parent node representing the tema visual group (Figure 12, screenshot 5, right side). 
 
 <p align="center">
     <img src="img/scaling_options.png" alt="scaling_options" title="Scaling options" width="150"/><br/>
-    <em>Figure 11. Scaling options. The user selects “Grouping of clusters” option.</em>
+    <em>Figure 13. Scaling options. The user selects “Grouping of clusters” option.</em>
 </p> 
 
-The user then decides to utilize the “[Grouping of clusters](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#grouping-of-clusters)” technique which brings the zoom approach used in mapping platforms to the Knowledge Graph Visual Browser. The user selects the “Grouping of clusters” option in the checkbox (Figure 11) and clicks the “minus” button. The client then groups nodes on the [current hierarchical level](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#current-hierarchical-level) (Figure 12, screenshot 6). Then the user decides to go further and clicks multiple times the “minus” button. After a few iterations, the user gets the result shown on Figure 12, screenshot 7. The user clicks the “minus” button once again, and at this time the client collapses the child group into its Matematicka sekce parent node. After a few more iterations with the “minus” button, the user gets to the state where the graph cannot be collapsed further (Figure 12, screenshot 9). This state represents the highest abstract level of the hierarchy. In this state, the graph shows the least amount of detail possible. 
+The user then decides to utilize the “[Grouping of clusters](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#grouping-of-clusters)” technique which brings the zoom approach used in mapping platforms to the Knowledge Graph Visual Browser. The user selects the “Grouping of clusters” option in the checkbox (Figure 13) and clicks the “minus” button. The client then groups nodes on the [current hierarchical level](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#current-hierarchical-level) (Figure 14, screenshot 6). Then the user decides to go further and clicks multiple times the “minus” button. After a few iterations, the user gets the result shown on Figure 14, screenshot 7. The user clicks the “minus” button once again, and at this time the client collapses the child group into its Matematicka sekce parent node. After a few more iterations with the “minus” button, the user gets to the state where the graph cannot be collapsed further (Figure 14, screenshot 9). This state represents the highest abstract level of the hierarchy. In this state, the graph shows the least amount of detail possible. 
 
 <p align="center">
     <img src="img/grouping_of_clusters.jpg" alt="grouping_of_clusters" title="Grouping of clusters" width="600"/><br/>
-    <em>Figure 12. A possible user’s scenario of exploring the knowledge graph with Matematicko-fyzikální fakulta in KGBrowser (screenshots 6-9).</em>
+    <em>Figure 14. A possible user’s scenario of exploring the knowledge graph with Matematicko-fyzikální fakulta in KGBrowser (screenshots 6-9).</em>
 </p> 
 
-The user then decides to click the “plus” button multiple times. With each iteration, the user gradually returns to the state from which he started (Figure 10, screenshot 5). 
+The user then decides to click the “plus” button multiple times. With each iteration, the user gradually returns to the state from which he started (Figure 12, screenshot 5). 
 
 <h2 id="references">References</h2>
 
