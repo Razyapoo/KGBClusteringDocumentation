@@ -11,16 +11,14 @@ Team members who contribute to the Knowledge Graph Visual Browser:
 
 Full implementation and basic principals used in the "Grouping of clusters" extension are described in the [technical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md) and [user](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md) documentations.
 
+This paper proposes several prototypes (developed by the student or found in other research papers) used to optimize the visualization of knowledge graphs so that they are well organized and easy to understand for ordinary users. It is also supposed to compare prototypes and implement at least one of them.
+
 Table of content:
 - [Introduction](#introduction)
 - [Motivation](#motivation)
 - [Approaches](#approaches)
 - [Grouping of clusters](#grouping-of-clusters-extension)
 - [References](#references)
-
-This paper proposes several prototypes (developed by the student or found in other research papers) used to optimize the visualization of knowledge graphs so that they are well organized and easy to understand for ordinary users. It is also supposed to compare prototypes and implement at least one of them.
-
-The paper is organized as follows. Section [1](#introduction) contains an introduction. Section [2](#motivation) describes the motivation used in our extension. Section [3](#approaches) describes different approaches used to simplify large graphs. Section [4](#references) describes final approach.
 
 <h2 id="introduction">1. Introduction</h2>
 
