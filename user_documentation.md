@@ -215,7 +215,7 @@ In case there are several different hierarchical groups, the highest abstract le
 
 <p align="center">
     <img src="img/map_style_zoom_highest.png" alt="map_style_zoom_highest" title="Map style zoom highest level" width="700"/><br/>
-    <em>Figure 9 (screenshots 1 and 2). Map style zoom highest abstract level</em>
+    <em>Figure 9. Map style zoom highest abstract level. Screenshot 1 shows an example from google maps. Screenshot 2 shows an example from Knowledge Graph Visual Browser.</em>
 </p>
 
 <h3 id="node-removal-glossary">Node removal</h3>
