@@ -193,6 +193,8 @@ Two cases can occur at the end of filtering:
 
   This child node can represent a single child node or a group containing all of the parent's child nodes. In this case, the remaining child node (in each parent) should be collapsed into the parent node, but this should only happen when all the child nodes having [current hierarchical level](#current-hierarchical-level-glossary) are the only child nodes of their parents (as shown in the Figure 8 above).
 
+<a name="edge_moving"/>
+
   > **Note** \
   > After collapsing child nodes, the algorithm switches the [current hierarchical level](#current-hierarchical-level-glossary) one hierarchical level higher. During this operation, all [non-hierarchical](#non-hierarchical-relationships-glossary) edges from child nodes are moved to the parent node.
 
