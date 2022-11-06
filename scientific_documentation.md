@@ -185,11 +185,11 @@ List of approaches:
 
 As the result of discussions I can conclude following:
 
-- [Filtering](#filtering) is a good approach, but to use it, the user must know the graph in advance so that he can filter the nodes he wants to see. This approach also correlates with the topic of another student (Jiří Resler), so my supervisor and I decided to skip it.
-- [Sparsification](#nodes-edges-eliminations) removes all redundant edges. Users didn't like it because it can remove edges, which can be helpful in understanding the story the graph represents.
+- [Filtering](#filtering) is a good approach, but to use it, the user must know the graph in advance so that he can filter the nodes he wants to see. This approach also correlates with the topic of another student (Jiří Resler), so my supervisor and I decided not to consider.
+- Users didn't like [Sparsification](#nodes-edges-eliminations) approach because it removes all redundant edges, which can be helpful in understanding the story the graph represents.
 - [Condensation](#condensation). This is the first technique implemented. I implemented it just to understand the Knowledge Graph Visual Browser implementation and how it works. The idea was to use the graph condensation method and create a new graph consisting of nodes that represent strongly connected components in the original graph. 
-- [Summarization](#summarization) sums up clustering and coarsening. This approach was preferred by working colleagues with only the remark that it would be possible to restore the details.
-- Personally, I did not like the [Sequential layout](#sequential-layout), but still wanted feedback from colleagues. They said it was a very user-friendly layout, easy to understand and looks like "Tree of life". So I left it in case I didn't find a better solution.
+- [Summarization](#summarization) (also [Node aggregation](#node-aggregation)) sums up clustering and coarsening. This approach was preferred by working colleagues with only the remark that it would be possible to restore the details.
+- Personally, I did not like the [Sequential layout](#sequential-layout), but still wanted to receive feedbacks from colleagues. They said it is a very user-friendly layout, easy to understand and looks like "Tree of life". So I left it in case I didn't find a better solution.
 - The [background hiding](#background-hiding) method has also received good reviews. However, this can only display the area of the graph that the user wants to see and does not make it easier to present the graph as a whole.
 - I showed users the [node highlighting](#highlighting-key-nodes-and-edges) example shown in Figure 5. They found the graph too complex, but they liked that the clusters of nodes can be easily seen and that the key nodes are shown larger than the other nodes. 
 
@@ -241,7 +241,7 @@ The following section describes the final approach proposed in this paper.
 
 <h2 id="grouping-of-clusters-extension">4. Grouping of clusters</h2>
 
-This part will be used as a contribution to [the original article](https://www.sciencedirect.com/science/article/pii/S1570826822000105#b2). Also available [here](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/Research%20paper%20for%20Knowledge%20Graph%20Browser.docx). 
+This part (also available [here](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/Research%20paper%20for%20Knowledge%20Graph%20Browser.docx)) will be used as a contribution to [the original article](https://www.sciencedirect.com/science/article/pii/S1570826822000105#b2).
 
 The "Grouping of clusters" algorithm first clusters the nodes into a [cluster](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#cluster), and then collapses that cluster into a single group node. The clustering of nodes is determined based on the [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-class), the parent node, the [level of the hierarchy](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-level) in which the node resides, and the visual class. Full description of the approach is available [here](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#grouping-of-clusters).
 
@@ -279,7 +279,7 @@ The stateless [server](https://github.com/linkedpipes/knowledge-graph-browser-ba
 <h3>Example</h3>
 
 <p align="center">
-    <img src="img/choose_configuration.jpg" alt="choose_configuration" title="Choice of the configuration" width="600"/><br/>
+    <img src="img/choose_configuration.jpg" alt="choose_configuration" title="Choice of the configuration" width="900"/><br/>
     <em>Figure 9. Choice of the configuration and starting node (screenshots 1-3).</em>
 </p>
 
@@ -288,14 +288,14 @@ Let us demonstrate our extension on a visual knowledge graph about Matematicko-f
 At the beginning, the user chooses the Charles Explorer meta-configuration (Figure 9, screenshot 1). The user then chooses the configuration supporting the [visual layout constraints](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md#visual-layout-constraint) (Figure 9, screenshot 2). Not all the configurations support visual layout constraints. The user then chooses the starting node from the list of starting nodes, in our case it is Matematicko-fyzikální fakulta (Figure 9, screenshot 3). The client then visualizes the selected starting node (Figure 10 below) and reads layout constraints from the server. The rest of the visualization part is as usual. 
 
 <p align="center">
-    <img src="img/starting_node_after_load.png" alt="starting_node_after_load" title="Starting node after load" width="400"/><br/>
+    <img src="img/starting_node_after_load.png" alt="starting_node_after_load" title="Starting node after load" width="600"/><br/>
     <em>Figure 10. Choice of the configuration and starting node (screenshots 1-3).</em>
 </p>
 
 An interesting part happens when the user starts exploring a graph. When the user selects the node on the graph, the client loads the node’s preview. If the node has assigned a [hierarchical class](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-class) (in the preview query) representing a [hierarchical group](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#hierarchical-group) that is allowed to be clustered and grouped, the client shows this class labeled as hierarchical class in the preview section on the side panel (Figure 11 screenshot 1). 
 
 <p align="center">
-    <img src="img/user_interaction.jpg" alt="user_interaction" title="User interaction" width="500"/><br/>
+    <img src="img/user_interaction.jpg" alt="user_interaction" title="User interaction" width="1000"/><br/>
     <em>Figure 11. A possible user’s scenario of exploring the knowledge graph with Matematicko-fyzikální fakulta in KGBrowser (screenshots 1-3).</em>
 </p>
 
@@ -304,25 +304,25 @@ Expansions that expand the node with its neighborhood using hierarchical relatio
 The user selects the Podřazená pracoviště view and clicks the Expand button. The client then performs the expansion action. Since the expansion is hierarchical, the client connects the neighborhood of the node using hierarchical relationships (result is shown on the Figure 11, screenshot 3). Here the Matematicko-fyzikální fakulta node represents a parent node. 
 
 <p align="center">
-    <img src="img/hierarchical_expansions.jpg" alt="hierarchical_expansions" title="Hierarchical expansions" width="600"/><br/>
-    <em>Figure 12. A possible user’s scenario of exploring the knowledge graph with Matematicko-fyzikální fakulta in KGBrowser (screenshots 4-5).</em>
+    <img src="img/(non)hierarchical_expansions.png" alt="hierarchical_expansions" title="(non)Hierarchical expansions" width="900"/><br/>
+    <em>Figure 12. A possible user’s scenario of exploring the knowledge graph with Matematicko-fyzikální fakulta in KGBrowser (screenshots 1-2).</em>
 </p> 
 
-The user then selects the Matematicka sekce node, clicks Podřazená pracoviště expand button in the list of available views and selects Katedra algebry node (Figure 12, screenshot 4). 
+The user then selects the Matematicka sekce node, clicks Podřazená pracoviště expand button in the list of available views and selects Katedra algebry node (Figure 12, screenshot 1). 
 
-The user then selects the Témata pracoviště view of the Katedra algebry node and clicks the Expand button. Now, the expansion is non-hierarchical, so the client connects the expanded neighborhood with a visual line (edge) (Figure 12, screenshot 5). 
+The user then selects the Témata pracoviště view of the Katedra algebry node and clicks the Expand button. Now, the expansion is non-hierarchical, so the client connects the expanded neighborhood with a visual line (edge) (Figure 12, screenshot 2). 
 
-This way, the user opens a group of nodes having tema visual class. The visual configuration specifies nodes assigned to tema visual class as a visual group. Therefore, the client creates the pseudo-parent node representing the tema visual group (Figure 12, screenshot 5, right side). 
+This way, the user opens a group of nodes having tema visual class. The visual configuration specifies nodes assigned to tema visual class as a visual group. Therefore, the client creates the pseudo-parent node representing the tema visual group (Figure 12, screenshot 2, right side). 
 
 <p align="center">
     <img src="img/scaling_options.png" alt="scaling_options" title="Scaling options" width="150"/><br/>
     <em>Figure 13. Scaling options. The user selects “Grouping of clusters” option.</em>
-</p> 
+</p>
 
-The user then decides to utilize the “[Grouping of clusters](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#grouping-of-clusters)” technique which brings the zoom approach used in mapping platforms to the Knowledge Graph Visual Browser. The user selects the “Grouping of clusters” option in the checkbox (Figure 13) and clicks the “minus” button. The client then groups nodes on the [current hierarchical level](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#current-hierarchical-level) (Figure 14, screenshot 6). Then the user decides to go further and clicks multiple times the “minus” button. After a few iterations, the user gets the result shown on Figure 14, screenshot 7. The user clicks the “minus” button once again, and at this time the client collapses the child group into its Matematicka sekce parent node. After a few more iterations with the “minus” button, the user gets to the state where the graph cannot be collapsed further (Figure 14, screenshot 9). This state represents the highest abstract level of the hierarchy. In this state, the graph shows the least amount of detail possible. 
+The user then decides to utilize the “[Grouping of clusters](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#grouping-of-clusters)” technique which brings the zoom approach used in mapping platforms to the Knowledge Graph Visual Browser. The user selects the “Grouping of clusters” option in the checkbox (Figure 13) and clicks the “minus” button. The client then groups nodes on the [current hierarchical level](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md#current-hierarchical-level) (Figure 14, screenshot 1). Then the user decides to go further and clicks multiple times the “minus” button. After a few iterations, the user gets the result shown on Figure 14, screenshot 2. The user clicks the “minus” button once again, and at this time the client collapses the child group into its Matematicka sekce parent node (Figure 14, screenshot 3). After a few more iterations with the “minus” button, the user gets to the state where the graph cannot be collapsed further (Figure 14, screenshot 4). This state represents the highest abstract level of the hierarchy. In this state, the graph shows the least amount of detail possible. 
 
 <p align="center">
-    <img src="img/grouping_of_clusters.jpg" alt="grouping_of_clusters" title="Grouping of clusters" width="600"/><br/>
+    <img src="img/grouping_of_clusters.png" alt="grouping_of_clusters" title="Grouping of clusters" width="900"/><br/>
     <em>Figure 14. A possible user’s scenario of exploring the knowledge graph with Matematicko-fyzikální fakulta in KGBrowser (screenshots 6-9).</em>
 </p> 
 
