@@ -21,3 +21,32 @@ Knowledge graphs are semantic graphs, thus preserve semantic meaning of the node
 
 
 1. We can also collapse nodes based on their names, but this doesn't make sense. Because we are working with semantics of nodes. As nodes are expanded close to its "expanded-parent" node, they are semantically connected to it  and between each other and it is useful to cluster and collapse them. Also it is possible to set up in the configuration which nodes cannot be clustered together.
+
+
+Where to add new methods:
+
+- Try to add at least one method that is completely different from what I have implemented.
+  - For example heuristic method that collapses all nodes heuristically. 
+- At each level of abstraction of the implemented method add new different methods and show why they are less suitable there
+  - For example how to add different nodes to the cluster:
+    - 1. based on the similarity:
+      - Position
+      - Name of the node
+      - Other specific properties of the elements
+      - 
+    - 2. based on the Topological criteria
+      - graph structure
+      - Strongly-connected component
+      - 
+  - Different clustering algorithms:
+    - KMeans 
+    - KMedoids
+- How to show clusters
+  - different style
+  - user may want to interact with the resulting diagram and manually modify the clustering
+- How to layout clusters
+
+
+# Useful links
+
+- https://www.yworks.com/pages/clustering-graphs-and-networks
