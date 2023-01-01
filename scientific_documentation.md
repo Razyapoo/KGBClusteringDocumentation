@@ -3,9 +3,9 @@
 
 Team members who contribute to the Knowledge Graph Visual Browser:
 - Štěpán Stenchlák
-  - basic implementation as a bachelor's thesis
+  - Basic implementation as a bachelor's thesis
 - Jiří Resler
-  - Faceted filtering
+  - [Faceted filtering](#https://github.com/JiriResler/knowledge-graph-browser-frontend)
 - Oskar Razyapov
   - [Grouping of clusters](https://github.com/Razyapoo/knowledge-graph-browser-frontend-grouping-of-clusters)
 
@@ -24,51 +24,62 @@ Table of content:
 
 A [knowledge graph](https://en.wikipedia.org/wiki/Knowledge_graph), also known as a semantic network, represents a network of real-world entities: objects, events, situations, or concepts, and illustrates the relationship between them. This information is typically stored in a graph database and visualized as a graph structure, giving rise to the term "knowledge graph" [[1]](#references). The most common way to represent knowledge graphs is to use the [RDF standard](https://en.wikipedia.org/wiki/Resource_Description_Framework).
 
-However, it can be difficult for non-specialists to study knowledge graphs due to background technicalities. To solve this problem, the paper “Interactive and iterative visual exploration of knowledge graphs based on shared and reusable visual configurations” [[2]](#references) proposes the [Knowledge Graph Visual browser](https://try.kgbrowser.opendata.cz/) interactive tool which allows non-specialists to explore knowledge graphs without knowing the underlying technical details.
+However, it can be difficult for non-specialists to study knowledge graphs due to background technicalities. To solve this problem, the paper “Interactive and iterative visual exploration of knowledge graphs based on shared and reusable visual configurations” [[2]](#references) proposes the [Knowledge Graph Visual browser](https://try.kgbrowser.opendata.cz/) - interactive tool which allows non-specialists to explore knowledge graphs without knowing the underlying technical details.
 
 <h2 id="motivation">2. Motivation</h2>
 
-Often the graphs are quite large, contain too much detail, which slows down and makes them difficult to visualize. And as a result, they do not provide easy visual learning and understanding for regular users.
+Often the graphs are quite large, contain too much detail, which slows down their processing time and makes them difficult to visualize. And as a result, this can worsen the visual perception and study of the graph for ordinary users.
 
-A good visualization can show (reveal) patterns in the graph that are of value to the user. Such visualization, for example, can be used for the presentation purposes.
+A good visualization must show (reveal) patterns in the graph that are of value to the user. Such visualization, for example, can be used for the presentation purposes.
 
-<h2 id="approaches">3. Approaches</h2>
+<h2 id="approaches">3. Increasing the level of visual perception of large graphs</h2>
 
-There are two approaches to start with. The first approach is to reduce the time used to render large graphs, i.e., optimize the backend methods used in graph rendering. This approach does not reduce the amount of detail shown on the graph, but only the rendering time.
+There are several approaches that can improve runtime at both rendering and layout stages. The first approach is aimed at reducing the rendering time of large graphs, but not the amount of detail displayed, i.e. it optimizes the internal methods used in graph rendering phase. This approach is beyond the scope of this article.
 
-The second approach is to make the graph more readable and understandable for non-specialists, i.e. optimize frontend visualization. For example, to reduce the amount of detail such as edges or nodes, or to use a different, more efficient, layout algorithm. This approach takes precedence because the original proposal of the Knowledge Graph Visual Browser was to hide technical complexity such as SPARQL queries and RDF standards to simplify the graph exploration for non-specialist users. This approach can also improve rendering time. Therefore, this paper will rely on this approach.
+The second approach is to make the graph more readable and understandable for non-specialists, i.e. optimize layout phase. For example, to reduce the amount of detail such as edges or nodes, or to use a different, more efficient, layout algorithm. As a side effect, it can also reduce rendering time. This article is based on this approach.
 
-By examining what a good, understandable graph should look like, and relying on articles [[3]](#references), [[4]](#references), we can establish several criteria and rely on them:
+Relying on the articles [[3]](#references), [[4]](#references), we can establish several following criteria indicating a good level of perception of a graph:
+
 - Intuitiveness / Perceptibility / Easy navigation
 - Simplicity
 - Usefulness
 - Highlighting key details
 
-<h3 id="filtering">Filtering</h3>
+It is also useful to consider the following several criteria that can improve the level of perception of a graph:
 
-The first way to simplify a graph is to use filtering, as it helps users extract and understand the information they need in the graph. The method should allow users to freely select attributes and relationships they are interested in and then use these features to create a small and informative graph.
-
-<h3 id="layouts">Layouts</h3>
-
-The second way is to use an existing layout or implement own. 
-
-Let's highlight a few criteria that need to be considered in a good layout that can be used to show large graphs:
-1. Nodes connected by an edge must be close to each other
-2. There must be the minimum number of intersections of edges, or even no intersections
+1. Nodes connected by an edge should be close to each other
+2. There should be a minimum number of intersections of edges, or even no intersections
 3. Large amount of nodes should be split into chunks, or clusters
 4. Clusters should contain related nodes
 5. Overall graph representation should represent (tell) a good story in understandable way
 
-Unfortunately, it is very difficult and time consuming to implement the own layout, because it requires to make changes in the big part of the Cytoscape library.
+Recent works [[5]](#references), [[6]](#references) approach the problem of visualization of large graphs, replacing it with "proxy graphs" - smaller representatives of large graphs. The main challenge is to find a proxy graph as *faithful*[[7]](#references) to the original graph as possible. 
 
-Fortunately, we can still integrate graph simplification techniques with existing layouts to make the graph visualization more user-friendly. To do this, we can describe the following five techniques:
-- [Sparsification. Elimination of redundant edges](#nodes-edges-eliminations)
-- [Summarization](#summarization)
-- [Clustering](#clustering)
-- [Coarsening](#coarsening)
-- [Condensation](#condensation)
+In the rest of this section, we will describe and compare several techniques that can be used to increase the level of perception of a graph visualization.
 
-<h4 id="nodes-edges-eliminations">Sparsification. Elimination of redundant edges</h4>
+<h3 id="filtering">Filtering</h3>
+
+There may be a case when it makes no sense to visualize the entire graph. In this case, it may be useful to use filtering, as it helps users extract the information they need from the graph and hide unnecessary visual clutter. This approach allows users to filter nodes and relationships based on selected attributes and then use them to create a small and informative graph.
+
+Filtering corresponds to a function that reduces a given set of elements to a new, smaller set that match a particular query or property. This is also applicable at a structural level where the user can select an element of interest and thus hide elements that are not connected to the selected element. The example is shown in the Figure 1 below.
+
+<p align="center">
+    <img src="img/path_filtering.png" alt="sparsification" title="Sparsification" width="700"/><br/>
+    <em>Figure 1. Path filtering. A user selects "2" element (screenshot 1 to the left). The result is shown on the screenshot 2 to the right - algorithm shows only nodes connected to the selected element.</em>
+</p>
+
+However, it can be difficult for the ordinary user to find the area of interest on the graph. In this case, it may be useful to help him make a choice and identify elements that may represent the object of interest. There are several algorithms that may analyze structural graph patterns and reveal such elements, e.g., centrality algorithms - measuring the relative importance of nodes within a graph. 
+
+Well-known representatives are [[6]](#references): 
+
+- The Eigenvector Centrality measures the transitive (or directional) influence of nodes. Relationships of a node to high-scoring nodes contribute more to the score of that node than connections to low-scoring nodes. 
+- The Closeness Centrality is a way of detecting nodes that are able to spread information efficiently through a subgraph. Nodes with a high closeness score have, on average, the shortest distances to all other nodes. 
+- The Betweenness Centrality is detecting the amount of influence a node has over the flow of information or resources in a graph. It can be used to find nodes that serve as bridges from one part of a graph to another. 
+- The Degree Centrality algorithm counts the number of incoming and outgoing relationships from a node. It is used to find popular nodes in a graph.
+
+All of these methods can help the user determine the site of interest to him, with which to start interacting.
+
+<h3 id="nodes-edges-eliminations">Sparsification. Elimination of redundant edges</h3>
 
 Sparsification is an approximation of a given graph by a graph with fewer edges.
 
@@ -79,11 +90,11 @@ An example is shown in Figure 1 below.
     <em>Figure 1. Sparsification.</em>
 </p>
 
-<h4 id="summarization">Summarization</h4>
+<h3 id="summarization">Summarization</h3>
 
-Graph summarization transforms graphs into more compact representations while preserving structural patterns. They produce summary graphs in the form of supergraphs. Supergraphs are the most common representation, which consists of supernodes and original nodes that are connected by edges and superedges that represent aggregated original edges [[5]](#references).
+Graph summarization transforms graphs into more compact representations while preserving structural patterns. They produce summary graphs in the form of supergraphs. Supergraphs are the most common representation, which consists of supernodes (represent aggregated original nodes) and original nodes that are connected by edges and superedges (represent aggregated original edges) [[7]](#references).
 
-This approach sums up the clustering and coarsening.
+This approach sums up the [clustering](#clustering) and [coarsening](#coarsening).
 
 An example is shown in Figure 2 below.
 
@@ -92,15 +103,17 @@ An example is shown in Figure 2 below.
     <em>Figure 2. Summarization.</em>
 </p>
 
-<h4 id="clustering">Clustering</h4>
+<h3 id="clustering">Clustering</h3>
 
-Graph clustering is the process of grouping the nodes of the graph into clusters, taking into account edge and node structures of the graph in such a way that there are several edges within each cluster and very few (or even no edges) between clusters [[6]](#references). Graph clustering clusters the nodes based on their similarity measure.
+Graph clustering is the process of grouping nodes into clusters, taking into account the structure of edges and nodes of the graph, so that there are several edges in each cluster and very few (or even no edges) between clusters [[8]](#references). Graph clustering clusters the nodes based on their similarity measure.
 
-<h4 id="coarsening">Coarsening</h4>
+#TODO Modularity
 
-The goal of this method is to replace the original graph by one which has fewer nodes, but whose structure and characteristics are similar to those of the original graph. Usually nodes with similar properties are grouped into a clusters. These similarity clusters form the new nodes of the coarsened graph and are hence termed as supernodes [[7]](#references).
+<h3 id="coarsening">Coarsening</h3>
 
-<h4 id="condensation">Condensation</h4>
+The goal of this method is to replace the original graph by one which has fewer nodes, but whose structure and characteristics are similar to those of the original graph. Usually nodes with similar properties are grouped into a clusters. These similarity clusters form the new nodes of the coarsened graph and are hence termed as supernodes [[9]](#references).
+
+<h3 id="condensation">Condensation</h3>
 
 Graph condensation returns a directed graph whose nodes represent the strong components of the original graph. This reduction provides a simplified view of the connectivity between components. 
 
@@ -121,7 +134,7 @@ Because in the Knowledge Graph Visual Browser we always expand the neighborhood 
     <em>Figure 3. Sequential layout</em>
 </p>
 
-The sequential layout (shown in the Figure 3 above) is designed to display data that contains a clear sequence of distinct levels of nodes. It takes multiple components into account and minimizes link crossings [[8]](#references).
+The sequential layout (shown in the Figure 3 above) is designed to display data that contains a clear sequence of distinct levels of nodes. It takes multiple components into account and minimizes link crossings [[10]](#references).
 
 This layout meets 1, 2, and 5 criteria listed at the beginning of the [Layouts](#layouts) section. It satisfies the first criterion because we expand the neighborhood in the same direction (the direction must be determined at the beginning), so we can place nodes in the neighborhood close to the expanding node. It meets the second criterion because we are expanding the nodes in the same direction, so we have room to place its neighbors in such a way that there are no edge intersections. It also meets the fifth criterion because it is visually understandable to non-specialists.
 
@@ -142,7 +155,7 @@ This technique allows to show only those nodes that are of interest to the user.
 
 <p align="center">
     <img src="img/hiding_background.png" alt="hiding_nodes" title="Hiding nodes" width="600"/><br/>
-    <em>Figure 4. Hiding redundant nodes [9].</em>
+    <em>Figure 4. Hiding redundant nodes [11].</em>
 </p>
 
 However, this technique has already been implemented in the Knowledge Graph Visual browser by Štěpán Stenchlák.
@@ -153,7 +166,7 @@ The second approach is to highlight key nodes or areas (clusters) of nodes that 
 
 <p align="center">
     <img src="img/node_highlighting.png" alt="node_highlighting" title="Node highlighting" width="750"/><br/>
-    <em>Figure 5. Node and edge highlighting [10].</em>
+    <em>Figure 5. Node and edge highlighting [12].</em>
 </p>
 
 The disadvantage of this method is that it only improves visual perception, but does not simplify the graph and does not make it faster.
@@ -188,6 +201,37 @@ As the result of discussions I can conclude following:
 - Personally, I did not like the [Sequential layout](#sequential-layout), but still wanted to receive feedbacks from colleagues. They said it is a very user-friendly layout, easy to understand and looks like "Tree of life". So I left it in case I didn't find a better solution.
 - The [background hiding](#background-hiding) method has also received good reviews. However, this can only display the area of the graph that the user wants to see and does not make it easier to present the graph as a whole.
 - I showed users the [node highlighting](#highlighting-key-nodes-and-edges) example shown in Figure 5. They found the graph too complex, but they liked that the clusters of nodes can be easily seen and that the key nodes are shown larger than the other nodes. 
+
+
+#TODO Draft
+Filtering problem
+A common problem when reducing large graphs or networks by filtering techniques is that users do not exactly know what they are looking for and, thus, require tools that assist them in identifying the critical elements.
+https://www.yworks.com/pages/interactive-filtering-of-large-diagrams
+
+Centrality 
+ Except for degree, the
+other two centrality measures, closeness and betweenness,
+are prohibitively expensive to compute, and thus impractical
+for large networks. On the other hand, although simple to
+compute, degree centrality gives limited information since
+it is based on a highly local view of the graph around each
+node. We need a set of centrality measures that enrich our
+understanding of very large networks, and are tractable to
+compute
+shortest-path or
+random walk betweenness [6, 25] have complexity at least
+O(n
+3
+) where n is the number of nodes in a graph
+https://www.cs.cmu.edu/~ukang/papers/CentralitySDM2011.pdf
+
+
+
+
+
+
+
+
 
 Based on the results of the survey, I convinced myself that the approach described in section "[Node aggregation](#node-aggregation)" is best suited. I presented this approach to my supervisor and two weeks later he told me that he had found a customer who is interested in this approach. The customer was the Charles University and the topic was "Departments and subjects".
 
@@ -330,9 +374,13 @@ The user then decides to click the “plus” button multiple times. With each i
 2. [Interactive and iterative visual exploration of knowledge graphs based on shareable and reusable visual configurations](https://www.sciencedirect.com/science/article/pii/S1570826822000105#b2) by Martin Nečaský, Štěpán Stenchlák
 3. [The 10 rules of great graph design](https://cambridge-intelligence.com/10-rules-great-graph-design/), by Corey Lanum, January 10, 2014
 4. [Data Visualization Effectiveness Profile](http://perceptualedge.com/articles/visual_business_intelligence/data_visualization_effectiveness_profile.pdf), by Stephen Few, 2017
-5. [NetworkX. Summarization](https://networkx.org/documentation/stable/reference/algorithms/summarization.html)
-6. [Graph clustering](https://paperswithcode.com/task/graph-clustering)
-7. [Coarsening Graphs with Neural Networks](https://karush27.github.io/posts/2012/08/blog-post-24/), October 11, 2021
-8. [Sequential layout: the best way to handle tiered data](https://cambridge-intelligence.com/sequential-layout-the-best-way-to-handle-tiered-data/), by Julia Robson, June 15, 2022
-9. [Customer behavior analysis with data visualization](https://cambridge-intelligence.com/customer-behavior-analysis/), by Rosy Hunt, August 30, 2022
-10. [Pharma data visualization](https://cambridge-intelligence.com/use-cases/pharma/)
+5. [Proxy graph: visual quality metrics of big graph sampling](https://www.researchgate.net/publication/314028734_Proxy_Graph_Visual_Quality_Metrics_of_Big_Graph_Sampling), by Quan Hoang Nguyen at al, February 2017
+6. [Graph Drawing and Network Visualization](https://link.springer.com/book/10.1007/978-3-030-35802-0#about-this-book), pp 272–286, Eades, P., Nguyen, Q., Hong, SH., 2018.
+7. [On the faithfulness of graph visualizations](https://link.springer.com/chapter/10.1007/978-3-642-36763-2_55)
+8. [Centrality Algorithms](https://neo4j.com/developer/graph-data-science/centrality-graph-algorithms/)
+9. [NetworkX. Summarization](https://networkx.org/documentation/stable/reference/algorithms/summarization.html)
+10. [Graph clustering](https://paperswithcode.com/task/graph-clustering)
+11. [Coarsening Graphs with Neural Networks](https://karush27.github.io/posts/2012/08/blog-post-24/), October 11, 2021
+12. [Sequential layout: the best way to handle tiered data](https://cambridge-intelligence.com/sequential-layout-the-best-way-to-handle-tiered-data/), by Julia Robson, June 15, 2022
+13. [Customer behavior analysis with data visualization](https://cambridge-intelligence.com/customer-behavior-analysis/), by Rosy Hunt, August 30, 2022
+14. [Pharma data visualization](https://cambridge-intelligence.com/use-cases/pharma/)

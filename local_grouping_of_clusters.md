@@ -7,13 +7,13 @@ _This page describes how local grouping of clusters is working._
 ### Table of content
 
 - [Motivation](#motivation)
-- [Research part](#reserach)
+- [Research part](#research)
 - [Implementation](#implementation)
 - [Conclusion](#conclusion)
 
 <h1 id="motivation">Motivation</h1>
 
-The basic principal of the local grouping of clusters is based on [global grouping of clusters](#TODO). The main difference is that in the local version grouping is performed only on the selected nodes.
+The use of local grouping allows users to work only with the area of the graph in which they are interested. The main advantage of local grouping over global grouping is that it requires less processing time and usage of resources.
 
 <h1 id="research">Research part</h1>
 
@@ -27,7 +27,7 @@ This section describes the various methods for selecting nodes. We can state the
 
 Selecting a node with a mouse click is a simple and straightforward method. At the same time, it is convenient and understandable to users on an intuitive level. 
 
-Selecting a node while the mouse is over it is also intuitive, but it can cause local grouping on a node that is accidentally under the mouse pointer. 
+Selecting a node while the mouse is over is also intuitive, but it can cause local grouping on a node that is accidentally under the mouse pointer. 
 
 The implicit selection of all nodes visible in the graph area is less intuitive and may confuse the user. To take advantage of this feature, it's best to explicitly select all the nodes on which you want to perform local grouping.
 
@@ -39,7 +39,7 @@ Selecting nodes with a mouse click is considered the best option to use as a sta
 
 <h1 id="implementation">Implementation</h1>
 
-The main advantage of the [`groupingOfClustersManager`](https://github.com/Razyapoo/knowledge-graph-browser-frontend-grouping-of-clusters/blob/5ee77643da16800807253298f984bcf5b13ec336/src/graph/GraphAreaManipulator.ts#L124) method is that it groups a predefined list of nodes. In the case of global grouping, all nodes on the graph area are taken, and in the case of a local grouping, all selected nodes and all their descendants (if exists) are taken. 
+The main advantage of the [`groupingOfClustersManager`](https://github.com/Razyapoo/knowledge-graph-browser-frontend-grouping-of-clusters/blob/5ee77643da16800807253298f984bcf5b13ec336/src/graph/GraphAreaManipulator.ts#L124) method is that it groups a predefined list of nodes. In the case of a global grouping, the list of predefined nodes consists of all nodes on the graph area, and in the case of a local grouping, it consists of the selected nodes and all their descendants (if any).
 
 The general logic of cluster grouping has undergone a slight change. The previous version of the algorithm performed grouping sequentially with respect to the hierarchical level, that is, in each subsequent iteration of the algorithm, nodes were taken from the [current hierarchical level](#TODO) or the next (+/- 1) level. This method, however, cannot be used with local grouping, because the user can select an arbitrary node on which he wants to perform local grouping, and this level may differ from the current hierarchical level. To solve this problem, the logic of the current hierarchical level is changed, but it is still valid that when zooming in, nodes having lower level have preference, and otherwise when zooming out. Each iteration of the cluster grouping performs a new search for the current hierarchical level. For example, when zooming out, `globalHierarchicalDepth` is set to the lowest level (keeping in mind that the level is increasing according to depth of hierarchy, i.e. descendants have higher hierarchical level in the hierarchy) among the nodes chosen to be grouped. However, when zooming in, it is not enough to simply find the highest level, but you also need to keep in mind that there may be nodes that have a lower hierarchical level, and at the same time have collapsed children. In this case, we need to give preference to such nodes.
 
@@ -49,4 +49,4 @@ It is also possible to combine local and global options of cluster grouping. In 
 
 <h1 id="conclusion">Conclusion</h1>
 
-The concept used to implement global grouping made it easy to extend it to support local grouping. The main difference between global and local grouping of clusters is that in the global version, grouping is performed on the entire range of nodes, while in the local version, only on selected (by mouse click) nodes and all its hierarchical descendants (if any).
+The concept used to implement [global grouping](#TODO) made it easy to extend it to support local grouping. In the local version grouping is performed only on the selected nodes and all their descendants (if any).
