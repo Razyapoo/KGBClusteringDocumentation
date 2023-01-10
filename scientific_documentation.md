@@ -11,7 +11,7 @@ Team members who contribute to the Knowledge Graph Visual Browser:
 
 Full implementation and basic principals used in the "Grouping of clusters" extension are described in the [technical](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/technical_documentation.md) and [user](https://github.com/Razyapoo/KGBClusteringDocumentation/blob/main/user_documentation.md) documentations.
 
-This paper proposes several prototypes (developed by the student or found in other research papers) used to optimize the visualization of knowledge graphs so that they are well organized and easy to understand for ordinary users. It is also supposed to compare prototypes and implement at least one of them.
+In this paper, we present several prototypes intended to optimize the visualization of knowledge graphs in a way so that they are both well-organized and easily understandable by ordinary users. These prototypes have been implemented by the student or identified through research of other papers. We also aim to compare these prototypes and implement at least one of them.  
 
 Table of content:
 - [Introduction](#introduction)
@@ -22,71 +22,116 @@ Table of content:
 
 <h2 id="introduction">1. Introduction</h2>
 
-A [knowledge graph](https://en.wikipedia.org/wiki/Knowledge_graph), also known as a semantic network, represents a network of real-world entities: objects, events, situations, or concepts, and illustrates the relationship between them. This information is typically stored in a graph database and visualized as a graph structure, giving rise to the term "knowledge graph" [[1]](#references). The most common way to represent knowledge graphs is to use the [RDF standard](https://en.wikipedia.org/wiki/Resource_Description_Framework).
+A [knowledge graph](https://en.wikipedia.org/wiki/Knowledge_graph), also known as a semantic network, is a representation of a network of real-world entities - objects, events, situations, or concepts - and relationships between them. These entities are usually stored in a graph database and visualized as a graph [[1]](#references) #TODO (["What is a Knowledge Graph?"](https://www.ibm.com/cloud/learn/knowledge-graph), by IBM Cloud Education, April 12, 2021). The most common way to represent knowledge graphs is through the [RDF (Resource Description Framework) standard](https://en.wikipedia.org/wiki/Resource_Description_Framework).
 
-However, it can be difficult for non-specialists to study knowledge graphs due to background technicalities. To solve this problem, the paper “Interactive and iterative visual exploration of knowledge graphs based on shared and reusable visual configurations” [[2]](#references) proposes the [Knowledge Graph Visual browser](https://try.kgbrowser.opendata.cz/) - interactive tool which allows non-specialists to explore knowledge graphs without knowing the underlying technical details.
+However, non-specialists may find it difficult to study knowledge graphs due to the background technicalities involved. In order to solve this problem, the paper “Interactive and iterative visual exploration of knowledge graphs based on shared and reusable visual configurations” [[2]](#references) #TODO ([Interactive and iterative visual exploration of knowledge graphs based on shareable and reusable visual configurations](https://www.sciencedirect.com/science/article/pii/S1570826822000105#b2) by Martin Nečaský, Štěpán Stenchlák) introduces the [Knowledge Graph Visual browser](https://try.kgbrowser.opendata.cz/) - an interactive tool that allows non-specialists to explore knowledge graphs without knowing the underlying technical details.
 
 <h2 id="motivation">2. Motivation</h2>
 
-Often the graphs are quite large, contain too much detail, which slows down their processing time and makes them difficult to visualize. Information overload can cause the user to get lost in irrelevant details, and as a result, this can worsen the visual perception and readability of the graph.
+When working with large graphs, it can be challenging to effectively visualize and interpret the data shown due to the high volume of the information present. The big amount of detail can slow down the processing time and make it difficult to focus on the most important aspects of the graph. 
 
-A good visualization must show (reveal) patterns in the graph that are of value to the user. Such visualization, for example, can be used for the presentation purposes.
+Other challenges include:
 
-<h2 id="approaches">3. Increasing the level of visual perception of large graphs</h2>
+- Limited screen area: Large graph can be difficult to fit onto a single screen, making it hard to see the overall structure or identify patterns
+- Overcrowding: When too many nodes or edges are present, the graph can become cluttered and difficult to read
+- Link overlap: When there are many edges between nodes, it can lead to link overlap, making it hard to distinguish individual edges and understand the connectivity of the graph
+- Lack of context: In big graphs, it can be hard to see the relationships between nodes or understand how they fit onto the overall structure 
+- High-Dimensional data: When nodes and edges are associated with many attributes, handling and visualizing them can become challenging
+- Scalability: Visualizing large graphs can be computationally expensive
+  
+A good visualization of a large graph should be able to reveal patterns that are of the value to the user. Such a visualization can be particularly useful for presentation purposes, as it help to convey important insights and trends in a clear and concise manner. It is important to choose strategies and techniques that will help to highlight the most relevant and meaningful aspects of the data.
 
-There are several approaches that can improve runtime at both rendering and layout stages. The first approach is aimed at reducing the rendering time of large graphs, but not the amount of detail displayed, i.e. it optimizes the internal methods used in graph rendering phase. This approach is beyond the scope of this article.
+<h2 id="approaches">3. Enhancing the visual perception of large graphs</h2>
 
-The second approach is to make the graph more readable and understandable for non-specialists, i.e. optimize layout phase. For example, to reduce the amount of detail such as edges or nodes, or to use a different, more efficient, layout algorithm. As a side effect, it can also reduce rendering time. This article is based on this approach.
+There are several approaches that can be taken to improve the runtime and performance of large graph visualizations. One approach is focused on optimizing the internal methods used in the rendering phase, in order to reduce the time it takes to render the graph without reducing the amount of detail displayed. While this approach is effective, it falls outside the scope of this article.
 
-Relying on the articles [[3]](#references), [[4]](#references), we can establish several following criteria indicating a good level of perception of a graph:
+Another approach is to optimize the layout phase in order to make the graph more readable and understandable for non-specialists. This can involve reducing the amount of detail, such as edges or nodes, or using a more efficient layout algorithm. As a result, this approach can help to improve the overall performance and efficiency of the visualization. 
 
-- Intuitiveness / Perceptibility / Easy navigation
-- Simplicity
-- Usefulness
-- Highlighting key details
+The focus of this research work is on the second approach, which aim to enhance the visual perception of large graphs. 
 
-It is also useful to consider the following several criteria that can improve the level of perception of a graph:
+According to the articles [[3]](#references) #TODO ([The 10 rules of great graph design](https://cambridge-intelligence.com/10-rules-great-graph-design/), by Corey Lanum, January 10, 2014) and [[4]](#references) #TODO ([Data Visualization Effectiveness Profile](http://perceptualedge.com/articles/visual_business_intelligence/data_visualization_effectiveness_profile.pdf), by Stephen Few, 2017), there are several criteria that can help to determine a good level of visual perception in a graph:
 
-1. Nodes connected by an edge should be close to each other
-2. There should be a minimum number of intersections of edges, or even no intersections
-3. Large amount of nodes should be split into chunks, or clusters
-4. Clusters should contain related nodes
-5. The area of the shown graph should be small 
-6. Overall graph representation should represent (tell) a good story in understandable way
+- Intuitiveness/perceptibility/easy navigation: The graph should be easy to navigate and understand, with a clear and intuitive layout. 
+- Simplicity: The graph should be free of clutter. 
+- Usefulness: The graph should be clear and useful to the user, and should provide valuable insights and information. 
+- Highlighting key details: The graph should highlight the most important and relevant details, and should allow the user to easily focus on these aspects.
 
-The criteria of perceptibility and readability are necessary, but not sufficient for quality graph visualization. In the paper [[5]](#references), the authors introduced another kind of criterion called *faithfulness*. They showed that although reducing the amount of detail displayed on the graph improves readability, it can also reduce the level of faithfulness. 
+In order to improve the level of perception in a graph, it is also useful to consider the following criteria:
 
-Recent works [[6]](#references), [[7]](#references) approach the problem of visualization of large graphs, replacing it with "proxy graphs" - smaller representatives of large graphs. Formally, we can describe the proxy graph as follows: given an input graph *G* and its drawing *D*, the proxy graph is *G'* that is smaller and has a drawing *D'*. We can state that if *G'* is a good approximate representation of *G*, then *D'* is an good visualization of *G* in which the user can see all the structure of *G*. In other words, the main challenge is to find a proxy graph that retains both a good level of perception and a good level of faithfulness.
+1. Nodes connected by an edge should be close to each other: This helps to clearly show the relationships between nodes and can make the graph easier to understand
+2. There should be a minimum number of edge intersections or no intersections at all: Avoiding edge intersections can help to reduce clutter and improve the overall readability of the graph
+3. A large number of nodes should be divided into chunks or clusters: This can help to organize the nodes and make it easier to understand the structure of the graph 
+4. Clusters should contain related nodes: Grouping related nodes together can help to emphasize the relationships between them
+5. The area of the graph shown should be small: A smaller, more focused area of the graph can help to improve the readability and clarity of the information
+6. The overall graphical representation should present (tell) a good story in an understandable way.
 
-In the rest of this section, we will describe and compare several techniques that can be used to create proxy graphs.
+Perceptibility and readability are necessary, but not sufficient criteria for quality graph visualization. In the paper [[5]](#references) #TODO ([On the faithfulness of graph visualizations](https://link.springer.com/chapter/10.1007/978-3-642-36763-2_55)), the authors introduced another criterion called *faithfulness*, which refers to the ability of the visualization to accurately represent the data being displayed. They found that reducing the amount of detail shown in a graph can improve readability, but can also reduce the level of confidence, or the visualization's ability to accurately represent the data.
+
+To address the challenge of visualizing large graphs while maintaining both a good level of perception and faithfulness, recent works [[8]](#references) #TODO ([Graph Drawing and Network Visualization](https://link.springer.com/book/10.1007/978-3-030-35802-0#about-this-book), pp 272–286, Eades, P., Nguyen, Q., Hong, SH., 2018.), [[9]](#references) #TODO ([Proxy graph: visual quality metrics of big graph sampling](https://www.researchgate.net/publication/314028734_Proxy_Graph_Visual_Quality_Metrics_of_Big_Graph_Sampling), by Quan Hoang Nguyen at al, February 2017) have proposed the use of "proxy graphs" - smaller representatives of large graphs. Formally, a proxy graph can be defined as follows: given an input graph *G* and its drawing *D*, a proxy graph is a smaller graph *G'* with a drawing *D'*, such that if *G'* is a good approximation of the *G*, then *D'* is a good visualization of *G* in which the user can see all the structure of G. In other words, the main challenge is to find a proxy graph that balances the competing objectives of perception and faithfulness.  
+
+In the rest of this section, we will describe and compare several techniques that can be used to find a proxy graph preserving a good level of perceptibility and faithfulness.
 
 <h3 id="filtering">Filtering</h3>
 
-There may be a case when it makes no sense to visualize the entire graph. In this case, it may be useful to use filtering, as it helps users extract the information they need from the graph and hide unnecessary visual clutter. The main advantage of this approach is that it allows users to filter nodes and relationships based on selected attributes and then use them to create a small and informative graph.
+Filtering is a useful technique for optimizing graph visualization when it is not necessary or practical to display the entire graph. By allowing users to select specific attributes or elements of interest, filtering can help to reduce visual clutter and improve the readability and clarity of the graph. As a result, users can create a small, informative graph that is tailored to their specific needs and interests, making it easier to extract valuable insights and information from data.
 
-Unlike the common use case of filtering, where the user filters nodes based on some attributes, this can also be applied at a structural level, where the user can select the element of interest directly on the graph and thus hide elements that are not related to the selected element. The example is shown in the Figure 1 below.
+The advantage of filtering is that it can be applied at both the attribute level, where nodes are filtered based on the selected attributes, and the structural level, where users can directly select elements of interest on the graph and hide unrelated data. This is illustrated in Figure 1 below.  
 
 <p align="center">
     <img src="img/path_filtering.png" alt="sparsification" title="Sparsification" width="700"/><br/>
     <em>Figure 1. Path filtering. A user selects "2" element (screenshot 1 to the left). The result is shown on the screenshot 2 to the right - algorithm shows only nodes connected to the selected element.</em>
 </p>
 
-However, it can be difficult for the ordinary user to find the area of interest on the graph. In this case, it may be useful to help him make a choice and identify elements that may represent the object of interest. There are several algorithms that may analyze structural graph patterns and reveal such elements, e.g., centrality algorithms - measuring the relative importance of nodes within a graph by considering its various structural properties. 
+However, it can be challenging for the ordinary user to identify the area of interest on the graph and select the appropriate elements of interest. Various algorithms can be used to analyze structural patterns in the graph and reveal such elements.  One such class of algorithms are centrality algorithms, which measure the relative importance of nodes within a graph based on structural properties.  
 
-Well-known representatives are [[8]](#references): 
+Well-known representatives are [[6]](#references) #TODO ([Centrality Algorithms](https://neo4j.com/developer/graph-data-science/centrality-graph-algorithms/)): 
 
-- The Eigenvector Centrality measures the transitive (or directional) influence of nodes. Relationships of a node to high-scoring nodes contribute more to the score of that node than connections to low-scoring nodes. 
-- The Closeness Centrality is a way of detecting nodes that are able to spread information efficiently through a subgraph. Nodes with a high closeness score have, on average, the shortest distances to all other nodes. 
-- The Betweenness Centrality is detecting the amount of influence a node has over the flow of information or resources in a graph. It can be used to find nodes that serve as bridges from one part of a graph to another. 
-- The Degree Centrality algorithm counts the number of incoming and outgoing relationships from a node. It is used to find popular nodes in a graph.
+- Eigenvector Centrality: Measures the influence of an element based on the influence of its neighbors, allowing it to identify elements that are connected to other influential elements 
+- Closeness Centrality: Measures the distance of an element to all other elements in the graph, indicating its proximity to the rest of the graph
+- Betweenness Centrality: Measures the number of shortest paths that pass through an element, indicating its importance as a bridge between other elements 
+- Degree Centrality: Measures the number of incoming and outgoing relationships a node has in the graph
 
-All of these methods can help the user determine the site of interest to him, with which to start interacting.
+By using centrality algorithms, users can more easily identify elements of interest and focus on the most important or influential elements in the graph. There are also other techniques such as [PageRank](https://en.wikipedia.org/wiki/PageRank), [LeaderRank](https://www.centiserver.org/centrality/LeaderRank/#:~:text=Definition,the%20need%20of%20frequent%20calibration.), [HITS (Hyperlink-Induced Topic Search)](https://en.wikipedia.org/wiki/HITS_algorithm).
+
+
+<h3 id="graph-sampling">Graph sampling</h3>
+
+The goal of the graph sampling is to extract a small subset of the large graph that preserves its structure, patterns, and properties. The result of this approach is a graph induced by the selected set.
+
+There are several methods for graph sampling, including: 
+
+<p>Random sampling</p>
+
+Random vertex and edge sampling are methods for selecting subsets of vertices and edges from a graph, respectively. The method works by randomly selecting a set of nodes or vertices from the graph according to a predefined probability distribution, such as uniform or degree-based probabilities. 
+
+One of the main advantages of random sampling is that it is easy to implement and computationally efficient, making it suitable for processing large graphs. However, as the selection of vertices/edges is based on random choice, the result may not be representative of the overall graph and there is a possibility of missing important features and properties of the original graph. For example, random vertex method have problems matching degree distribution, since there are many high-degree nodes in the sample. Sampled graphs sampled using random edge sampling usually very sparsely connected and thus do not respect community structure [[]] #TODO ([Sampling from large graphs](https://www.academia.edu/2957458/Sampling_from_large_graphs), Jure Leskovec, Christos Faloutsos) [[]] #TODO [Proxy graph: visual quality metrics of big graph sampling](https://www.researchgate.net/publication/314028734_Proxy_Graph_Visual_Quality_Metrics_of_Big_Graph_Sampling), by Quan Hoang Nguyen at al, February 2017).
+
+Another variations of random sampling are Random Vertex-Edge and Random Node-Edge samplings. They differ in how the subset of nodes and edges is selected: 
+
+- In the *Random Vertex-Edge* sampling we first uniformly at random pick a node and then uniformly at random pick an edge incident to the node. This technique aims to reduce the bias to high-degree nodes that is present on the original random edge sampling. [[]] #TODO ([Sampling from large graphs](https://www.academia.edu/2957458/Sampling_from_large_graphs)
+
+- In the *Random Node-Edge* sampling we select a node and an edge at random independently. In other words, we first select a node at random and then an edge at random without considering if the edge is connected to the randomly selected node or not.
+
+The best way is to make a *Hybrid* approach [[]] #TODO [Reducing Large Internet Topologies for Faster Simulations](https://link.springer.com/chapter/10.1007/11422778_27), where with probability p we perform a step of random vertex-edge or random node-edge sampling and with probability 1 − p we perform a step of random edge sampling sampling.
+
+<p>Sampling by exploration</p>
+
+In this family of the sampling techniques we first choose a node uniformly at random and then explore nodes in its vicinity. These techniques include: 
+
+- Breads-first search (BFS): This technique is inspired by well-known [breadth-first search](https://en.wikipedia.org/wiki/Breadth-first_search) algorithm. It starts at a randomly selected node and then visiting all of its neighbors before moving to the next node.
+- Depth-first search (DFS): This technique is inspired by the depth-first search algorithm. It starts at random node and then follows a path of edges as deep as possible, then it performs backtracking and moves onto the next path. 
+- Random walk [[]] #TODO ([Sampling from large graphs](https://www.academia.edu/2957458/Sampling_from_large_graphs)): This technique uniformly at random picks a starting node and then simulate a random walk on the graph. With the probability *c*, it revisits a strating node at every step and restarts the walk. The probability is usually set to a low value, such as 0.15, to ensure that the random walk explorers a large portion of the graph. However, random walk can get stuck if the starting vertex belongs to a small, isolated component. The graph structure in the sample is then distorted, as random walker remains inside a subgraph. To solve this drawback, some variations of random walk have been proposed, such as *lazy random walk*, where the probability c is set ot zero, or the *random jump*, where the random walker has a small probability *c = 0.15* to jump to a random vertex in the graph with the goal to explore different parts of the graph. 
+- Random path: At each iteration method randomly chooses two nodes from the original vertex set, finds the shortest path between them, and adds all previously unselected nodes and edges in the path. The process is repeated until the desired sample size is obtained [[]] [[]] #TODO ([Proxy graph: visual quality metrics of big graph sampling](https://www.researchgate.net/publication/314028734_Proxy_Graph_Visual_Quality_Metrics_of_Big_Graph_Sampling))([Impact of Sampling Design in Estimation of Graph Characteristics](https://www.researchgate.net/publication/264543191_Impact_of_Sampling_Design_in_Estimation_of_Graph_Characteristics)). 
+
+There are many other sampling techniques such as Random PageRank Vertex sampling, Random Degree Vertex, Snowball sampling etc. Sampling allows to overcome the scalability issues, it helps to identify and isolate subsets of the graph that are important and interesting to the user. 
 
 <h3 id="nodes-edges-eliminations">Sparsification. Elimination of redundant edges</h3>
 
-Spectral sparsification is an approximation of a given graph by a graph with fewer edges [[9]](#references). In other words, the proxy graph *G'* is a sparsification of the original graph *G* if it is a subgraph of *G*, and its edge density is smaller than the edge density of *G*.
+In the best case a large graph assumed to be sparse so that $$|E| \leq c|V|$$
 
-Two graphs *G* and *G'* are considered close if their Laplacian matrices are close as linear operators. Based on this, the spectrum (eigenvalues of the Laplacian matrices; see [[10]](#references)) of a proxy graph *G'* should approximate the spectrum of the original graph *G*.  
+Spectral sparsification is an approximation of a given graph by a graph with fewer edges [[7]](#references) #TODO ([Spectral sparsification of graphs: theory and algorithms](https://dl.acm.org/doi/10.1145/2492007.2492029), D. Spielman at al, pp87-94). In other words, the proxy graph *G'* is a sparsification of the original graph *G* if it is a subgraph of *G*, and its edge density is smaller than the edge density of *G*.
+
+Two graphs *G* and *G'* are considered close if their Laplacian matrices are close as linear operators. Based on this, the spectrum (eigenvalues of the Laplacian matrices; see [[10]](#references) #TODO [Algebraic Graph Theory. Graduate Texts in Mathematics](https://link.springer.com/book/10.1007/978-1-4613-0163-9), Godsil, C.D., Royle, G.F., 2001) of a proxy graph *G'* should approximate the spectrum of the original graph *G*.  
 
 An example is shown in Figure 1 below.
 
@@ -97,7 +142,11 @@ An example is shown in Figure 1 below.
 
 <h3 id="summarization">Summarization</h3>
 
-Graph summarization transforms graphs into more compact representations while preserving structural patterns. They produce summary graphs in the form of supergraphs. Supergraphs are the most common representation, which consists of supernodes (represent aggregated original nodes) and original nodes that are connected by edges and superedges (represent aggregated original edges) [[11]](#references).
+
+
+
+
+Graph summarization transforms graphs into more compact representations while preserving structural patterns. They produce summary graphs in the form of supergraphs. Supergraphs are the most common representation, which consists of supernodes (represent aggregated original nodes) and original nodes that are connected by edges and superedges (represent aggregated original edges) [[11]](#references) #TODO ([NetworkX. Summarization](https://networkx.org/documentation/stable/reference/algorithms/summarization.html)).
 
 This approach sums up the [clustering](#clustering) and [coarsening](#coarsening).
 
@@ -110,13 +159,13 @@ An example is shown in Figure 2 below.
 
 <h3 id="clustering">Clustering</h3>
 
-Graph clustering is the process of grouping nodes into clusters, taking into account the structure of edges and nodes of the graph, so that there are several edges in each cluster and very few (or even no edges) between clusters [[12]](#references). Graph clustering clusters the nodes based on their similarity measure.
+Graph clustering is the process of grouping nodes into clusters, taking into account the structure of edges and nodes of the graph, so that there are several edges in each cluster and very few (or even no edges) between clusters [[12]](#references) #TODO ([Graph clustering](https://paperswithcode.com/task/graph-clustering)). Graph clustering clusters the nodes based on their similarity measure.
 
-#TODO Modularity
+# 1. TODO Modularity
 
 <h3 id="coarsening">Coarsening</h3>
 
-The goal of this method is to replace the original graph by one which has fewer nodes, but whose structure and characteristics are similar to those of the original graph. Usually nodes with similar properties are grouped into a clusters. These similarity clusters form the new nodes of the coarsened graph and are hence termed as supernodes [[13]](#references).
+The goal of this method is to replace the original graph by one which has fewer nodes, but whose structure and characteristics are similar to those of the original graph. Usually nodes with similar properties are grouped into a clusters. These similarity clusters form the new nodes of the coarsened graph and are hence termed as supernodes [[13]](#references) #TODO ([Coarsening Graphs with Neural Networks](https://karush27.github.io/posts/2012/08/blog-post-24/), October 11, 2021).
 
 <h3 id="condensation">Condensation</h3>
 
@@ -139,7 +188,7 @@ Because in the Knowledge Graph Visual Browser we always expand the neighborhood 
     <em>Figure 3. Sequential layout</em>
 </p>
 
-The sequential layout (shown in the Figure 3 above) is designed to display data that contains a clear sequence of distinct levels of nodes. It takes multiple components into account and minimizes link crossings [[14]](#references).
+The sequential layout (shown in the Figure 3 above) is designed to display data that contains a clear sequence of distinct levels of nodes. It takes multiple components into account and minimizes link crossings [[14]](#references) #TODO ([Sequential layout: the best way to handle tiered data](https://cambridge-intelligence.com/sequential-layout-the-best-way-to-handle-tiered-data/), by Julia Robson, June 15, 2022).
 
 This layout meets 1, 2, and 5 criteria listed at the beginning of the [Layouts](#layouts) section. It satisfies the first criterion because we expand the neighborhood in the same direction (the direction must be determined at the beginning), so we can place nodes in the neighborhood close to the expanding node. It meets the second criterion because we are expanding the nodes in the same direction, so we have room to place its neighbors in such a way that there are no edge intersections. It also meets the fifth criterion because it is visually understandable to non-specialists.
 
@@ -160,7 +209,7 @@ This technique allows to show only those nodes that are of interest to the user.
 
 <p align="center">
     <img src="img/hiding_background.png" alt="hiding_nodes" title="Hiding nodes" width="600"/><br/>
-    <em>Figure 4. Hiding redundant nodes [15].</em>
+    <em>Figure 4. Hiding redundant nodes [15] #TODO ([Customer behavior analysis with data visualization](https://cambridge-intelligence.com/customer-behavior-analysis/), by Rosy Hunt, August 30, 2022).</em>
 </p>
 
 However, this technique has already been implemented in the Knowledge Graph Visual browser by Štěpán Stenchlák.
@@ -171,14 +220,14 @@ The second approach is to highlight key nodes or areas (clusters) of nodes that 
 
 <p align="center">
     <img src="img/node_highlighting.png" alt="node_highlighting" title="Node highlighting" width="750"/><br/>
-    <em>Figure 5. Node and edge highlighting [16].</em>
+    <em>Figure 5. Node and edge highlighting [16] #TODO ([Pharma data visualization](https://cambridge-intelligence.com/use-cases/pharma/)).</em>
 </p>
 
 The disadvantage of this method is that it only improves visual perception, but does not simplify the graph and does not make it faster.
 
 <h4 id="node-aggregation">Node aggregation</h4>
 
-Node aggregation is an example of [graph coarsening](#coarsening). A coarsened graph consists of aggregated nodes. But this is exactly not what we want to do, because in this way we will lose other nodes and edges that may need to be restored (shown) in future. It would be much better to still be able to reveal nodes and edges hidden within aggregated nodes.
+Node aggregation is an example of [graph coarsening](#coarsening). A coarsened graph consists of aggregated nodes. But this is not exactly what we want to do, because in this way we will lose other nodes and edges that may need to be restored (shown) in future. It would be much better to still be able to reveal nodes and edges hidden within aggregated nodes.
 
 However, this can cause a problem in the Knowledge Graph Visual browser, because there are detailed queries that are used to display node details, and if we aggregate nodes, it will not be possible to display details of aggregated nodes because they will be auxiliary and will not exist in the database. The same can be said for expansion and preview queries. Thus, we may lose all the functionality that the Knowledge Graph visual browser provides.
 
@@ -208,7 +257,7 @@ As the result of discussions I can conclude following:
 - I showed users the [node highlighting](#highlighting-key-nodes-and-edges) example shown in Figure 5. They found the graph too complex, but they liked that the clusters of nodes can be easily seen and that the key nodes are shown larger than the other nodes. 
 
 
-#TODO Draft
+# 2. TODO Draft
 Filtering problem
 A common problem when reducing large graphs or networks by filtering techniques is that users do not exactly know what they are looking for and, thus, require tools that assist them in identifying the critical elements.
 https://www.yworks.com/pages/interactive-filtering-of-large-diagrams
@@ -375,20 +424,21 @@ The user then decides to click the “plus” button multiple times. With each i
 
 <h2 id="references">References</h2>
 
-1. ["What is a Knowledge Graph?"](https://www.ibm.com/cloud/learn/knowledge-graph), by IBM Cloud Education, April 12, 2021
-2. [Interactive and iterative visual exploration of knowledge graphs based on shareable and reusable visual configurations](https://www.sciencedirect.com/science/article/pii/S1570826822000105#b2) by Martin Nečaský, Štěpán Stenchlák
-3. [The 10 rules of great graph design](https://cambridge-intelligence.com/10-rules-great-graph-design/), by Corey Lanum, January 10, 2014
-4. [Data Visualization Effectiveness Profile](http://perceptualedge.com/articles/visual_business_intelligence/data_visualization_effectiveness_profile.pdf), by Stephen Few, 2017
-5. [On the faithfulness of graph visualizations](https://link.springer.com/chapter/10.1007/978-3-642-36763-2_55)
-6. [Proxy graph: visual quality metrics of big graph sampling](https://www.researchgate.net/publication/314028734_Proxy_Graph_Visual_Quality_Metrics_of_Big_Graph_Sampling), by Quan Hoang Nguyen at al, February 2017
-7. [Graph Drawing and Network Visualization](https://link.springer.com/book/10.1007/978-3-030-35802-0#about-this-book), pp 272–286, Eades, P., Nguyen, Q., Hong, SH., 2018.
-8. [Centrality Algorithms](https://neo4j.com/developer/graph-data-science/centrality-graph-algorithms/)
-9. [Spectral sparsification of graphs: theory and algorithms](https://dl.acm.org/doi/10.1145/2492007.2492029), D. Spielman at al, pp87-94
-10. [Algebraic Graph Theory. Graduate Texts in Mathematics](https://link.springer.com/book/10.1007/978-1-4613-0163-9), Godsil, C.D., Royle, G.F., 2001
-11. [NetworkX. Summarization](https://networkx.org/documentation/stable/reference/algorithms/summarization.html)
-12. [Graph clustering](https://paperswithcode.com/task/graph-clustering)
-13. [Coarsening Graphs with Neural Networks](https://karush27.github.io/posts/2012/08/blog-post-24/), October 11, 2021
-14. [Sequential layout: the best way to handle tiered data](https://cambridge-intelligence.com/sequential-layout-the-best-way-to-handle-tiered-data/), by Julia Robson, June 15, 2022
-15. [Customer behavior analysis with data visualization](https://cambridge-intelligence.com/customer-behavior-analysis/), by Rosy Hunt, August 30, 2022
-16. [Pharma data visualization](https://cambridge-intelligence.com/use-cases/pharma/)
+1. 
+2. 
+3. 
+4. 
+5. 
+6. 
+7. 
+8. 
+9.  
+10. 
+11. 
+12. 
+13. 
+14. 
+15. 
+16. 
 17. 
+18. 

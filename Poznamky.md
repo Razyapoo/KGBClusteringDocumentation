@@ -50,3 +50,24 @@ Where to add new methods:
 # Useful links
 
 - https://www.yworks.com/pages/clustering-graphs-and-networks
+
+
+links:
+
+https://www.semanticscholar.org/paper/Proxy-Graph%3A-Visual-Quality-Metrics-of-Big-Graph-Nguyen-Hong/3db14edc3a191906f7203ad6b64b46d51241b038
+https://arxiv.org/pdf/2004.14794.pdf
+https://dl.acm.org/doi/pdf/10.1145/3186727
+https://users.ics.forth.gr/~kondylak/publications/2019_edbt.pdf
+https://www.academia.edu/72813229/RDF_graph_summarization_principles_techniques_and_applications
+https://www.semanticscholar.org/paper/RDF-graph-summarization%3A-principles%2C-techniques-and-Kondylakis-Kotzinos/793b12435e91bb166a6047365c91bb0d9034901d
+https://www.yworks.com/pages/interactive-filtering-of-large-diagrams
+https://cambridge-intelligence.com/big-graph-data-visualization/
+https://www.cs.cmu.edu/~ukang/papers/CentralitySDM2011.pdf
+https://neo4j.com/blog/graph-algorithms-neo4j-louvain-modularity/
+https://networkx.org/documentation/stable/reference/algorithms/summarization.html
+file:///home/oskar/Documents/Research%20project/books/faithfulness_PacificVis2013.pdf
+file:///home/oskar/Documents/Research%20project/books/proxy.pdf
+https://www.academia.edu/14009514/Spectral_sparsification_of_graphs_theory_and_algorithms
+https://www.academia.edu/2957458/Sampling_from_large_graphs
+https://www.academia.edu/3144485/Effectively_visualizing_large_networks_through_sampling
+file:///home/oskar/Documents/Research%20project/books/Drawing%20big%20graphs%20using%20spectral%20sparsification.pdf
