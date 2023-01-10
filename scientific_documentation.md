@@ -127,7 +127,7 @@ There are many other sampling techniques such as Random PageRank Vertex sampling
 
 <h3 id="nodes-edges-eliminations">Sparsification. Elimination of redundant edges</h3>
 
-In the best case a large graph assumed to be sparse so that $$|E| \leq c|V|$$
+In the best case a large graph assumed to be sparse so that $|E| \leq c|V|$
 
 Spectral sparsification is an approximation of a given graph by a graph with fewer edges [[7]](#references) #TODO ([Spectral sparsification of graphs: theory and algorithms](https://dl.acm.org/doi/10.1145/2492007.2492029), D. Spielman at al, pp87-94). In other words, the proxy graph *G'* is a sparsification of the original graph *G* if it is a subgraph of *G*, and its edge density is smaller than the edge density of *G*.
 
