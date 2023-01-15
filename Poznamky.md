@@ -71,3 +71,13 @@ https://www.academia.edu/14009514/Spectral_sparsification_of_graphs_theory_and_a
 https://www.academia.edu/2957458/Sampling_from_large_graphs
 https://www.academia.edu/3144485/Effectively_visualizing_large_networks_through_sampling
 file:///home/oskar/Documents/Research%20project/books/Drawing%20big%20graphs%20using%20spectral%20sparsification.pdf
+
+
+Homogeneous and heterogeneous sampling:
+https://www.cs.rpi.edu/~slotag/classes/FA16/slides/lec19-sample.pdf
+
+Sparsification by effective resistances:
+https://www.academia.edu/14009496/Graph_Sparsification_by_Effective_Resistances
+
+Spectral Sparsification of graphs:
+https://www.academia.edu/14009514/Spectral_sparsification_of_graphs_theory_and_algorithms 
