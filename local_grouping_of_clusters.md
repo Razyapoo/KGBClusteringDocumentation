@@ -4,6 +4,8 @@ _This page describes how local grouping of clusters is working._
 
 ---
 
+#TODO do you know different methods how to apply local zooming?
+
 ### Table of content
 
 - [Motivation](#motivation)

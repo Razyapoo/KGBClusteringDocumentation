@@ -1,202 +1,40 @@
 # Grouping of clusters
 
-_This page describes how the [grouping of clusters](#grouping-of-clusters-glossary) approach is implemented in the Knowledge Graph Browser._
+_This page describes how the "Grouping of Clusters" approach is implemented in the Knowledge Graph Browser._
 
 ---
 ### Table of Contents
 
-- [Main goal](#main-goal)
-- [Glossary](#glossary)
 - Knowledge Graph browser
   - [Frontend](#frontend)
   - [Backend](#backend)
   - [Configuration](#configuration)
 
 ---
- 
-<h1 id="main-goal">Main goal</h1>
-
-So far, in the Knowledge Graph Visual browser, it was only possible to group nodes in such a way that the user selects a couple of nodes and makes a group out of them manually. But in many cases it is more efficient and easier for the user to escape such work and allow the application to automatically group nodes based on similar attribute values.
-
-The main purpose of the implemented [grouping of clusters](#grouping-of-clusters-glossary) approach is to make a large graph more user-friendly, i.e. more readable and understandable. 
-
-> **Note** \
-> Original knowledge graph exploration is proposed in a research paper ["Iteractive and iterative visual exploration of knowledge graphs based on shareable and reusable visual configurations"](https://www.sciencedirect.com/science/article/pii/S1570826822000105). Its implementations is available [here](https://github.com/martinnec/knowledge-graph-browser-website).
-
-
-<h1 id="glossary">Glossary</h1>
-
-This part of the documentation contains necessary terms that are used later in the documentation. They will help you understand the basic principle of how the extension works.
-
-Terms described here may differ from usual terms you may be familiar with. This glossary is slightly different from the [glossary in the user documentation](user_documentation.md#glossary).
-
-You can skip this section for now and go to [Implementation](#implementation) section.
-
-<h3 id="grouping-of-clusters-glossary">Grouping of clusters</h3>
-
-> **Definition** \
-> Grouping of clusters is the process of creating clusters of nodes with the same or similar attribute values ​​and then combining them into a single group.
-
-<h3 id="visual-layout-constraint-glossary">Visual layout constraint</h3>
-
-> **Definition** \
-> A visual layout constraint is a rule (constraint) applied to a graph to change a way it is visualized.
-
-<h3 id="set-of-visual-constraints-glossary">Set of visual layout constraints</h3>
-
-> **Definition** \
-> A visual layout constraint set is a set of [visual layout constraints](#visual-layout-constraint-glossary) to be applied to a graph.
-
-<h3 id="parent-child-or-child-parent-hierarchical-relationship-glossary">Parent-child or child-parent hierarchical relationship</h3>
-
-Typically, nodes in a graph are related to each other, for example, a company has employees, university has scientists, scientist has awards, scientist writes scientific papers, university has departments, and many other examples. 
-
-One possible way to visualize such relationships is to create an edge between parent and child. But there is also another way, namely adding a hierarchy between nodes. In such case, parent node is visualized as a larger node containing child nodes inside.
-
-Figure 1 below shows an example with faculties and sections. The faculty "Matematicko-fyzikální fakulta" can be seen as a larger node (blue) containing child nodes (light blue) inside, representing sections: 
-
-<p align="center">
-    <img src="img/child_parent_relation.png" alt="parent-child-relationship" title="Parent-child relationship" width="600"/><br/>
-    <em>Figure 1. Parent-child relationship</em>
-</p>
-
-Each such node hierarchy represents a [hierarchical group](#hierarchical-group-glossary).
-
-> **Warning** \
-> Hierarchical relationships are predefined by a technician in the [visual configuration](#child-parent-or-parent-child-layout-constraint).
-
-Expansion query can be triggered from a parent node (expand child nodes) as well as form a child node (expand parent node). In both cases it may use same predicate in SPARQL CONSTRUCT, for example `skos:broader`.
-
-[Non-hierarchical](#non-hierarchical-relationships-glossary) relationships are also possible. 
-
-<h3 id="non-hierarchical-relationships-glossary">Non-hierarchical relationship </h3>
-
-> **Definition** \
-> Non-hierarchical relationships are represented by edge between nodes.
-
-For example, "the department teaches the subject" relationship can be visualized as non-hierarchical. An example is shown in the Figure 2 below.
-
-<p align="center">
-    <img src="img/non_hierarchical_edge.png" alt="non-hierarchical-edge" title="Non-hierarchical edge" width="600"/><br/>
-    <em>Figure 2. Non-hierarchical edge</em>
-</p>
-
-> **Note** \
-> Non-hierarchical relationships are all relationships other than [hierarchical](#parent-child-or-child-parent-hierarchical-relationship-glossary).
-
-<h3 id="hierarchical-class-glossary">Hierarchical class</h3>
-
-> **Definition** \
-> A hierarchical class is a visual class that defines which [hierarchical group](#hierarchical-group-glossary) a node belongs to. A node can only be assigned to one hierarchical class.
-
-A hierarchical class, if it exists, is shown along with a label of a node on the detail panel. See Figure 3 below for more details.
-
-<p align="center">
-    <img src="img/hierarchical_class.png" alt="hierarchical-class" title="Hierarchical class" width="350"/><br/>
-    <em>Figure 3. Hierarchical class</em>
-</p>
-
-> **Note** \
-> A hierarchical class (or hierarchical group class) is a common class for all nodes to be placed in a same [hierarchical group](#hierarchical-groups). It is assigned to a node in a SPARQL CONSTRUCT query in the same way as a visual class, i.e. using the `browser:class` predicate. 
-
-> **Warning** \
-> Each node must be assigned to some hierarchical group class in case it needs to be placed in any hierarchy.
-
-<h3 id="hierarchical-level-glossary">Hierarchical level</h3>
-
-> **Definition** \
-> A hierarchical level of a node indicates the depth of a hierarchy at which a node resides.
-
-The amount of detail displayed on maps (in mapping platforms) depends on a zoom level. [Grouping of clusters](#grouping-of-clusters-glossary) approach uses the same idea. At the deepest (lowest) level of the hierarchy, the graph shows all possible details. And at the highest level (zero level) of the hierarchy, the graph shows only those single nodes that are representatives of hierarchies themselves. 
-
-<h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3>
-
-> **Definition** \
-> A current hierarchical level is the deepest [hierarchical level](#hierarchical-level-glossary) shown in the graph area.
-
-At the moment when child nodes collapse into their parents, the current hierarchical level decreases by 1, and when child nodes with a hierarchical level by 1 deeper than the current hierarchical level appear, the current hierarchical level increases by 1.
-
-The `globalHierarchyDepth` attribute value indicates the current hierarchical level.
-
-<h3 id="hierarchical-group-glossary">Hierarchical group</h3>
-
-> **Definition** \
-> A hierarchical group is a cluster of nodes that are related to each other by [parent-child relationships](#parent-child-or-child-parent-hierarchical-relationship-glossary). 
-
-Each node in a hierarchical group must have the [hierarchical class](#hierarchical-class-glossary) which represents that hierarchical group and shows that the node belongs to this hierarchical group.
-
-An example of one such hierarchical group is shown in Figure 1 above.
-
-> **Warning** \
-> A hierarchical group is predefined by a technician in the [visual configuration](#hierarchical-groups-to-cluster-layout-constraint).
-
-<h3 id="visual-group-glossary">Visual group</h3>
-
-> **Definition** \
-> A visual group is a cluster of nodes located in the same area on a graph. Nodes that belong to the same visual group are placed under the same "pseudo-parent" node representing the visual group itself.
-
-An example of a visual group is shown in the Figure 4 below. The "pseudo-parent" node is a gray node with white nodes inside.
-
-<p align="center">
-    <img src="img/visual_group.png" alt="visual-group" title="Visual group" width="600"/><br/>
-    <em>Figure 4. Visual group</em>
-</p>
-
-> **Warning** \
-> A visual group is predefined by a technician in the [visual configuration](#visual-group-layout-constraint).
-
-Each node in a visual group must have an additional visual group class representing that visual group. It can be (and usually) identical to the hierarchical class.
-
-> **Note** \
-> Hierarchical groups themselves can be interpreted as visual groups. In such a case, there is no need for a "pseudo-parent".
-
-An example of two visual groups "pracovisteVisualGroup" and "tema" is shown in Figure 5 below (later on we will use "pracovisteVisualGroup" as the visual group).
-
-<p align="center">
-    <img src="img/visual_groups.png" alt="visual-groups" title="Visual groups" width="600"/><br/>
-    <em>Figure 5. Visual groups. To the left is "pracovisteVisualGroup" visual group and to the right is "tema" visual group</em>
-</p>
-
-> **Note** \
-> The main advantage of visual groups is that you can easily move all the nodes that belong to the same group across the entire graph area at the same time. This way they won't be scattered all over the graph area. 
-
-
 
 <h1 id="implementation">Implementation</h1>
 
 The implementation of "Grouping of clusters" extension is split into two parts: 
 
 - [Backend](#backend)
-  - [Backend server](#backend-server)
   - [Visual configuration](#visual-configuration)
+  - [Backend server](#backend-server)
 - [Frontend](#frontend)
-
-<h2 id="backend">Backend</h2>
-
-This section of the documentation is split into two parts: 
-
-- [Backend server](#backend-server)
-- [Visual configuration](#visual-configuration)
-
-<h2 id="backend-server">Backend server</h2>
-
-The original ["kgserver.js" backend server](#https://github.com/martinnec/knowledge-graph-browser) is extended with a new request handler `layout-constraints`.
-
-This handler sends a request to the endpoint and receives [visual layout constraints](#visual-layout-constraint-glossary) to apply in the main application (defined in the visual configuration).
-
-The output of the request handler is a JSON object containing all the constraints.
-
-<h3 id="backend-implementation">Implementation</h3>
-
-See the implementation of the backend server [here](https://github.com/Razyapoo/knowledge-graph-browser-backend).
 
 <h2 id="visual-configuration">Visual configuration</h2>
 
-The original visual configuration is extended with a [set of visual layout constraints](#set-of-visual-constraints-glossary) that are assigned using the `browser:hasLayoutConstraints` predicate. 
+We propose a new term "visual layout constraint" that is a rule that is applied to the graph to change how it is displayed or arranged visually. To support visual layout constraints we extend the Knowledge Graph Visual Browser ontology with new terms. 
 
-A [set](#set-of-visual-constraints-glossary) is expressed as an instance of the `browser:LayoutConstraintSet` class. 
+Figure shows the extension of the ontology as UML class diagram
 
-Each [visual layout constraint](#visual-layout-constraint-glossary) must be expressed as an instance of an individual layout constraint class and assigned to a set of visual layout constraints using the `browser:hasConstraint` predicate. 
+A set of visual layout constraints is assigned to the visual configuration using the `browser:hasLayoutConstraints` predicate, and expressed as an instance of the `browser:LayoutConstraintSet` class. 
+
+Each specific visual layout constraint is assigned to a set of visual layout constraints using the `browser:hasConstraint` predicate and expressed as an instance of an individual layout constraint class, like:
+
+```
+<https://linked.opendata.cz/resource/knowledge-graph-browser/layout-constraints/visual-groups/wikidata/animal-classification/region> a browser:VisualGroupLayoutConstraint ;
+```
+
 
 Next few sections describe each layout constraint class in more details. 
 
@@ -242,6 +80,23 @@ A [visual layout constraint](#visual-layout-constraint-glossary) defining [child
 <h3 id="backend-configuration-implementation">Implementation</h3>
 
 See a visual configuration example [here](https://github.com/linkedpipes/knowledge-graph-browser-configurations/blob/main/configurations/university-topic-map-with-constraints.ttl) ([basic configuration](https://github.com/linkedpipes/knowledge-graph-browser-configurations/blob/main/configurations/university-topic-map.ttl)).
+
+<h2 id="backend">Backend</h2>
+
+This section of the documentation is split into two parts: 
+
+- [Backend server](#backend-server)
+- [Visual configuration](#visual-configuration)
+
+<h2 id="backend-server">Backend server</h2>
+
+The original [backend server](#https://github.com/martinnec/knowledge-graph-browser) is extended to include a new request handler called `layout-constraints`. This handler reads layout constraints from the database based on requests received from the frontend.
+
+The output of the request handler is a JSON object containing all the constraints.
+
+<h3 id="backend-implementation">Implementation</h3>
+
+Implementation of the backend server is available [here](https://github.com/Razyapoo/knowledge-graph-browser-backend).
 
 ---
 
@@ -449,10 +304,10 @@ The `groupingOfClusters` method is explained in more detail in the code comments
 - Choose which hierarchical groups to cluster (user interface)
 - Delete/add pseudo-parent for a visual group (user interface)
 
-2. Place nodes of different hierarchical classes under the same pseudo-parent node.
-3. Cluster nodes based on attributes other than their positions.
-4. Switching between hierarchical and normal views.
-5. Fix the position of the pseudo-parent when moving (not currently supported due to limitations of the Cytoscape library).
+1. Place nodes of different hierarchical classes under the same pseudo-parent node.
+2. Cluster nodes based on attributes other than their positions.
+3. Switching between hierarchical and normal views.
+4. Fix the position of the pseudo-parent when moving (not currently supported due to limitations of the Cytoscape library).
 
 <h1 id="references">References</h1>
 
