@@ -21,98 +21,33 @@ The implementation of "Grouping of clusters" extension is split into two parts:
   - [Backend server](#backend-server)
 - [Frontend](#frontend)
 
-<h2 id="visual-configuration">Visual configuration</h2>
+<h2 id="architecture">Architecture</h2>
 
-We propose a new term "visual layout constraint" that is a rule that is applied to the graph to change how it is displayed or arranged visually. To support visual layout constraints we extend the Knowledge Graph Visual Browser ontology with new terms. 
+The following diagram shows the different parts of the Knowledge Graph Visual Browser that are involved when working with visual constraints:
 
-Figure shows the extension of the ontology as UML class diagram
-
-A set of visual layout constraints is assigned to the visual configuration using the `browser:hasLayoutConstraints` predicate, and expressed as an instance of the `browser:LayoutConstraintSet` class. 
-
-Each specific visual layout constraint is assigned to a set of visual layout constraints using the `browser:hasConstraint` predicate and expressed as an instance of an individual layout constraint class, like:
-
-```
-<https://linked.opendata.cz/resource/knowledge-graph-browser/layout-constraints/visual-groups/wikidata/animal-classification/region> a browser:VisualGroupLayoutConstraint ;
-```
-
-
-Next few sections describe each layout constraint class in more details. 
-
-> **Warning** \
-> It is expected that nodes have a [hierarchical class](#hierarchical-class-glossary) assigned. 
-
-<h3 id="visual-group-layout-constraint">"VisualGroupLayoutConstraint" class</h3>
-
-A [visual layout constraint](#visual-layout-constraint-glossary) defining [visual group](#visual-group-glossary) is expressed as an instance of the `browser:VisualGroupLayoutConstraint` class. A visual group class is assigned to the visual group layout constraint via `browser:clusteringSelector` predicate.
-
-> **Warning** \
-> Each visual group class must be assigned to a separate instance of `browser:VisualGroupLayoutConstraint` class.
-
-<h3 id="hierarchical-groups-to-cluster-layout-constraint">"HierarchicalGroupsToClusterLayoutConstraint" class</h3>
-
-> **Note** \
-> It can be useful not to group clusters of nodes that belong to the same [hierarchical group](#hierarchical-group-glossary) (or [visual group](#visual-group-glossary)). For example, group only clusters that belong to the "tema" visual group, but do not belong to the "pracovisteVisualGroup" visual group (shown in Figure 5 above).
-
-A [visual layout constraint](#visual-layout-constraint-glossary) that determines [hierarchical groups](#hierarchical-group-glossary), in which we can group clusters, is expressed as an instance of the `browser:HierarchyGroupToClusterLayoutConstraint` class. The [hierarchical (group) class](#hierarchical-class-glossary) is assigned using the `browser:clusteringSelector` predicate. 
-
-> **Warning** \
-> Each hierarchical group class must be assigned to a separate instance of the `browser:HierarchyGroupToClusterLayoutConstraint` class.
-
-<h3 id="classes-to-cluster-together-layout-constraint">"ClassesToClusterTogetherLayoutConstraint" class</h3>
-
-By default, the algorithm only groups clusters of nodes of the same visual class (usually different from the hierarchical class). But it is possible to define which visual classes can be clustered and grouped together.
-
-A [visual layout constraint](#visual-layout-constraint-glossary) that defines classes to cluster and group together is expressed as an instance of the `browser:ClassesToClusterTogetherLayoutConstraint` class. Classes are assigned using the `browser:clusteringSelector` predicate.
-
-> **Warning** \
-> The classes to cluster together are defined by a technician in the visual configuration. \
-> Use this layout constraint only if you want to create groups containing nodes of different classes. Put all classes you want to cluster and group together in the one instance of the `browser:ClassesToClusterTogetherLayoutConstraint` class.
-
-<h3 id="child-parent-or-parent-child-layout-constraint">"ChildParentLayoutConstraint" and "ParentChildLayoutConstraint" classes</h3>
-
-A [visual layout constraint](#visual-layout-constraint-glossary) defining [child-parent](#parent-child-or-child-parent-hierarchical-relationship-glossary) (resp. [parent-child](#parent-child-or-child-parent-hierarchical-relationship-glossary)) relationships is expressed as an instance of the `browser:ChildParentLayoutConstraint` (resp. `browser:ParentChildLayoutConstraint`) class. Classes playing a child role (resp. parent role) are assigned using the `browser:childNodeSelector` (resp. `browser:parentNodeSelector`) predicate. An expansion predicate (e.g. `skos:broader`) in the expansion SPARQL query is assigned using the `browser:hierarchyEdgeSelector` predicate.
-
-> **Warning** \
-> Each pair of node and edge selectors must be assigned to a separate instance of the `browser:ChildParentLayoutConstraint` (resp. `browser:ParentChildLayoutConstraint`) class. \
-> If you want to add more edge selectors with the same node selector, make each pair of the edge selector and the node selector as a separate instance of the `browser:ChildParentLayoutConstraint` (resp. `browser:ParentChildLayoutConstraint`) class.
-
-
-<h3 id="backend-configuration-implementation">Implementation</h3>
-
-See a visual configuration example [here](https://github.com/linkedpipes/knowledge-graph-browser-configurations/blob/main/configurations/university-topic-map-with-constraints.ttl) ([basic configuration](https://github.com/linkedpipes/knowledge-graph-browser-configurations/blob/main/configurations/university-topic-map.ttl)).
-
-<h2 id="backend">Backend</h2>
-
-This section of the documentation is split into two parts: 
-
-- [Backend server](#backend-server)
-- [Visual configuration](#visual-configuration)
-
-<h2 id="backend-server">Backend server</h2>
-
-The original [backend server](#https://github.com/martinnec/knowledge-graph-browser) is extended to include a new request handler called `layout-constraints`. This handler reads layout constraints from the database based on requests received from the frontend.
-
-The output of the request handler is a JSON object containing all the constraints.
-
-<h3 id="backend-implementation">Implementation</h3>
-
-Implementation of the backend server is available [here](https://github.com/Razyapoo/knowledge-graph-browser-backend).
-
----
+<p align="center">
+    <img src="img/architecture_diagram.png" alt="architecture-diagram" title="Architecture diagram" width="600"/><br/>
+</p>
 
 <h2 id="frontend">Frontend</h2>
 
-We all know how zoom in/out works on mapping platforms such as [google maps](https://maps.google.com), maps.cz, etc. Zoom is used to increase or decrease the zoom level at a specific point and show more or less detail on a map.
-
-The [grouping of clusters](#grouping-of-clusters-glossary) extension is inspired by such mapping platforms.
-
 > **Note** \
-> Zoom feature from mapping platforms can be achieved by choosing both "Zoom" and "Grouping of clusters" options in the [checkbox](user_documentation.md#checkbox-glossary).
+> The code is also enriched with descriptive comments
 
-The next few sections describe extensions to the main components of the source code. 
+The following diagram shows how the different components interact during runtime when the tool loads constraints from the triple store:
 
-> **Warning** \
-> Implementation of each component extension is described in more details in the code comments.
+<p align="center">
+    <img src="img/sequence_diagram.png" alt="sequence-diagram" title="Sequence diagram" width="600"/><br/>
+</p>
+
+1. The user initializes the loading of the configuration with constraints.
+2. The KGVB frontend sends a request via `getConstraints` to the server, including the IRI of the set of visual layout constraints as an argument.
+3. The server retrieves the constraints as a set of triples.
+4. The server processes the loaded constraints into JSON and sends them to the frontend.
+5. The client applies the loaded constraints to the graph.
+
+It is important to note that constraints are predefined by a technician in the visual configuration file, and are only loaded once, during the initial loading of the configuration.
+
 
 <h3 id="extension-of-the-grapharea">Extension of the GraphArea.vue</h3>
 
@@ -297,6 +232,83 @@ The `groupingOfClusters` algorithm first clusters the nodes into a [cluster](#cl
 The basic approach of the algorithm is that it creates several centroids, generates from them an empty group (k-Means clustering [1]) or a group consisting of a single node (k-Medoids clustering [2]), and then adds surrounding nodes to the closest group.
 
 The `groupingOfClusters` method is explained in more detail in the code comments. For more information, see the implementation of [groupingOfClusters](https://github.com/Razyapoo/knowledge-graph-browser-frontend/blob/master/src/cluster/clusters/KMeans/KMeans.ts).
+
+<h2 id="visual-configuration">Visual configuration</h2>
+
+We introduce the new term "visual layout constraint" as a rule applied to a graph to change how it is displayed or arranged visually. To support this, we have extended the Knowledge Graph Visual Browser ontology with new terms, as depicted in the UML class diagram in Figure.
+
+> **Note**
+> In the rest of this document, we use the prefix `browser:` as a shorthand for the namespace `https://linked.opendata.cz/ontology/knowledge-graph-browser/`.
+
+A set of visual layout constraints is assigned to the visual configuration using the `browser:hasLayoutConstraints` predicate, and is expressed as an instance of the `browser:LayoutConstraintSet` class. Each individual visual layout constraint is assigned to a set of visual layout constraints using the `browser:hasConstraint` predicate, and is expressed as an instance of a specific layout constraint class, as shown below:
+
+```
+@prefix browser: <https://linked.opendata.cz/ontology/knowledge-graph-browser/> .
+
+<https://linked.opendata.cz/resource/knowledge-graph-browser/configuration/wikidata/animal-classification> a browser:Configuration ;
+  browser:hasLayoutConstraintSet <https://linked.opendata.cz/resource/knowledge-graph-browser/layout-constraints/wikidata/animal-classification> .
+
+<https://linked.opendata.cz/resource/knowledge-graph-browser/layout-constraints/wikidata/animal-classification> a browser:LayoutConstraintSet ;
+  browser:hasConstraint <https://linked.opendata.cz/resource/knowledge-graph-browser/layout-constraints/visual-groups/wikidata/animal-classification/region> .
+
+<https://linked.opendata.cz/resource/knowledge-graph-browser/layout-constraints/visual-groups/wikidata/animal-classification/region> a browser:VisualGroupLayoutConstraint .
+```
+
+Supported visual layout constraints: `browser:VisualGroupLayoutConstraint`, `browser:HierarchicalGroupLayoutConstraint`, `browser:GroupToClusterLayoutConstraint`, and `browser:ClassesToClusterTogetherLayoutConstraint`.
+
+The next few sections describe each layout constraint class in more details. 
+
+<h3 id="hierarchical-group-layout-constraint">"HierarchicalGroupLayoutConstraint" class</h3>
+
+A visual layout constraint defining [hierarchical relationships](#hierarchical-relationships-glossary)) is expressed as an instance of the `browser:HierarchicalGroupLayoutConstraint` class. A hierarchical class of the node is assigned to the hierarchical group layout constraint via `browser:nodeSelector` predicate. A class of an edge, which will be treated as hierarchical, is assigned using the `browser:hierarchicalEdgeSelector` predicate.
+
+> **Warning** \
+> Each pair of node and edge selectors must be assigned to a separate instance of the `browser:HierarchicalGroupLayoutConstraint` class. \
+> If you want to add more edge selectors with the same node selector, make each pair of the edge selector and the node selector as a separate instance of the `browser:HierarchicalGroupLayoutConstraint` class.
+
+<h3 id="visual-group-layout-constraint">"VisualGroupLayoutConstraint" class</h3>
+
+A visual layout constraint defining [visual group](#visual-group-glossary) is expressed as an instance of the `browser:VisualGroupLayoutConstraint` class. A visual group class is assigned to the visual group layout constraint via `browser:clusteringSelector` predicate.
+
+> **Warning** \
+> Each specific visual group must be expressed as a separate instance of `browser:VisualGroupLayoutConstraint` class.
+
+<h3 id="group-to-cluster-layout-constraint">"GroupToClusterLayoutConstraint" class</h3>
+
+A visual layout constraint that determines [hierarchical group](#hierarchical-group-glossary) or [visual group](#visual-group-glossary), in which nodes can be grouped, is expressed as an instance of the `browser:HierarchicalGroupLayoutConstraint` class. The [class](#hierarchical-class-glossary) is assigned using the `browser:clusteringSelector` predicate. 
+
+<h3 id="classes-to-cluster-together-layout-constraint">"ClassesToClusterTogetherLayoutConstraint" class</h3>
+
+By default, the algorithm only groups clusters of nodes of the same visual class (different from the hierarchical class). But it is possible to define which different visual classes can be clustered and grouped together.
+
+A visual layout constraint that defines classes to cluster and group together is expressed as an instance of the `browser:ClassesToClusterTogetherLayoutConstraint` class. Classes are assigned using the `browser:clusteringSelector` predicate.
+
+> **Warning** \
+> Use this layout constraint only if you want to group nodes of different classes together. Place all the desired classes under one instance of the `browser:ClassesToClusterTogetherLayoutConstraint` class.
+
+
+<h3 id="backend-configuration-implementation">Implementation</h3>
+
+See a visual configuration example [here](https://github.com/linkedpipes/knowledge-graph-browser-configurations/blob/main/configurations/university-topic-map-with-constraints.ttl) ([basic configuration](https://github.com/linkedpipes/knowledge-graph-browser-configurations/blob/main/configurations/university-topic-map.ttl)).
+
+<h2 id="backend">Backend</h2>
+
+This section of the documentation is split into two parts: 
+
+- [Backend server](#backend-server)
+- [Visual configuration](#visual-configuration)
+
+<h2 id="backend-server">Backend server</h2>
+
+The original [backend server](#https://github.com/martinnec/knowledge-graph-browser) is extended to include a new request handler called `layout-constraints`. This handler reads layout constraints from the database based on requests received from the frontend.
+
+The output of the request handler is a JSON object containing all the constraints.
+
+<h3 id="backend-implementation">Implementation</h3>
+
+Implementation of the backend server is available [here](https://github.com/Razyapoo/knowledge-graph-browser-backend).
+
+---
 
 <h1 id="what-to-do-next">What to do next?</h1>
 
