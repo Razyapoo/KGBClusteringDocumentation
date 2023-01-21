@@ -92,7 +92,7 @@ Use +/- buttons or mouse wheel to apply zooming on the graph
 
 <h3 id="group-compact-mode-guide">Group compact mode</h3>
 
-This [mode](glossary.md#img/group-compact-mode) is only available for group nodes. To enable it, click the "Group compact mode" button. You can recursively explore inner groups by simply clicking on them. To exit this mode, click anywhere outside the group, or by using the "Group compact mode" button. A visual representation of how to enter and exit the group compact mode is depicted in Figure 6.
+This [mode](glossary.md#group-compact-mode) is only available for group nodes. To enable it, click the "Group compact mode" button. You can recursively explore inner groups by simply clicking on them. To exit this mode, click anywhere outside the group, or by using the "Group compact mode" button. A visual representation of how to enter and exit the group compact mode is depicted in Figure 6.
 
 <p align="center">
     <img src="img/group_compact_show.gif" alt="group-compact" title="Group compact mode"/><br/>
