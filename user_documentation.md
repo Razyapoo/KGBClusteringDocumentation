@@ -100,11 +100,11 @@ Use +/- buttons or mouse wheel to apply zooming on the graph
 
 <h3 id="group-compact-mode-guide">Group compact mode</h3>
 
+This mode is only available for group nodes.
+
 To enable it, you can click the specific button as shown in Figure #TODO. You can recursively explore inner groups by simply clicking on them. 
 
 To exit this mode, you can click anywhere outside the group, or by using the specific button as shown in Figure. 
-
-This mode is only available for group nodes.
 
 <h3 id="node-removal-guide">Basic operations with the node</h3>
 
