@@ -1,10 +1,9 @@
 ### Table of Contents
 
 - [Motivation](#motivation)
-- [Glossary](#glossary)
 - [How to use the extension?](#how-to-use-the-extension)
   - [Configuration selection](#configuration-selection)
-  - [Get started with graph exploration](#get-started-with-graph-exploration)
+  - [Begin Your Graph Exploration](#get-started-with-graph-exploration)
 
 ---
 
@@ -60,7 +59,7 @@ A) A settings menu for adjusting the graph and its settings \
 B) A search bar for locating a specific node \
 C) Detail panel displaying information about a selected node \
 D) "Available views" list for incrementally exploring the neighborhood of a selected node \
-E) Basic operations for manipulating graph area
+E) Basic operations for manipulating graph area \
 F) Basic operations for manipulating nodes 
 
 <h3 id="hierarchical-expansions">Hierarchical expansions</h3>
@@ -82,7 +81,7 @@ Expansions, placed under the "Available views" label, can be either hierarchical
 
 <h3 id="zooming-guide">Zooming</h3>
 
-With help of [checkbox](#checkbox-glossary) you can choose whether to apply global, local, or traditional zooming, or combine these options together. Note that map-style zooming is achieved by combination of traditional zooming with any variation of grouping of clusters zooming.
+With help of [checkbox](glossary.md#checkbox-glossary) you can choose whether to apply global, or local grouping of clusters, or traditional zooming, or combine these options together. Note that [map-style zooming](glossary.md#zooming) is achieved by combination of traditional zooming with any variation of grouping of clusters zooming.
 
 Each option in the checkbox brings its own functionality: 
 - Zoom In / Zoom Out: This option allows you to adjust the magnification of the graph
@@ -143,7 +142,7 @@ To demonstrate how the zooming features work, let's use the "Global grouping of 
     <em>Figure 14. The visual representation of the zooming out feature.</em>
 </p>
 
-The process of zooming in is similar to zooming out. By repeatedly clicking the “+” button, we can gradually return to the initial state from which we started. This can be seen in Figure 13. Local zooming works in a similar way. Map-style zooming can be enabled by selecting the local or global zooming in combination with the "Zoom In / Zoom Out" option.
+The process of zooming in is similar to zooming out. By repeatedly clicking the “+” button, we can gradually return to the initial state from which we started. This can be seen in Figure 13. Local grouping of clusters works in a similar way. Map-style zooming can be enabled by selecting the local or global grouping of clusters in combination with the "Zoom In / Zoom Out" option.
 
 <p>Group compact mode</p>
 
