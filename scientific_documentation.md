@@ -456,10 +456,10 @@ Let us demonstrate our approach on a visual knowledge graph about "Animal kingdo
 
 The Knowledge Graph Visual browser has a start page that displays different meta-configurations, which are logically organized by topic. Each meta-configuration then represents a set of specific configurations. For example, "Encyclopedia" meta-configuration lists configurations for exploring encyclopedic knowledge graphs (Screenshot 1).
 
-Our extension reuqires the use of visual layout constraints that define the way how the graph is visualized. These constraints are defined in a visual configuration file, which is specific for each configuration. In this case, we have chosen the "Animal classification" configuration (Screenshot 2), which supports visual layout constraints. Each configuration provides a list of starting nodes (Screenshot 3), which serve as entry points for exploring the knowledge graphs. When a starting node is selected, it is displayed as a single node on the graph area and is automatically selected. When a node is selected, the client loads a preview detail of the node and displays it in the upper part of the detail panel. If the selected node belongs to a hierarchical group, the detail panel will display that group as well.
+Our extension reuqires the use of visual layout constraints that define the way how the graph is visualized. These constraints are defined in a visual configuration file, which is specific for each configuration. In this case, we have chosen the "Animal classification" configuration (Screenshot 2), which supports visual layout constraints. Each configuration provides a list of starting nodes (Screenshot 3), which serve as entry points for exploring the knowledge graphs. When a starting node is chosen, it is displayed as a single node on the graph area and is automatically selected. When a node is selected, the client loads a preview detail of the node and displays it in the upper part of the detail panel. If the node belongs to a hierarchical group, the detail panel will display that group as well.
 
 <p align="center">
-    <img src="img/choose-configuration.gif" alt="choose_configuration" title="Choice of the configuration" width="900"/><br/>
+    <img src="img/choose_configuration.gif" alt="choose_configuration" title="Choice of the configuration" width="900"/><br/>
     <em>Figure 9. Choice of the configuration and starting node (screenshots 1-3).</em>
 </p>
 
@@ -467,7 +467,7 @@ Our extension reuqires the use of visual layout constraints that define the way 
 Knowledge Graph Visual browser allows for dynamic exploration of knowledge graphs through the use of expansions, which can be found in the detail panel. Our selected configuration supports both: hierarchical and non-hierarhical expansions. We can distinguish between them by using a tooltip which, when hovered over a field, indicates whether the expansions is hierarchical or non-hierarchical. When a hierarchical expansion is chosen, for example "Orders of a class", the neighborhood of the expanded node will be displayed in a hierarchical structure using compound nodes (Figure 11, 1). This way, "mammal" node serves as a parent node. And the list of its child nodes is displayed in the detail panel (Figure 11, 2).  
 
 <p align="center">
-    <img src="img/mammal_compound_node.png" alt="mammal-compound-node" title="Mammal compound node" width="1000"/><br/>
+    <img src="img/mammal_compound_node.gif" alt="mammal-compound-node" title="Mammal compound node" width="1000"/><br/>
     <em>Figure 11. 1. Compound node representing parent-child relationship; 2. List of child nodes.</em>
 </p>
 

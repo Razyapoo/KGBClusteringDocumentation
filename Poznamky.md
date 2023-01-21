@@ -81,3 +81,27 @@ https://www.academia.edu/14009496/Graph_Sparsification_by_Effective_Resistances
 
 Spectral Sparsification of graphs:
 https://www.academia.edu/14009514/Spectral_sparsification_of_graphs_theory_and_algorithms 
+
+
+
+
+2x Speed up video: 
+
+ffmpeg -i Soon.mp4
+  -filter_complex
+     "[0:v]trim=0:2,setpts=PTS-STARTPTS[v1];
+      [0:v]trim=2:5,setpts=1/2*(PTS-STARTPTS)[v2];
+      [0:v]trim=5,setpts=PTS-STARTPTS[v3];
+      [0:a]atrim=0:2,asetpts=PTS-STARTPTS[a1];
+      [0:a]atrim=2:5,asetpts=PTS-STARTPTS,atempo=2[a2];
+      [0:a]atrim=5,asetpts=PTS-STARTPTS[a3];
+      [v1][a1][v2][a2][v3][a3]concat=n=3:v=1:a=1"
+  -preset superfast -profile:v baseline output.mp4
+
+  cut video:
+
+
+  make gif:
+
+ffmpeg -ss 61.0 -t 2.5 -i StickAround.mp4 -filter_complex "[0:v] palettegen" palette.png
+ffmpeg -ss 61.0 -t 2.5 -i StickAround.mp4 -i palette.png -filter_complex "[0:v][1:v] paletteuse" prettyStickAround.gif
