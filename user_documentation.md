@@ -92,7 +92,7 @@ Use +/- buttons or mouse wheel to apply zooming on the graph
 
 <h3 id="group-compact-mode-guide">Group compact mode</h3>
 
-This [mode](glossary.md#group-compact-mode) is only available for group nodes. To enable it, click the "Group compact mode" button. You can recursively explore inner groups by simply clicking on them. To exit this mode, click anywhere outside the group, or by using the "Group compact mode" button. A visual representation of how to enter and exit the group compact mode is depicted in Figure 6.
+This [mode](glossary.md#group-compact-mode) is only available for group nodes. To enable it, click the "Group compact mode" button. Then you can recursively explore inner groups by clicking on them. To exit this mode, click anywhere outside the group, or by using the "Group compact mode" button. A visual representation of how to enter and exit the group compact mode is depicted in Figure 6.
 
 <p align="center">
     <img src="img/group_compact_show.gif" alt="group-compact" title="Group compact mode"/><br/>
@@ -101,15 +101,12 @@ This [mode](glossary.md#group-compact-mode) is only available for group nodes. T
 
 <h2 id="restrictions">Restrictions on a graph</h2>
 
-1. It is not possible to group nodes placed in different hierarchical groups, hierarchical levels, visual classes, or having different parent node. It is not possible to add a pseudo-parent node into a group.
-2. It is not possible to delete a pseudo-parent node.
-3. It is not possible to expand node's children if some its descendants are already collapsed.
-4. If a node was expanded with its children and next they were collapsed, then the same expansion will not show children since they are already existing in the graph. In such case you should show (uncollapse) them using wheel or +/- button.
-5. It is still possible to use clustering in the case if some node (and possibly its descendants) was removed, and therefore the hierarchy was broken.
-6. The "+" button or wheel ungroup all groups placed at the [current hierarchical level](#current-hierarchical-level-glossary). In the case you want to ungroup certain group, select such group and double click on it (or use "break" button).
-7. If there is at least one node of some hierarchy on the graph, then for non-hierarchical expansions, no new node and only non-hierarchical edges leading to existing nodes are displayed on the graph. All other nodes and edges are still being created and will be displayed during the next hierarchical expansions.
-8. If you want to expand a node with its children, but there are already expanded and collapsed its sibling nodes, then to display their (siblings') children, use the - button to return to the level where only sibling nodes are shown, and then using the + button show all children of all siblings.
-9. It is not available during the group compact mode to use view expansions 
+1. It is not possible to group nodes placed in different [hierarchical groups](glossary.md#hierarchical-groups-glossary), [hierarchical levels](glossary.md#hierarchical-level-glossary), visual classes, or having different parent node. It is not possible to include a pseudo-parent node within a group.
+2. It is not possible to manually delete a pseudo-parent node. It will be automatically deleted when the last node inside will be deleted.
+3. It is not possible to expand node's children if some of its descendants have already been collapsed.
+4. If a node;s children were previously expanded and then collapsed, attempting to expand the node again will not display its children since they are already present in the graph in a collapsed state. In this case, you can reveal them by using grouping of clusters zooming and mouse wheel or the "+" button.
+5. The "+" button or mouse wheel ungroup all groups placed at the [current hierarchical level](#current-hierarchical-level-glossary). To ungroup a specific group, select it and double click on it, or use the "break" button.
+6. When the group compact mode is enabled, it is not possible to expand any nodes.
 
 <h2>Example</h2>
 

@@ -22,7 +22,7 @@ Group compact mode is a feature that allows to view the structure of a group and
 
 The goal of this mode is to make it easier for the user to understand the structure of the group and navigate through it without being overwhelmed by unnecessary information.
 
-> **Note**
+> **Note** \
 > This mode is only available for group nodes. 
 
 <h3 id="hierarchical-relationships-glossary">Hierarchical relationship</h3>
