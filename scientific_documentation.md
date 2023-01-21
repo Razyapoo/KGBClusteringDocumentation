@@ -459,7 +459,7 @@ The Knowledge Graph Visual browser has a start page that displays different meta
 Our extension reuqires the use of visual layout constraints that define the way how the graph is visualized. These constraints are defined in a visual configuration file, which is specific for each configuration. In this case, we have chosen the "Animal classification" configuration, which supports visual layout constraints. Each configuration provides a list of starting nodes, which serve as entry points for exploring the knowledge graphs. When a starting node is chosen, it is displayed as a single node on the graph area and is automatically selected. Whenever a node is selected, the client loads a preview detail of the node and displays it in the upper part of the detail panel. If the node belongs to a hierarchical group, the detail panel will display that group as well (Figure 9). 
 
 <p align="center">
-    <img src="img/choose_configuration.gif" alt="choose_configuration" title="Choice of the configuration" width="900"/><br/>
+    <img src="img/choose_configuration.gif" alt="choose_configuration" title="Choice of the configuration" width="1000"/><br/>
     <em>Figure 9. The visual representation of the selection of the configuration and the starting node.</em>
 </p>
 
@@ -474,7 +474,7 @@ Knowledge Graph Visual browser allows for dynamic exploration of knowledge graph
 Let's follow the steps: select the "Carnivora" node within a group and detach it from there -> expand its "Families of an order" view -> select the "Felidae" node within a group and detach it from there -> expand its "Genera of a family" view -> select the "Panthera" node within a group and detach it from there -> expand its "Species of a genus" view -> select the "Leopard" node within a group and detach it from there -> expand its "Habitat of the taxon" view. A visual representation of the complete process can be found in Figure 12. The last expansion, "Habitat of the taxon", is non-hierarchical, resulting in a neighborhood connected by edges. All nodes in this neighborhood are of the type "habitat" and, as defined in the configuration, are encased in a pseudo-parent node.
 
 <p align="center">
-    <img src="img/habitat.gif" alt="habitat" title="Habitat" width="900"/><br/>
+    <img src="img/habitat.gif" alt="habitat" title="Habitat" width="1000"/><br/>
     <em>Figure 13. Scaling options. The user selects “Grouping of clusters” option.</em>
 </p>
 
