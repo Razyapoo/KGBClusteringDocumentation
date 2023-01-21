@@ -10,15 +10,13 @@
 
 <h1 id="motivation">Motivation</h1>
 
-The grouping of clusters is a powerful built-in tool that allows to effectively work with large amounts of data in a clear and intuitive way. This extension provides a new way of interacting with the graph by allowing to group clusters of similar nodes, and interact with them in a more manageable and intuitive way. 
+The grouping of clusters is a powerful built-in tool that allows to effectively work with large amounts of data in a clear and intuitive way. This extension provides a new way of interacting with the graph by allowing to combine different simplification techniques, that can improve the user's experience of working with a large graph. 
 
-The extension takes into account hierarchical relationships and utilizes the concept of multi-level hierarchy, which is achieved through the use of compound nodes. These nodes can be expanded and collapsed, creating smaller representations of the original graph, and making it easier to restore the original graph without losing any information. Additionally, the extension supports map-style zooming, which allows to easily adjust the necessary level of detail displayed and focus only on the data of interest.
+The extension takes into account [hierarchical relationships](glossary.md#hierarchical-relationships-glossary) and utilizes the concept of multi-level hierarchy, which is achieved through the use of [compound nodes](glossary.md#compound-node). These nodes can be expanded and collapsed, creating smaller representations of the original graph, and making it easier to restore the original graph without losing any information. Additionally, the extension supports map-style [zooming](glossary.md#zooming), which allows to easily adjust the necessary level of detail displayed and focus only on the data of interest.
 
 Furthermore, the extension provides a group compact mode, which allows to uncover the internals of the groups without cluttering the graph. This mode allows to easily view the nodes within a group and recursively explore inner groups, helping to focus on specific groups and understand their structure.
 
-Another useful feature of the extension is the ability to move clusters of nodes around the graph area as a group, making it easier to reorganize and rearrange the data. This feature helps to keep the graph area clean and without clutter. 
-
-To bring more flexibility in controlling the amount of detail displayed and help to focus on the data of the interest, our extension provides options for global, local and inverse local zooming. 
+Another useful feature of the extension is the ability to move clusters of nodes around the graph area as a [visual group](glossary.md#visual-group-glossary), making it easier to reorganize and rearrange the data. 
 
 Overall, the grouping of clusters is a valuable tool for anyone working with large and complex networks, providing a range of features that help to understand and manipulate the data, without losing important information.
 
@@ -26,25 +24,25 @@ Overall, the grouping of clusters is a valuable tool for anyone working with lar
 
 <h2 id="configuration-selection">Configuration selection</h2>
 
-**1.** Select the "Charles Explorer" meta-configuration, as shown in Figure 1.
+**1.** Select the "Encyclopedia" meta-configuration, as shown in Figure 1.
 
 <p align="center">
     <img src="img/meta_configuration_selection.png" alt="meta-configuration-selection" title="Meta-Configuration selection" width="600"/><br/>
     <em>Figure 1. Meta-Configuration selection</em>
 </p>
 
-**2.** Choose the "Browsing topics cultivated at Charles University (with constraints)" configuration, as shown in Figure 2.
+**2.** Choose the "Animal classification" configuration, as shown in Figure 2.
 
 <p align="center">
     <img src="img/configuration_selection.png" alt="configuration-selection" title="Configuration selection" width="600"/><br/>
-    <em>Figure 11. Meta-Configuration selection</em>
+    <em>Figure 2. Meta-Configuration selection</em>
 </p>
 
 **3.** Select a starting node from the list of available starting nodes as shown in Figure 3.
 
 <p align="center">
     <img src="img/starting_node.png" alt="starting-node" title="Starting node" width="600"/><br/>
-    <em>Figure 12. Starting node</em>
+    <em>Figure 3. Starting node</em>
 </p>
 
 <h2 id="begin-your-graph-exploration">Begin Your Graph Exploration</h2>
@@ -53,96 +51,105 @@ Overall, the grouping of clusters is a valuable tool for anyone working with lar
 
 To interact with the graph, the tool provides the following options:
 
+<p align="center">
+    <img src="img/basic_operations.png" alt="basic-operations" title="Basic operations"/><br/>
+    <em>Figure 4. Basic operations on graph.</em>
+</p>
 
-A) A settings menu for adjusting the graph and its settings
-B) A search bar for locating a specific node
-C) Detail panel displaying information about a selected node
-D) "Available views" list for incrementally exploring the neighborhood of a selected node
-E) Basic operations for manipulating nodes 
+A) A settings menu for adjusting the graph and its settings \
+B) A search bar for locating a specific node \
+C) Detail panel displaying information about a selected node \
+D) "Available views" list for incrementally exploring the neighborhood of a selected node \
+E) Basic operations for manipulating graph area
+F) Basic operations for manipulating nodes 
 
 <h3 id="hierarchical-expansions">Hierarchical expansions</h3>
 
-Expansions, placed under the "Available views" label, can be either hierarchical or non-hierarchical in relation to the selected node. You can refer to Figure 13 for an example. 
-
-By hovering over an expansion, you can display a tooltip indicating whether the expansion is hierarchical or non-hierarchical.
+Expansions, placed under the "Available views" label, can be either hierarchical or non-hierarchical in relation to the selected node. By hovering over an expansion, you can display a tooltip indicating whether the expansion is hierarchical or non-hierarchical. You can refer to Figure 5 for an example. 
 
 - Hierarchical expansions:
-  - "Nadřazená pracoviště"
-  - "Podřazená pracoviště"
+  - "Phylum of a class"
+  - "Orders of a class"
 
 - Non-hierarchical expansions:
-  - "Témata pracoviště"
-  - "Sdílená témata pracoviště"
+  - "The branch of science studies the taxon"
+  - "Habitat of the taxon"
 
 <p align="center">
-    <img src="img/hierarchical_non_hierarchical_expansions.png" alt="hierarchical-and-non-hierarchical-expansions" title="Hierarchical and non hierarchical expansions" width="530"/><br/>
-    <em>Figure 13. Hierarchical and non-hierarchical expansions</em>
+    <img src="img/tooltips_expansions.gif" alt="tooltips-expansions" title="Tooltips"/><br/>
+    <em>Figure 5. Hierarchical and non-hierarchical expansions</em>
 </p>
 
-> **Note**
-> - A [hierarchical group](#hierarchical-groups-glossary) can be constructed incrementally using hierarchical expansions.
-> - Non-hierarchical expansions reveal a node's neighborhood, where each neighboring node is connected to that node through an edge.
+<h3 id="zooming-guide">Zooming</h3>
 
-<h3 id="grouping-guide">Grouping</h3>
-
-With help of [checkbox](#checkbox-glossary) you can choose whether to apply global, local, inverse local map-style zooming, or combine these options together. 
+With help of [checkbox](#checkbox-glossary) you can choose whether to apply global, local, or traditional zooming, or combine these options together. Note that map-style zooming is achieved by combination of traditional zooming with any variation of grouping of clusters zooming.
 
 Each option in the checkbox brings its own functionality: 
 - Zoom In / Zoom Out: This option allows you to adjust the magnification of the graph
-- Global grouping of clusters: This option allows you to change the detail displayed, without changing the overall size or magnification of the whole graph
+- Global grouping of clusters: This option allows you to globally change the detail displayed, without changing the overall size or magnification of the whole graph
 - Local grouping of clusters: This option allows you to apply grouping of clusters locally, only on selected nodes
-- Inverse grouping of clusters: This option allows you to lock a selected compound nodes in their expanded state, so that they remain expanded and visible during zooming, while the rest of the graph changes the detail displayed. 
 
 Use +/- buttons or mouse wheel to apply zooming on the graph
 
-> **Note**
-> The process of how the grouping of clusters approach works is explained in the glossary section of this guide.
-
 <h3 id="group-compact-mode-guide">Group compact mode</h3>
 
-This mode is only available for group nodes.
-
-To enable it, you can click the specific button as shown in Figure #TODO. You can recursively explore inner groups by simply clicking on them. 
-
-To exit this mode, you can click anywhere outside the group, or by using the specific button as shown in Figure. 
-
-<h3 id="node-removal-guide">Basic operations with the node</h3>
-
-- Collapse: To collapse a compound node, you can use local zooming function, as shown in Figure. Select the compound node and choose the local zooming option, then collapse the node by scrolling the mouse wheel down or using the "-" button.
-- Expand: To expand a supernode (collapsed compound node), select this node and choose the local zooming option, then expand the node by scrolling the mouse wheel up or using the "+" button.
-- Delete: To delete the node, select it first, and then click on delete button, as shown in Figure. ***Important:*** This will remove recursively all descendants of the selected node.
-- Rename: To rename a group, click rename as shown in Figure (C). ***Important:*** This feature is only available for group nodes.
-
-#TODO
-Below is shown an example of the [node removal](#node-removal-glossary):
-
-Before removal of the "Informaticka sekce":
-
-<p align="center">
-    <img src="img/before_removal.png" alt="before-removal" title="Before removal" width="750"/><br/>
-    <em>Figure 14. Before removal (the node "Informaticka sekce" is selected for deletion)</em>
-</p>
-
-After removal:
-
-<p align="center">
-    <img src="img/after_removal.png" alt="after-removal" title="After removal" width="350"/><br/>
-    <em>Figure 15. After removal</em>
-</p>
+This mode is only available for group nodes. To enable it, you can click the "Group compact mode" button as shown in Figure #TODO. You can recursively explore inner groups by simply clicking on them. To exit this mode, you can click anywhere outside the group, or by using the "Group compact mode" button. 
 
 <h2 id="restrictions">Restrictions on a graph</h2>
 
-#TODO
 1. It is not possible to group nodes placed in different hierarchical groups, hierarchical levels, visual classes, or having different parent node. It is not possible to add a pseudo-parent node into a group.
 2. It is not possible to delete a pseudo-parent node.
 3. It is not possible to expand node's children if some its descendants are already collapsed.
-4. If a node was expanded with its children and next they were collapsed, then the same expansion will not show children since they are already existing in the graph. In such case you should show (uncollapse) them using wheel or plus/minus button.
+4. If a node was expanded with its children and next they were collapsed, then the same expansion will not show children since they are already existing in the graph. In such case you should show (uncollapse) them using wheel or +/- button.
 5. It is still possible to use clustering in the case if some node (and possibly its descendants) was removed, and therefore the hierarchy was broken.
-6. The "plus" button or wheel ungroup all groups placed at the [current hierarchical level](#current-hierarchical-level-glossary). In the case you want to ungroup certain group, select such group and double click on it (or use "break" button).
+6. The "+" button or wheel ungroup all groups placed at the [current hierarchical level](#current-hierarchical-level-glossary). In the case you want to ungroup certain group, select such group and double click on it (or use "break" button).
 7. If there is at least one node of some hierarchy on the graph, then for non-hierarchical expansions, no new node and only non-hierarchical edges leading to existing nodes are displayed on the graph. All other nodes and edges are still being created and will be displayed during the next hierarchical expansions.
-8. If you want to expand a node with its children, but there are already expanded and collapsed its sibling nodes, then to display their (siblings') children, use the minus button to return to the level where only sibling nodes are shown, and then using the plus button show all children of all siblings.
+8. If you want to expand a node with its children, but there are already expanded and collapsed its sibling nodes, then to display their (siblings') children, use the - button to return to the level where only sibling nodes are shown, and then using the + button show all children of all siblings.
 9. It is not available during the group compact mode to use view expansions 
 
-<h2 id="summary">Summary</h2>
+<h2>Example</h2>
 
-The Grouping of clusters extension is a powerful tool for working with large and complex networks, providing a range of features that make it easy to understand and manipulate the data. The extension allows to group clusters of similar nodes, interact with them in manageable and intuitive way, and utilize the concept of multi-level hierarchy. The extension supports map-style zooming, which allows to easily adjust the necessary level of detail displayed and focus only on the data of interest. Additionally, the extension provides a group compact mode, which allows to uncover insights of groups without cluttering the graph. Feel free to use the newly implemented features that will give you a fresh perspective on the graph.
+Let us demonstrate our approach on a visual knowledge graph about "Animal kingdom". The Knowledge Graph Visual browser is available at https://try.kgbrowser.opendata.cz/. 
+
+The Knowledge Graph Visual browser has a start page that displays different meta-configurations, which are logically organized by topic. Each meta-configuration then represents a set of specific configurations. For example, "Encyclopedia" meta-configuration lists configurations for exploring encyclopedic knowledge graphs.
+
+Our extension requires the use of visual layout constraints that define the way how the graph is visualized. These constraints are defined in a visual configuration file, which is specific for each configuration. In this case, we have chosen the "Animal classification" configuration, which supports visual layout constraints. Each configuration provides a list of starting nodes, which serve as entry points for exploring the knowledge graphs. When a starting node is chosen, it is displayed as a single node on the graph area and is automatically selected. Whenever a node is selected, the client loads a preview detail of the node and displays it in the upper part of the detail panel. If the node belongs to a hierarchical group, the detail panel will display that group as well (Figure 9). 
+
+<p align="center">
+    <img src="img/choose_configuration.gif" alt="choose_configuration" title="Choice of the configuration"/><br/>
+    <em>Figure 9. The visual representation of the selection of the configuration and the starting node.</em>
+</p>
+
+Knowledge Graph Visual browser allows for dynamic exploration of knowledge graphs through the use of expansions, which can be found in the detail panel. Our selected configuration supports both: hierarchical and non-hierarchical expansions. We can distinguish between them by using a tooltip which, when hovered over a field, indicates whether the expansions is hierarchical or non-hierarchical. When a hierarchical expansion is chosen, for example "Orders of a class", the neighborhood of the expanded node will be displayed in a hierarchical structure using compound nodes. This way, "mammal" node serves as a parent node. Additionally, the list of its child nodes is displayed in the detail panel (Figure 11).  
+
+<p align="center">
+    <img src="img/mammal_compound_node.gif" alt="mammal-compound-node" title="Mammal compound node"/><br/>
+    <em>Figure 10. The visual representation of the hierarchical expansion.</em>
+</p>
+
+Let's follow the steps: select the "Carnivora" node within the "(72) Order" group and detach it from there -> expand its "Families of an order" view -> select the "Felidae" node within the "(23) Family" group and detach it from there -> expand its "Genera of a family" view -> select the "Panthera" node within the "(45) Genus" group and detach it from there -> expand its "Species of a genus" view -> select the "Leopard" node within the "(17) Species" group and detach it from there -> expand its "Habitat of the taxon" view. The last expansion, "Habitat of the taxon", is non-hierarchical, resulting in a neighborhood connected by edges. All nodes in this neighborhood are of the class "region" and, as defined in the configuration, are encased in a pseudo-parent node. A visual representation of the complete process can be found in Figure 12.
+
+<p align="center">
+    <img src="img/habitat.gif" alt="habitat" title="Habitat"/><br/>
+    <em>Figure 13. The visual representation of the multiple hierarchical expansions and non-hierarchical expansion.</em>
+</p>
+
+<p>Zooming</p>
+
+To demonstrate how the zooming features work, let's use the "Global grouping of clusters" type of zoom and start by zooming out first. To do this, we need to select "Global grouping of clusters" option in the checkbox. By using the "-" button (or the mouse wheel), we can group together nodes that are located at the deepest level of each hierarchy. In our example, these nodes are the child nodes of the "Panthera" compound node, and the "forest" and "shrubland" nodes placed inside a pseudo-parent node. By continuing to click, we can gradually reach a state where the group is the only remaining child node within the "Panthera" compound node. If we click the "-" button once again, the "Panthera" node will collapse. Note that the visual group representing nodes of class "region" will not collapse, as it is a visual element that encompasses a cluster of nodes. By continuing to click the “-” button a few more times, we can gradually reach a state where the graph can no longer be collapsed any further. This state represents the highest level of abstraction in the hierarchy and shows the least amount of detail possible. A visual representation of the complete process can be found in Figure 13. Note that different hierarchical and visual groups cannot be grouped together. 
+
+<p align="center">
+    <img src="img/zooming_out.gif" alt="zooming_out" title="Zooming out"/><br/>
+    <em>Figure 14. The visual representation of the zooming out feature.</em>
+</p>
+
+The process of zooming in is similar to zooming out. By repeatedly clicking the “+” button, we can gradually return to the initial state from which we started. This can be seen in Figure 13. Local zooming works in a similar way. Map-style zooming can be enabled by selecting the local or global zooming in combination with the "Zoom In / Zoom Out" option.
+
+<p>Group compact mode</p>
+
+Let us demonstrate how the group compact mode works. We can activate it on the group node by clicking on the "group compact mode" button. Once the mode is activated, we can recursively explore the nodes inside the group by navigating through the inner groups. Note that it also possible to jump between different levels in the structure. This mode is a view mode, and when it is turned off, the graph returns to the state where it was activated. To exit this mode, we can click anywhere outside the group, or by using the specific button. A visual representation of the complete process can be found in Figure 14.
+
+<p align="center">
+    <img src="img/group_compact_mode.gif" alt="group_compact_mode" title="Group compact mode"/><br/>
+    <em>Figure 14. The visual representation of the group compact mode.</em>
+</p>

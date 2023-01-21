@@ -421,17 +421,6 @@ We also propose a group compact mode, which allows to uncover the internals of g
 It is important to note that the group compact mdoe is a view mode, and once it is turned off, the state when the mode was activated will be restored. This feature allows to focus on specific groups and understand their structure.
 
 It is useful tool for exploring and understanding large and complex networks, as it allows users to easily drill down into specific groups and see the nodes within them in a more organized and structured way. Additionaly, by recursivly exploring inner groups, users can gain a deeper uderstanding of the hierarchical structure of the graph and the overall graph. 
----
-
-# TODO Delete?
-The first draft of the approach is shown in the Figure 6 below.
-
-<p align="center">
-    <img src="img/firts_draft_diagram.png" alt="first_draft" title="First draft" width="1000"/><br/>
-    <em>Figure 6. First draft. It is a concept representing the main idea used in the final approach. It represents different hierarchies and hierarchical as well as non-hierarchical relationships.</em>
-</p>
-
-
 
 <h3>Map-style zoom</h3>
 
@@ -439,69 +428,11 @@ Map-style zoom is a type of zooming that is often used in map-based applications
 
 Supernodes/superedges and groups proposed in our approach are closely related to map-style zoom in that they both allow for changing the amount of detail displayed in the graph. As map-style zooming consists of two main phases: change of the image magnification and change of the detail desplayed, we can utilize the traditional zooming to change the magnification along with compound nodes, supernodes/superedges and groups to change the amount of detail desplayed. This will help us to implement a multi-level hierarchy, where each level will show a different amount of detail of the graph.
 
-We propose three different types of map-style zooming: global, local and inverse local. Global zooming allows for zooming in or our on the entire graph, local zooming allows for zooming in or out on specific selected nodes, and inverse local zooming locks a selected compound node in its expanded state, so that it remains expanded and visible when zooming in or out, while the rest of the graph is zoomed in or out. Additionally, we provide the option to use only one phase of map-style zooming, such as only changing the magnification or only changing the level of detail.
-# TODO
-<p align="center">
-    <img src="img/map_style_zoom.png" alt="map_style_zoom" title="Map style zoom" width="900"/><br/>
-    <em>Figure 7. Map-style zoom (screenshots 1-3). Czechia (google maps, screenshot 1, left), which is placed at the level 0, is an aggregation of cities placed at the level 1 (google maps, screenshot 2, left), and analogously, MFF (screenshot 1, right), which is placed at the level 0, is an aggregation of departments placed at the level 1 (screenshot 2, right). In case there are several different hierarchical groups, the highest abstract level will show the last ancestor of each hierarchy and they will not be grouped or collapsed (screenshots 3, left - google maps, countries and right - departments and subjects).</em>
-</p>
+We propose two different types of map-style zooming: global and local. Global zooming allows for zooming in or our on the entire graph, while local zooming allows for zooming in or out only on specific selected nodes. Additionally, we provide the option to use only one phase of map-style zooming, such as only changing the magnification or only changing the level of detail.
 
-The point is not to stick with the "Departments and Subjects" topic only, but to make it abstract and reusable with other topics.
+<h2 id="summary">Summary</h2>
 
-The following section describes the final approach proposed in this paper.
-
-<h3>Example</h3>
-
-Let us demonstrate our approach on a visual knowledge graph about "Animal kingdom". The Knowledge Graph Visual browser is available at https://try.kgbrowser.opendata.cz/. 
-
-The Knowledge Graph Visual browser has a start page that displays different meta-configurations, which are logically organized by topic. Each meta-configuration then represents a set of specific configurations. For example, "Encyclopedia" meta-configuration lists configurations for exploring encyclopedic knowledge graphs.
-
-Our extension reuqires the use of visual layout constraints that define the way how the graph is visualized. These constraints are defined in a visual configuration file, which is specific for each configuration. In this case, we have chosen the "Animal classification" configuration, which supports visual layout constraints. Each configuration provides a list of starting nodes, which serve as entry points for exploring the knowledge graphs. When a starting node is chosen, it is displayed as a single node on the graph area and is automatically selected. Whenever a node is selected, the client loads a preview detail of the node and displays it in the upper part of the detail panel. If the node belongs to a hierarchical group, the detail panel will display that group as well (Figure 9). 
-
-<p align="center">
-    <img src="img/choose_configuration.gif" alt="choose_configuration" title="Choice of the configuration" width="1000"/><br/>
-    <em>Figure 9. The visual representation of the selection of the configuration and the starting node.</em>
-</p>
-
-Knowledge Graph Visual browser allows for dynamic exploration of knowledge graphs through the use of expansions, which can be found in the detail panel. Our selected configuration supports both: hierarchical and non-hierarhical expansions. We can distinguish between them by using a tooltip which, when hovered over a field, indicates whether the expansions is hierarchical or non-hierarchical. When a hierarchical expansion is chosen, for example "Orders of a class", the neighborhood of the expanded node will be displayed in a hierarchical structure using compound nodes (Figure 11, 1). This way, "mammal" node serves as a parent node. And the list of its child nodes is displayed in the detail panel (Figure 11, 2).  
-
-<p align="center">
-    <img src="img/mammal_compound_node.gif" alt="mammal-compound-node" title="Mammal compound node" width="1000"/><br/>
-    <em>Figure 11. 1. Compound node representing parent-child relationship; 2. List of child nodes.</em>
-</p>
-
-
-Let's follow the steps: select the "Carnivora" node within a group and detach it from there -> expand its "Families of an order" view -> select the "Felidae" node within a group and detach it from there -> expand its "Genera of a family" view -> select the "Panthera" node within a group and detach it from there -> expand its "Species of a genus" view -> select the "Leopard" node within a group and detach it from there -> expand its "Habitat of the taxon" view. A visual representation of the complete process can be found in Figure 12. The last expansion, "Habitat of the taxon", is non-hierarchical, resulting in a neighborhood connected by edges. All nodes in this neighborhood are of the type "habitat" and, as defined in the configuration, are encased in a pseudo-parent node.
-
-<p align="center">
-    <img src="img/habitat.gif" alt="habitat" title="Habitat" width="1000"/><br/>
-    <em>Figure 13. Scaling options. The user selects “Grouping of clusters” option.</em>
-</p>
-
-
-<p>Map-style zooming</p>
-Let us demostrate how the map-style zooming out feature works. We can try it by selecting "Global grouping of clusters" and "Zoom In / Zoom Out" options in the checkbox. By clicking on the "minus" button, we can group together nodes that are placed on the deepest level of the hierarchy. By continuing to click, we can gradually reach the state shown in Figure 15, where the group is the only child node remaining (inside compound node "Matematicka sekce"). In this case, if we click the "minus" button once again, the node "Matematicka sekce" will collapse. By continuing to click the “minus” button a few more times, we can gradually reach the state where the graph cannot be collapsed any further. This state represents the highest level of abstraction in the hierarchy and shows the least amount of detail possible. The local and inverse local zoomings work in similar way.
-
-<p align="center">
-    <img src="img/scaling_options.png" alt="scaling_options" title="Scaling options" width="150"/><br/>
-    <em>Figure 13. Scaling options. The user selects “Grouping of clusters” option.</em>
-</p>
-<p align="center">
-    <img src="img/grouping_of_clusters.png" alt="grouping_of_clusters" title="Grouping of clusters" width="900"/><br/>
-    <em>Figure 14. A possible user’s scenario of exploring the knowledge graph with Matematicko-fyzikální fakulta in KGBrowser (screenshots 6-9).</em>
-</p> 
-
-Zooming in work in a similar way as zooming out. By repeating clicking the “plus” button, we can gradually return to the initial state from which we started (Figure 12, screenshot 5).
-
-<p>Group compact mode</p>
-
-#TODO
-
-Let us demostrate how the group compact mode works. Once the mode is activated, we can recursively explore the nodes inside the group by navigating through the inner groups. 
-
-The group compact mode is a view mode, and once we switched of this mode, we will return to the state where the mode was activated. This feature allows to focus on specific groups and understand the structure of the groups and the graph itself. 
-
-TODO describe group compact mode and the list of nodes inside a group and compound node
+The Grouping of clusters extension is a powerful tool for working with large and complex networks, providing a range of features that make it easy to understand and manipulate the data. It combines different graph simplification approaches to achieve better simplification results. By allowing the user to combine different simplification methods, this extension improves the user's experience of working with the graph. It allows users to group clusters of similar nodes, interact with them in a manageable and intuitive way, and utilize the concept of multi-level hierarchy. The extension supports map-style zooming, which allows the users to easily adjust the necessary level of detail displayed and focus only on the data of interest. Additionally, the extension provides a group compact mode, which allows the user to uncover insights of groups without cluttering the graph.
 
 <h2 id="references">References</h2>
 

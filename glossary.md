@@ -27,16 +27,16 @@ The goal of this mode is to make it easier for the user to understand the struct
 
 <h3 id="hierarchical-relationships-glossary">Hierarchical relationship</h3>
 
-Hierarchical relationships have a parent-child structure and are represented using compound nodes. 
+Hierarchical relationships have a parent-child structure and are represented using [compound nodes](#compound-node). 
 
-Figure 1 below shows an example with animal classification:
+Figure 1 below shows an example with Animal classification:
 
 <p align="center">
-    <img src="img/child_parent_relation.png" alt="parent-child-relationship" title="Parent-child relationship" width="600"/><br/>
+    <img src="img/child_parent_relation.png" alt="parent-child-relationship" title="Parent-child relationship" width="400"/><br/>
     <em>Figure 1. Parent-child relationship</em>
 </p>
 
-Here the node "Animal" represents a compound node, containing inside child node #TODO, which, in turn, is the parent node of the internal nodes.
+Here the node "Chordata" represents a compound node, containing inside "mammal" child node, which, in turn, is a compound node containing the "(72) Order" group. 
 
 Each such multi-level hierarchy represents a [hierarchical group](#hierarchical-group-glossary).
 
@@ -48,14 +48,7 @@ Each such multi-level hierarchy represents a [hierarchical group](#hierarchical-
 <h3 id="non-hierarchical-relationships-glossary">Non-hierarchical relationship</h3>
 
 > **Definition** \
-> Non-hierarchical relationships refer to relationships that are not represented as parent-child hierarchy. These relationships are typically represented by edges between nodes in a graph. 
-
-For example, as shown in Figure 2 below, the relationship between an animal and its habitat is represented as non-hierarchical; animal and habitat are connected by an edge instead.
-
-<p align="center">
-    <img src="img/non_hierarchical_edge.png" alt="non-hierarchical-edge" title="Non-hierarchical edge" width="600"/><br/>
-    <em>Figure 2. Non-hierarchical edge</em>
-</p>
+> Non-hierarchical relationships refer to relationships that are not represented using parent-child structure. Instead, these relationships are typically represented by edges between nodes in a graph. 
 
 <h3 id="hierarchical-class-glossary">Hierarchical class</h3>
 
@@ -109,7 +102,7 @@ An example of a hierarchical group is shown in Figure 1 above.
 For example, in Figure 4, "pseudo-parent" (grey) node is used as visual element to encapsulate and represent the nodes of a specific type. 
 
 <p align="center">
-    <img src="img/visual_group.png" alt="visual-group" title="Visual group" width="600"/><br/>
+    <img src="img/visual_group.png" alt="visual-group" title="Visual group" width="300"/><br/>
     <em>Figure 4. Visual group</em>
 </p>
 
@@ -119,16 +112,16 @@ For example, in Figure 4, "pseudo-parent" (grey) node is used as visual element 
 Each node within a visual group must be assigned to a specific visual class, which represents that visual group.
 
 > **Note** \
-> In the context of a hierarchical group, the parent node serves as the visual element encapsulating and representing the cluster of child nodes, eliminating the need for a separate "pseudo-parent" node.   
+> In the context of a hierarchical group, the parent node serves as the visual element encapsulating and representing the cluster of child nodes. This eliminates the need for a separate "pseudo-parent" node for a hierarchical group. 
 
-An example of two visual groups "" and "" is shown in Figure 5 below (later on we will use "" as the visual group).
+An example of hierarchical group "regionVisualGroup" and visual group "animalHierarchicalGroup" is shown in Figure 5 below.
 
 <p align="center">
     <img src="img/visual_groups.png" alt="visual-groups" title="Visual groups" width="600"/><br/>
-    <em>Figure 5. Visual groups. To the left is "" visual group and to the right is "" visual group</em>
+    <em>Figure 5. Visual groups. Above is "animalHierarchicalGroup" visual group and to below is "regionVisualGroup" visual group</em>
 </p>
 
-Visual groups make the graph more manageable and intuitive for the user by grouping similar nodes together. They allow to easily move the cluster around the graph area, avoiding the scattering of related nodes around the graph area.   
+Visual groups make the graph more manageable and intuitive for the user by grouping similar nodes together. They allow to easily move the cluster, avoiding the scattering of related nodes around the graph area.
 
 <h3 id="cluster-glossary">Cluster</h3>
 
@@ -142,7 +135,7 @@ Visual groups make the graph more manageable and intuitive for the user by group
 
 <h3 id="checkbox-glossary">Checkbox</h3>
 
-The "Scaling options" checkbox is located in the top right corner of the graph area and allows the user to select whether to group clusters, zoom in/out, or both options. See Figure 6 below for more detail.
+The "Scaling options" checkbox is located in the top right corner of the graph area and allows the user to select whether to group clusters globally, or locally, zoom in/out, or combine these options. See Figure 6 below for more detail.
 
 <p align="center">
     <img src="img/scaling_options.png" alt="scaling-options" title="Scaling options" width="200"/><br/>
@@ -153,11 +146,6 @@ The "Scaling options" checkbox is located in the top right corner of the graph a
 
 Map-style zooming, as it relates to the Grouping of Clusters extension, refers to the ability to adjust the magnification and level of detail displayed on the graph at the same time, allowing to focus on the specific data of interest and make the graph more manageable and intuitive.  
 
-The level of detail is controlled through the use of compound nodes, supernodes/superedges, and groups. By utilizing these elements, certain areas of the graph can be selectively expanded or collapsed to reveal or hide specific details. 
+The level of detail is controlled through the use of [compound nodes](#compound-node), [supernodes](#supernode)/[superedges](#superedge), and [groups](#grouping-glossary). By utilizing these elements, certain areas of the graph can be selectively expanded or collapsed to reveal or hide specific details. 
 
-There are three types of map-style zooming, namely global, local and inverse local. Global zooming allows for zooming in or our on the entire graph, local zooming allows for zooming in or out on specific selected nodes, and inverse local zooming locks a selected compound node in its expanded state, so that it remains expanded and visible when zooming in or out, while the rest of the graph is zoomed in or out. Furthermore, we provide the option to use only one phase of map-style zooming, such as only changing the magnification or only changing the level of detail.
-
-<p align="center">
-    <img src="img/map_style_zoom_highest.png" alt="map_style_zoom_highest" title="Map style zoom highest level" width="700"/><br/>
-    <em>Figure 9. Map style zoom highest abstract level. Left side - an example from google maps. Right side - an example from Knowledge Graph Visual Browser.</em>
-</p>
+There are two types of map-style zooming, namely global and local. Global zooming allows for zooming in or our on the entire graph, while local zooming allows for zooming only on specific selected nodes. Map-style zooming is achieved by combination of traditional zooming, which changes the magnification, with any variation of grouping of clusters zooming. 
