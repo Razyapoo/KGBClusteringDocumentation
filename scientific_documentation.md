@@ -20,7 +20,7 @@ Table of content:
 
 <h2 id="introduction">1. Introduction</h2>
 
-A [knowledge graph](https://en.wikipedia.org/wiki/Knowledge_graph), also known as a semantic network, is a representation of a network of real-world entities - objects, events, situations, or concepts - and relationships between them. These entities are usually stored in a graph database and visualized as a graph [[1]](#references). The most common way to represent knowledge graphs is through the [RDF (Resource Description Framework) standard](https://en.wikipedia.org/wiki/Resource_Description_Framework).
+A [knowledge graph](https://en.wikipedia.org/wiki/Knowledge_graph), also known as a semantic network, is a representation of a network of real-world entities - objects, events, situations, or concepts - and relationships between them. These entities are usually stored in a graph database and visualized as a graph [^1]. The most common way to represent knowledge graphs is through the [RDF (Resource Description Framework) standard](https://en.wikipedia.org/wiki/Resource_Description_Framework).
 
 However, non-specialists may find it difficult to study knowledge graphs due to the background technicalities involved. In order to solve this problem, the paper “Interactive and iterative visual exploration of knowledge graphs based on shared and reusable visual configurations” [[2]](#references) #TODO ([Interactive and iterative visual exploration of knowledge graphs based on shareable and reusable visual configurations](https://www.sciencedirect.com/science/article/pii/S1570826822000105#b2) by Martin Nečaský, Štěpán Stenchlák) introduces the [Knowledge Graph Visual browser](https://try.kgbrowser.opendata.cz/) - an interactive tool that allows non-specialists to explore knowledge graphs without knowing the underlying technical details.
 
@@ -420,8 +420,6 @@ It is important to note that the group compact mdoe is a view mode, and once it 
 
 It is useful tool for exploring and understanding large and complex networks, as it allows users to easily drill down into specific groups and see the nodes within them in a more organized and structured way. Additionaly, by recursivly exploring inner groups, users can gain a deeper uderstanding of the hierarchical structure of the graph and the overall graph. 
 
-For example, Benner offers a pointed, yet concise critique of this idea. [^Benner1]  
-
 <h3>Map-style zoom</h3>
 
 Map-style zoom is a type of zooming that is often used in map-based applications, such as Google Maps or Maps.cz. It refers to the ability to change the magnification together with the level of detail of the map, typically by using a zoom in/out features, such as the zoom buttons or scroll wheel on a mouse. This allows the user to zoom in to see more detail, and zoom out to see a broader overview of the map. This type of zoomimg is different from the traditional zooming, which only changes the magnification or size of an image; instead it changes magnification as well as the amount of detail, providing a more detailed view of the area when zoomed in. Map-style zooming also refers to the ability to pan and move around the map, which can be useful for navigating large and complex networks.
@@ -436,23 +434,4 @@ The Grouping of clusters extension is a powerful tool for working with large and
 
 <h2 id="references">References</h2>
 
-[^Benner1]: { | Benner, 1995 | | |zu:1707130:78DK3PZ5}
-
-1. [1]: ["What is a Knowledge Graph?"](https://www.ibm.com/cloud/learn/knowledge-graph), by IBM Cloud Education, April 12, 2021
-2. 
-3. 
-4. 
-5. 
-6. 
-7. 
-8. 
-9.  
-10. 
-11. 
-12. 
-13. 
-14. 
-15. 
-16. 
-17. 
-18. 
+[^1]: ["What is a Knowledge Graph?"](https://www.ibm.com/cloud/learn/knowledge-graph), by IBM Cloud Education, April 12, 2021
