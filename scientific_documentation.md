@@ -83,7 +83,7 @@ In the rest of this section, we will describe and compare several techniques tha
 
 Filtering is a useful technique for optimizing graph visualization when it is not necessary or practical to display the entire graph. By allowing users to select specific attributes or elements of interest, filtering can help to reduce visual clutter and improve the readability and clarity of the graph. As a result, users can create a small, informative graph that is tailored to their specific needs and interests, making it easier to extract valuable insights and information from data.
 
-The advantage of filtering is that it can be applied at both the attribute level, where nodes are filtered based on the selected attributes, and the structural level, where users can directly select elements of interest on the graph and hide unrelated data. This is illustrated in Figure 1 below.  
+The advantage of filtering is that it can be applied at both the attribute level, where nodes are filtered based on the selected attributes, and the structural level, where users can directly select elements of interest on the graph and hide unrelated data. The last approach is illustrated in Figure 1 below.  
 
 <p align="center">
     <img src="img/path_filtering.png" alt="sparsification" title="Sparsification" width="700"/><br/>
@@ -99,25 +99,25 @@ Well-known representatives are[^8]:
 - Betweenness Centrality <span id="betweenness-centrality"/>: Measures the number of shortest paths that pass through an element, indicating its importance as a bridge between other elements 
 - Degree Centrality: Measures the number of incoming and outgoing relationships a node has in the graph
   
-By using centrality algorithms, users can more easily identify elements of interest and focus on the most important or influential elements in the graph. There are also other techniques such as [PageRank](https://en.wikipedia.org/wiki/PageRank), [LeaderRank](https://www.centiserver.org/centrality/LeaderRank/#:~:text=Definition,the%20need%20of%20frequent%20calibration.), [HITS (Hyperlink-Induced Topic Search)](https://en.wikipedia.org/wiki/HITS_algorithm).
+By using centrality algorithms, users can more easily identify elements of interest and focus on the most important or influential elements in the graph. There are also other techniques such as [PageRank](https://en.wikipedia.org/wiki/PageRank), [LeaderRank](https://www.centiserver.org/centrality/LeaderRank/#:~:text=Definition,the%20need%20of%20frequent%20calibration.), [HITS (Hyperlink-Induced Topic Search)](https://en.wikipedia.org/wiki/HITS_algorithm), etc.
 
 However, centrality algorithms typically consider only one dimension of importance, such as degree, closeness, or betweenness, which can lead to the bias in the results. They often make an assumptions about the original graph, such as that it is connected. They are computationally expensive: except for degree centrality, they have the complexity at least $O(n^3)$ where $n$ is the number of nodes, which makes them usually impractical for large networks[^9].
 
-Filtering can be applied to both heterogeneous and homogeneous graphs. In a homogeneous graph, where all nodes and edges have the same type, filtering can be done based on certain properties or attributes of the nodes and edges. For example, filter can be applied to remove nodes with low centrality  or low degree. In a heterogeneous graph, on the other hand, where nodes and edges are of different types, filtering can be done based on the type of the node or edge, and also based on certain properties or attributes of the nodes and edges. 
+Filtering can be applied to both heterogeneous and homogeneous graphs. In a homogeneous graph, filtering can be done based on certain properties or attributes of the nodes and edges. For example, filter can be applied to remove nodes with low centrality or low degree. In a heterogeneous graph, on the other hand, filtering can be done based on the type of the node or edge, and also based on certain properties or attributes of the nodes and edges. Additionally, filtering can be lossless and lossy, depending on the goal of the filtered graph. Lossless filtering, for example, only hides redundant nodes, while lossy filtering removes them. 
 
-Filtering can be lossless and lossy, depending on the goal of the filtered graph. Lossless filtering, for example, only hides redundant nodes, while lossy filtering removes them. The main advantage of filtering is that it simplifies the graph, according to the user's preferences, as the user defines the settings of the filter. However, to apply the filter, users must know the graph in advance and filtering can also lead to loss of information, ambiguity and inaccuracy, so it is important to carefully evaluate the quality of the filtering technique and the filtered graph.
+The main advantage of filtering is that it simplifies the graph according to the user's preferences. However, to apply the filter, users must know the graph in advance and filtering can also lead to loss of information, ambiguity and inaccuracy, so it is important to carefully evaluate the quality of the filtering technique and the filtered graph.
 
 <h3 id="graph-sampling">Graph sampling</h3>
 
 The goal of the graph sampling is to extract a small subset of the large graph that preserves its structure, patterns, and properties. The result of this approach is a graph induced by the selected set.
 
-There are several methods for heterogeneous and homogeneous graph sampling. Homogeneous graph sampling methods include: 
+There are several methods for heterogeneous and homogeneous graph sampling. Techniques for sampling homogeneous graphs include: 
 
-*Random sampling*. Random node and edge sampling are methods for selecting subsets of vertices and edges from a graph, respectively. The method works by randomly selecting a set of nodes or vertices from the graph according to a predefined probability distribution, such as uniform or degree-based probabilities. 
+*Random sampling*. Random node/edge sampling is a method for selecting subsets of nodes/edges from a graph, respectively. The method works by randomly selecting a set of nodes/edges from the graph according to a predefined probability distribution, such as uniform or degree-based probabilities. 
 
-One of the main advantages of random sampling is that it is easy to implement and computationally efficient, making it suitable for processing large graphs. It might be useful to preserve an edge that plays a role of bridge between two communities or clusters. In the paper [^10], Spielman and Srivastava show that we can achieve an approximation of the original graph with only $O(\epsilon^{-2}nlogn)$ edges. 
+One of the main advantages of random sampling is that it is easy to implement and computationally efficient, making it suitable for processing large graphs. In the paper [^10], Spielman and Srivastava show that we can achieve an approximation of the original graph with only $O(\epsilon^{-2}nlogn)$ edges, where $\epsilon$ is a parameter that is used to control the sparsity of the resulting graph. The choice of $\epsilon$ can affect the trade-off between the preservation of the original graph properties and the sparsity of the resulting graph.
 
-However, as the selection of vertices/edges is based on random choice, the result may not be representative of the overall graph and there is a possibility of missing important features and properties of the original graph. For example, random node sampling method have problems matching degree distribution, since there are many high-degree nodes in the sample. Also, sample graphs sampled using random edge sampling usually very sparsely connected and thus do not respect community structure [^7] [^11].
+However, as the selection of nodes/edges is based on random choice, there is a possibility of missing important features and properties of the original graph. For example, random node sampling method may have difficulty preserving the degree distribution, if there are many high-degree nodes in the sample. Similarly, graphs sampled using random edge sampling are typically very sparsely connected, and thus do not accurately reflect the community structure present in the original graph [^7] [^11].
 
 Another variations of random sampling are Random Node-Edge and Random Edge-Node samplings. They differ in how the subset of nodes and edges is selected: 
 
@@ -127,7 +127,7 @@ Another variations of random sampling are Random Node-Edge and Random Edge-Node 
 
 These techniques aim to reduce the bias to high-degree nodes that is present on the original random edge sampling [^11].
 
-The best way is to make a *Hybrid* approach [^12], where with probability p we perform a step of random edge-node or random node-edge sampling and with probability 1 − p we perform a step of random edge sampling.
+It may be beneficial to use a *Hybrid* approach [^12], where with probability $p$ we perform a step of random edge-node/random node-edge sampling and with probability $1 − p$ we perform a step of random edge sampling.
 
 *Sampling by exploration*. In this family of the sampling techniques we first choose a node uniformly at random and then explore nodes in its vicinity. These techniques include: 
 
