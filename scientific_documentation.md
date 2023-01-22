@@ -9,7 +9,7 @@ Team members who contribute to the Knowledge Graph Visual Browser:
 - Oskar Razyapov
   - [Grouping of clusters](https://github.com/Razyapoo/knowledge-graph-browser-frontend-grouping-of-clusters)
 
-The focus of this research paper is to improve and optimize the visualization of knowledge graphs. The research includes the exploration of several prototypes, which have been created by the student or identified trough the research of other papers. The goal is to make large and complex knowledge graphs well-organized and easily understandable for non-specialists. This paper aims to compare various existing prototypes in the field of graph simplification and use those insights to develop the own prototype.
+The focus of this research paper is to improve and optimize the visualization of knowledge graphs. The research includes the exploration of several prototypes, which have been created by the student or identified through the research of other papers. The goal is to make large and complex knowledge graphs well-organized and easily understandable for non-specialists. This paper aims to compare various existing prototypes in the field of graph simplification and use those insights to develop the own prototype.
 
 Table of content:
 - [Introduction](#introduction)
@@ -35,24 +35,25 @@ Main challenges include:
 - Link overlap: When there are many edges between nodes, it can lead to link overlap, making it hard to distinguish individual edges and understand the connectivity of the graph
 - Lack of context: In big graphs, it can be hard to see the relationships between nodes or understand how they fit onto the overall structure 
 - High-Dimensional, complex data: When nodes and edges are associated with many attributes, handling and visualizing them can become challenging
-- Scalability: As mentioned, visualizing large graphs can be computationally expensive
+- Scalability: Visualizing large graphs can be computationally expensive
 - Dynamic data: Real data are usually dynamic and it may be challenging and expensive to run layout every time a new data appears on the graph area 
   
 A good visualization of a large graph should be able to reveal patterns that are of the value to the user. Such a visualization can be particularly useful for presentation purposes, as it help to convey important insights and trends in a clear and concise manner. It is important to choose strategies and techniques that will help to highlight the most relevant and meaningful aspects of the data.
 
 <h2 id="approaches">3. Enhancing the visual perception of large graphs</h2>
 
-There are several approaches that can be taken to improve the runtime and performance of large graph visualizations. One approach is focused on optimizing the internal methods used in the rendering phase, in order to reduce the time it takes to render the graph without reducing the amount of detail displayed. While this approach is effective, it falls outside the scope of this article.
+There are several approaches that can be taken to improve large graph visualizations. One approach is focused on optimizing the internal methods used in the rendering phase, in order to reduce the time it takes to render the graph without reducing the amount of detail displayed. While this approach is effective, it falls outside the scope of this article.
 
-Another approach is to optimize the layout phase in order to make the graph more readable and understandable for non-specialists. This can involve reducing the amount of detail, such as edges or nodes, or using a more efficient layout algorithm. As a result, this approach can help to improve the overall performance and efficiency of the visualization. 
+Another approach is to optimize the layout phase in order to make the graph more readable and understandable for non-specialists. This can involve reducing the amount of detail present in a graph, such as edges or nodes, or using a more efficient layout algorithm. As a result, this approach can help to improve the efficiency of the visualization as well as the speed of graph rendering algorithms. 
 
-The focus of this research work is on the second approach, which aim to enhance the visual perception of large graphs. 
+The focus of this research work is on the second approach, which aims to enhance the visual perception of large graphs. 
 
-*Graph definition*. A *plain graph* $G$ is an abstract data type consisting of a finite set of vertices (nodes) $V$ and a set of edges (links) $E$ usually representing a relationship between nodes. In this paper, we support a general graph model, where every node has a set of associated attributes describing the features of an object that a node represents. A graph is often represented by its adjacency matrix $A$, which ca be binary, corresponding to whether there exists a relationship between two nodes, or numerical, corresponding to the strength of the relationship. In this article, the adjacency matrix is considered to be binary unless otherwise noted.
+**Graph definition**. A *plain graph* $G$ is a data structure consisting of a finite set of vertices (nodes) $V$ and a set of edges (links) $E$ usually representing a relationship between nodes. In this paper, we support a general graph model, where every node has a set of associated attributes describing the features of an object that a node represents. A graph is often represented by its adjacency matrix $A$, which can be binary, corresponding to whether there exists a relationship between two nodes, or numerical, corresponding to the strength of the relationship. In this article, the adjacency matrix is considered to be binary unless otherwise noted. Additionally, we define a drawing $D$ as the visual representation of the graph $G$.
 
 According to the articles [^3] and [^4], there are several criteria that can help to determine a good level of visual perception in a graph:
 
-- Intuitiveness/perceptibility/easy navigation: The graph should be easy to navigate and understand, with a clear and intuitive layout. 
+- Intuitiveness/easy navigation: The graph should be easy to navigate, with a clear and intuitive layout. 
+- Perceptibility: The graph should be easy to understand.
 - Simplicity: The graph should be free of clutter. 
 - Usefulness: The graph should be clear and useful to the user, and should provide valuable insights and information. 
 - Highlighting key details: The graph should highlight the most important and relevant details, and should allow the user to easily focus on these aspects.
@@ -64,20 +65,19 @@ In order to improve the level of perception in a graph, it is also useful to con
 3. A large number of nodes should be divided into chunks or clusters: This can help to organize the nodes and make it easier to understand the structure of the graph 
 4. Clusters should contain related nodes: Grouping related nodes together can help to emphasize the relationships between them
 5. The area of the graph shown should be small: A smaller, more focused area of the graph can help to improve the readability and clarity of the information
-6. The overall graphical representation should present (tell) a good story in an understandable way.
+6. The overall graph representation should present (tell) a good story in an understandable way.
 
-Perceptibility and readability are necessary, but not sufficient criteria for quality graph visualization. In the paper [^5], the authors introduced another criterion called *faithfulness*, which refers to the ability of the visualization to accurately represent the data being displayed. They found that reducing the amount of detail shown in a graph can improve readability, but can also reduce the level of confidence, or the visualization's ability to accurately represent the data.
+Perceptibility and readability are necessary, but not sufficient criteria for the quality of graph visualization. In the paper [^5], the authors introduced another criterion called *faithfulness*, which refers to the ability of the visualization to accurately represent the data being displayed. They found that while reducing the amount of detail shown in a graph can improve the overall perception, it can also reduce the level of accuracy in representing the data.
 
-To address the challenge of visualizing large graphs while maintaining both a good level of perception and faithfulness, recent works [^6], [^7] have proposed the use of "proxy graphs" - smaller representatives of large graphs. Formally, a proxy graph can be defined as follows: given an input graph $G$ and its drawing $D$, a proxy graph is a smaller graph $G'$ with a drawing $D'$, such that if $G'$ is a good approximation of the $G$, then $D'$ is a good visualization of $G$ in which the user can see all the structure of G. In other words, the main challenge is to find a proxy graph that balances the competing objectives of perception and faithfulness.  
+To address the challenge of visualizing large graphs while maintaining both a good level of perception and faithfulness, recent works [^6] [^7] have proposed the use of "proxy graphs" - smaller representatives of large graphs. Formally, a proxy graph can be defined as follows: given an input graph $G$ and its drawing $D$, a proxy graph is a smaller graph $G'$ with a drawing $D'$, such that if $G'$ is a good approximation of the $G$, then $D'$ is a good visualization of $G$ in which the user can see all the structure of $G$. In other words, the main challenge is to find a proxy graph that balances the competing objectives of perception and faithfulness.  
 
-It is worth mentioning that we can distinguish between *homogeneous* and *heterogeneous* graphs. In homogeneous graph all nodes have the same types and characteristics, while in heterogeneous graph all nodes and edges have different types and characteristics. Knowledge graphs are known representatives of heterogeneous graphs. 
+It is worth mentioning that we can distinguish between *homogeneous* and *heterogeneous* graphs. In a homogeneous graph, all the nodes and edges have the same types and characteristics, while in a heterogeneous graph, they may have different types and characteristics. Knowledge graphs are known representatives of heterogeneous graphs. 
 
-A knowledge graph browser allows users to build and interact with a graph dynamically. *Static* graph simplification techniques create simplified version of a graph by analyzing its structure at a single point in time, after the graph is already built. *Dynamic* techniques, on the other hand, take into account changes in the graph over time. The simplest way to work with dynamic graphs is to treat them as a series of static graph snapshots. For the remainder of this paper, we will focus on working with a single static snapshot of a heterogeneous graph.
+It is also important to note that there are different approaches to simplifying graphs, depending on whether the graph is considered *static* or *dynamic*. Static graph simplification techniques create simplified version of a graph by analyzing its structure at a single point in time, after the graph has already been built. Dynamic techniques, on the other hand, take into account changes in the graph over time. The simplest way to work with dynamic graphs is to treat them as a series of static graph snapshots, which can be analyzed and simplified separately. In this paper, we will focus on working with static snapshots of a dynamic heterogeneous graph.
 
-We can distinguish between *lossy* and *lossless* graph simplification techniques. Lossy techniques are used in situations where it is more important to reduce the complexity of the graph and make it more interpretable. On the other hand, lossless techniques are used in situations where it is essential to preserve all the information of the original graph.
-# TODO Metrics to evaluate the goodness of the graph visualization
+Furthermore, we can distinguish between *lossy* and *lossless* graph simplification techniques. Lossy techniques are used in situations where it is more important to reduce the complexity of the graph and make it more interpretable, even if it means losing some information from the original graph. In contrast, lossless techniques are used in situations where it is essential to preserve all the information of the original graph, even if it means that the simplified graph may be less interpretable.
 
-In the rest of this section, we will describe and compare several techniques that can be used to find a proxy graph preserving a good level of perceptibility and faithfulness.
+In the rest of this section, we will describe and compare several techniques that can be used to find a proxy graph which preserves a good level of perceptibility and faithfulness.
 
 <h3 id="filtering">Filtering</h3>
 
