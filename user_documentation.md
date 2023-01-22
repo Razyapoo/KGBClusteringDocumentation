@@ -94,8 +94,8 @@ Use +/- buttons or mouse wheel to apply zooming on the graph
 
 - Collapse: Select the [compound node](glossary.md#compound-node) to be collapsed and choose the Local grouping of clusters zooming (or Global grouping of clusters) option in the checkbox, then collapse the node by scrolling the mouse wheel down or using the "-" button.
 - Expand: Select the [supernode](glossary.md#supernode) to be expanded and choose the Local grouping of clusters zooming (or Global grouping of clusters) option, then expand the node by scrolling the mouse wheel up or using the "+" button.
-- Delete: Select the node to be deleted and click on delete button in the detail panel. *Important*: This will remove recursively all descendants of the selected node, if any.
-- Rename: Select the group to be renamed and click rename button in the detail panel. *Important*: This feature is only available for group nodes
+- Delete: Select the node to be deleted and click on delete button in the detail panel. **Important**: This will remove recursively all descendants of the selected node, if any.
+- Rename: Select the group to be renamed and click rename button in the detail panel. **Important**: This feature is only available for group nodes
 
 <h3 id="group-compact-mode-guide">Group compact mode</h3>
 

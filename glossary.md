@@ -10,7 +10,7 @@ Compound nodes can be used to group inner nodes together, creating a hierarchica
 
 <h3 id="supernode">Supernode</h3>
 
-Supernode is used to represent a collapsed compound node. The list of collpased child nodes is available in the detail panel.   
+Supernode is used to represent a collapsed compound node. The list of collapsed child nodes is available in the detail panel. To identify it from other nodes, it is distinguished by the presence of three dots within the node.
 
 <h3 id="superedge">Superedge</h3>
 
