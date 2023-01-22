@@ -70,17 +70,17 @@ This class is used to group nodes together in a hierarchical manner. If a node b
 > **Definition** \
 > The hierarchical level of a node indicates the depth of a hierarchy at which a node resides. For example, root node resides at level 0 and its children reside at level 1 and so on. 
 
-This concept is similar to how the amount of detail displayed on a map  changes based on the zoom level. Our approach uses this same idea, where at the deepest level of the hierarchy, the graph displays all possible details, while at the highest level of the hierarchy, the graph only shows the representative nodes that make up the hierarchy. 
-
-This allows for an easy way to navigate through large and complex networks, by showing different level of detail based on the hierarchical level of nodes.
+The difference between the level of hierarchy and the current hierarchical level is that each node has associated level of hierarchy, while the current hierarchical level is associated with the graph. 
 
 <h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3>
 
 > **Definition** \
 > The current hierarchical level refers to the specific [level of hierarchy](#hierarchical-level-glossary) that is currently being focused on. 
 
-This level can also be described as the "zoom level" where the level of detail displayed in the graph changes as the user zoom in or zoom out. 
+This level, also referred to as the "zoom level", describes the level of detail displayed in the graph as the user zooms in or out. 
 For example, when zooming out, the current hierarchical level decreases as child nodes collapse into their parents, resulting in a higher level of abstraction. Conversely, when zooming in, the current hierarchical level increases as child nodes with a deeper level in the hierarchy become visible, providing more detail.  
+
+This allows for an easy way to navigate through large and complex networks, by showing different level of detail.
 
 <h3 id="hierarchical-groups-glossary">Hierarchical group</h3>
 
