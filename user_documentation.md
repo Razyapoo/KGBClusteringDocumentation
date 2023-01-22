@@ -90,6 +90,13 @@ Each option in the checkbox brings its own functionality:
 
 Use +/- buttons or mouse wheel to apply zooming on the graph
 
+<h3>Node Operations</h3>
+
+- Collapse: Select the [compound node](glossary.md#compound-node) to be collapsed and choose the Local grouping of clusters zooming (or Global grouping of clusters) option in the checkbox, then collapse the node by scrolling the mouse wheel down or using the "-" button.
+- Expand: Select the [supernode](glossary.md#supernode) to be expanded and choose the Local grouping of clusters zooming (or Global grouping of clusters) option, then expand the node by scrolling the mouse wheel up or using the "+" button.
+- Delete: Select the node to be deleted and click on delete button in the detail panel. *Important*: This will remove recursively all descendants of the selected node, if any.
+- Rename: Select the group to be renamed and click rename button in the detail panel. *Important*: This feature is only available for group nodes
+
 <h3 id="group-compact-mode-guide">Group compact mode</h3>
 
 This [mode](glossary.md#group-compact-mode) is only available for group nodes. To enable it, click the "Group compact mode" button. Then you can recursively explore inner groups by clicking on them. To exit this mode, click anywhere outside the group, or by using the "Group compact mode" button. A visual representation of how to enter and exit the group compact mode is depicted in Figure 6.
@@ -98,15 +105,6 @@ This [mode](glossary.md#group-compact-mode) is only available for group nodes. T
     <img src="img/group_compact_show.gif" alt="group-compact" title="Group compact mode"/><br/>
     <em>Figure 6. How to enter and exit the group compact mode.</em>
 </p>
-
-<h2 id="restrictions">Restrictions on a graph</h2>
-
-1. It is not possible to group nodes placed in different [hierarchical groups](glossary.md#hierarchical-groups-glossary), [hierarchical levels](glossary.md#hierarchical-level-glossary), visual classes, or having different parent node. It is not possible to include a pseudo-parent node within a group.
-2. It is not possible to manually delete a pseudo-parent node. It will be automatically deleted when the last node inside will be deleted.
-3. It is not possible to expand node's children if some of its descendants have already been collapsed.
-4. If a node;s children were previously expanded and then collapsed, attempting to expand the node again will not display its children since they are already present in the graph in a collapsed state. In this case, you can reveal them by using grouping of clusters zooming and mouse wheel or the "+" button.
-5. The "+" button or mouse wheel ungroup all groups placed at the [current hierarchical level](#current-hierarchical-level-glossary). To ungroup a specific group, select it and double click on it, or use the "break" button.
-6. When the group compact mode is enabled, it is not possible to expand any nodes.
 
 <h2>Example</h2>
 
@@ -144,7 +142,9 @@ To demonstrate how the zooming features work, let's use the "Global grouping of 
     <em>Figure 10. The visual representation of the zooming out feature.</em>
 </p>
 
-The process of zooming in is similar to zooming out. By repeatedly clicking the “+” button, we can gradually return to the initial state from which we started. This can be seen in Figure 13. Local grouping of clusters works in a similar way. Map-style zooming can be enabled by selecting the local or global grouping of clusters in combination with the "Zoom In / Zoom Out" option.
+The process of zooming in is similar to zooming out. By repeatedly clicking the “+” button, we can gradually return to the initial state from which we started. Local grouping of clusters works in a similar way, but only on selected nodes. 
+
+To enable the map-style zooming, which is used on maps and combines the change in magnification scale with the alternation of the level of detail displayed, we should select the Local or Global grouping of clusters (some of them, or both is possible) together with the "Zoom In / Zoom Out" option.
 
 <h3>Group compact mode</h3>
 
@@ -154,3 +154,13 @@ Let us demonstrate how the group compact mode works. We can activate it on the g
     <img src="img/group_compact_mode.gif" alt="group_compact_mode" title="Group compact mode"/><br/>
     <em>Figure 11. The visual representation of the group compact mode.</em>
 </p>
+
+
+<h2 id="restrictions">Restrictions on a graph</h2>
+
+1. It is not possible to group nodes placed in different [hierarchical groups](glossary.md#hierarchical-groups-glossary), [hierarchical levels](glossary.md#hierarchical-level-glossary), visual classes, or having different parent node. It is not possible to include a pseudo-parent node within a group.
+2. It is not possible to manually delete a pseudo-parent node. It will be automatically deleted when the last node inside will be deleted.
+3. It is not possible to expand node's children if some of its descendants have already been collapsed.
+4. If a node;s children were previously expanded and then collapsed, attempting to expand the node again will not display its children since they are already present in the graph in a collapsed state. In this case, you can reveal them by using grouping of clusters zooming and mouse wheel or the "+" button.
+5. The "+" button or mouse wheel ungroup all groups placed at the [current hierarchical level](#current-hierarchical-level-glossary). To ungroup a specific group, select it and double click on it, or use the "break" button.
+6. When the group compact mode is enabled, it is not possible to expand any nodes.
