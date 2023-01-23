@@ -290,27 +290,22 @@ Coarsening is often used as a preprocessing step for multi-level algorithms [^50
 Visual tricks are techniques used to improve the readability and perceptibility of large graphs, such as knowledge graphs.
 
 Some examples of visual tricks include:
-- [Highlighting key nodes and edges](#highlighting-key-nodes-and-edges)
-- [Grouping/Aggregation of similar nodes or edges](#node-grouping-and-aggregation)
-- [Combination of different layouts](#layout-combination)
-- [Zooming and panning](#zooming-and-panning)
-- [Using tooltips](#tooltips)
 
 - <em id="highlighting-key-nodes-and-edges">Highlighting key nodes and edges</em>. Highlighting key nodes or areas of the graph can be a very useful technique for drawing attention to the most important or relevant parts of the graph, and making them more easily identifiable. This can be done using different visual cues, such as color, size, shape, or transparency.
 
-Highlighting can be used in conjunction with filtering, which can be used to show only those nodes that are of the interest to the user, while hiding the rest of the graph, or making it less visible.
+    Highlighting can be used in conjunction with filtering, which can be used to show only those nodes that are of the interest to the user, while hiding the rest of the graph, or making it less visible.
 
 - <em id="node-grouping-and-aggregation">Grouping similar nodes and edges</em>. This combines different approaches like [clustering](#clustering) and [summarization](#summarization).
 
-By grouping similar nodes together, we can reduce clutter and make it easier to understand the overall structure of the graph. This can be done based on various criteria such as node properties, attributes, or relationships, and it can be applied to both homogeneous and heterogeneous graphs. 
+    By grouping similar nodes together, we can reduce clutter and make it easier to understand the overall structure of the graph. This can be done based on various criteria such as node properties, attributes, or relationships, and it can be applied to both homogeneous and heterogeneous graphs. 
 
-A popular approach to improve the level of losslessness of graph summarization is the use of [compound nodes](https://cambridge-intelligence.com/combos/), which are often used to represent clusters of nodes or subgraphs within a single visual element. The main advantage of such nodes is that they can be collapsed or expanded to show individual nodes inside the cluster. This allows users to navigate and explore the graph at different levels of detail, while preserving the context and the relationships among the nodes.
+    A popular approach to improve the level of losslessness of graph summarization is the use of [compound nodes](https://cambridge-intelligence.com/combos/), which are often used to represent clusters of nodes or subgraphs within a single visual element. The main advantage of such nodes is that they can be collapsed or expanded to show individual nodes inside the cluster. This allows users to navigate and explore the graph at different levels of detail, while preserving the context and the relationships among the nodes.
 
-Compound nodes allow to show more detailed information when zoomed in and more general information when zoomed out. When the graph is zoomed out, the compound nodes are shown as single node, which can be used to represent a group or a cluster of similar nodes. This can help to reduce the clutter and make it easier to understand the overall structure of the graph. When the graph is zoomed in, the compound nodes can be expanded to show the individual nodes inside the cluster, which can be used to show more detailed information.
+    Compound nodes allow to show more detailed information when zoomed in and more general information when zoomed out. When the graph is zoomed out, the compound nodes are shown as single node, which can be used to represent a group or a cluster of similar nodes. This can help to reduce the clutter and make it easier to understand the overall structure of the graph. When the graph is zoomed in, the compound nodes can be expanded to show the individual nodes inside the cluster, which can be used to show more detailed information.
 
 - <em id="layout-combination">Combination of different layout algorithms</em>. By using different layout algorithms for different parts of the graph it is possible to improve the level of perceptibility and readability of the graph and it can help to reveal different aspects of the graph. Different layout algorithms can be used to emphasize different features of the graph.
 
-It may also be useful to change the layout depending on the zoom level, for example, at each zoom-in level it may be useful to use different layouts. This can help to adjust the level of detail and the level of abstraction of the graph, depending on the user's needs and preferences. For example, when the graph is zoomed out, it may be useful to use layout that emphasizes the overall structure of the graph, and when the graph is zoomed in, it may be useful to use layout that emphasizes the details of the graph.
+    It may also be useful to change the layout depending on the zoom level, for example, at each zoom-in level it may be useful to use different layouts. This can help to adjust the level of detail and the level of abstraction of the graph, depending on the user's needs and preferences. For example, when the graph is zoomed out, it may be useful to use layout that emphasizes the overall structure of the graph, and when the graph is zoomed in, it may be useful to use layout that emphasizes the details of the graph.
 
 - <em id="zooming-and-panning">Graph zooming and panning</em>. This allows users to zoom in and out of the graph to focus on specific parts of the graph.
 
