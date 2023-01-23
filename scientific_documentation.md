@@ -245,8 +245,6 @@ For a $t$-typed heterogeneous graph, it is possible to find $tk$ clusters by per
 
 Graph summarization transforms graphs into more compact summary representations while preserving structural patterns and properties. This is a broad term that encompasses different techniques that can be used to create a simplified graph, like clustering, graph sparsification, sampling, or a combination of them. One example of a summary graph that is commonly used is a condensed graph, also known as a directed acyclic graph (DAG), which is the result of applying a strongly [connected component (SCC) algorithm](#scc). 
 
-One of the main challendges of graph summariztion, is to create a summary graph from which we can restore the original graph.
-
 Graph summarization methods can be categorized based on the type of information or property of the graph that it captures [^45]: 
 
 - *Static or Dynamic*: Despite the prevalence of large dynamic graphs, only a small number of researches are aimed at their efficient summarization like [^46] or [^47]. Dynamic graph summarization techniques include online and incremental algorithms, which continuously update the summary of the graph in response to its changes over time. Some examples of these techniques include: Sliding window, which involves dividing the dynamic graph into a series of fixed-size windows, and summarizing the graph within each window. Some previously stated techniques such as Random Walks, K-Means, hierarchical clustering, or community detection are also applicable to dynamic graphs.
@@ -277,15 +275,13 @@ We distinguish two main types of the grouping-based graph summarization techniqu
     <em>Figure 2. Dedensification. The original graph is shown on the screenshot 1 to the left. The resulting graph is shown on the screenshot 2 to the right.</em>
 </p>
 
-The main advantage of graph summarization is that it produces a summary graph that is again graph which can be further compressed.
+The main advantage of graph summarization is that it produces a summary graph that is again graph which can be further compressed. One of the main challenges of graph summarization, is to create a summary graph that preserves important information present in the original graph, and from which we can restore the original graph.
 
 <h3 id="coarsening">Coarsening</h3>
 
-This technique replaces the original graph by one which has fewer nodes, but whose structure and characteristics are similar to those of the original graph. The nodes with similar properties are grouped into a clusters, called supernodes [^49].
+This technique replaces the original graph by one which has fewer nodes, but whose structure and characteristics are similar to those of the original graph. The nodes with similar properties are grouped into a clusters, called supernodes [^49]. It is very similar to the graph summarization, however, the main goal of the coarsening it to create a smaller representation of the original graph for the purpose of improving the efficiency and scalability of graph-based computations, while graph summarization techniques are aimed, in turn, to make a graph more simpler to understand, and preserve the important information of the graph structure.  
 
-The main goal of the coarsening it to create a smaller representation of the original graph for the purpose of improving the efficiency and scalability of graph-based computations. It is very similar to the graph summarization, which is aimed, in turn, to make a graph more simpler to understand, while preserving the important information of the graph structure.  
-
-Coarsening is often used as a preprocessing step for multi-level algorithms [^50] [^51], which iteratively compress a graph into smaller, more manageable graphs in a multi-level setting. The multilevel algorithm is an iterative process that repeatedly applies a specific operation, such as graph partitioning or clustering, on current-level graph. Graph partitioning is a computationally expensive task, especially for large graphs, so coarsening is often used as a preprocessing step to reduce the size of the graph and make it more manageable for the partitioning algorithm. The process typically starts by replacing the original graph $G$ with a coarse approximation $G_c$, which is then partitioned into smaller subgraphs, called partitions. The partition of $G_c$ then used to create a rough partition of $G$, by mapping the supernodes of $G_c$ back to the original nodes of $G$ [^52] [^53]. In the case if partition is still big, the whole process can be applied recursively. 
+Coarsening is often used as a preprocessing step for multi-level algorithms [^50] [^51], which iteratively compress a graph into smaller, more manageable graphs in a multi-level manner. The multi-level algorithm is an iterative process that repeatedly applies a specific operation, such as graph partitioning or clustering, on current-level graph. Graph partitioning is a computationally expensive task, especially for large graphs, so coarsening is often used as a preprocessing step to reduce the size of the graph and make it more manageable for the partitioning algorithm. The process typically starts by replacing the original graph $G$ with a coarse approximation $G_c$, which is then partitioned into smaller subgraphs, called partitions. The partition of $G_c$ then used to create a rough partition of $G$, by mapping the supernodes of $G_c$ back to the original nodes of $G$ [^52] [^53]. In the case if partition is still big, the whole process can be applied recursively. 
 
 ---
 
@@ -300,13 +296,11 @@ Some examples of visual tricks include:
 - [Zooming and panning](#zooming-and-panning)
 - [Using tooltips](#tooltips)
 
-<em id="highlighting-key-nodes-and-edges">Highlighting key nodes and edges</em>. Highlighting key nodes or areas of the graph can be a very useful technique for drawing attention to the most important or relevant parts of the graph, and making them more easily identifiable. This can be done using different visual cues, such as color, size, shape, or transparency.
+- <em id="highlighting-key-nodes-and-edges">Highlighting key nodes and edges</em>. Highlighting key nodes or areas of the graph can be a very useful technique for drawing attention to the most important or relevant parts of the graph, and making them more easily identifiable. This can be done using different visual cues, such as color, size, shape, or transparency.
 
 Highlighting can be used in conjunction with filtering, which can be used to show only those nodes that are of the interest to the user, while hiding the rest of the graph, or making it less visible.
 
-#TODO add picture example
-
-<em id="node-grouping-and-aggregation">Grouping similar nodes and edges</em>. This combines different approaches like [clustering](#clustering) and [summarization](#summarization).
+- <em id="node-grouping-and-aggregation">Grouping similar nodes and edges</em>. This combines different approaches like [clustering](#clustering) and [summarization](#summarization).
 
 By grouping similar nodes together, we can reduce clutter and make it easier to understand the overall structure of the graph. This can be done based on various criteria such as node properties, attributes, or relationships, and it can be applied to both homogeneous and heterogeneous graphs. 
 
@@ -314,13 +308,13 @@ A popular approach to improve the level of losslessness of graph summarization i
 
 Compound nodes allow to show more detailed information when zoomed in and more general information when zoomed out. When the graph is zoomed out, the compound nodes are shown as single node, which can be used to represent a group or a cluster of similar nodes. This can help to reduce the clutter and make it easier to understand the overall structure of the graph. When the graph is zoomed in, the compound nodes can be expanded to show the individual nodes inside the cluster, which can be used to show more detailed information.
 
-<em id="layout-combination">Combination of different layout algorithms</em>. By using different layout algorithms for different parts of the graph it is possible to improve the level of perceptibility and readability of the graph and it can help to reveal different aspects of the graph. Different layout algorithms can be used to emphasize different features of the graph.
+- <em id="layout-combination">Combination of different layout algorithms</em>. By using different layout algorithms for different parts of the graph it is possible to improve the level of perceptibility and readability of the graph and it can help to reveal different aspects of the graph. Different layout algorithms can be used to emphasize different features of the graph.
 
 It may also be useful to change the layout depending on the zoom level, for example, at each zoom-in level it may be useful to use different layouts. This can help to adjust the level of detail and the level of abstraction of the graph, depending on the user's needs and preferences. For example, when the graph is zoomed out, it may be useful to use layout that emphasizes the overall structure of the graph, and when the graph is zoomed in, it may be useful to use layout that emphasizes the details of the graph.
 
-<em id="zooming-and-panning">Graph zooming and panning</em>. This allows users to zoom in and out of the graph to focus on specific parts of the graph.
+- <em id="zooming-and-panning">Graph zooming and panning</em>. This allows users to zoom in and out of the graph to focus on specific parts of the graph.
 
-<em id="tooltips">Tooltips</em>. This allow users to get more information about a specific node or edge by hovering it. Tooltips are small boxes that appears when the user hovers over the element or clicks on a specific element, such as a node or an edge in a graph. They are used to provide additional information or context about the element. 
+- <em id="tooltips">Tooltips</em>. This allow users to get more information about a specific node or edge by hovering it. Tooltips are small boxes that appears when the user hovers over the element or clicks on a specific element, such as a node or an edge in a graph. They are used to provide additional information or context about the element. 
 
 <h2> 4. Proposed algorithm: Grouping of clusters</h2>
 
