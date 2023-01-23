@@ -291,7 +291,7 @@ Coarsening is often used as a preprocessing step for multi-level algorithms [^50
 
 <h3 id="visual-tricks">Visual tricks</h3>
 
-Visual tricks are techniques used to improve the readability and perseptability of large graphs, such as knowledge graphs.
+Visual tricks are techniques used to improve the readability and perceptibility of large graphs, such as knowledge graphs.
 
 Some examples of visual tricks include:
 - [Highlighting key nodes and edges](#highlighting-key-nodes-and-edges)
