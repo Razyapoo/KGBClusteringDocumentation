@@ -273,7 +273,7 @@ We distinguish two main types of the grouping-based graph summarization techniqu
 *Dedensification*. Usually large graphs have lots of high-degree nodes, which can be useful to compress. Maccioni and Abadi proposed a lossless compression technique, called dedensification [^48], which summarizes the multiple connections of the same kind to high-degree nodes by replacing them with virtual nodes. In other words, this technique separates high-degree nodes from the incoming connections they have by means of intermediate nodes that summarize those connections. An example is shown on Figure 2 below.
 
 <p align="center">
-    <img src="img/dedensification.png" alt="dedensification" title="Dedensification" width="600"/><br/>
+    <img src="img/dedensification.png" alt="dedensification" title="Dedensification" width="700"/><br/>
     <em>Figure 2. Dedensification. The original graph is shown on the screenshot 1 to the left. The resulting graph is shown on the screenshot 2 to the right.</em>
 </p>
 
