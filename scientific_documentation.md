@@ -243,30 +243,32 @@ For a $t$-typed heterogeneous graph, it is possible to find $tk$ clusters by per
 
 <h3 id="summarization">Summarization</h3>
 
-Graph summarization transforms graphs into more compact summary representations while preserving structural patterns and properties. This is a broad term that encompasses different techniques that can be used to create a simplified graph, like clustering, graph sparsification, sampling, or a combination of them. One example of a summary graph that is commonly used is a condensed graph, also known as a directed acyclic graph (DAG), which is the result of applying a strongly [connected component (SCC) algorithm](#scc). 
+Graph summarization transforms graphs into more compact summary representations while preserving structural patterns and properties. This is a broad term that encompasses different techniques that can be used to create a simplified graph, including clustering, graph sparsification, sampling, or a combination of them. One example of a summary graph that is commonly used is a condensed graph, also known as a directed acyclic graph (DAG), which is the result of applying a strongly [connected component (SCC) algorithm](#scc). 
 
-Graph summarization methods can be categorized based on the type of information or property of the graph that it captures [^45]: 
+Graph summarization methods can be categorized as follows [^45]: 
 
-- *Static or Dynamic*: Despite the prevalence of large dynamic graphs, only a small number of researches are aimed at their efficient summarization like [^46] or [^47]. Dynamic graph summarization techniques include online and incremental algorithms, which continuously update the summary of the graph in response to its changes over time. Some examples of these techniques include: Sliding window, which involves dividing the dynamic graph into a series of fixed-size windows, and summarizing the graph within each window. Some previously stated techniques such as Random Walks, K-Means, hierarchical clustering, or community detection are also applicable to dynamic graphs.
+- *Static or Dynamic*: Despite the prevalence of large dynamic graphs, only a small number of researches are aimed at their efficient summarization like [^46] or [^47]. Dynamic graph summarization techniques include online and incremental algorithms, which continuously update the summary of the graph in response to its changes over time. An example of dynamic technique is *Sliding window*, which involves dividing the dynamic graph into a series of fixed-size windows, and summarizing the graph within each window. Some previously stated techniques such as Random Walks, K-Means, hierarchical clustering, or community detection are also applicable to dynamic graphs.
 
-- *Homogeneous or Heterogeneous*: Homogeneous summarization methods assume that an input graph is homogeneous. These methods create summary of the graph based on a single criterion, such as node degree on edge weight. On the other hand, heterogeneous summarization methods assume that an input graph is heterogeneous. These methods create summary based on the multiple criteria and take into account the different types and properties of nodes and edges.
+- *Homogeneous or Heterogeneous*: Homogeneous summarization methods assume that an input graph is homogeneous. These methods create summary of the graph based on a single criterion, such as node degree or edge weight. On the other hand, heterogeneous summarization methods assume that an input graph is heterogeneous. These methods create summary based on the multiple criteria and take into account the different types and properties of nodes and edges.
 
 The summarization result can vary as follows:
 
 - *Summary type*: It can be (i) a *supergraph*, consisting of supernodes and/or original nodes, and superedges and/or original edges; (ii) a *list* of nodes and edges that have the most significant influence on the overall structure of the graph. The shape of the summary can be (a) *flat*, with nodes simply grouped into supernodes, and (b) *hierarchical*, with multiple levels of abstraction.
 - *Overlapping and non-overlapping nodes*: Each node can belong only to one summary element such as supernode, or it can belong to multiple supernodes at the same time.
 
-<em id="grouping-and-aggregation-summarization">Grouping/aggregation based techniques</em>. These methods are aimed to identify and combine similar nodes/edges into a supernodes/superedges based on their structural and attribute similarities. In the case of grouping-based techniques, the resulting supernode, which represents a cluster of nodes, is typically given by the most important node and its attributes from a set of nodes in a cluster. This is done, for example, by identifying the node with the highest centrality, such as degree centrality or betweenness centrality. On the other hand, in the case of aggregation, the resulting supernode is created by aggregating the attributes of the nodes in the cluster using an aggregation function. This can be done, for example, by taking average, sum, or median of the attributes of the nodes in the cluster. In this case, the resulting supernode is not necessarily the most important node in the cluster.  
+The use of the supernodes is a popular approach in graph summarization to maintain a high level of information preservation. A supernode is often represented as a collapsed [compound node](https://cambridge-intelligence.com/combos/), which is used to represent a cluster of nodes or a subgraph within a single visual element. The main advantage of using supernodes is their ability to expand and collapse, allowing to show individual nodes inside the cluster when expanded, and a high-level overview of the entire graph when collapsed.
+
+<em id="grouping-and-aggregation-summarization">Grouping/aggregation based techniques</em>. These methods are aimed to identify and combine similar nodes/edges into a supernodes/superedges based on their structural and attribute similarities. In the case of grouping-based techniques, the resulting supernode is typically given by the most important node in a cluster. This is done, for example, by identifying the node with the highest centrality, such as degree centrality or betweenness centrality. On the other hand, in the case of aggregation, the resulting supernode is created by aggregating the attributes of the nodes in a cluster using an aggregation function. This can be done, for example, by taking average, sum, or median of the attributes of the nodes in a cluster. In this case, the resulting supernode is not necessarily the most important node in the cluster.  
 
 We distinguish two main types of the grouping-based graph summarization techniques: (i) *node-grouping* and (ii) *edge-grouping*.
 
-- <em id="node-grouping">Node-grouping methods</em>.  This technique is aimed to group similar nodes in a graph. This can be done by identifying clusters or communities of nodes in the graph that are more densely connected to each other than to the rest of the graph and then combining them into one supernode. Each such community is considered to be a summary of a group (cluster) of nodes in the original graph. 
+- <em id="node-grouping">Node-grouping methods</em>. This technique is aimed to group similar nodes in a graph. This can be done by identifying clusters or communities of nodes in the graph that are more densely connected to each other than to the rest of the graph and then combining them into one supernode. Each such community is considered to be a summary of a group (cluster) of nodes in the original graph. 
 
-- <em id="edge-grouping">Edge-grouping methods</em>. Unlike node-grouping methods that group similar nodes together into supernodes, edge-grouping methods aggregate edges into edge-compressors and/or virtual nodes to reduce the number of edges in a graph in either lossless or lossy manner. Lossless techniques allow for an accurate reconstruction of the original graph, while lossy techniques require less space to store the summary graph, but are not so as accurate in reconstruction of the original graph.
+- <em id="edge-grouping">Edge-grouping methods</em>. Unlike node-grouping methods that group similar nodes together into supernodes, edge-grouping methods aggregate edges into edge-compressors or virtual nodes to reduce the number of edges in a graph in either lossless or lossy manner:
 
-    Lossless edge-grouping techniques often use an edge-compressor function that compresses a set of similar edges into a single, representative edge. The compressed edges can be decompressed to exactly reconstruct the original graph.
+  - Lossless edge-grouping techniques often use an edge-compressor function that compresses a set of similar edges into a single, representative edge. The compressed edges can be decompressed to exactly reconstruct the original graph.
 
-    Lossy edge-grouping techniques often use virtual nodes, representing a group of edges. These virtual nodes are used to represent the edges in the group in the summary graph. The information loss is a trade-off to make the graph more readable.
+  - Lossy edge-grouping techniques often use virtual nodes, which serve as a representation of a group of edges. This approach allows to use less storage space for the summary graph. However, it also involves some loss of information as a trade-off for making the graph more readable.
 
 *Dedensification*. Usually large graphs have lots of high-degree nodes, which can be useful to compress. Maccioni and Abadi proposed a lossless compression technique, called dedensification [^48], which summarizes the multiple connections of the same kind to high-degree nodes by replacing them with virtual nodes. In other words, this technique separates high-degree nodes from the incoming connections they have by means of intermediate nodes that summarize those connections. An example is shown on Figure 2 below.
 
@@ -275,7 +277,7 @@ We distinguish two main types of the grouping-based graph summarization techniqu
     <em>Figure 2. Dedensification. The original graph is shown on the screenshot 1 to the left. The resulting graph is shown on the screenshot 2 to the right.</em>
 </p>
 
-The main advantage of graph summarization is that it produces a summary graph that is again graph which can be further compressed. One of the main challenges of graph summarization, is to create a summary graph that preserves important information present in the original graph, and from which we can restore the original graph.
+The main advantage of graph summarization is that it produces a summary graph that is again graph which can be further compressed. One of the main challenges of graph summarization, is to create a summary graph that preserves important information present in the original graph, and from which we can restore the original graph. By grouping similar nodes together, we can reduce clutter and make it easier to understand the overall structure of the graph. Additionally, the use of supernodes allows to navigate and explore the graph at different levels of detail, while preserving the context and the relationships among the nodes.
 
 <h3 id="coarsening">Coarsening</h3>
 
@@ -287,21 +289,11 @@ Coarsening is often used as a preprocessing step for multi-level algorithms [^50
 
 <h3 id="visual-tricks">Visual tricks</h3>
 
-Visual tricks are techniques used to improve the readability and perceptibility of large graphs, such as knowledge graphs.
+Visual tricks are techniques used to improve the readability and perceptibility of large graphs, including knowledge graphs.
 
 Some examples of visual tricks include:
 
-- <em id="highlighting-key-nodes-and-edges">Highlighting key nodes and edges</em>. Highlighting key nodes or areas of the graph can be a very useful technique for drawing attention to the most important or relevant parts of the graph, and making them more easily identifiable. This can be done using different visual cues, such as color, size, shape, or transparency.
-
-    Highlighting can be used in conjunction with filtering, which can be used to show only those nodes that are of the interest to the user, while hiding the rest of the graph, or making it less visible.
-
-- <em id="node-grouping-and-aggregation">Grouping similar nodes and edges</em>. This combines different approaches like [clustering](#clustering) and [summarization](#summarization).
-
-    By grouping similar nodes together, we can reduce clutter and make it easier to understand the overall structure of the graph. This can be done based on various criteria such as node properties, attributes, or relationships, and it can be applied to both homogeneous and heterogeneous graphs. 
-
-    A popular approach to improve the level of losslessness of graph summarization is the use of [compound nodes](https://cambridge-intelligence.com/combos/), which are often used to represent clusters of nodes or subgraphs within a single visual element. The main advantage of such nodes is that they can be collapsed or expanded to show individual nodes inside the cluster. This allows users to navigate and explore the graph at different levels of detail, while preserving the context and the relationships among the nodes.
-
-    Compound nodes allow to show more detailed information when zoomed in and more general information when zoomed out. When the graph is zoomed out, the compound nodes are shown as single node, which can be used to represent a group or a cluster of similar nodes. This can help to reduce the clutter and make it easier to understand the overall structure of the graph. When the graph is zoomed in, the compound nodes can be expanded to show the individual nodes inside the cluster, which can be used to show more detailed information.
+- <em id="highlighting-key-nodes-and-edges">Highlighting key nodes and edges</em>. Highlighting key nodes or areas of the graph can be a very useful technique for drawing attention to the most important or relevant parts of the graph, and making them more easily identifiable. This can be done using different visual cues, such as color, size, shape, or transparency. Furthermore, highlighting can be used in conjunction with filtering, which can be used to show only those nodes that are of the interest to the user, while hiding the rest of the graph, or making it less visible.
 
 - <em id="layout-combination">Combination of different layout algorithms</em>. By using different layout algorithms for different parts of the graph it is possible to improve the level of perceptibility and readability of the graph and it can help to reveal different aspects of the graph. Different layout algorithms can be used to emphasize different features of the graph.
 
