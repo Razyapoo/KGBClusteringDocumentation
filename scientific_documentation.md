@@ -86,7 +86,7 @@ Filtering is a useful technique for optimizing graph visualization when it is no
 The advantage of filtering is that it can be applied at both the attribute level, where nodes are filtered based on the selected attributes, and the structural level, where users can directly select elements of interest on the graph and hide unrelated data. The last approach is illustrated in Figure 1 below.  
 
 <p align="center">
-    <img src="img/path_filtering.png" alt="sparsification" title="Sparsification" width="850"/><br/>
+    <img src="img/path_filtering.png" alt="sparsification" title="Sparsification" width="600"/><br/>
     <em>Figure 1. Path filtering. A user selects "2" element (screenshot 1 to the left). The result is shown on the screenshot 2 to the right - algorithm shows only nodes connected to the selected element.</em>
 </p>
 
