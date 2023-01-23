@@ -86,7 +86,7 @@ Filtering is a useful technique for optimizing graph visualization when it is no
 The advantage of filtering is that it can be applied at both the attribute level, where nodes are filtered based on the selected attributes, and the structural level, where users can directly select elements of interest on the graph and hide unrelated data. The last approach is illustrated in Figure 1 below.  
 
 <p align="center">
-    <img src="img/path_filtering.png" alt="sparsification" title="Sparsification" width="700"/><br/>
+    <img src="img/path_filtering.png" alt="sparsification" title="Sparsification" width="850"/><br/>
     <em>Figure 1. Path filtering. A user selects "2" element (screenshot 1 to the left). The result is shown on the screenshot 2 to the right - algorithm shows only nodes connected to the selected element.</em>
 </p>
 
@@ -273,8 +273,8 @@ We distinguish two main types of the grouping-based graph summarization techniqu
 *Dedensification*. Usually large graphs have lots of high-degree nodes, which can be useful to compress. Maccioni and Abadi proposed a lossless compression technique, called dedensification [^48], which summarizes the multiple connections of the same kind to high-degree nodes by replacing them with virtual nodes. In other words, this technique separates high-degree nodes from the incoming connections they have by means of intermediate nodes that summarize those connections. An example is shown on Figure 2 below.
 
 <p align="center">
-    <img src="img/dedensification.png" alt="dedensification" title="Dedensification" width="400"/><br/>
-    <em>Figure 2. *Dedensification*. The original graph is shown on the screenshot 1. The resulting graph is shown on the screenshot 2.</em>
+    <img src="img/dedensification.png" alt="dedensification" title="Dedensification" width="800"/><br/>
+    <em>Figure 2. Dedensification. The original graph is shown on the screenshot 1 to the left. The resulting graph is shown on the screenshot 2 to the right.</em>
 </p>
 
 The main advantage of graph summarization is that it produces a summary graph that is again graph which can be further compressed.
