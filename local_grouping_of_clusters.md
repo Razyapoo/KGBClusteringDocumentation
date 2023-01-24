@@ -19,6 +19,13 @@ The use of local grouping allows users to work only with the area of the graph i
 
 <h1 id="research">Research part</h1>
 
+which technique to use?
+
+zoom context - zoom only a specific part and keep surrounding untouched. It changes the magnification level. Generalizes fish-eye and zoom lense. Fish eye - show more and more detail as goes to center, and less detail as goes far from center
+zoom brushing - show the area of interest in a box, hide surrounding nodes - group compact mode?
+multi-scale zooming - It does this by creating multiple levels of detail for the graph, each showing a different level of granularity. This allows the user to see the same area of the graph at different levels of detail, depending on their needs.
+
+how to apply technique? how to choose nodes of interest
 This section describes the various methods for selecting nodes. We can state the following ones:
 
 1. A node(s) can be selected using mouse click.
