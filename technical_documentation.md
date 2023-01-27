@@ -117,7 +117,7 @@ The next few sections describe each layout constraint class in more details.
 
 <h4 id="hierarchical-group-layout-constraint">"HierarchicalGroupLayoutConstraint" class</h4>
 
-A visual layout constraint defining [hierarchical relationships](glossary.md#hierarchical-relationships-glossary) is expressed as an instance of the `browser:HierarchicalGroupLayoutConstraint` class. A hierarchical class of the node is assigned to the hierarchical group layout constraint via `browser:nodeSelector` predicate. A class of an edge, which will be treated as hierarchical, is assigned using the `browser:hierarchicalEdgeSelector` predicate.
+A visual layout constraint defining [hierarchical relationships](glossary.md#hierarchical-relationships-glossary) is expressed as an instance of the `browser:HierarchicalGroupLayoutConstraint` class. A hierarchical class of the node, regardless whether the node is a parent or a child, is assigned to the hierarchical group layout constraint via `browser:nodeSelector` predicate. A class of an edge, which will be treated as hierarchical, is assigned using the `browser:hierarchicalEdgeSelector` predicate.
 
 Each pair of node and edge selectors must be assigned to a separate instance of the `browser:HierarchicalGroupLayoutConstraint` class. If you want to add more edge selectors with the same node selector, make each pair of the edge selector and the node selector as a separate instance of the `browser:HierarchicalGroupLayoutConstraint` class.
 
@@ -129,7 +129,7 @@ Each specific visual group must be expressed as a separate instance of `browser:
 
 <h4 id="group-to-cluster-layout-constraint">"GroupToClusterLayoutConstraint" class</h4>
 
-A visual layout constraint that determines hierarchical group or visual group, in which nodes can be grouped, is expressed as an instance of the `browser:HierarchicalGroupLayoutConstraint` class. The [class](#hierarchical-class-glossary) is assigned using the `browser:clusteringSelector` predicate. 
+A visual layout constraint that determines hierarchical group or visual group, in which nodes can be grouped, is expressed as an instance of the `browser:GroupToClusterLayoutConstraint` class. The class is assigned using the `browser:clusteringSelector` predicate. 
 
 <h4 id="classes-to-cluster-together-layout-constraint">"ClassesToClusterTogetherLayoutConstraint" class</h4>
 
@@ -139,19 +139,6 @@ A visual layout constraint that defines classes to cluster and group together is
 
 Use this layout constraint only if you want to group nodes of different classes together. Place all the desired classes under one instance of the `browser:ClassesToClusterTogetherLayoutConstraint` class.
 
-
 <h3 id="backend-configuration-implementation">Implementation</h3>
 
 See a visual configuration example [here](https://github.com/linkedpipes/knowledge-graph-browser-configurations/blob/main/configurations/university-topic-map-with-constraints.ttl) ([basic configuration](https://github.com/linkedpipes/knowledge-graph-browser-configurations/blob/main/configurations/university-topic-map.ttl)).
-
-<h2 id="possible-improvements">Possible improvements</h2>
-
-1. Add possibility for the user to:
-- Choose which hierarchical groups to cluster (user interface)
-- Delete/add pseudo-parent for a visual group (user interface)
-
-1. Place nodes of different hierarchical classes under the same pseudo-parent node.
-2. Cluster nodes based on attributes other than their positions.
-3. Predefine maximal and minimal sizes of clusters in the configuration file.
-4. Switching between hierarchical and normal views.
-5. Fix the position of the pseudo-parent when moving (not currently supported due to limitations of the Cytoscape library).
