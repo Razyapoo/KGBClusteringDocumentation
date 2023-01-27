@@ -8,8 +8,11 @@ _This page describes how the "Grouping of Clusters" approach is implemented in t
 - Knowledge Graph browser
   - [Architecture](#architecture)
   - [Frontend](#frontend)
+    - [Implementation](#frontend-implementation)
   - [Backend](#backend)
-  - [Configuration](#configuration)
+    - [Backend server](#backend-server)
+      - [Implementation](#frontend-implementation)
+    - [Visual Configuration](#visual-configuration)
 
 <h1 id="architecture">Architecture</h1>
 
@@ -19,10 +22,7 @@ The following diagram shows the different parts of the Knowledge Graph Visual Br
     <img src="img/architecture_diagram.png" alt="architecture-diagram" title="Architecture diagram" width="600"/><br/>
 </p>
 
-<h1 id="frontend">Frontend</h1>
-
-> **Note** \
-> The code is also enriched with descriptive comments
+<h2 id="frontend">Frontend</h2>
 
 The following diagram shows how the different components interact during runtime when the tool loads constraints from the triple store:
 
@@ -64,7 +64,11 @@ This mode makes all types of zooming unavailable and reduces the visibility of t
 
 Additionally, the original compact mode is modified so that the node on which it is activated detaches from its parent and releases all children, and similarly, when the mode is disabled, the original state of the graph is restored.
 
-<h1 id="backend">Backend</h1>
+<h3 id="frontend-implementation">Implementation</h3>
+
+Implementation of the frontend is available [here](https://github.com/Razyapoo/knowledge-graph-browser-frontend-grouping-of-clusters).
+
+<h2 id="backend">Backend</h2>
 
 This section of the documentation is split into two parts: 
 
@@ -145,7 +149,7 @@ A visual layout constraint that defines classes to cluster and group together is
 
 See a visual configuration example [here](https://github.com/linkedpipes/knowledge-graph-browser-configurations/blob/main/configurations/university-topic-map-with-constraints.ttl) ([basic configuration](https://github.com/linkedpipes/knowledge-graph-browser-configurations/blob/main/configurations/university-topic-map.ttl)).
 
-<h1 id="possible-improvements">Possible improvements</h1>
+<h2 id="possible-improvements">Possible improvements</h2>
 
 1. Add possibility for the user to:
 - Choose which hierarchical groups to cluster (user interface)
