@@ -3,25 +3,15 @@
 _This page describes how the "Grouping of Clusters" approach is implemented in the Knowledge Graph Browser._
 
 ---
-### Table of Contents
+# Table of Contents
 
 - Knowledge Graph browser
+  - [Architecture](#architecture)
   - [Frontend](#frontend)
   - [Backend](#backend)
   - [Configuration](#configuration)
 
----
-
-<h1 id="implementation">Implementation</h1>
-
-The implementation of "Grouping of clusters" extension is split into two parts: 
-
-- [Backend](#backend)
-  - [Visual configuration](#visual-configuration)
-  - [Backend server](#backend-server)
-- [Frontend](#frontend)
-
-<h2 id="architecture">Architecture</h2>
+<h1 id="architecture">Architecture</h1>
 
 The following diagram shows the different parts of the Knowledge Graph Visual Browser that are involved when working with visual constraints:
 
@@ -29,7 +19,7 @@ The following diagram shows the different parts of the Knowledge Graph Visual Br
     <img src="img/architecture_diagram.png" alt="architecture-diagram" title="Architecture diagram" width="600"/><br/>
 </p>
 
-<h2 id="frontend">Frontend</h2>
+<h1 id="frontend">Frontend</h1>
 
 > **Note** \
 > The code is also enriched with descriptive comments
@@ -74,7 +64,7 @@ This mode makes all types of zooming unavailable and reduces the visibility of t
 
 Additionally, the original compact mode is modified so that the node on which it is activated detaches from its parent and releases all children, and similarly, when the mode is disabled, the original state of the graph is restored.
 
-<h2 id="backend">Backend</h2>
+<h1 id="backend">Backend</h1>
 
 This section of the documentation is split into two parts: 
 
