@@ -30,11 +30,11 @@ The following diagram shows how the different components interact during runtime
     <img src="img/sequence_diagram.png" alt="sequence-diagram" title="Sequence diagram" width="600"/><br/>
 </p>
 
-1. The user initializes the loading of the configuration with constraints.
+1. The user initializes loading of the configuration with constraints.
 2. The KGVB frontend sends a request via `getConstraints` to the server, including the IRI of the set of visual layout constraints as an argument.
-3. The server retrieves the constraints as a set of triples.
+3. The server loads the constraints as a set of triples from the triple-store.
 4. The server processes the loaded constraints into JSON and sends them to the frontend.
-5. The client applies the loaded constraints to the graph.
+5. The frontend applies the loaded constraints to the graph.
 
 It is important to note that constraints are predefined by a technician in the visual configuration file, and are only loaded once, during the initial loading of the configuration.
 
