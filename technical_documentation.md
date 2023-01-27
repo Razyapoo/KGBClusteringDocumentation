@@ -38,19 +38,15 @@ The following diagram shows how the different components interact during runtime
 
 It is important to note that constraints are predefined by a technician in the visual configuration file, and are only loaded once, during the initial loading of the configuration.
 
-<h3 id="map-style-zooming-technical-documentation">Map-Style Zooming</h3>
+<h3 id="grouping-of-clusters-technical-documentation">Grouping of clusters</h3>
 
-The implementation of the map-style zooming is divided among multiple components, with the main function being the `groupingOfClustersManager`. This function takes a boolean parameter as an argument, indicating whether the zooming action is set to be in or out. It is designed to work with a pre-defined set of nodes, referred as the active set of nodes. This function is used for various types of grouping of clusters, including global and local. Each type of zooming first prepares a set of nodes in the variable `nodesToCluster` and then passes it to the `groupingOfClustersManager` function, which then manages the necessary clustering and grouping operations on the active set, resulting in updated graph visualization that reflects the current zooming level. Additionally, the function also handles updating the visual elements, such as the compound nodes and supernodes, to ensure a seamless transition when zooming in or out. 
-
-Actual clustering and grouping is performed by the `groupingOfClusters` function, which takes a desired clustering method and a set of nodes to be clustered as arguments. By performing desired clustering method, this function groups a cluster of similar nodes into a single node.
-
-This allows for a consistent and efficient zooming experience, as active set of nodes is always tailored to the desired zooming type.
+The implementation of the grouping of clusters type of zooming is divided among multiple components, with the main function being the [`groupingOfClustersManager`](https://github.com/Razyapoo/knowledge-graph-browser-frontend-grouping-of-clusters/blob/5ee77643da16800807253298f984bcf5b13ec336/src/graph/GraphAreaManipulator.ts#L124). This function manages the clustering and grouping of nodes in the graph to enable zooming in or out. It takes a boolean argument, indicating whether the zooming action is set to zoom in or out, and works with a predefined set of nodes, referred as the active set. This function is used for both global and local grouping of clusters. For each type of zooming, a set of nodes, `nodesToCluster`, is prepared and passed to the `groupingOfClustersManager` function, which then performs the necessary clustering and grouping operations on the active set, resulting in an updated graph visualization that reflects the amount of detail corresponding to the [current zooming (hierarchical) level](glossary.md#current-hierarchical-level). This includes an update of the visual elements such as compound nodes and supernodes to ensure a seamless transition when zooming in or out.
 
 <h3 id="local-zooming">Local version of grouping of clusters</h3>
 
-The concept used to implement global grouping makes it easy to support local grouping as well. The main advantage of the [`groupingOfClustersManager`](https://github.com/Razyapoo/knowledge-graph-browser-frontend-grouping-of-clusters/blob/5ee77643da16800807253298f984bcf5b13ec336/src/graph/GraphAreaManipulator.ts#L124) method is that it allows for the grouping of a predefined list of nodes. In the case of a global grouping, the list consists of all nodes on the graph area, while in the case of a local grouping, it consists of the selected nodes and all their descendants (if any).
+As was mentioned, the main advantage of the `groupingOfClustersManager` method is that it allows for the grouping of a predefined list of nodes. In the case of a global grouping, the list consists of all nodes on the graph area, while in the case of a local grouping, it consists of the selected nodes and all their descendants (if any).
 
-The algorithm for cluster grouping has undergone changes to handle local grouping as well. In previous version, grouping was performed sequentially with respect to the hierarchical level, that is, in each subsequent iteration of the algorithm, nodes were taken from the [current hierarchical level](glossary.md#current-hierarchical-level) or the next (+/- 1) level. However, this method cannot be used with local grouping as the user can select any node on which to perform local grouping, which may differ from the current hierarchical level. The current version addresses this by adjusting the logic of the current hierarchical level and searching for the current level in each iteration of the cluster grouping. 
+The algorithm for cluster grouping has undergone changes to handle local grouping. In previous version, grouping was performed sequentially with respect to the hierarchical level, that is, in each subsequent iteration of the algorithm, nodes were taken from the current hierarchical level or the next (+/- 1) level. However, this method cannot be used with local grouping as the user can select any node on which to perform local grouping, which may differ from the current hierarchical level. The current version addresses this by adjusting the logic of the current hierarchical level and searching for the current level in each iteration of the cluster grouping. 
 
 Furthermore, the algorithm is able to handle gaps in the sequence of hierarchical levels, for example, when nodes at, let's say, 4, 5, 6 levels were deleted and now do not exist on the graph. In this case, the algorithm can understand the gap in the sequence and looks for the next existing level.
 
@@ -91,8 +87,7 @@ We introduce the new term "visual layout constraint" as a rule applied to a grap
 
 In addition to the standard visual classes of a node, we also include information about the hierarchical and visual group that the node belongs to. It is important to note that a hierarchical class is often considered a visual group class as well, as the root ancestor node in a hierarchy can be seen as a visual element that encompasses a cluster of child nodes.
 
-> **Note**
-> In the rest of this document, we use the prefix `browser:` as a shorthand for the namespace `https://linked.opendata.cz/ontology/knowledge-graph-browser/`.
+In the rest of this document, we use the prefix `browser:` as a shorthand for the namespace `https://linked.opendata.cz/ontology/knowledge-graph-browser/`.
 
 Here is an example of how to define a specific set of layout constraints in the configuration file:
 
@@ -120,16 +115,13 @@ The next few sections describe each layout constraint class in more details.
 
 A visual layout constraint defining [hierarchical relationships](#hierarchical-relationships-glossary) is expressed as an instance of the `browser:HierarchicalGroupLayoutConstraint` class. A hierarchical class of the node is assigned to the hierarchical group layout constraint via `browser:nodeSelector` predicate. A class of an edge, which will be treated as hierarchical, is assigned using the `browser:hierarchicalEdgeSelector` predicate.
 
-> **Warning** \
-> Each pair of node and edge selectors must be assigned to a separate instance of the `browser:HierarchicalGroupLayoutConstraint` class. \
-> If you want to add more edge selectors with the same node selector, make each pair of the edge selector and the node selector as a separate instance of the `browser:HierarchicalGroupLayoutConstraint` class.
+Each pair of node and edge selectors must be assigned to a separate instance of the `browser:HierarchicalGroupLayoutConstraint` class. If you want to add more edge selectors with the same node selector, make each pair of the edge selector and the node selector as a separate instance of the `browser:HierarchicalGroupLayoutConstraint` class.
 
 <h3 id="visual-group-layout-constraint">"VisualGroupLayoutConstraint" class</h3>
 
 A visual layout constraint defining [visual group](#visual-group-glossary) is expressed as an instance of the `browser:VisualGroupLayoutConstraint` class. A visual group class is assigned to the visual group layout constraint via `browser:clusteringSelector` predicate.
 
-> **Warning** \
-> Each specific visual group must be expressed as a separate instance of `browser:VisualGroupLayoutConstraint` class.
+Each specific visual group must be expressed as a separate instance of `browser:VisualGroupLayoutConstraint` class.
 
 <h3 id="group-to-cluster-layout-constraint">"GroupToClusterLayoutConstraint" class</h3>
 
@@ -141,8 +133,7 @@ By default, the algorithm only groups clusters of nodes of the same visual class
 
 A visual layout constraint that defines classes to cluster and group together is expressed as an instance of the `browser:ClassesToClusterTogetherLayoutConstraint` class. Classes are assigned using the `browser:clusteringSelector` predicate.
 
-> **Warning** \
-> Use this layout constraint only if you want to group nodes of different classes together. Place all the desired classes under one instance of the `browser:ClassesToClusterTogetherLayoutConstraint` class.
+Use this layout constraint only if you want to group nodes of different classes together. Place all the desired classes under one instance of the `browser:ClassesToClusterTogetherLayoutConstraint` class.
 
 
 <h3 id="backend-configuration-implementation">Implementation</h3>
