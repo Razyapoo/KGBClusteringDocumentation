@@ -4,31 +4,25 @@ In this section of the guide, you will be introduced to key concepts and termino
 
 <h3 id="compound-node">Compound node</h3>
 
-Compound nodes are used to represent hierarchical relationships. This way the parent node is represented as a container node that includes the child nodes inside.
-
 Compound nodes can be used to group inner nodes together, creating a hierarchical structure where the parent node represents the group as a whole and the child nodes represent individual elements within the group.
 
 <h3 id="supernode">Supernode</h3>
 
-Supernode is used to represent a collapsed compound node. The list of collapsed child nodes is available in the detail panel. To identify it from other nodes, it is distinguished by the presence of three dots within the node.
+Supernode is used to represent a collapsed [compound node](#compound-node). The list of collapsed child nodes is available in the detail panel. To identify it from other nodes, it is distinguished by the presence of plus icon within the node (upper-left corner).
 
 <h3 id="superedge">Superedge</h3>
 
-Superedge is used to represent a compressed set of edges. Each superedge represents a set of edges that are of the same type.   
+Superedge is used to represent a compressed set of edges of the same type.   
 
 <h3 id="group-compact-mode">Group compact mode</h3>
 
-Group compact mode is a feature that allows to view the structure of a group and recursively explore its inner groups without cluttering the graph. 
-
-The goal of this mode is to make it easier for the user to understand the structure of the group and navigate through it without being overwhelmed by unnecessary information.
+Group compact mode is a feature that allows to view the structure of a group and recursively explore its inner groups without cluttering the graph.
 
 This mode is only available for group nodes. 
 
 <h3 id="hierarchical-relationships-glossary">Hierarchical relationship</h3>
 
-Hierarchical relationships have a parent-child structure and are represented using [compound nodes](#compound-node). 
-
-Figure 1 below shows an example with Animal classification:
+Hierarchical relationships have a parent-child structure and are represented using [compound nodes](#compound-node). Figure 1 below shows an example with Animal classification:
 
 <p align="center">
     <img src="img/child_parent_relation.png" alt="parent-child-relationship" title="Parent-child relationship" width="400"/><br/>
@@ -58,30 +52,23 @@ This class is used to group nodes together in a hierarchical manner. If a node b
     <em>Figure 2. Hierarchical class</em>
 </p>
 
-This class is common for all the nodes that are placed in the same [hierarchical group](#hierarchical-groups-glossary). It is necessary for a node to be assigned to a hierarchical class in order for it to be included in a hierarchical group.
+This class is common for all the nodes that are placed in the same hierarchical group. It is necessary for a node to be assigned to a hierarchical class in order for it to be included in a hierarchical group.
 
 <h3 id="hierarchical-level-glossary">Hierarchical level</h3>
 
 The hierarchical level of a node indicates the depth of a hierarchy at which a node resides. For example, root node resides at level 0 and its children reside at level 1 and so on. 
 
-The difference between the level of hierarchy and the current hierarchical level is that each node has associated level of hierarchy, while the current hierarchical level is associated with the graph. 
+The difference between the level of hierarchy and the [current hierarchical level](#current-hierarchical-level-glossary) is that hierarchical level is associated with every node, while the current hierarchical level is associated with the graph. 
 
 <h3 id="current-hierarchical-level-glossary">Current hierarchical level</h3>
 
-The current hierarchical level refers to the specific [level of hierarchy](#hierarchical-level-glossary) that is currently being focused on. 
+The current hierarchical level refers to the specific [level of hierarchy](#hierarchical-level-glossary) that is currently being focused on. It can also be called the current zoom level.
 
-This level, also referred to as the "zoom level", describes the level of detail displayed in the graph as the user zooms in or out. 
-For example, when zooming out, the current hierarchical level decreases as child nodes collapse into their parents, resulting in a higher level of abstraction. Conversely, when zooming in, the current hierarchical level increases as child nodes with a deeper level in the hierarchy become visible, providing more detail.  
-
-This allows for an easy way to navigate through large and complex networks, by showing different level of detail.
+This level describes the level of detail displayed in the graph as the user zooms in or out. For example, when zooming out, the current hierarchical level decreases as child nodes collapse into their parents, resulting in a higher level of abstraction. Conversely, when zooming in, the current hierarchical level increases as child nodes with a deeper level in the hierarchy become visible, providing more detail. This allows for an easy way to navigate through large and complex networks, by showing different level of detail.
 
 <h3 id="hierarchical-groups-glossary">Hierarchical group</h3>
 
-Hierarchical groups are clusters of nodes that are related to each other through [hierarchical relationships](#hierarchical-relationships-glossary).
- 
-Each node within a hierarchical group must be assigned to a specific [hierarchical class](#hierarchical-class-glossary), which represents that hierarchical group.
-
-An example of a hierarchical group is shown in Figure 1 above.
+Hierarchical groups are clusters of nodes that are related to each other through [hierarchical relationships](#hierarchical-relationships-glossary). Each node within a hierarchical group must be assigned to a specific [hierarchical class](#hierarchical-class-glossary), which represents that hierarchical group. An example of a hierarchical group is shown in Figure 1 above.
 
 Hierarchical groups are predefined by a technician in the visual configuration file and cannot be defined by the user within the user interface. 
 
@@ -96,13 +83,9 @@ For example, in Figure 3, "pseudo-parent" (grey) node is used as visual element 
     <em>Figure 3. Visual group</em>
 </p>
 
-Visual groups are predefined by a technician in the visual configuration file and cannot be defined by the user within the user interface. 
+Visual groups are predefined by a technician in the visual configuration file and cannot be defined by the user within the user interface. Each node within a visual group must be assigned to a specific visual class, which represents that visual group.
 
-Each node within a visual group must be assigned to a specific visual class, which represents that visual group.
-
-In the context of a hierarchical group, the parent node serves as the visual element encapsulating and representing the cluster of child nodes. This eliminates the need for a separate "pseudo-parent" node for a hierarchical group. 
-
-An example of hierarchical group "regionVisualGroup" and visual group "animalHierarchicalGroup" is shown in Figure 4 below.
+In the context of a hierarchical group, the parent node serves as the visual element encapsulating and representing the cluster of child nodes. This eliminates the need for a separate "pseudo-parent" node for a hierarchical group. An example of hierarchical group "regionVisualGroup" and visual group "animalHierarchicalGroup" is shown in Figure 4 below.
 
 <p align="center">
     <img src="img/visual_groups.png" alt="visual-groups" title="Visual groups" width="600"/><br/>
