@@ -19,7 +19,7 @@ _This page describes how the "Grouping of Clusters" approach is implemented in t
 The following diagram shows the different parts of the Knowledge Graph Visual Browser that are involved when working with visual constraints:
 
 <p align="center">
-    <img src="img/architecture_diagram.png" alt="architecture-diagram" title="Architecture diagram" width="600"/><br/>
+    <img src="img/architecture_diagram.png" alt="architecture-diagram" title="Architecture diagram"/><br/>
 </p>
 
 <h2 id="frontend">Frontend</h2>
@@ -27,7 +27,7 @@ The following diagram shows the different parts of the Knowledge Graph Visual Br
 The following diagram shows how the different components interact during runtime when the tool loads constraints from the triple store:
 
 <p align="center">
-    <img src="img/sequence_diagram.png" alt="sequence-diagram" title="Sequence diagram" width="600"/><br/>
+    <img src="img/sequence_diagram.png" alt="sequence-diagram" title="Sequence diagram"/><br/>
 </p>
 
 1. The user initializes loading of the configuration with constraints.
@@ -86,7 +86,7 @@ Implementation of the backend server is available [here](https://github.com/Razy
 We introduce the new term "visual layout constraint" as a rule applied to a graph to change how it is displayed or arranged visually. To support this, we have extended the Knowledge Graph Visual Browser ontology with new terms, as depicted in the UML class diagram below:
 
 <p align="center">
-    <img src="img/extension_diagram.png" alt="extension-diagram" title="Extension diagram" width="600"/><br/>
+    <img src="img/extension_diagram.png" alt="extension-diagram" title="Extension diagram"/><br/>
 </p>
 
 In addition to the standard visual classes of a node, we also include information about the hierarchical and visual group that the node belongs to. It is important to note that a hierarchical class is often considered a visual group class as well, as the root ancestor node in a hierarchy can be seen as a visual element that encompasses a cluster of child nodes.
