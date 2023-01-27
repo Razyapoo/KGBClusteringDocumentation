@@ -56,6 +56,14 @@ Actual clustering and grouping is performed by the `groupingOfClusters` function
 
 This allows for a consistent and efficient zooming experience, as active set of nodes is always tailored to the desired zooming type.
 
+<h3 id="local-zooming">Local version of grouping of clusters</h3>
+
+The concept used to implement global grouping makes it easy to support local grouping as well. The main advantage of the [`groupingOfClustersManager`](https://github.com/Razyapoo/knowledge-graph-browser-frontend-grouping-of-clusters/blob/5ee77643da16800807253298f984bcf5b13ec336/src/graph/GraphAreaManipulator.ts#L124) method is that it allows for the grouping of a predefined list of nodes. In the case of a global grouping, the list consists of all nodes on the graph area, while in the case of a local grouping, it consists of the selected nodes and all their descendants (if any).
+
+The algorithm for cluster grouping has undergone changes to handle local grouping as well. In previous version, grouping was performed sequentially with respect to the hierarchical level, that is, in each subsequent iteration of the algorithm, nodes were taken from the [current hierarchical level](glossary.md#current-hierarchical-level) or the next (+/- 1) level. However, this method cannot be used with local grouping as the user can select any node on which to perform local grouping, which may differ from the current hierarchical level. The current version addresses this by adjusting the logic of the current hierarchical level and searching for the current level in each iteration of the cluster grouping. 
+
+Furthermore, the algorithm is able to handle gaps in the sequence of hierarchical levels, for example, when nodes at, let's say, 4, 5, 6 levels were deleted and now do not exist on the graph. In this case, the algorithm can understand the gap in the sequence and looks for the next existing level.
+
 <h3 id="working-with-groups">Working with groups</h3>
 
 The extension allows for the grouping of nodes without breaking them apart, as opposed to previous implementations which would always break a group before adding it to another group. This brings the ability of a more fine-grained control over the grouping of nodes in the graph. It allows to keep certain groups intact while still being able to group them with other nodes, resulting in more intuitive and flexible way of exploring the graph.
