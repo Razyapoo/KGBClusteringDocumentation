@@ -32,7 +32,7 @@ The following diagram shows how the different components interact during runtime
 
 1. The user initializes loading of the configuration with constraints.
 2. The KGVB frontend sends a request via `getConstraints` to the server, including the IRI of the set of visual layout constraints as an argument.
-3. The server loads the constraints as a set of triples from the triple-store.
+3. The server loads the constraints as a set of triples from the triple store.
 4. The server processes the loaded constraints into JSON and sends them to the frontend.
 5. The frontend applies the loaded constraints to the graph.
 
@@ -73,7 +73,7 @@ This section of the documentation is split into two parts:
 
 <h2 id="backend-server">Backend server</h2>
 
-The original stateless [backend server](#https://github.com/martinnec/knowledge-graph-browser) is extended to include a new request handler called `layout-constraints`. This handler reads a specific set of layout constraints from the triple store that is defined by `constraintSetIRI` parameter taken as argument from the frontend.
+The original stateless [backend server](#https://github.com/martinnec/knowledge-graph-browser) is extended to include a new request handler for layout constraints. This handler reads a specific set of layout constraints from the triple store that is defined by `constraintSetIRI` parameter taken as argument from the frontend.
 
 The output of the request handler is a JSON object containing all the constraints.
 
@@ -83,7 +83,11 @@ Implementation of the backend server is available [here](https://github.com/Razy
 
 <h2 id="visual-configuration">Visual configuration</h2>
 
-We introduce the new term "visual layout constraint" as a rule applied to a graph to change how it is displayed or arranged visually. To support this, we have extended the Knowledge Graph Visual Browser ontology with new terms, as depicted in the UML class diagram in Figure.
+We introduce the new term "visual layout constraint" as a rule applied to a graph to change how it is displayed or arranged visually. To support this, we have extended the Knowledge Graph Visual Browser ontology with new terms, as depicted in the UML class diagram below:
+
+<p align="center">
+    <img src="img/sequence_diagram.png" alt="sequence-diagram" title="Sequence diagram" width="600"/><br/>
+</p>
 
 In addition to the standard visual classes of a node, we also include information about the hierarchical and visual group that the node belongs to. It is important to note that a hierarchical class is often considered a visual group class as well, as the root ancestor node in a hierarchy can be seen as a visual element that encompasses a cluster of child nodes.
 
