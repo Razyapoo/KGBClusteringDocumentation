@@ -54,11 +54,11 @@ Each such multi-level hierarchy represents a [hierarchical group](#hierarchical-
 
 > The hierarchical class is a visual class that defines which [hierarchical group](#hierarchical-groups-glossary) a node belongs to in hierarchical structure. A node can only be assigned to one hierarchical class.
 
-This class is used to group nodes together in a hierarchical manner. If a node belongs to some hierarchical class, the class will be displayed along with the label of the node in the detail panel. See Figure 3 below for more details.
+This class is used to group nodes together in a hierarchical manner. If a node belongs to some hierarchical class, the class will be displayed along with the label of the node in the detail panel. See Figure 2 below for more details.
 
 <p align="center">
     <img src="img/hierarchical_class.png" alt="hierarchical-class" title="Hierarchical class" width="350"/><br/>
-    <em>Figure 3. Hierarchical class</em>
+    <em>Figure 2. Hierarchical class</em>
 </p>
 
 > **Note** \
@@ -99,11 +99,11 @@ An example of a hierarchical group is shown in Figure 1 above.
 > **Definition** \
 > A visual group is a type of compound node that is used to visually represent a cluster of similar nodes, regardless of the type of the relationships present between them.
 
-For example, in Figure 4, "pseudo-parent" (grey) node is used as visual element to encapsulate and represent the nodes of a specific type. 
+For example, in Figure 3, "pseudo-parent" (grey) node is used as visual element to encapsulate and represent the nodes of a specific type. 
 
 <p align="center">
     <img src="img/visual_group.png" alt="visual-group" title="Visual group" width="300"/><br/>
-    <em>Figure 4. Visual group</em>
+    <em>Figure 3. Visual group</em>
 </p>
 
 > **Warning** \
@@ -114,11 +114,11 @@ Each node within a visual group must be assigned to a specific visual class, whi
 > **Note** \
 > In the context of a hierarchical group, the parent node serves as the visual element encapsulating and representing the cluster of child nodes. This eliminates the need for a separate "pseudo-parent" node for a hierarchical group. 
 
-An example of hierarchical group "regionVisualGroup" and visual group "animalHierarchicalGroup" is shown in Figure 5 below.
+An example of hierarchical group "regionVisualGroup" and visual group "animalHierarchicalGroup" is shown in Figure 4 below.
 
 <p align="center">
     <img src="img/visual_groups.png" alt="visual-groups" title="Visual groups" width="600"/><br/>
-    <em>Figure 5. Visual groups. Above is "animalHierarchicalGroup" visual group and to below is "regionVisualGroup" visual group</em>
+    <em>Figure 4. Visual groups. Above is "animalHierarchicalGroup" visual group and to below is "regionVisualGroup" visual group</em>
 </p>
 
 Visual groups make the graph more manageable and intuitive for the user by grouping similar nodes together. They allow to easily move the cluster, avoiding the scattering of related nodes around the graph area.
@@ -135,11 +135,11 @@ Visual groups make the graph more manageable and intuitive for the user by group
 
 <h3 id="checkbox-glossary">Checkbox</h3>
 
-The "Scaling options" checkbox is located in the top right corner of the graph area and allows the user to select whether to group clusters globally, or locally, zoom in/out, or combine these options. See Figure 6 below for more detail.
+The "Scaling options" checkbox is located in the top right corner of the graph area and allows the user to select whether to group clusters globally, or locally, zoom in/out, or combine these options. See Figure 5 below for more detail.
 
 <p align="center">
     <img src="img/scaling_options.png" alt="scaling-options" title="Scaling options" width="200"/><br/>
-    <em>Figure 6. Scaling options</em>
+    <em>Figure 5. Scaling options</em>
 </p>
 
 <h3 id="zooming-glossary">Zooming</h3>

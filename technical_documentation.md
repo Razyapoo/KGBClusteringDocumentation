@@ -89,7 +89,7 @@ We introduce the new term "visual layout constraint" as a rule applied to a grap
     <img src="img/extension_diagram.png" alt="extension-diagram" title="Extension diagram"/><br/>
 </p>
 
-In addition to the standard visual classes of a node, we also include information about the hierarchical and visual group that the node belongs to. It is important to note that a hierarchical class is often considered a visual group class as well, as the root ancestor node in a hierarchy can be seen as a visual element that encompasses a cluster of child nodes.
+In addition to the standard visual classes of a node, we also include information about the hierarchical and visual group classes that the node belongs to.
 
 In the rest of this document, we use the prefix `browser:` as a shorthand for the namespace `https://linked.opendata.cz/ontology/knowledge-graph-browser/`.
 
@@ -111,27 +111,27 @@ This example defines a "region" visual group layout constraint.
 
 - Each individual visual layout constraint is assigned to a set of visual layout constraints using the `browser:hasConstraint` predicate, and is expressed as an instance of a specific layout constraint class. 
 
-Supported visual layout constraints: `browser:VisualGroupLayoutConstraint`, `browser:HierarchicalGroupLayoutConstraint`, `browser:GroupToClusterLayoutConstraint`, and `browser:ClassesToClusterTogetherLayoutConstraint`.
+- Supported visual layout constraint classes: `browser:VisualGroupLayoutConstraint`, `browser:HierarchicalGroupLayoutConstraint`, `browser:GroupToClusterLayoutConstraint`, and `browser:ClassesToClusterTogetherLayoutConstraint`.
 
 The next few sections describe each layout constraint class in more details. 
 
-<h3 id="hierarchical-group-layout-constraint">"HierarchicalGroupLayoutConstraint" class</h3>
+<h4 id="hierarchical-group-layout-constraint">"HierarchicalGroupLayoutConstraint" class</h4>
 
 A visual layout constraint defining [hierarchical relationships](#hierarchical-relationships-glossary) is expressed as an instance of the `browser:HierarchicalGroupLayoutConstraint` class. A hierarchical class of the node is assigned to the hierarchical group layout constraint via `browser:nodeSelector` predicate. A class of an edge, which will be treated as hierarchical, is assigned using the `browser:hierarchicalEdgeSelector` predicate.
 
 Each pair of node and edge selectors must be assigned to a separate instance of the `browser:HierarchicalGroupLayoutConstraint` class. If you want to add more edge selectors with the same node selector, make each pair of the edge selector and the node selector as a separate instance of the `browser:HierarchicalGroupLayoutConstraint` class.
 
-<h3 id="visual-group-layout-constraint">"VisualGroupLayoutConstraint" class</h3>
+<h4 id="visual-group-layout-constraint">"VisualGroupLayoutConstraint" class</h4>
 
 A visual layout constraint defining [visual group](#visual-group-glossary) is expressed as an instance of the `browser:VisualGroupLayoutConstraint` class. A visual group class is assigned to the visual group layout constraint via `browser:clusteringSelector` predicate.
 
 Each specific visual group must be expressed as a separate instance of `browser:VisualGroupLayoutConstraint` class.
 
-<h3 id="group-to-cluster-layout-constraint">"GroupToClusterLayoutConstraint" class</h3>
+<h4 id="group-to-cluster-layout-constraint">"GroupToClusterLayoutConstraint" class</h4>
 
 A visual layout constraint that determines [hierarchical group](#hierarchical-group-glossary) or [visual group](#visual-group-glossary), in which nodes can be grouped, is expressed as an instance of the `browser:HierarchicalGroupLayoutConstraint` class. The [class](#hierarchical-class-glossary) is assigned using the `browser:clusteringSelector` predicate. 
 
-<h3 id="classes-to-cluster-together-layout-constraint">"ClassesToClusterTogetherLayoutConstraint" class</h3>
+<h4 id="classes-to-cluster-together-layout-constraint">"ClassesToClusterTogetherLayoutConstraint" class</h4>
 
 By default, the algorithm only groups clusters of nodes of the same visual class (different from the hierarchical class). But it is possible to define which different visual classes can be clustered and grouped together.
 
