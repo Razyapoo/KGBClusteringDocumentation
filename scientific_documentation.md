@@ -9,7 +9,7 @@ Team members who contribute to the Knowledge Graph Visual Browser:
 - Oskar Razyapov
   - [Grouping of clusters](https://github.com/Razyapoo/knowledge-graph-browser-frontend-grouping-of-clusters)
 
-The focus of this research paper is to improve and optimize the visualization of knowledge graphs. The research includes the exploration of several prototypes, which have been created by the student or identified through the research of other papers. The goal is to make large and complex knowledge graphs well-organized and easily understandable for non-specialists. This paper aims to compare various existing prototypes in the field of graph simplification and use those insights to develop the own prototype.
+The focus of this research paper is to explore and analyze different existing techniques in the field of graph simplification and use those insights to develop the own prototype. The goal is to make large and complex knowledge graphs well-organized and easily understandable for non-specialists.
 
 Table of content:
 - [Introduction](#introduction)
