@@ -38,7 +38,8 @@ If you are interested in the raw visual configurations demonstrated in the paper
 # Tutorial
 
 ### Learn about other helpful Knowledge Graph Browser features
-- Clustering and grouping [Implementation](https://github.com/Razyapoo/knowledge-graph-browser-frontend-grouping-of-clusters)
+- Clustering and grouping
   - [User Documentation](user_documentation.md)
   - [Technical Documentation](technical_documentation.md)
   - [Scientific Documentation](scientific_documentation.md)
+  - [Implementation](https://github.com/Razyapoo/knowledge-graph-browser-frontend-grouping-of-clusters)
